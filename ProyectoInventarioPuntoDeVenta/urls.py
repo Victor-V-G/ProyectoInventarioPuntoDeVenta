@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from LoginApp.views import renderlogin as Login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    #RUTA DEL LOGIN
+    path('', Login)
 ]

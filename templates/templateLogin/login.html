@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <script src="{%static "js/login.js" %}"></script>
+    <link rel="stylesheet" href="{%static "css/login-style.css" %}">
+</head>
+
+<body>
+
+    <main class="login-style">
+
+        <div>
+            <h1>LOGIN DIEGX</h1>
+        </div>
+
+        <form>
+            <label for="NombreDeUsuario">Nombre Usuario:</label>
+            <input type="text" placeholder="Ingrese su Usuario" id="NombreDeUsuario" name="NombreDeUsuario"/>
+            <br>
+            <span class="error" id="eErrorNombreUsuario"></span>
+            <br>
+            <label for="Password">Password:</label>
+            <input type="text" placeholder="Ingrese su Password" id="Password" name="Password"/><br>
+            <span class="error" id="eErrorPassword"></span>
+            <br>
+        </form>
+        
+        <button 
+            type="button" 
+            onclick="login()">ACCEDER
+        </button>
+
+    </main>
+
+</body>
+
+</html>
