@@ -21,9 +21,11 @@ from AdminHomeApp import views as AdminHomeApp
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     #RUTA DEL LOGIN
-    path('', Login),
+    path('', include('LoginApp.urls')),
+
     #RUTA DEL HOME ADMIN
-    path('adminHome/', include('AdminHomeApp.urls')),
+    path('adminhome/', include('AdminHomeApp.urls')),
 ]
 

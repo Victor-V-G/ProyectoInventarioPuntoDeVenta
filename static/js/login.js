@@ -44,17 +44,8 @@ function login(){
         ElementoPassword.style.color = "black"
         eErrorPassword.innerText = ""
         eErrorNombreUsuario.innerText = ""
-        window.location.href = "adminHome/"
-    } else if (validarNombreDeUsuario == 1 && validarPassword == 1) {
-        ElementoNombreDeUsuario.value = ""
-        ElementoPassword.value = "" 
-        ElementoNombreDeUsuario.style.backgroundColor = "white"
-        ElementoNombreDeUsuario.style.color = "black"
-        ElementoPassword.style.backgroundColor = "white"
-        ElementoPassword.style.color = "black"
-        eErrorPassword.innerText = ""
-        eErrorNombreUsuario.innerText = ""
-    }
+        window.location.href = "adminhome/"
+    } 
 
 }
 
