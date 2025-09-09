@@ -47,6 +47,18 @@ function login(){
         window.location.href = "adminhome/"
     } 
 
+    if (validarNombreDeUsuario == 3 && validarPassword == 3) {
+        ElementoNombreDeUsuario.value = ""
+        ElementoPassword.value = ""
+        ElementoNombreDeUsuario.style.backgroundColor = "white"
+        ElementoNombreDeUsuario.style.color = "black"
+        ElementoPassword.style.backgroundColor = "white"
+        ElementoPassword.style.color = "black"
+        eErrorPassword.innerText = ""
+        eErrorNombreUsuario.innerText = ""
+        window.location.href = "home/"
+    }
+
 }
 
 
@@ -61,14 +73,12 @@ function verificarNombreDeUsuario(elementoNombreUsuario,valorNombreUsuario, eErr
     else if (valorNombreUsuario == "admin"){
         elementoNombreUsuario.style.color = "black"
         elementoNombreUsuario.style.backgroundColor = "white"
-        eErrorNombreUsuario.innerText = "Error en el nombre o contraseña"
         return 1
     }
-    else if (valorNombreUsuario != "admin"){
+    else if (valorNombreUsuario == "bodeguero"){
         elementoNombreUsuario.style.color = "black"
         elementoNombreUsuario.style.backgroundColor = "white"
-        eErrorNombreUsuario.innerText = "Error en el nombre o contraseña"
-        return 2
+        return 3
     }
 }
 
@@ -87,10 +97,9 @@ function verificarPasswordUsuario(elementoPassword, valorPassword, eErrorPasswor
         eErrorPassword.innerText = "Error en el nombre o contraseña"
         return 1
     }
-    else if (valorPassword != "123"){
+    else if (valorPassword == "12345"){
         elementoPassword.style.color = "black"
         elementoPassword.style.backgroundColor = "white"
-        eErrorPassword.innerText = "Error en el nombre o contraseña"
-        return 2
+        return 3
     }
 }

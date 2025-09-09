@@ -27,5 +27,8 @@ urlpatterns = [
 
     #RUTA DEL HOME ADMIN
     path('adminhome/', include('AdminHomeApp.urls')),
+
+    #RUTA DEL HOME
+    path('home/', include("HomeApp.urls")),
 ]
 
