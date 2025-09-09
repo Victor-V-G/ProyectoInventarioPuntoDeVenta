@@ -1,6 +1,7 @@
-
 /*FUNCION PRINCIPAL*/
 function login(){
+
+/*-----------------------------------------------------------------------------------------------------------------------------*/
 
     /*AQUI SE RECUPERA LA ID DEL INPUT DEL NOMBRE DE USUARIO Y SE ALMACENA EN LA VARIABLE ElementoNombreDeUsuario*/
     let ElementoNombreDeUsuario = document.getElementById("NombreDeUsuario")
@@ -9,7 +10,10 @@ function login(){
     VARIABLE ValorNombreDeUsuario*/
     let ValorNombreDeUsuario = ElementoNombreDeUsuario.value
 
+    /*AQUI SE RECUPERA LA ID DEL SPAN QUE MANEJARA Y MOSTRARA EL ERROR AL INGRESAR EL NOMBRE DE USUARIO*/
     let eErrorNombreUsuario = document.getElementById("eErrorNombreUsuario")
+
+/*-----------------------------------------------------------------------------------------------------------------------------*/
 
     /*AQUI SE RECUPERA LA ID DEL INPUT DE LA PASSWORD Y SE ALMACENA EN LA VARIABLE ElementoPassword*/
     let ElementoPassword = document.getElementById("Password")
@@ -18,29 +22,30 @@ function login(){
     VARIABLE ValorPassword*/
     let ValorPassword = ElementoPassword.value
 
-    
+    /*AQUI SE RECUPERA LA ID DEL SPAN QUE MANEJARA Y MOSTRARA EL ERROR AL INGRESAR LA PASSWORD*/
     let eErrorPassword = document.getElementById("eErrorPassword")
+
+/*-----------------------------------------------------------------------------------------------------------------------------*/
 
     /*AQUI SE ALMACENA EL RESULTADO DE LA FUNCION LLAMADA, EN ESTE CASO ValidarNombreDeUsuario */
     let validarNombreDeUsuario = verificarNombreDeUsuario(ElementoNombreDeUsuario, ValorNombreDeUsuario, eErrorNombreUsuario)
     
+    /*AQUI SE ALMACENA EL RESULTADO DE LA FUNCION LLAMADA, EN ESTE CASO ValidarPassword */
     let validarPassword = verificarPasswordUsuario(ElementoPassword, ValorPassword, eErrorPassword)
 
-    if (validarNombreDeUsuario == 1 && validarPassword == 1){
-        alert("YOU RECIVED CP")
+/*-----------------------------------------------------------------------------------------------------------------------------*/
+    
+    if (validarNombreDeUsuario == 1 && validarPassword == 1) {
         ElementoNombreDeUsuario.value = ""
         ElementoPassword.value = ""
         ElementoNombreDeUsuario.style.backgroundColor = "white"
         ElementoNombreDeUsuario.style.color = "black"
         ElementoPassword.style.backgroundColor = "white"
         ElementoPassword.style.color = "black"
-        console.log("DALE TU CORTE PABLO  ☝ ☝ ☝ ☝ ☝ ☝")
         eErrorPassword.innerText = ""
         eErrorNombreUsuario.innerText = ""
-
-    }
-    else if (validarNombreDeUsuario == 1 && validarPassword == 1){
-        alert("YOU NOT RECIVED CP")
+        window.location.href = "adminHome/"
+    } else if (validarNombreDeUsuario == 1 && validarPassword == 1) {
         ElementoNombreDeUsuario.value = ""
         ElementoPassword.value = "" 
         ElementoNombreDeUsuario.style.backgroundColor = "white"
@@ -50,9 +55,11 @@ function login(){
         eErrorPassword.innerText = ""
         eErrorNombreUsuario.innerText = ""
     }
+
 }
 
 
+/*FUNCION QUE VALIDA QUE EL USERNAME INGRESADO ES EL CORRECTO*/
 function verificarNombreDeUsuario(elementoNombreUsuario,valorNombreUsuario, eErrorNombreUsuario){
     if (valorNombreUsuario.length == 0){
         elementoNombreUsuario.style.color = "white"
@@ -75,6 +82,7 @@ function verificarNombreDeUsuario(elementoNombreUsuario,valorNombreUsuario, eErr
 }
 
 
+/*FUNCION QUE VALIDA QUE LA PASSWORD INGRESADA ES CORRECTA*/
 function verificarPasswordUsuario(elementoPassword, valorPassword, eErrorPassword){
     if (valorPassword.length == 0){
         elementoPassword.style.color = "white"
