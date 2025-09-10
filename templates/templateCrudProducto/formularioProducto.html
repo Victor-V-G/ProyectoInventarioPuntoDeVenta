@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="{%static 'js/FormularioProducto.js' %}"></script>
+</head>
+<body>
+    <h1>Formulario de registro de Productos</h1>
+        <label>Categoria Producto: </label>
+        <select
+        name="datosCatProd"
+        id="datosCatProd">
+        </select>
+        <script>
+            let categoriaProductos = JSON.parse(localStorage.getItem("categorias"))
+            let datos = document.getElementById("datosCatProd")
+            datos.innerHTML = `<option value="">Elige la categoria del producto</option>`
+            categoriaProductos.forEach(categoria => {
+                let productocategoria = `<option value="${categoria.nombreCategoria}">${categoria.nombreCategoria}</option>`
+                datos.innerHTML += productocategoria;
+            }); 
+        </script>
+        <span id="eDatosCatProdE"></span>
+        <br></br>
+        <br></br>
+        <label>Codigo de Barras: </label>
+        <input
+        name="codigoBarras"
+        id="codigoBarras"
+        type="text"
+        placeholder="Ingrese el codigo de barras del Producto">
+        </input>
+        <span id="eCodigoBarrasE"></span>
+        <br></br>
+        <br></br>
+        <label>Valor Producto: </label>
+        <input
+        name="valorProducto"
+        id="valorProducto"
+        type="number"
+        placeholder="Ingrese el valor del Producto">
+        </input>
+        <span id="eValorProductoE"></span>
+        <br></br>
+        <br></br>
+        <label>Stock Producto: </label>
+        <input
+        name="stockProducto"
+        id="stockProducto"
+        type="number"
+        placeholder="Ingrese el stock del Producto">
+        </input>
+        <span id="eStockProductoE"></span>
+        <br></br>
+        <br></br>
+        <label>Nombre Producto: </label>
+        <input
+        name="nombreProducto"
+        id="nombreProducto"
+        type="text"
+        placeholder="Ingrese el nombre del Producto">
+        </input>
+        <span id="eNombreProductoE"></span>
+        <br></br>
+        <br></br>
+        <label>Marca Producto: </label>
+        <input
+        name="marcaProducto"
+        id="marcaProducto"
+        type="text"
+        placeholder="Ingrese el marca del Producto">
+        </input>
+        <span id="eMarcaProductoE"></span>
+        <br></br>
+        <br></br>
+        <label>Fecha Vencimiento: </label>
+        <input
+        name="fechaVencimientoProducto"
+        id="fechaVencimientoProducto"
+        type="date"
+        ></input>
+        <span id="eFechaVencimientoProductoE"></span>
+        <br></br>
+        <br></br>
+        
+
+        <button
+        className="BotonesEncabezado" onclick="registrarProductos()">Registrar Producto
+        </button>
+        <br></br>
+        <span id="errorRegistrar"></span>
+</body>
+</html>

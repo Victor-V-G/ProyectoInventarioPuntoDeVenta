@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="{%static 'js/FormularioUsuario.js' %}"></script>
+</head>
+<body>
+    <h1>Formulario de registro de Usuarios</h1>
+        <label>Rut: </label>
+        <select
+        name="datosPersona"
+        id="datosPersona">
+        </select>
+        <script>
+            let empleados = JSON.parse(localStorage.getItem("empleadosA"))
+            let datos = document.getElementById("datosPersona")
+            datos.innerHTML = `<option value="">Elige el rut del usuario</option>`
+            empleados.forEach(empleado => {
+                let rut = `<option value="${empleado.rut}">${empleado.rut}</option>`
+                datos.innerHTML += rut;
+            }); 
+        </script>
+        <span id="eCargoE"></span>
+        <br></br>
+        <br></br>
+        <label>Tipo: </label>
+        <select
+        name="cargoUsuario"
+        id="cargoUsuario">
+            <option value="">Elige el cargo del usuario</option>
+            <option value="admin">Cargo de Administrador</option>
+            <option value="bodeguero">Cargo de Bodeguero</option>
+        </select>
+        <span id="eCargoE"></span>
+        <br></br>
+        <br></br>
+        <label>Nombre: </label>
+        <input
+        name="contraseniaUsuario"
+        id="contraseniaUsuario"
+        type="text"
+        placeholder="Ingrese la contraseña del Usuario">
+        </input>
+        <span id="eContraseniaUsuarioE"></span>
+        <br></br>
+        <br></br>
+
+        <button
+        className="BotonesEncabezado" onclick="registrarUsuarios()">Registrar Usuario
+        </button>
+        <br></br>
+        <span id="errorRegistrar"></span>
+</body>
+</html>

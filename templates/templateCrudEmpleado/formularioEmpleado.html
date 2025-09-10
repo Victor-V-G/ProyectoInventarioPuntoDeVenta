@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="{%static 'js/FormularioEmpleado.js' %}"></script>
+</head>
+<body>
+    <h1>Formulario de registro de Empleados</h1>
+        <label>Rut: </label>
+        <input
+        name="rutEmpleado"
+        id="rutEmpleado"
+        type="text"
+        placeholder="Ingrese el Nombre del Empledo">
+        </input>
+        <span id="eRutE"></span>
+        <br></br>
+        <br></br>
+        <label>Nombre: </label>
+        <input
+        name="nombreEmpleado"
+        id="nombreEmpleado"
+        type="text"
+        placeholder="Ingrese el Nombre del Empledo">
+        </input>
+        <span id="eNombreE"></span>
+        <br></br>
+        <br></br>
+        <label>Apellido: </label>
+        <input
+        name="apellidoEmpleado"
+        id="apellidoEmpleado"
+        type="text"
+        placeholder="Ingrese el Nombre del Empledo">
+        </input>
+        <span id="eApellidoE"></span>
+        <br></br>
+        <br></br>
+        <label>Edad: </label>
+        <input
+        name="edadEmpleado"
+        id="edadEmpleado"
+        type="number"
+        placeholder="Ingrese el Numero del Empledo">
+        </input>
+        <span id="eEdadE"></span>
+        <br></br>
+        <br></br>
+        <label>Numero: </label>
+        <input
+        name="numeroEmpleado"
+        id="numeroEmpleado"
+        type="number"
+        placeholder="Ingrese el Numero del Empledo">
+        </input>
+        <span id="eNumeroE"></span>
+        <br></br>
+        <br></br>
+
+        <button
+        className="BotonesEncabezado" onclick="registrarEmpleados()">Registrar Empleado
+        </button>
+        <br></br>
+        <span id="errorRegistrar"></span>
+</body>
+</html>
