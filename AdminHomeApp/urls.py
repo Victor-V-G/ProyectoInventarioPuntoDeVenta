@@ -3,6 +3,9 @@ from django.urls import path, include
 from AdminHomeApp.views import renderAdminHome
 from CrudEmpleadosApp import views 
 from CrudUsuariosApp import views
+from CrudProductosApp import views
+from CrudCategoriasApp import views
+from CrudBodegaApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),

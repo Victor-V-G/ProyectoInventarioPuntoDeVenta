@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'LoginApp',
     'AdminHomeApp',
-    'CrudEmpleadosApp'
+    'HomeApp',
+    'CrudEmpleadosApp',
+    'CrudUsuariosApp',
+    'CrudProductosApp',
+    'CrudCategoriasApp',
+    'CrudBodegaApp',
 ]
 
 MIDDLEWARE = [
