@@ -44,7 +44,9 @@ function login(){
         ElementoPassword.style.color = "black"
         eErrorPassword.innerText = ""
         eErrorNombreUsuario.innerText = ""
+        localStorage.setItem("categoria", "admin");
         window.location.href = "adminhome/"
+        
     } 
 
     if (validarNombreDeUsuario == 3 && validarPassword == 3) {
@@ -56,6 +58,7 @@ function login(){
         ElementoPassword.style.color = "black"
         eErrorPassword.innerText = ""
         eErrorNombreUsuario.innerText = ""
+        localStorage.setItem("categoria", "home");
         window.location.href = "home/"
     }
 

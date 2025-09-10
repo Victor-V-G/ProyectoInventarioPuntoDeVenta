@@ -1,17 +1,18 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD PRODUCTO</title>
+    <script src="{%static "js/crudVolver.js" %}"></script>
 </head>
 <body>
     
     <h1>CRUD PRODUCTO</h1>
 
-    <a href="/home/">
-        <button>VOLVER ATRAS</button>
-    </a>
+    <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
+
 
 </body>
 </html>
