@@ -15,4 +15,5 @@ urlpatterns = [
     path("crudproductos/", include("CrudProductosApp.urls")),
     path("crudcategorias/", include("CrudCategoriasApp.urls")),
     path("crudbodegas/", include("CrudBodegaApp.urls"))
+    
 ]

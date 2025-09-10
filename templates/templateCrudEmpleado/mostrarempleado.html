@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSTRAR EMPLEADOS</title>
+    <script src="{%static 'js/MostrarEmpleados.js' %}"></script>
+</head>
+<body>
+    <h1>LISTA EMPLEADOS</h1>
+    <br></br>
+    <table>
+        <thead>
+            <tr>
+                <th>RUT Empleado</th>
+                <th>Nombre Empleado</th>
+                <th>Apelllido de Empleado</th>
+                <th>Edad Empleado</th>
+                <th>Numero Telefono Empleado</th>
+            </tr>
+        </thead>
+        <tbody id="mostrarEmpleados">
+            <script>
+                function mostrarEmpleados() {
+                    let eMostrarEmpleados = document.getElementById("mostrarEmpleados");
+
+                    let empleados = JSON.parse(localStorage.getItem("empleadosA")) || [];
+
+                    eMostrarEmpleados.innerHTML = empleados.map((p, index) => {
+                        return "<tr>"+
+                                "<td>"+p.rut+"</td>"+
+                                "<td>"+p.nombre+"</td>"+
+                                "<td>"+p.apellido+"</td>"+
+                                "<td>"+p.edad+"</td>"+
+                                "<td>"+p.numero+"</td>"+
+                            "</tr>";
+                    })
+                }
+                // Llamar a la función cuando cargue la página
+                window.onload = mostrarEmpleados;
+            </script>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSTRAR EMPLEADOS</title>
+    <script src="{%static 'js/MostrarEmpleados.js' %}"></script>
+</head>
+<body>
+    <h1>LISTA PRODUCTOS</h1>
+    <br></br>
+    <table>
+        <thead>
+            <tr>
+                <th>Categoria Producto</th>
+                <th>Codigo Producto</th>
+                <th>Valor Producto</th>
+                <th>Stock Producto</th>
+                <th>Nombre Producto</th>
+                <th>Fecha Registro Producto</th>
+                <th>Marco Producto</th>
+                <th>Fecha Vencimiento Producto</th>
+            </tr>
+        </thead>
+        <tbody id="mostrarProductos">
+            <script>
+                function mostrarProductos() {
+                    let eMostrarProductos = document.getElementById("mostrarProductos");
+
+                    let productos = JSON.parse(localStorage.getItem("productos")) || [];
+
+                    eMostrarProductos.innerHTML = productos.map((p, index) => {
+                        return "<tr>"+
+                                "<td>"+p.categoriaProducto+"</td>"+
+                                "<td>"+p.codigoBarras+"</td>"+
+                                "<td>"+p.valorProducto+"</td>"+
+                                "<td>"+p.stockProducto+"</td>"+
+                                "<td>"+p.nombreProducto+"</td>"+
+                                "<td>"+p.fechaRegistro+"</td>"+
+                                "<td>"+p.marcaProducto+"</td>"+
+                                "<td>"+p.fechaVencimiento+"</td>"+
+                            "</tr>";
+                    })
+                }
+                // Llamar a la función cuando cargue la página
+                window.onload = mostrarProductos;
+            </script>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSTRAR EMPLEADOS</title>
+    <script src="{%static 'js/MostrarEmpleados.js' %}"></script>
+</head>
+<body>
+    <h1>LISTA CATEGORIAS</h1>
+    <br></br>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Categoria</th>
+                <th>Descripcion Catgeroria</th>
+            </tr>
+        </thead>
+        <tbody id="mostrarCategorias">
+            <script>
+                function mostrarCategorias() {
+                    let eMostrarCategorias = document.getElementById("mostrarCategorias");
+
+                    let categorias = JSON.parse(localStorage.getItem("categorias")) || [];
+
+                    eMostrarCategorias.innerHTML = categorias.map((p, index) => {
+                        return "<tr>"+
+                                "<td>"+p.nombreCategoria+"</td>"+
+                                "<td>"+p.descripcion+"</td>"+
+                            "</tr>";
+                    })
+                }
+                // Llamar a la función cuando cargue la página
+                window.onload = mostrarCategorias;
+            </script>
+        </tbody>
+    </table>
+</body>
+</html>

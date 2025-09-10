@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+{%load static%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD EMPLEADOS</title>
 </head>
 <body>
+
     <h1>CRUD EMPLEADOS</h1>
+
+    <a href="/adminhome/crudempleados/accion-a-realizar-empleado/">
+        <button>AGREGAR EMPLEADO</button>
+    </a>
+
+    {% include "templateCrudEmpleado/mostrarempleado.html" %}
 
     <a href="/adminhome/">
         <button>VOLVER ATRAS</button>
     </a>
     
-    {% include "templateCrudEmpleado/formularioEmpleado.html" %}
+
 </body>
 </html>

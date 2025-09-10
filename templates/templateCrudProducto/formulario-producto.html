@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AGREGAR PRODUCTO</title>
     <script src="{%static 'js/FormularioProducto.js' %}"></script>
+    <script src="{%static "js/crudVolver.js" %}"></script>
 </head>
 <body>
     <h1>Formulario de registro de Productos</h1>
@@ -92,5 +93,7 @@
         </button>
         <br></br>
         <span id="errorRegistrar"></span>
+
+        <button type="button" onclick="regresarCrudProducto()">VOLVER ATRAS</button>
 </body>
 </html>
