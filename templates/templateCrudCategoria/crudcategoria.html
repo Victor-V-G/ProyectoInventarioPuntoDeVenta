@@ -5,14 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD CATEGORIAS</title>
-    <script src="{%static "js/crudVolver.js" %}"></script>
+    <script src="{%static 'js/crudVolver.js' %}"></script>
+    <script src="{%static 'js/revisarYAlmacenarAccion.js' %}"></script>
 </head>
 <body>
     
     <h1>CRUD CATEGORIAS</h1>
-    <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
-    {% include "templateCrudCategoria/formularioCategoria.html" %}
+
+    <button type="button" onclick="registrarCategoriaAccion(); accionIrAlFormularioCategorias();">AGREGAR CATEGORIAS</button>    
+
     {% include "templateCrudCategoria/mostrarcategoria.html" %}
+
+    <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
 
 </body>
 </html>

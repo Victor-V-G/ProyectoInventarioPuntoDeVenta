@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD EMPLEADOS</title>
+    <script src="{%static 'js/revisarYAlmacenarAccion.js' %}"></script>
 </head>
 <body>
 
     <h1>CRUD EMPLEADOS</h1>
 
-    <a href="/adminhome/crudempleados/accion-a-realizar-empleado/">
-        <button>AGREGAR EMPLEADO</button>
+    <a href="/adminhome/crudempleados/agregar-empleado">
+        <button onclick="registrarEmpleadosAccion()">AGREGAR EMPLEADO</button>
     </a>
 
     {% include "templateCrudEmpleado/mostrarempleado.html" %}

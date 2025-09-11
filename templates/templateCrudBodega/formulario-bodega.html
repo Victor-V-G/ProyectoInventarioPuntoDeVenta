@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="{%static 'js/crudVolver.js' %}"></script>
+    <script src="{%static 'js/FormularioBodega.js' %}"></script>
+</head>
+<body>
+    <h1>Formulario de registro de Bodegas</h1>
+        <label>Nombre Bodega: </label>
+        <input
+        name="nombreBodega"
+        id="nombreBodega"
+        type="text"
+        placeholder="Ingrese el Nombre de la Bodega">
+        </input>
+        <span id="eNombreBodegaE"></span>
+        <br></br>
+        <br></br>
+        <label>Ubicacion: </label>
+        <textarea 
+        name="ubicacionBodega"
+        id="ubicacionBodega"
+        className="Ubicacion"
+        ></textarea>
+        <span id="eUbicacionBodegaE"></span>
+        <br></br>
+        <br></br>
+
+        <button
+        className="BotonesEncabezado" onclick="registrarBodegas(); regresarCrudBodega();">Registrar Bodega
+        </button>
+        <br></br>
+        <span id="errorRegistrar"></span>
+
+    <button type="button" onclick="regresarCrudBodega()">VOLVER ATRAS</button>
+</body>
+</html>

@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD BODEGA</title>
-    <script src="{%static "js/crudVolver.js" %}"></script>
+    <script src="{%static 'js/crudVolver.js' %}"></script>
 </head>
 <body>
     
     <h1>CRUD BODEGA</h1>
 
-    
+    <button type="button" onclick="accionProductoABodega()">AGREGAR PRODUCTO A BODEGA</button>
+
+    {% include "templateCrudBodega/mostrarbodegas.html" %}
+
     <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
     
 </body>

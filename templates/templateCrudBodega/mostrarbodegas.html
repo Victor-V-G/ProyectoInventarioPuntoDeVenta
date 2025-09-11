@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSTRAR EMPLEADOS</title>
+</head>
+<body>
+    <h1>LISTA BODEGAS</h1>
+    <br></br>
+    <table>
+        <thead>
+            <tr>
+                <th>Accion Bodega</th>
+                <th>Nombre Bodega</th>
+                <th>Ubicacion Bodega</th>
+            </tr>
+        </thead>
+        <tbody id="mostrarBodegas">
+            <script>
+                function mostrarBodegas() {
+                    let eMostrarBodegas = document.getElementById("mostrarBodegas");
+
+                    let bodegas = JSON.parse(localStorage.getItem("bodegas")) || [];
+
+                    eMostrarBodegas.innerHTML = bodegas.map((p, index) => {
+                        return "<tr>"+
+                                "<td>"+p.accion+"</td>"+
+                                "<td>"+p.nombreBodega+"</td>"+
+                                "<td>"+p.ubicacionBodega+"</td>"+
+                            "</tr>";
+                    }).join("")
+                }
+                // Llamar a la función cuando cargue la página
+                window.onload = mostrarBodegas;
+            </script>
+        </tbody>
+    </table>
+</body>
+</html>

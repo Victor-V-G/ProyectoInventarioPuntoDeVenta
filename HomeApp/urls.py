@@ -8,5 +8,5 @@ urlpatterns = [
     path('', renderTemplateHome),
     path('crudproductos/', include("CrudProductosApp.urls")),
     path('crudcategorias/', include("CrudCategoriasApp.urls")),
-    path('crudbodega/', include("CrudBodegaApp.urls")),
+    path('crudbodegas/', include("CrudBodegaApp.urls")),
 ]

@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD USUARIO</title>
+    <script src="{%static 'js/revisarYAlmacenarAccion.js'%}"></script>
 </head>
 <body>
 
     <h1>CRUD USUARIO</h1>
     
-    <a href="/adminhome/crudusuarios/accion-a-realizar-usuario">
-        <button>AGREGAR USUARIO</button>
+    <a href="/adminhome/crudusuarios/agregar-usuario">
+        <button onclick="registrarUsuariosAccion()">AGREGAR USUARIO</button>
     </a>
 
     {% include "templateCrudUsuario/mostrarusuarios.html" %}

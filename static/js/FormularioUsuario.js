@@ -1,4 +1,6 @@
 function registrarUsuarios(){
+    let eRutEmpleado = document.getElementById("rutEmpleado")
+    let vRutEmpleado = eRutEmpleado.value
     let eCargoUsuario = document.getElementById("cargoUsuario")
     let vCargoUsuario = eCargoUsuario.value
     let eContraseniaUsuario = document.getElementById("contraseniaUsuario")
@@ -7,7 +9,7 @@ function registrarUsuarios(){
 
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
     let nuevoUsuario = {
-        rut:"a",
+        rut:vRutEmpleado,
         cargo:vCargoUsuario,
         contrasenia:vContraseniaUsuario
     };

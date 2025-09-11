@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="{%static 'js/FormularioCategoria.js' %}"></script>
+    <script src="{%static 'js/crudVolver.js' %}"></script>
 </head>
 <body>
     <h1>Formulario de registro de Categorias</h1>
@@ -30,9 +31,12 @@
         <br></br>
 
         <button
-        className="BotonesEncabezado" onclick="registrarCategorias()">Registrar Categoria
+            className="BotonesEncabezado" onclick="registrarCategorias(); regresarCrudCategorias();">Registrar Categoria
         </button>
         <br></br>
         <span id="errorRegistrar"></span>
+    
+    <button type="button" onclick="regresarCrudCategorias()">VOLVER ATRAS</button>
+    
 </body>
 </html>

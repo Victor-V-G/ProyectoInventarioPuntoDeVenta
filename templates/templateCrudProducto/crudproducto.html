@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD PRODUCTO</title>
-    <script src="{%static "js/crudVolver.js" %}"></script>
+    <script src="{%static 'js/crudVolver.js' %}"></script>
+    <script src="{%static 'js/revisarYAlmacenarAccion.js' %}"></script>
 </head>
 <body>
     
     <h1>CRUD PRODUCTO</h1>
 
-    <button type="button" onclick="irAccionARealizarProducto()">AGREGAR PRODUCTO</button>
+    <button type="button" onclick="registrarProductosAccion(); irAgregarProductoFormulario(); ">AGREGAR PRODUCTO</button>
 
     {% include "templateCrudProducto/mostrarproductos.html" %}
 

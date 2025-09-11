@@ -5,9 +5,5 @@ def renderTemplateCrudProductos (request):
     return render(request, "templateCrudProducto/crudproducto.html")
 
 
-def renderTemplateAccionARealizarProducto (request):
-    return render(request, "templateCrudProducto/accion-a-realizar-producto.html")
-
-
 def renderTemplateFormularioAgregarProducto (request):
     return render(request, "templateCrudProducto/formulario-producto.html")

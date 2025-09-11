@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOSTRAR EMPLEADOS</title>
-    <script src="{%static 'js/MostrarEmpleados.js' %}"></script>
 </head>
 <body>
     <h1>LISTA PRODUCTOS</h1>
@@ -41,7 +40,7 @@
                                 "<td>"+p.marcaProducto+"</td>"+
                                 "<td>"+p.fechaVencimiento+"</td>"+
                             "</tr>";
-                    })
+                    }).join("")
                 }
                 // Llamar a la función cuando cargue la página
                 window.onload = mostrarProductos;

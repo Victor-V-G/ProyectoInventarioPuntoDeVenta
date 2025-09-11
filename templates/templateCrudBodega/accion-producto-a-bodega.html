@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACCION A REALIZAR BODEGA</title>
+    <script src="{%static 'js/crudVolver.js'%}"></script>
+    <script src="{%static 'js/revisarYAlmacenarAccion.js'%}"></script>
+</head>
+<body>
+    
+    <h1>ACCION A REALIZAR BODEGA</h1>
+    
+    <form>
+        <select
+        name="accionARealizar"
+        id="accionARealizar">
+            <option value="">Ingrese la accion a realizar/option>
+            <option value="agregar">Agregar Bodega</option>
+        </select>
+    </form>
+
+    <button type="button" onclick="registrarProductoABodegaAccion(); accionIrAlFormulario();">AGREGAR PRODUCTO A BODEGA</button>
+
+    <button type="button" onclick="regresarCrudBodega()">VOLVER ATRAS</button>
+    
+</body>
+</html>

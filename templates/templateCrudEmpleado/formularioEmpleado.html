@@ -60,9 +60,22 @@
         <br></br>
         <br></br>
 
+        <script>
+            function validar() {
+                const validador = registrarEmpleados();
+
+                if (!validador) {
+                    alert("Faltan datos.");
+                    return;
+                }
+                window.location.href = "/adminhome/crudempleados";
+                }
+        </script>
+        
         <button
-        className="BotonesEncabezado" onclick="registrarEmpleados()">Registrar Empleado
+            className="BotonesEncabezado" onclick="validar()">Registrar Empleado
         </button>
+        
         <br></br>
         <span id="errorRegistrar"></span>
 

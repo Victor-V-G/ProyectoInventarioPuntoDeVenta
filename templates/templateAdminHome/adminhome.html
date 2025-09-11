@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+{%load static%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME ADMIN</title>
+    <link rel="stylesheet" href="{%static 'css/admin-home-style.css' %}">
 </head>
-<body>
+<body class="inicio-div-style">
 
-    <h1>ADMIN HOME</h1>
-    
-    <a href="/adminhome/crudempleados/">
-        <button>ACCEDER CRUD EMPLEADO</button>
-    </a>
+    <div >
 
-    <a href="/adminhome/crudusuarios/">
-        <button>ACCEDER CRUD USUARIOS</button>
-    </a>
+        <header>
 
-    <a href="/adminhome/crudproductos/">
-        <button>ACCEDER CRUD PRODUCTOS</button>
-    </a>
+            <h1>BIENVENIDO ADMIN. ELIJA UNA OPCION.</h1>
 
-    <a href="/adminhome/crudcategorias/">
-        <button>ACCEDER CRUD CATEGORIAS</button>
-    </a>
+        </header>
 
-    <a href="/adminhome/crudbodegas/">
-        <button>ACCEDER CRUD BODEGA</button>
-    </a>
+        <main>
 
-    <a href="/">
-        <button>CERRAR SESION</button>
-    </a>
+            <nav>
+
+                <a href="/adminhome/crudempleados/">
+                    <button>ACCEDER CRUD EMPLEADO</button>
+                </a>
+
+                <a href="/adminhome/crudusuarios/">
+                    <button>ACCEDER CRUD USUARIOS</button>
+                </a>
+
+                <a href="/adminhome/crudproductos/">
+                    <button>ACCEDER CRUD PRODUCTOS</button>
+                </a>
+
+                <a href="/adminhome/crudcategorias/">
+                    <button>ACCEDER CRUD CATEGORIAS</button>
+                </a>
+
+                <a href="/adminhome/crudbodegas/">
+                    <button>ACCEDER CRUD BODEGA</button>
+                </a>
+
+                <a href="/">
+                    <button>CERRAR SESION</button>
+                </a>
+
+            </nav>
+            
+        </main>
+
+    </div>
 
 </body>
 </html>

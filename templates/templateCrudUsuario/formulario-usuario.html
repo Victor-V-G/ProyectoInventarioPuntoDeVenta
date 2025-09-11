@@ -11,12 +11,12 @@
     <h1>Formulario de registro de Usuarios</h1>
         <label>Rut: </label>
         <select
-        name="datosPersona"
-        id="datosPersona">
+        name="rutEmpleado"
+        id="rutEmpleado">
         </select>
         <script>
             let empleados = JSON.parse(localStorage.getItem("empleadosA"))
-            let datos = document.getElementById("datosPersona")
+            let datos = document.getElementById("rutEmpleado")
             datos.innerHTML = `<option value="">Elige el rut del usuario</option>`
             empleados.forEach(empleado => {
                 let rut = `<option value="${empleado.rut}">${empleado.rut}</option>`
@@ -48,9 +48,13 @@
         <br></br>
         <br></br>
 
-        <button
-        className="BotonesEncabezado" onclick="registrarUsuarios()">Registrar Usuario
-        </button>
+        
+        <a href="/adminhome/crudusuarios">
+            <button
+                className="BotonesEncabezado" onclick="registrarUsuarios()">Registrar Usuario
+            </button>
+        </a>
+
         <br></br>
         <span id="errorRegistrar"></span>
 
