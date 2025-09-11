@@ -14,6 +14,20 @@ function registrarCategorias(){
     let vlmNombreCat = validarNull(eNombreCategoria, vNombreCategoria, eErrorNombreCategoria)
     let vlmDescripcion = validarNull(eDescripcionCategoria, vDescripcionCategoria, eErrorDescripcion)
 
+    // Función para validar que un campo no esté vacío
+    function validarNull(elemento, valor, elementoError) {
+        if (!valor || valor.trim() === "") {
+            elementoError.textContent = "Este campo es obligatorio";
+            elemento.style.backgroundColor = "red";
+            return false;
+        } else {
+            elementoError.textContent = "";
+            elemento.style.border = "";
+            return true;
+        }
+    }
+
+
     // Si ambos campos son válidos
     if(vlmNombreCat && vlmDescripcion){
         // Recupera el array de categorías o crea uno vacío
@@ -21,7 +35,7 @@ function registrarCategorias(){
 
         // Crea un objeto con los datos de la categoría
         let nuevoCategoria = {
-            nombreCategria: vNombreCategoria,
+            nombreCategoria: vNombreCategoria,
             descripcion: vDescripcionCategoria
         };
 
