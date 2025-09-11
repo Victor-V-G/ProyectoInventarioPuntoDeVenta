@@ -5,19 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD EMPLEADOS</title>
+    <link rel="stylesheet" href="{%static 'css/crud-empleado-style.css'%}">
     <script src="{%static 'js/revisarYAlmacenarAccion.js' %}"></script>
 </head>
-<body>
+<body class="inicio-div-style">
 
-    <h1>CRUD EMPLEADOS</h1>
-
-    <a href="/adminhome/crudempleados/agregar-empleado">
+    <header>
+        <h1>CRUD EMPLEADOS</h1>
+    </header>
+    
+    <a href="/adminhome/crudempleados/agregar-empleado" class="boton-style">
         <button onclick="registrarEmpleadosAccion()">AGREGAR EMPLEADO</button>
     </a>
 
     {% include "templateCrudEmpleado/mostrarempleado.html" %}
 
-    <a href="/adminhome/">
+    <br>
+    <br>
+    
+    <a href="/adminhome/" class="boton-style">
         <button>VOLVER ATRAS</button>
     </a>
     

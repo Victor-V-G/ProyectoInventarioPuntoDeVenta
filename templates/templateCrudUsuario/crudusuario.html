@@ -6,18 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD USUARIO</title>
     <script src="{%static 'js/revisarYAlmacenarAccion.js'%}"></script>
+    <link rel="stylesheet" href="{%static 'css/crud-usuario-style.css'%}">
 </head>
-<body>
+<body class="inicio-div-style">
 
-    <h1>CRUD USUARIO</h1>
+    <header>
+        <h1>CRUD USUARIO</h1>
+    </header>
     
-    <a href="/adminhome/crudusuarios/agregar-usuario">
+    
+    <a href="/adminhome/crudusuarios/agregar-usuario" class="boton-style">
         <button onclick="registrarUsuariosAccion()">AGREGAR USUARIO</button>
     </a>
 
     {% include "templateCrudUsuario/mostrarusuarios.html" %}
 
-    <a href="/adminhome/">
+    <br>
+    <br>
+    
+    <a href="/adminhome/" class="boton-style">
         <button>VOLVER ATRAS</button>
     </a>
 

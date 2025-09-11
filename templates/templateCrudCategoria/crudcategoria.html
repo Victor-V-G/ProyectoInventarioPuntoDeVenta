@@ -7,16 +7,26 @@
     <title>CRUD CATEGORIAS</title>
     <script src="{%static 'js/crudVolver.js' %}"></script>
     <script src="{%static 'js/revisarYAlmacenarAccion.js' %}"></script>
+    <link rel="stylesheet" href="{%static 'css/crud-categoria-style.css'%}">
 </head>
-<body>
+<body class="inicio-div-style">
     
-    <h1>CRUD CATEGORIAS</h1>
+    <header>
+        <h1>CRUD CATEGORIAS</h1>
+    </header>
 
-    <button type="button" onclick="registrarCategoriaAccion(); accionIrAlFormularioCategorias();">AGREGAR CATEGORIAS</button>    
-
+    <div class="boton-style">
+        <button type="button" onclick="registrarCategoriaAccion(); accionIrAlFormularioCategorias();">AGREGAR CATEGORIAS</button>    
+    </div>
+    
     {% include "templateCrudCategoria/mostrarcategoria.html" %}
 
-    <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
+    <br>
+    <br>
 
+    <div class="boton-style">
+        <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
+    </div>
+    
 </body>
 </html>

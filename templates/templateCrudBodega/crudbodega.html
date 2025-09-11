@@ -6,16 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD BODEGA</title>
     <script src="{%static 'js/crudVolver.js' %}"></script>
+    <link rel="stylesheet" href="{%static 'css/crud-bodega-style.css'%}">
 </head>
-<body>
+<body class="inicio-div-style">
     
-    <h1>CRUD BODEGA</h1>
-
-    <button type="button" onclick="accionProductoABodega()">AGREGAR PRODUCTO A BODEGA</button>
-
+    <header>
+        <h1>CRUD BODEGA</h1>
+    </header>
+    
+    <div class="boton-style">
+        <button type="button" onclick="accionProductoABodega()">AGREGAR PRODUCTO A BODEGA</button>
+    </div>
+    
     {% include "templateCrudBodega/mostrarbodegas.html" %}
 
-    <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
+    <br>
+    <br>
+
+    <div class="boton-style">
+        <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
+    </div>
     
 </body>
 </html>

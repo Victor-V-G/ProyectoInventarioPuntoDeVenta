@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
+{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,16 +7,28 @@
     <title>CRUD PRODUCTO</title>
     <script src="{%static 'js/crudVolver.js' %}"></script>
     <script src="{%static 'js/revisarYAlmacenarAccion.js' %}"></script>
+    <link rel="stylesheet" href="{%static 'css/crud-producto-style.css'%}">
 </head>
-<body>
+<body class="inicio-div-style">
     
-    <h1>CRUD PRODUCTO</h1>
-
-    <button type="button" onclick="registrarProductosAccion(); irAgregarProductoFormulario(); ">AGREGAR PRODUCTO</button>
+    <header>
+        <h1>CRUD PRODUCTO</h1>
+    </header>
+    
+    <div class="boton-style">
+        <button type="button" onclick="registrarProductosAccion(); irAgregarProductoFormulario(); ">AGREGAR PRODUCTO</button>
+    </div>
+    
 
     {% include "templateCrudProducto/mostrarproductos.html" %}
 
-    <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
+    <br>
+    <br>
+
+    <div class="boton-style">
+        <button type="button" onclick="crudVolver()">VOLVER ATRAS</button>
+    </div>
+    
 
 </body>
 </html>

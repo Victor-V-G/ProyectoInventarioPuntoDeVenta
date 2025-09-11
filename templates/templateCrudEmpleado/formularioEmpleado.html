@@ -6,82 +6,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="{%static 'js/FormularioEmpleado.js' %}"></script>
+    <link rel="stylesheet" href="{%static 'css/form-style.css'%}">
 </head>
 <body>
-    <h1>Formulario de registro de Empleados</h1>
-        <label>Rut: </label>
+    <div class="form-container">
+        <h1>Formulario de registro de Empleados</h1>
+
+        <label for="rutEmpleado">Rut: </label>
         <input
-        name="rutEmpleado"
-        id="rutEmpleado"
-        type="text"
-        placeholder="Ingrese el Nombre del Empledo">
-        </input>
-        <span id="eRutE"></span>
-        <br></br>
-        <br></br>
-        <label>Nombre: </label>
+            class="input-style"
+            name="rutEmpleado"
+            id="rutEmpleado"
+            type="text"
+            placeholder="Ingrese el Nombre del Empleado">
+        <span id="eRutE" class="error-message"></span>
+        <br><br>
+
+        <label for="nombreEmpleado">Nombre: </label>
         <input
-        name="nombreEmpleado"
-        id="nombreEmpleado"
-        type="text"
-        placeholder="Ingrese el Nombre del Empledo">
-        </input>
-        <span id="eNombreE"></span>
-        <br></br>
-        <br></br>
-        <label>Apellido: </label>
+            class="input-style"
+            name="nombreEmpleado"
+            id="nombreEmpleado"
+            type="text"
+            placeholder="Ingrese el Nombre del Empleado">
+        <span id="eNombreE" class="error-message"></span>
+        <br><br>
+
+        <label for="apellidoEmpleado">Apellido: </label>
         <input
-        name="apellidoEmpleado"
-        id="apellidoEmpleado"
-        type="text"
-        placeholder="Ingrese el Nombre del Empledo">
-        </input>
-        <span id="eApellidoE"></span>
-        <br></br>
-        <br></br>
-        <label>Edad: </label>
+            class="input-style"
+            name="apellidoEmpleado"
+            id="apellidoEmpleado"
+            type="text"
+            placeholder="Ingrese el Apellido del Empleado">
+        <span id="eApellidoE" class="error-message"></span>
+        <br><br>
+
+        <label for="edadEmpleado">Edad: </label>
         <input
-        name="edadEmpleado"
-        id="edadEmpleado"
-        type="number"
-        placeholder="Ingrese el Numero del Empledo">
-        </input>
-        <span id="eEdadE"></span>
-        <br></br>
-        <br></br>
-        <label>Numero: </label>
+            class="input-style"
+            name="edadEmpleado"
+            id="edadEmpleado"
+            type="number"
+            placeholder="Ingrese la Edad del Empleado">
+        <span id="eEdadE" class="error-message"></span>
+        <br><br>
+
+        <label for="numeroEmpleado">Número: </label>
         <input
-        name="numeroEmpleado"
-        id="numeroEmpleado"
-        type="number"
-        placeholder="Ingrese el Numero del Empledo">
-        </input>
-        <span id="eNumeroE"></span>
-        <br></br>
-        <br></br>
+            class="input-style"
+            name="numeroEmpleado"
+            id="numeroEmpleado"
+            type="number"
+            placeholder="Ingrese el Número del Empleado">
+        <span id="eNumeroE" class="error-message"></span>
+        <br><br>
+
+        <button class="btn-registrar" onclick="validar()">Registrar Empleado</button>
 
         <script>
+            /* Función para validar el registro de empleados */
             function validar() {
+                // Llama a la función registrarEmpleados() que intenta registrar un empleado
+                // Devuelve true si todos los campos son válidos, o false si falta algún dato
                 const validador = registrarEmpleados();
 
-                if (!validador) {
-                    alert("Faltan datos.");
-                    return;
+                // Si registrarEmpleados devuelve false, significa que faltan datos
+                if (validador == false) {
+                    alert("Faltan datos."); // Muestra alerta al usuario
+                    return; // Sale de la función sin continuar
                 }
-                window.location.href = "/adminhome/crudempleados";
+                // Si registrarEmpleados devuelve true, todo está correcto
+                else if(validador == true){
+                    // Redirige a la página de listado de empleados
+                    window.location.href = "/adminhome/crudempleados";
                 }
+            }
         </script>
-        
-        <button
-            className="BotonesEncabezado" onclick="validar()">Registrar Empleado
-        </button>
-        
-        <br></br>
-        <span id="errorRegistrar"></span>
 
-    <a href="/adminhome/crudempleados">
-        <button>VOLVER ATRAS</button>
-    </a>
+        <br>
+        <span id="errorRegistrar" class="error-message"></span>
 
+        <a href="/adminhome/crudempleados" class="boton-style">
+            <button type="button" class="volver-button">VOLVER ATRÁS</button>
+        </a>
+    </div>
 </body>
 </html>

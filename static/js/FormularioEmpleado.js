@@ -1,103 +1,97 @@
+/*------------------------------------------------------------
+FUNCION registrarEmpleados()
+Se encarga de registrar un nuevo empleado en localStorage,
+validando que todos los campos estén completos.
+------------------------------------------------------------*/
 function registrarEmpleados(){
+    /*--------------------------- Captura de elementos y valores ---------------------------*/
+
+    // Input y valor del RUT del empleado
     let eRutEmpleado = document.getElementById("rutEmpleado")
     let vRutEmpleado = eRutEmpleado.value
+
+    // Input y valor del nombre del empleado
     let eNombreEmpleado = document.getElementById("nombreEmpleado")
     let vNombreEmpleado = eNombreEmpleado.value
+
+    // Input y valor del apellido del empleado
     let eApellidoEmpleado = document.getElementById("apellidoEmpleado")
     let vApellidoEmpleado = eApellidoEmpleado.value
+
+    // Input y valor de la edad del empleado
     let eEdadEmpleado = document.getElementById("edadEmpleado")
     let vEdadEmpleado = eEdadEmpleado.value
+
+    // Input y valor del número de contacto del empleado
     let eNumeroEmpleado = document.getElementById("numeroEmpleado")
     let vNumeroEmpleado = eNumeroEmpleado.value
 
+    /*--------------------------- Manejo de errores ---------------------------*/
 
-    
     let eErrorRut = document.getElementById("eRutE")
     let eErrorNombre = document.getElementById("eNombreE")
     let eErrorApellido = document.getElementById("eApellidoE")
     let eErrorEdad = document.getElementById("eEdadE")
     let eErrorNumero = document.getElementById("eNumeroE")
 
-    let vlmNombre = validarLargoAncho(eNombreEmpleado,vNombreEmpleado,eErrorNombre)
-    let vlmApellido = validarLargoAncho(eApellidoEmpleado,vApellidoEmpleado,eErrorApellido)
-    let vlmEdad = validarLargoAnchoEdad(eEdadEmpleado,vEdadEmpleado,eErrorEdad)
-    
+    /*--------------------------- Validaciones ---------------------------*/
 
-    if(vlmNombre && vlmApellido && vlmEdad){
+    // Verifica que el RUT no esté vacío
+    let vlmRut = validarNull(eRutEmpleado, vRutEmpleado, eErrorRut)
+    // Verifica que el nombre no esté vacío
+    let vlmNombre = validarNull(eNombreEmpleado, vNombreEmpleado, eErrorNombre)
+    // Verifica que el apellido no esté vacío
+    let vlmApellido = validarNull(eApellidoEmpleado, vApellidoEmpleado, eErrorApellido)
+    // Verifica que la edad no esté vacía
+    let vlmEdad = validarNull(eEdadEmpleado, vEdadEmpleado, eErrorEdad)
+    // Verifica que el número de contacto no esté vacío
+    let vlmNumero = validarNull(eNumeroEmpleado, vNumeroEmpleado, eErrorNumero)
+
+    /*--------------------------- Registro de empleado ---------------------------*/
+
+    // Solo si todas las validaciones son correctas (true) se guarda el empleado
+    if(vlmRut && vlmNombre && vlmApellido && vlmEdad && vlmNumero){
+        // Recupera la lista de empleados desde localStorage o crea un array vacío si no existe
         let empleados = JSON.parse(localStorage.getItem("empleadosA")) || [];
+
+        // Crea un objeto con todos los datos del empleado
         let nuevoEmpleado = {
-            rut:vRutEmpleado,
-            nombre:vNombreEmpleado,
-            apellido:vApellidoEmpleado,
-            edad:vEdadEmpleado,
-            numero:vNumeroEmpleado
+            rut: vRutEmpleado,
+            nombre: vNombreEmpleado,
+            apellido: vApellidoEmpleado,
+            edad: vEdadEmpleado,
+            numero: vNumeroEmpleado
         };
+
+        // Agrega el nuevo empleado al array
         empleados.push(nuevoEmpleado);
+
+        // Guarda nuevamente el array actualizado en localStorage
         localStorage.setItem("empleadosA", JSON.stringify(empleados));
 
-    
+        // Muestra los empleados en consola (para depuración)
         console.log(empleados)
-    }
 
-
-    
-}
-
-
-function validarLargoAncho(elemento,valor,error){
-    valor = valor.trim()
-
-    if(!/^[a-zA]+$/.test(valor)){
-        error.innerText = "Debe ingresar algun valor tipo texto, sin espacios, ni caracteres especiales"
-        elemento.style.backgroundColor = "blue"
-        elemento.style.color = "white"
-        return false
-    }
-    else if(valor.length <= 0){
-        error.innerText = "Debe ingresar algun valor para el Nombre"
-        elemento.style.backgroundColor = "red"
-        elemento.style.color = "white"
-        return false
-    }
-    else if(valor.length <= 2){
-        error.innerText = "Debe ingresar mas de 3 caracteres para el Nombre"
-        elemento.style.backgroundColor = "orange"
-        elemento.style.color = "white"
-        return false
-    }
-    else if(valor.length >= 3){
-        error.innerText = "Ingresado correctamente"
-        elemento.style.backgroundColor = "green"
-        elemento.style.color = "white"
+        // Retorna true indicando que el registro fue exitoso
         return true
     }
-
 }
-    
 
-
-
-function validarLargoAnchoEdad(elemento,valor,error){
-    
-    if(valor === ""){
-        error.innerText = "Debe ingresar algun valor para La Edad"
-        elemento.style.backgroundColor = "red"
-        elemento.style.color = "white"
-    }
-    else if(valor >= 0 && valor <= 17){
-        error.innerText = "Debe ingresar mas mayor a 18 años"
-        elemento.style.backgroundColor = "orange"
-        elemento.style.color = "white"
-    }
-    else if(valor >= 18 && valor <= 99){
-        error.innerText = "Edad Ingresado correctamente"
-        elemento.style.backgroundColor = "green"
-        elemento.style.color = "white"
-        return true
-    }
-    else if(valor >= 100){
-        error.innerText = "Deberias estar muerto"
-        elemento.style.backgroundColor = "darkred"
-        elemento.style.color = "white"
+/*------------------------------------------------------------
+FUNCION validarNull()
+Valida si un campo está vacío o no, y cambia el estilo del input
+dependiendo del resultado.
+------------------------------------------------------------*/
+function validarNull(elemento, valor, error) {
+    if (valor.length === 0) { // Caso: el campo está vacío
+        error.innerText = "Debe ingresar un valor"; // Muestra mensaje de error
+        elemento.style.backgroundColor = "red"; // Fondo rojo
+        elemento.style.color = "white"; // Texto blanco
+        return false; // Retorna false = no válido
+    } else { // Caso: el campo tiene un valor válido
+        error.innerText = ""; // Limpia mensaje de error
+        elemento.style.backgroundColor = "green"; // Fondo verde
+        elemento.style.color = "white"; // Texto blanco
+        return true; // Retorna true = válido
     }
 }

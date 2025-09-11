@@ -7,8 +7,10 @@
     <title>AGREGAR PRODUCTO</title>
     <script src="{%static 'js/FormularioProducto.js' %}"></script>
     <script src="{%static "js/crudVolver.js" %}"></script>
+    <link rel="stylesheet" href="{%static 'css/form-style.css'%}">
 </head>
 <body>
+    <div class="form-container">
     <h1>Formulario de registro de Productos</h1>
         <label>Categoria Producto: </label>
         <select
@@ -89,11 +91,38 @@
         
 
         <button
-            className="BotonesEncabezado" onclick="registrarProductos(); regresarCrudProducto();">Registrar Producto
+            className="BotonesEncabezado" onclick="validar()">Registrar Producto
         </button>
+
+
+        <script>
+            /* Función para validar el registro de productos */
+            function validar() {
+                // Llama a la función registrarProductos() que intenta registrar un producto
+                // Devuelve true si todos los campos son válidos, o false si falta algún dato
+                const validador = registrarProductos();
+
+                // Si registrarProductos devuelve false, significa que faltan datos
+                if (validador == false) {
+                    alert("Faltan datos."); // Muestra alerta al usuario
+                    return; // Sale de la función sin continuar
+                }
+                // Si registrarProductos devuelve true, todo está correcto
+                else if(validador == true){
+                    // Redirige al listado de productos
+                    // NOTA: No es correcto usar window.onload aquí
+                    // porque se ejecuta inmediatamente y sobrescribe window.onload
+                    window.onload = regresarCrudProducto();
+                }
+            }
+        </script>
+
+
+
         <br></br>
         <span id="errorRegistrar"></span>
 
         <button type="button" onclick="regresarCrudProducto()">VOLVER ATRAS</button>
+        </div>
 </body>
 </html>

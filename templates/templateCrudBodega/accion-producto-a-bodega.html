@@ -1,29 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-{%load static%}
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACCION A REALIZAR BODEGA</title>
-    <script src="{%static 'js/crudVolver.js'%}"></script>
-    <script src="{%static 'js/revisarYAlmacenarAccion.js'%}"></script>
+    <script src="{% static 'js/crudVolver.js' %}"></script>
+    <script src="{% static 'js/revisarYAlmacenarAccion.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/form-style.css' %}">
 </head>
 <body>
-    
-    <h1>ACCION A REALIZAR BODEGA</h1>
-    
-    <form>
-        <select
-        name="accionARealizar"
-        id="accionARealizar">
-            <option value="">Ingrese la accion a realizar/option>
-            <option value="agregar">Agregar Bodega</option>
-        </select>
-    </form>
+    <div class="form-container">
+        <h1>ACCION A REALIZAR BODEGA</h1>
+        
+        <form>
+            <label for="accionARealizar">Acción:</label>
+            <select
+                class="input-style"
+                name="accionARealizar"
+                id="accionARealizar">
+                <option value="">Seleccione una acción</option>
+                <option value="agregar">Agregar Bodega</option>
+            </select>
+            <span id="eAccionBodegaE" class="error-message"></span>
+            <br><br>
+        </form>
 
-    <button type="button" onclick="registrarProductoABodegaAccion(); accionIrAlFormulario();">AGREGAR PRODUCTO A BODEGA</button>
+        <button type="button" class="btn-registrar" onclick="validar()">AGREGAR PRODUCTO A BODEGA</button>
+        <br>
+        <button type="button" class="volver-button" onclick="regresarCrudBodega()">VOLVER ATRÁS</button>
+    </div>
 
-    <button type="button" onclick="regresarCrudBodega()">VOLVER ATRAS</button>
-    
+    <script>
+        /* Función para validar la selección de acción antes de continuar */
+        function validar() {
+            // Obtiene el elemento del input donde se selecciona la acción a realizar
+            let eAccion = document.getElementById("accionARealizar")
+            // Obtiene el valor ingresado o seleccionado en ese input
+            let vAccion = eAccion.value
+            // Obtiene el elemento donde se mostrará el mensaje de error
+            let eErrorAccion = document.getElementById("eAccionBodegaE")
+
+            // Si no se ingresó ningún valor
+            if (vAccion == "") {
+                // Muestra un mensaje de error
+                eErrorAccion.innerText = "Debe ingresar un valor";
+                // Cambia el fondo del input a rojo y el texto a blanco
+                eAccion.style.backgroundColor = "red";
+                eAccion.style.color = "white";
+                // Muestra un alert avisando que faltan datos
+                alert("Faltan datos.");
+            }
+            // Si sí se ingresó un valor
+            else if(vAccion != "") {
+                // Limpia el mensaje de error
+                eErrorAccion.innerText = "";
+                // Cambia el fondo del input a verde y el texto a blanco
+                eAccion.style.backgroundColor = "green";
+                eAccion.style.color = "white";
+                // Llama a la función para registrar el producto en la bodega
+                // y luego redirige al formulario según categoría
+                // NOTA: Asignar estas funciones a window.onload no es correcto, 
+                // porque se ejecutarán inmediatamente y sobrescriben window.onload.
+                window.onload = registrarProductoABodegaAccion();
+                window.onload = accionIrAlFormulario();
+            }
+        }
+    </script>
+
 </body>
 </html>

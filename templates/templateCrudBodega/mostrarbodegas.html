@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MOSTRAR EMPLEADOS</title>
+    <link rel="stylesheet" href="{%static 'css/crud-bodega-style.css'%}">
 </head>
-<body>
-    <h1>LISTA BODEGAS</h1>
-    <br></br>
-    <table>
+<body class="inicio-div-style">
+
+    <header>
+        <h1>LISTA BODEGAS</h1>
+    </header>
+    
+    <table class="tabla-gestion-style">
         <thead>
-            <tr>
+            <tr class="tabla-gestion-style-first">
                 <th>Accion Bodega</th>
                 <th>Nombre Bodega</th>
                 <th>Ubicacion Bodega</th>
@@ -19,20 +23,25 @@
         </thead>
         <tbody id="mostrarBodegas">
             <script>
+                /* Función para mostrar todas las bodegas almacenadas en localStorage */
                 function mostrarBodegas() {
+                    // Obtiene el elemento HTML donde se mostrarán las bodegas
                     let eMostrarBodegas = document.getElementById("mostrarBodegas");
 
+                    // Recupera el arreglo de bodegas desde localStorage, si no existe crea un arreglo vacío
                     let bodegas = JSON.parse(localStorage.getItem("bodegas")) || [];
 
+                    // Genera las filas de la tabla con los datos de cada bodega
                     eMostrarBodegas.innerHTML = bodegas.map((p, index) => {
                         return "<tr>"+
-                                "<td>"+p.accion+"</td>"+
-                                "<td>"+p.nombreBodega+"</td>"+
-                                "<td>"+p.ubicacionBodega+"</td>"+
+                                    "<td>"+p.accion+"</td>"+        // Columna de acción
+                                    "<td>"+p.nombreBodega+"</td>"+ // Columna de nombre de bodega
+                                    "<td>"+p.ubicacionBodega+"</td>"+ // Columna de ubicación
                             "</tr>";
-                    }).join("")
+                    }).join(""); // Une todas las filas en un solo string
                 }
-                // Llamar a la función cuando cargue la página
+
+                // Llama a la función mostrarBodegas cuando la página termina de cargar
                 window.onload = mostrarBodegas;
             </script>
         </tbody>

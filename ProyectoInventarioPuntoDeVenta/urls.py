@@ -19,16 +19,23 @@ from django.urls import path, include
 from LoginApp.views import renderlogin as Login
 from AdminHomeApp import views as AdminHomeApp
 
+# Lista de rutas principales de la aplicación Django
 urlpatterns = [
+    # Ruta para el panel de administración de Django
+    # Cuando accedes a /admin/ se abre el admin predeterminado de Django
     path('admin/', admin.site.urls),
 
-    #RUTA DEL LOGIN
+    # Ruta principal del login
+    # Todas las URLs definidas en LoginApp.urls se incluirán aquí
+    # Al acceder a la raíz del sitio ("/") se manejarán las vistas de LoginApp
     path('', include('LoginApp.urls')),
 
-    #RUTA DEL HOME ADMIN
+    # Ruta para el home del administrador
+    # Todas las URLs definidas en AdminHomeApp.urls se incluirán bajo /adminhome/
     path('adminhome/', include('AdminHomeApp.urls')),
 
-    #RUTA DEL HOME
+    # Ruta para el home general de la aplicación
+    # Todas las URLs definidas en HomeApp.urls se incluirán bajo /home/
     path('home/', include("HomeApp.urls")),
 ]
 

@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REGISTRAR USUARIO</title>
     <script src="{%static 'js/FormularioUsuario.js' %}"></script>
+    <link rel="stylesheet" href="{%static 'css/form-style.css'%}">
 </head>
 <body>
+    <div class="form-container">
     <h1>Formulario de registro de Usuarios</h1>
         <label>Rut: </label>
         <select
@@ -23,7 +25,7 @@
                 datos.innerHTML += rut;
             }); 
         </script>
-        <span id="eCargoE"></span>
+        <span id="eRutE"></span>
         <br></br>
         <br></br>
         <label>Tipo: </label>
@@ -49,11 +51,29 @@
         <br></br>
 
         
-        <a href="/adminhome/crudusuarios">
-            <button
-                className="BotonesEncabezado" onclick="registrarUsuarios()">Registrar Usuario
-            </button>
-        </a>
+        <button
+            className="BotonesEncabezado" onclick="validar()">Registrar Usuario
+        </button>
+
+        <script>
+            /* Función para validar el registro de usuarios */
+            function validar() {
+                // Llama a la función registrarUsuarios() que intenta registrar un usuario
+                // Devuelve true si todos los campos son válidos, o false si falta algún dato
+                const validador = registrarUsuarios();
+
+                // Si registrarUsuarios devuelve false, significa que faltan datos
+                if (validador == false) {
+                    alert("Faltan datos."); // Muestra alerta al usuario
+                    return; // Sale de la función sin continuar
+                }
+                // Si registrarUsuarios devuelve true, todo está correcto
+                else if(validador == true){
+                    // Redirige al listado de usuarios
+                    window.location.href = "/adminhome/crudusuarios";
+                }
+            }
+        </script>
 
         <br></br>
         <span id="errorRegistrar"></span>
@@ -61,5 +81,6 @@
     <a href="/adminhome/crudusuarios">
         <button>VOLVER ATRAS</button>
     </a>
+    </div>
 </body>
 </html>

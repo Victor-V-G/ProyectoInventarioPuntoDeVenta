@@ -1,108 +1,110 @@
-/*FUNCION PRINCIPAL*/
+/*------------------------------------------------------------
+FUNCION PRINCIPAL: login()
+------------------------------------------------------------*/
 function login(){
 
-/*-----------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------- BLOQUE 1: Usuario ---------------------------*/
 
-    /*AQUI SE RECUPERA LA ID DEL INPUT DEL NOMBRE DE USUARIO Y SE ALMACENA EN LA VARIABLE ElementoNombreDeUsuario*/
+    // Obtiene el elemento del input donde el usuario escribe su nombre
     let ElementoNombreDeUsuario = document.getElementById("NombreDeUsuario")
 
-    /*AQUI SE RECUPERA EL VALOR DEL INPUT DEL NOMBRE DE USUARIO (LO QUE INGRESO EL USUARIO) Y SE ALMACENA EN LA 
-    VARIABLE ValorNombreDeUsuario*/
+    // Obtiene el valor escrito en el input (lo que el usuario ingresó)
     let ValorNombreDeUsuario = ElementoNombreDeUsuario.value
 
-    /*AQUI SE RECUPERA LA ID DEL SPAN QUE MANEJARA Y MOSTRARA EL ERROR AL INGRESAR EL NOMBRE DE USUARIO*/
+    // Obtiene el span donde se mostrarán los errores de nombre de usuario
     let eErrorNombreUsuario = document.getElementById("eErrorNombreUsuario")
 
-/*-----------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------- BLOQUE 2: Password ---------------------------*/
 
-    /*AQUI SE RECUPERA LA ID DEL INPUT DE LA PASSWORD Y SE ALMACENA EN LA VARIABLE ElementoPassword*/
+    // Obtiene el elemento del input donde el usuario escribe la contraseña
     let ElementoPassword = document.getElementById("Password")
     
-    /*AQUI SE RECUPERA EL VALOR DEL INPUT DE LA PASSWORD (LO QUE INGRESO EL USUARIO) Y SE ALMACENA EN LA 
-    VARIABLE ValorPassword*/
+    // Obtiene el valor escrito en el input (la contraseña ingresada)
     let ValorPassword = ElementoPassword.value
 
-    /*AQUI SE RECUPERA LA ID DEL SPAN QUE MANEJARA Y MOSTRARA EL ERROR AL INGRESAR LA PASSWORD*/
+    // Obtiene el span donde se mostrarán los errores de la contraseña
     let eErrorPassword = document.getElementById("eErrorPassword")
 
-/*-----------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------- BLOQUE 3: Validaciones ---------------------------*/
 
-    /*AQUI SE ALMACENA EL RESULTADO DE LA FUNCION LLAMADA, EN ESTE CASO ValidarNombreDeUsuario */
+    // Llama a la función que valida el nombre de usuario
+    // Devuelve 0 si vacío, 1 si admin, 3 si bodeguero
     let validarNombreDeUsuario = verificarNombreDeUsuario(ElementoNombreDeUsuario, ValorNombreDeUsuario, eErrorNombreUsuario)
     
-    /*AQUI SE ALMACENA EL RESULTADO DE LA FUNCION LLAMADA, EN ESTE CASO ValidarPassword */
+    // Llama a la función que valida la contraseña
+    // Devuelve 0 si vacío, 1 si coincide con admin, 3 si coincide con bodeguero
     let validarPassword = verificarPasswordUsuario(ElementoPassword, ValorPassword, eErrorPassword)
 
-/*-----------------------------------------------------------------------------------------------------------------------------*/
-    
+/*--------------------------- BLOQUE 4: Condiciones de acceso ---------------------------*/
+
+    // ✅ Caso 1: Usuario admin (nombre=admin y password=123)
     if (validarNombreDeUsuario == 1 && validarPassword == 1) {
+        // Limpia los inputs
         ElementoNombreDeUsuario.value = ""
         ElementoPassword.value = ""
+        // Restaura colores de los inputs
         ElementoNombreDeUsuario.style.backgroundColor = "white"
         ElementoNombreDeUsuario.style.color = "black"
         ElementoPassword.style.backgroundColor = "white"
         ElementoPassword.style.color = "black"
+        // Borra los mensajes de error
         eErrorPassword.innerText = ""
         eErrorNombreUsuario.innerText = ""
+        // Guarda en localStorage que la categoría del usuario es "admin"
         localStorage.setItem("categoria", "admin");
+        // Redirige al home de administrador
         window.location.href = "adminhome/"
-        
     } 
 
+    // ✅ Caso 2: Usuario bodeguero (nombre=bodeguero y password=12345)
     if (validarNombreDeUsuario == 3 && validarPassword == 3) {
+        // Limpia los inputs
         ElementoNombreDeUsuario.value = ""
         ElementoPassword.value = ""
+        // Restaura colores de los inputs
         ElementoNombreDeUsuario.style.backgroundColor = "white"
         ElementoNombreDeUsuario.style.color = "black"
         ElementoPassword.style.backgroundColor = "white"
         ElementoPassword.style.color = "black"
+        // Borra los mensajes de error
         eErrorPassword.innerText = ""
         eErrorNombreUsuario.innerText = ""
+        // Guarda en localStorage que la categoría del usuario es "home"
         localStorage.setItem("categoria", "home");
+        // Redirige al home de bodeguero
         window.location.href = "home/"
     }
 
 }
 
-
-/*FUNCION QUE VALIDA QUE EL USERNAME INGRESADO ES EL CORRECTO*/
-function verificarNombreDeUsuario(elementoNombreUsuario,valorNombreUsuario, eErrorNombreUsuario){
-    if (valorNombreUsuario.length == 0){
-        elementoNombreUsuario.style.color = "white"
-        elementoNombreUsuario.style.backgroundColor = "red"
-        eErrorNombreUsuario.innerText = "Debes ingresar algo"
+/*------------------------------------------------------------
+FUNCION verificarNombreDeUsuario()
+Valida si el nombre de usuario ingresado es válido.
+------------------------------------------------------------*/
+function verificarNombreDeUsuario(elementoNombreUsuario, valorNombreUsuario, eErrorNombreUsuario){
+    if (valorNombreUsuario.length == 0){ // Si el usuario no ingresó nada
         return 0
     }
-    else if (valorNombreUsuario == "admin"){
-        elementoNombreUsuario.style.color = "black"
-        elementoNombreUsuario.style.backgroundColor = "white"
+    else if (valorNombreUsuario == "admin"){ // Si ingresó "admin"
         return 1
     }
-    else if (valorNombreUsuario == "bodeguero"){
-        elementoNombreUsuario.style.color = "black"
-        elementoNombreUsuario.style.backgroundColor = "white"
+    else if (valorNombreUsuario == "bodeguero"){ // Si ingresó "bodeguero"
         return 3
     }
 }
 
-
-/*FUNCION QUE VALIDA QUE LA PASSWORD INGRESADA ES CORRECTA*/
+/*------------------------------------------------------------
+FUNCION verificarPasswordUsuario()
+Valida si la contraseña ingresada es válida.
+------------------------------------------------------------*/
 function verificarPasswordUsuario(elementoPassword, valorPassword, eErrorPassword){
-    if (valorPassword.length == 0){
-        elementoPassword.style.color = "white"
-        elementoPassword.style.backgroundColor = "red"
-        eErrorPassword.innerText = "Debes ingresar algo"
+    if (valorPassword.length == 0){ // Si la contraseña está vacía
         return 0
     }
-    else if (valorPassword == "123"){
-        elementoPassword.style.color = "black"
-        elementoPassword.style.backgroundColor = "white"
-        eErrorPassword.innerText = "Error en el nombre o contraseña"
+    else if (valorPassword == "123"){ // Contraseña de admin
         return 1
     }
-    else if (valorPassword == "12345"){
-        elementoPassword.style.color = "black"
-        elementoPassword.style.backgroundColor = "white"
+    else if (valorPassword == "12345"){ // Contraseña de bodeguero
         return 3
     }
 }
