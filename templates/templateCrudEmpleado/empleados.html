@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMPLEADOS MODELS</title>
+</head>
+<body>
+    <div>LISTADO DE EMPLEADOS</div>
+
+    {%if empleados %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>RUT</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Numero Telefonico</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in empleados %}
+            <tr>
+                <td scope="row">{{ emp.RutEmpleado }}</td>
+                <td>{{ emp.NombreEmpleado }}</td>
+                <td>{{ emp.ApellidoEmpleado }}</td>
+                <td>{{ emp.EdadEmpleado }}</td>
+                <td>{{ emp.NumeroTelefonoEmpleado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div>NO HAY EMPLEADOS</div>
+    {% endif %}
+</body>
+</html>

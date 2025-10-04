@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from CrudEmpleadosApp.models import Empleados
 
 # Create your views here.
 def renderCrudEmpleados(request):
@@ -8,3 +9,8 @@ def renderCrudEmpleados(request):
 def renderTemplateFormularioAgregarEmpleado(request):
     return render(request, 'templateCrudEmpleado/formularioempleado.html')
 
+#Models
+def empleadosData(request):
+    empleados = Empleados.objects.all()
+    data = {'empleados' : empleados}
+    return render(request, 'templateCrudEmpleado/empleados.html', data)

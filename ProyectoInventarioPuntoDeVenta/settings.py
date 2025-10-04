@@ -78,16 +78,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ProyectoInventarioPuntoDeVenta.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+#instalar mysql https://cdn.mysql.com//Downloads/MySQL-9.4/mysql-9.4.0-winx64.msi
+#instalar mysql workbench https://cdn.mysql.com//Downloads/MySQLGUITools/mysql-workbench-community-8.0.43-winx64.msi
+
+#poner en cmd en la carpeta del proyecto: pip install PyMySQL
+
+import pymysql
+pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'punto-de-venta-db',
+        'USER': 'root',
+        'PASSWORD': 'root'
     }
 }
 
+#utilizar cmd: python manage.py makemigrations
+#despues: python manage.py migrate
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
