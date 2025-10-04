@@ -1,6 +1,7 @@
 from django.urls import path
 from CrudProductosApp.views import renderTemplateCrudProductos  # Importa la view que muestra el listado de productos
 from CrudProductosApp.views import renderTemplateFormularioAgregarProducto  # Importa la view que muestra el formulario para agregar un producto
+from CrudProductosApp import views
 
 # Lista de rutas para la aplicación CrudProductosApp
 urlpatterns = [
@@ -10,5 +11,9 @@ urlpatterns = [
 
     # Ruta para agregar un nuevo producto
     # Al acceder a /crudproductos/agregar-producto/, se ejecuta la view renderTemplateFormularioAgregarProducto
-    path('agregar-producto/', renderTemplateFormularioAgregarProducto)
+    path('agregar-producto/', renderTemplateFormularioAgregarProducto),
+
+    #Models Ruta
+    path('producto-models/', views.productoData)
+
 ]

@@ -17,5 +17,5 @@ urlpatterns = [
     # Al acceder a /crudempleados/agregar-empleado/, se ejecuta la view renderTemplateFormularioAgregarEmpleado
     path('agregar-empleado/', renderTemplateFormularioAgregarEmpleado),
 
-    path('empleados/', views.empleadosData)
+    path('empleados-models/', views.empleadosData)
 ]

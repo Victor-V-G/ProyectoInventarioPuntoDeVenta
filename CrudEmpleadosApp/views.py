@@ -12,5 +12,5 @@ def renderTemplateFormularioAgregarEmpleado(request):
 #Models
 def empleadosData(request):
     empleados = Empleados.objects.all()
-    data = {'empleados' : empleados}
-    return render(request, 'templateCrudEmpleado/empleados.html', data)
+    data = {'Empleados' : empleados}
+    return render(request, 'templateCrudEmpleado/empleados-models.html', data)

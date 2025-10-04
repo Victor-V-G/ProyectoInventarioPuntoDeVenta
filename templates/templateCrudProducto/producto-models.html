@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRODUCTOS MODELS</title>
+</head>
+<body>
+    <div>LISTADO DE PRODUCTOS</div>
+
+    {%if Producto %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID PRODUCTO</th>
+                <th>CODIGO DE BARRAS</th>
+                <th>VALOR PRODUCTO</th>
+                <th>STOCK</th>
+                <th>NOMBRE PRODUCTO</th>
+                <th>FECHA DE REGISTRO</th>
+                <th>MARCA DEL PRODUCTO</th>
+                <th>FECHA DE VENCIMIENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pro in Producto %}
+            <tr>
+                <td scope="row">{{ pro.IdProducto }}</td>
+                <td>{{ pro.CodigoDeBarras }}</td>
+                <td>{{ pro.ValorProducto }}</td>
+                <td>{{ pro.StockProducto }}</td>
+                <td>{{ pro.NombreProducto }}</td>
+                <td>{{ pro.FechaDeRegistroProducto }}</td>
+                <td>{{ pro.MarcaProducto }}</td>
+                <td>{{ pro.FechaDeVencimiento }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div>NO HAY PRODUCTOS REGISTRADOS</div>
+    {% endif %}
+</body>
+</html>

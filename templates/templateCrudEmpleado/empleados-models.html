@@ -8,7 +8,7 @@
 <body>
     <div>LISTADO DE EMPLEADOS</div>
 
-    {%if empleados %}
+    {%if Empleados %}
 
     <table>
         <thead>
@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for emp in empleados %}
+            {% for emp in Empleados %}
             <tr>
                 <td scope="row">{{ emp.RutEmpleado }}</td>
                 <td>{{ emp.NombreEmpleado }}</td>
