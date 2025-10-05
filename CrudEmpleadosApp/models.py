@@ -19,22 +19,22 @@ class Empleados(models.Model):
     # Nombre del empleado
     # CharField: campo de texto, max_length=55
     # db_column='NombreEmpleado' indica que en la base de datos la columna se llama 'NombreEmpleado'
-    Nombre = models.CharField(max_length=55, db_column='NombreEmpleado')
+    NombreEmpleado = models.CharField(max_length=55, db_column='NombreEmpleado', verbose_name="Nombre")
 
     # Apellido del empleado
     # CharField: campo de texto, max_length=55
     # db_column='ApellidoEmpleado' indica que en la base de datos la columna se llama 'ApellidoEmpleado'
-    Apellido = models.CharField(max_length=55, db_column='ApellidoEmpleado')
+    ApellidoEmpleado = models.CharField(max_length=55, db_column='ApellidoEmpleado', verbose_name="Apellido")
 
     # Edad del empleado
     # IntegerField: campo de número entero
     # db_column='EdadEmpleado' indica que en la base de datos la columna se llama 'EdadEmpleado'
-    Edad = models.IntegerField(db_column='EdadEmpleado')
+    EdadEmpleado = models.IntegerField(db_column='EdadEmpleado', verbose_name="Edad")
 
     # Teléfono del empleado
     # IntegerField: campo de número entero
     # db_column='NumeroTelefonoEmpleado' indica que en la base de datos la columna se llama 'NumeroTelefonoEmpleado'
-    Telefono = models.IntegerField(db_column='NumeroTelefonoEmpleado')
+    NumeroTelefonoEmpleado = models.IntegerField(db_column='NumeroTelefonoEmpleado', verbose_name="Telefono")
 
     # --------------------------------------------------------------------
     # Meta información del modelo

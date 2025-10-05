@@ -23,10 +23,10 @@ class Producto(models.Model):
     )
 
     # Valor del producto
-    Valor = models.IntegerField(db_column='ValorProducto')
+    ValorProducto = models.IntegerField(db_column='ValorProducto', verbose_name="Valor")
 
     # Cantidad disponible en stock
-    Stock = models.IntegerField(db_column='StockProducto')
+    StockProducto = models.IntegerField(db_column='StockProducto', verbose_name="Stock")
 
     # Nombre del producto
     NombreProducto = models.CharField(
@@ -42,7 +42,7 @@ class Producto(models.Model):
     )
 
     # Marca del producto
-    Marca = models.CharField(max_length=55, db_column='MarcaProducto')
+    MarcaProducto = models.CharField(max_length=55, db_column='MarcaProducto', verbose_name="Marca")
 
     # Fecha de vencimiento del producto
     FechaDeVencimiento = models.DateField(

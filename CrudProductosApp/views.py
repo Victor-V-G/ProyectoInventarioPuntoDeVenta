@@ -45,10 +45,10 @@ def productoRegistrationView(request):
             # Imprime en consola los datos validados para depuración
             print("FORM ES VALIDO")
             print("CODIGO DE BARRAS: ", form.cleaned_data['CodigoDeBarras'])
-            print("VALOR: ", form.cleaned_data['Valor'])
-            print("STOCK: ", form.cleaned_data['Stock'])
+            print("VALOR: ", form.cleaned_data['ValorProducto'])
+            print("STOCK: ", form.cleaned_data['StockProducto'])
             print("NOMBRE DEL PRODUCTO: ", form.cleaned_data['NombreProducto'])
-            print("MARCA: ", form.cleaned_data['Marca'])
+            print("MARCA: ", form.cleaned_data['MarcaProducto'])
             print("FECHA DE VENCIMIENTO: ", form.cleaned_data['FechaDeVencimiento'])
             
             form.save()  # Guarda el nuevo producto en la base de datos

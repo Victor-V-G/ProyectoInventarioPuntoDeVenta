@@ -27,10 +27,10 @@
             {% for emp in Empleados %}
             <tr>
                 <td>{{ emp.Rut }}</td>
-                <td>{{ emp.Nombre }}</td>
-                <td>{{ emp.Apellido }}</td>
-                <td>{{ emp.Edad }}</td>
-                <td>{{ emp.Telefono }}</td>
+                <td>{{ emp.NombreEmpleado }}</td>
+                <td>{{ emp.ApellidoEmpleado }}</td>
+                <td>{{ emp.EdadEmpleado }}</td>
+                <td>{{ emp.NumeroTelefonoEmpleado }}</td>
                 <!-- Enlaces para actualizar o eliminar el empleado -->
                 <td>
                     <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.Rut }}">ACTUALIZAR</a> |
