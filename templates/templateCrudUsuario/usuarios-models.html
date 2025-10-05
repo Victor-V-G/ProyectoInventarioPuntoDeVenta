@@ -1,12 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/models-style.css' %}">
     <title>USUARIO MODELS</title>
 </head>
 <body>
-    <div>LISTADO DE USUARIO</div>
+    
+    <header><h1>LISTA DE USUARIOS</h1></header>
 
     {%if Usuarios %}
 
@@ -16,6 +19,7 @@
                 <th>ID USUARIO</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -26,8 +30,8 @@
                 <td>{{ usu.Password }}</td>
                 <!-- Enlaces para actualizar o eliminar el usuario -->
                 <td>
-                    <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}">ACTUALIZAR</a> |
-                    <a href="/adminhome/crud-usuarios/eliminar-usuario/{{ usu.IdUsuarios }}">ELIMINAR</a>
+                    <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}"><button>ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-usuarios/eliminar-usuario/{{ usu.IdUsuarios }}"><button>ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}

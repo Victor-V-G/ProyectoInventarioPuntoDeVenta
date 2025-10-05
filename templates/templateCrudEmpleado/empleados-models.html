@@ -1,13 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/models-style.css' %}">
     <title>Listado de Empleados</title>
 </head>
 <body>
     <!-- Título de la página -->
-    <div>LISTADO DE EMPLEADOS</div>
+    <header><h1>LISTA DE EMPLEADOS</h1></header>
 
     <!-- Verifica si hay empleados en la base de datos -->
     {% if Empleados %}
@@ -33,8 +35,8 @@
                 <td>{{ emp.NumeroTelefonoEmpleado }}</td>
                 <!-- Enlaces para actualizar o eliminar el empleado -->
                 <td>
-                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.Rut }}">ACTUALIZAR</a> |
-                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.Rut }}">ELIMINAR</a>
+                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.Rut }}"><button>ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.Rut }}"><button>ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}
