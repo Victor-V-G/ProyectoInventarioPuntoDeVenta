@@ -21,7 +21,7 @@ USE `punto-de-venta-db` ;
 -- Table `punto-de-venta-db`.`Producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Producto` (
-  `IdProducto` INT NOT NULL,
+  `IdProducto` INT NOT NULL AUTO_INCREMENT,
   `CodigoDeBarras` VARCHAR(100) NOT NULL,
   `ValorProducto` INT NOT NULL,
   `StockProducto` INT NOT NULL,

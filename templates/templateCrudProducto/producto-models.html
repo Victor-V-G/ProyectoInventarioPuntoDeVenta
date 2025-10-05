@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRODUCTOS MODELS</title>
+    <title>Listado de Productos</title>
 </head>
 <body>
+    <!-- Título de la página -->
     <div>LISTADO DE PRODUCTOS</div>
 
-    {%if Producto %}
-
+    <!-- Verifica si hay productos en la base de datos -->
+    {% if Producto %}
     <table>
         <thead>
             <tr>
@@ -21,25 +22,37 @@
                 <th>FECHA DE REGISTRO</th>
                 <th>MARCA DEL PRODUCTO</th>
                 <th>FECHA DE VENCIMIENTO</th>
+                <th>ACCIONES</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Recorre todos los productos y muestra sus datos en filas -->
             {% for pro in Producto %}
             <tr>
-                <td scope="row">{{ pro.IdProducto }}</td>
+                <td>{{ pro.IdProducto }}</td>
                 <td>{{ pro.CodigoDeBarras }}</td>
-                <td>{{ pro.ValorProducto }}</td>
-                <td>{{ pro.StockProducto }}</td>
+                <td>{{ pro.Valor }}</td>
+                <td>{{ pro.Stock }}</td>
                 <td>{{ pro.NombreProducto }}</td>
                 <td>{{ pro.FechaDeRegistroProducto }}</td>
-                <td>{{ pro.MarcaProducto }}</td>
+                <td>{{ pro.Marca }}</td>
                 <td>{{ pro.FechaDeVencimiento }}</td>
+                <!-- Enlaces para actualizar o eliminar el producto -->
+                <td>
+                    <a href="/adminhome/crud-producto/actualizar-producto/{{ pro.IdProducto }}">ACTUALIZAR</a> |
+                    <a href="/adminhome/crud-producto/eliminar-producto/{{ pro.IdProducto }}">ELIMINAR</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
+        <!-- Mensaje cuando no hay productos registrados -->
         <div>NO HAY PRODUCTOS REGISTRADOS</div>
     {% endif %}
+
+    <!-- Botones de navegación -->
+    <a href="/adminhome/"><button type="button">VOLVER</button></a>
+    <a href="registro-producto/"><button type="button">REGISTRAR PRODUCTO</button></a>
 </body>
 </html>

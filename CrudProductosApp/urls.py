@@ -1,19 +1,34 @@
-from django.urls import path
-from CrudProductosApp.views import renderTemplateCrudProductos  # Importa la view que muestra el listado de productos
-from CrudProductosApp.views import renderTemplateFormularioAgregarProducto  # Importa la view que muestra el formulario para agregar un producto
-from CrudProductosApp import views
+# Importaciones necesarias
+from django.urls import path  # Función para definir rutas URL
+from CrudProductosApp import views  # Importa las vistas de la app CrudProductosApp
 
-# Lista de rutas para la aplicación CrudProductosApp
+# ========================================================================
+# Lista de rutas URL de la aplicación CrudProductosApp
+# ========================================================================
 urlpatterns = [
-    # Ruta raíz de la app ('/crudproductos/')
-    # Al acceder a la raíz de CrudProductosApp, se ejecuta la view renderTemplateCrudProductos
-    path('', renderTemplateCrudProductos),
+    # --------------------------------------------------------------------
+    # Ruta para mostrar todos los productos
+    # --------------------------------------------------------------------
+    # http://<tu_dominio>/crud-producto/
+    path('crud-producto/', views.productoData),
 
-    # Ruta para agregar un nuevo producto
-    # Al acceder a /crudproductos/agregar-producto/, se ejecuta la view renderTemplateFormularioAgregarProducto
-    path('agregar-producto/', renderTemplateFormularioAgregarProducto),
+    # --------------------------------------------------------------------
+    # Ruta para registrar un nuevo producto mediante formulario
+    # --------------------------------------------------------------------
+    # http://<tu_dominio>/crud-producto/registro-producto/
+    path('crud-producto/registro-producto/', views.productoRegistrationView),
 
-    #Models Ruta
-    path('producto-models/', views.productoData)
+    # --------------------------------------------------------------------
+    # Ruta para actualizar un producto existente
+    # --------------------------------------------------------------------
+    # <int:IdProducto> indica que se espera un número entero correspondiente al ID del producto
+    # http://<tu_dominio>/crud-producto/actualizar-producto/1
+    path('crud-producto/actualizar-producto/<int:IdProducto>', views.actualizarProducto),
 
+    # --------------------------------------------------------------------
+    # Ruta para eliminar un producto
+    # --------------------------------------------------------------------
+    # <int:IdProducto> indica que se espera un número entero correspondiente al ID del producto
+    # http://<tu_dominio>/crud-producto/eliminar-producto/1
+    path('crud-producto/eliminar-producto/<int:IdProducto>', views.eliminarProducto)
 ]

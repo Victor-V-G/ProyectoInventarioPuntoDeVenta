@@ -27,7 +27,7 @@ urlpatterns = [
 
     # Rutas para CRUD de productos
     # Todas las URLs definidas en CrudProductosApp.urls se incluyen bajo /crudproductos/
-    path("crudproductos/", include("CrudProductosApp.urls")),
+    path("", include("CrudProductosApp.urls")),
 
     # Rutas para CRUD de categorías
     # Todas las URLs definidas en CrudCategoriasApp.urls se incluyen bajo /crudcategorias/
