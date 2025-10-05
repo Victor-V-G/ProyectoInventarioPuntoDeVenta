@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMPLEADOS MODELS</title>
+    <title>Listado de Empleados</title>
 </head>
 <body>
+    <!-- Título de la página -->
     <div>LISTADO DE EMPLEADOS</div>
 
-    {%if Empleados %}
-
+    <!-- Verifica si hay empleados en la base de datos -->
+    {% if Empleados %}
     <table>
         <thead>
             <tr>
@@ -17,23 +18,35 @@
                 <th>Nombre</th>
                 <th>Apellido</th>
                 <th>Edad</th>
-                <th>Numero Telefonico</th>
+                <th>Telefono</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Recorre todos los empleados y muestra sus datos -->
             {% for emp in Empleados %}
             <tr>
-                <td scope="row">{{ emp.RutEmpleado }}</td>
-                <td>{{ emp.NombreEmpleado }}</td>
-                <td>{{ emp.ApellidoEmpleado }}</td>
-                <td>{{ emp.EdadEmpleado }}</td>
-                <td>{{ emp.NumeroTelefonoEmpleado }}</td>
+                <td>{{ emp.Rut }}</td>
+                <td>{{ emp.Nombre }}</td>
+                <td>{{ emp.Apellido }}</td>
+                <td>{{ emp.Edad }}</td>
+                <td>{{ emp.Telefono }}</td>
+                <!-- Enlaces para actualizar o eliminar el empleado -->
+                <td>
+                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.Rut }}">ACTUALIZAR</a> |
+                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.Rut }}">ELIMINAR</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
+        <!-- Mensaje cuando no hay empleados -->
         <div>NO HAY EMPLEADOS</div>
     {% endif %}
+
+    <!-- Botones de navegación -->
+    <a href="/adminhome/"><button type="button">VOLVER</button></a>
+    <a href="registro-empleado/"><button type="button">REGISTRAR EMPLEADO</button></a>
 </body>
 </html>

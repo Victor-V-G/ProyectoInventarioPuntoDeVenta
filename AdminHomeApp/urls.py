@@ -19,7 +19,7 @@ urlpatterns = [
 
     # Rutas para CRUD de empleados
     # Todas las URLs definidas en CrudEmpleadosApp.urls se incluyen bajo /crudempleados/
-    path("crudempleados/", include("CrudEmpleadosApp.urls")),
+    path("", include("CrudEmpleadosApp.urls")),
 
     # Rutas para CRUD de usuarios
     # Todas las URLs definidas en CrudUsuariosApp.urls se incluyen bajo /crudusuarios/
