@@ -53,8 +53,9 @@ ENGINE = InnoDB;
 -- Table `punto-de-venta-db`.`Usuarios`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Usuarios` (
-  `IdUsuarios` INT NOT NULL,
-  `ContrasenaUsuario` VARCHAR(45) NOT NULL,
+  `IdUsuarios` INT NOT NULL AUTO_INCREMENT,
+  `Username` VARCHAR(30) NOT NULL,
+  `Password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`IdUsuarios`),
   UNIQUE INDEX `IdUsuarios_UNIQUE` (`IdUsuarios` ) )
 ENGINE = InnoDB;

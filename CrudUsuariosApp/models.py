@@ -7,8 +7,9 @@ from django.db import models
 #en la base de datos
 
 class Usuarios(models.Model):
-    IdUsuarios = models.IntegerField(primary_key=True, db_column='IdUsuarios')
-    ContrasenaUsuario = models.CharField(max_length=45, db_column='ContrasenaUsuario')
+    IdUsuarios = models.AutoField(primary_key=True, db_column='IdUsuarios')
+    Username = models.CharField(max_length=30, db_column='Username')
+    Password = models.CharField(max_length=45, db_column='Password')
     
     #Aqui se llama a la tabla la cual queremos insertar/mostrar datos, esto evitando lo mencionado anteriormente
     class Meta:

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuarios</title>
+</head>
+<body>
+    <!-- Título de la página -->
+    <div>REGISTRO DE USUARIOS</div>
+
+    <!-- Formulario para crear o actualizar productos -->
+    <form method="POST">
+        {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
+        {{ form.as_p }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
+        <input type="submit" value="ENVIAR"> <!-- Botón para enviar el formulario -->
+    </form>
+    
+    <!-- Botón para volver al listado de productos -->
+    <a href="/adminhome/crud-usuarios">
+        <button type="button">VOLVER</button>
+    </a>
+</body>
+</html>

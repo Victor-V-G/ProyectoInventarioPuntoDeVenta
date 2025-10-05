@@ -1,19 +1,18 @@
 from django.urls import path
-from CrudUsuariosApp.views import renderTemplateCrudUsuario  # Importa la view que muestra el listado de usuarios
-from CrudUsuariosApp.views import renderTemplateFormularioAgregarUsuario  # Importa la view que muestra el formulario para agregar un usuario
 from CrudUsuariosApp import views
 
 # Lista de rutas para la aplicación CrudUsuariosApp
 urlpatterns = [
-    # Ruta raíz de la app ('/crudusuarios/')
-    # Al acceder a la raíz de CrudUsuariosApp, se ejecuta la view renderTemplateCrudUsuario
-    path('', renderTemplateCrudUsuario),
 
-    # Ruta para agregar un nuevo usuario
-    # Al acceder a /crudusuarios/agregar-usuario/, se ejecuta la view renderTemplateFormularioAgregarUsuario
-    path('agregar-usuario/', renderTemplateFormularioAgregarUsuario),
-    
+    #Models
+    path('crud-usuarios/', views.usuariosData),
 
-    path('usuarios-models/', views.usuariosData)
+    #Form
+    path('crud-usuarios/registro-usuario/', views.usuariosRegistrationView),
 
+    #Actualizar
+    path('crud-usuarios/actualizar-usuario/<int:IdUsuarios>', views.actualizarUsuario),
+
+    #Eliminar
+    path('crud-usuarios/eliminar-usuario/<int:IdUsuarios>', views.eliminarUsuario)
 ]
