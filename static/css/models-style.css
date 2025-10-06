@@ -10,6 +10,7 @@
 }
 
 html {
+    flex-wrap: wrap;
     font-family: 'General Sans', sans-serif;
     background-color: #D1D5DB;
     display: flex;
@@ -27,9 +28,11 @@ body {
     padding: 20px;
 }
 
+
 /* Encabezado principal */
 header {
-    width: 87%;
+    position: sticky;
+    width: 17%;
     height: 80px;
     background-color: #2d3748;
     color: #EBECF2;

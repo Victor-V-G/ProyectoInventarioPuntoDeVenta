@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LISTA DE CARGOS</title>
+    <link rel="stylesheet" href="{%static 'css/models-style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>LISTA DE CARGOS</h1>
+    </header>
+    {% if Cargos %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID CARGO</th>
+                <th>TIPO DE CARGO</th>
+                <th>ESTADO DEL CARGO</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cag in Cargos %}
+            <tr>
+                <td>{{ cag.IdCargos}}</td>
+                <td>{{ cag.TipoDeCargo }}</td>
+                <td>{{ cag.EstadoDelCargo }}</td>
+                <td>
+                    <a href="/adminhome/crud-cargos/actualizar-cargo/{{ cag.IdCargos }}"><button>ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-cargos/eliminar-cargo/{{ cag.IdCargos }}"><button>ELIMINAR</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div>NO HAY CARGOS</div>
+    {% endif %}
+
+    <a href="/adminhome/"><button type="button">VOLVER</button></a>
+    <a href="registro-cargo/"><button type="button">REGISTRAR CATEGORIA</button></a>
+</body>
+</html>

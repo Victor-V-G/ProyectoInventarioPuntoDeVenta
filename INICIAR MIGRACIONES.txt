@@ -24,6 +24,10 @@ python manage.py migrate --fake CrudBodegasApp 0001
 
 python manage.py migrate --fake CrudCategoriaProductoApp 0001
 
+#despues 
+
+python manage.py migrate --fake CrudCargosApp 0001
+
 #al ultimo aplicar: 
 
 python manage.py migrate

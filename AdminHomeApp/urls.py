@@ -6,6 +6,7 @@ from CrudUsuariosApp import views  # Importa views de la app CrudUsuariosApp
 from CrudProductosApp import views  # Importa views de la app CrudProductosApp
 from CrudCategoriaProductoApp import views  # Importa views de la app CrudCategoriasApp
 from CrudBodegasApp import views  # Importa views de la app CrudBodegaApp
+from CrudCargosApp import views  # Importa views de la app CrudBodegaApp
 
 # Lista principal de rutas del proyecto
 urlpatterns = [
@@ -35,5 +36,9 @@ urlpatterns = [
 
     # Rutas para CRUD de bodegas
     # Todas las URLs definidas en CrudBodegaApp.urls se incluyen bajo /crudbodegas/
-    path("", include("CrudBodegasApp.urls"))
+    path("", include("CrudBodegasApp.urls")),
+
+    # Rutas para CRUD de cargos
+    # Todas las URLs definidas en CrudCargosApp.urls se incluyen bajo /crudCargos/
+    path("", include("CrudCargosApp.urls"))
 ]
