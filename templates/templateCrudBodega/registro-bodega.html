@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Bodegas</title>
+<body>
+    <div>REGISTRO DE BODEGAS</div>
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ENVIAR">
+    </form>
+
+    <a href="/adminhome/crud-bodegas">
+        <button type="button">VOLVER</button>
+    </a>
+</body>
+</html>

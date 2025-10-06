@@ -18,9 +18,9 @@ CREATE SCHEMA IF NOT EXISTS `punto-de-venta-db` DEFAULT CHARACTER SET utf8 ;
 USE `punto-de-venta-db` ;
 
 -- -----------------------------------------------------
--- Table `punto-de-venta-db`.`Producto`
+-- Table `punto-de-venta-db`.`Productos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Producto` (
+CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Productos` (
   `IdProducto` INT NOT NULL AUTO_INCREMENT,
   `CodigoDeBarras` VARCHAR(100) NOT NULL,
   `ValorProducto` INT NOT NULL,
@@ -65,7 +65,7 @@ ENGINE = InnoDB;
 -- Table `punto-de-venta-db`.`Bodegas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Bodegas` (
-  `IdBodega` INT NOT NULL,
+  `IdBodega` INT NOT NULL AUTO_INCREMENT,
   `NombreBodega` VARCHAR(55) NOT NULL,
   `UbicacionBodega` VARCHAR(65) NOT NULL,
   PRIMARY KEY (`IdBodega`),
@@ -77,7 +77,7 @@ ENGINE = InnoDB;
 -- Table `punto-de-venta-db`.`Cargos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Cargos` (
-  `IdCargos` INT NOT NULL,
+  `IdCargos` INT NOT NULL AUTO_INCREMENT,
   `TipoDeCargo` ENUM('Gerente', 'Bodeguero') NOT NULL,
   `EstadoDelCargo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`IdCargos`))
@@ -88,7 +88,7 @@ ENGINE = InnoDB;
 -- Table `punto-de-venta-db`.`CategoriaBodegaUusuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`CategoriaBodegaUusuario` (
-  `IdAccionesBodega` INT NOT NULL,
+  `IdAccionesBodega` INT NOT NULL AUTO_INCREMENT,
   `FechaAccionBodega` TIMESTAMP NOT NULL,
   `AccionBodega` ENUM('Agregar', 'Editar', 'Eliminar') NOT NULL,
   PRIMARY KEY (`IdAccionesBodega`))
@@ -99,7 +99,7 @@ ENGINE = InnoDB;
 -- Table `punto-de-venta-db`.`AccionesProductos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`AccionesProductos` (
-  `IdAccionesProductos` INT NOT NULL,
+  `IdAccionesProductos` INT NOT NULL AUTO_INCREMENT,
   `FechaAccionProductos` TIMESTAMP NOT NULL,
   `AccionProductos` ENUM('Registrar', 'Editar', 'Eliminar') NOT NULL,
   PRIMARY KEY (`IdAccionesProductos`),
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`user` (
 -- Table `punto-de-venta-db`.`CategoriaProducto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`CategoriaProducto` (
-  `IdCategoriaProducto` INT NOT NULL,
+  `IdCategoriaProducto` INT NOT NULL AUTO_INCREMENT,
   `NombreCategoria` VARCHAR(100) NOT NULL,
   `Descripcion` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`IdCategoriaProducto`))

@@ -9,7 +9,7 @@ from django.db import models
 # en la base de datos y evitar que Django genere nombres por defecto.
 # ========================================================================
 
-class Producto(models.Model):
+class Productos(models.Model):
     # ID del producto, clave primaria autoincremental
     IdProducto = models.AutoField(primary_key=True, db_column='IdProducto')
 
@@ -55,4 +55,4 @@ class Producto(models.Model):
     # --------------------------------------------------------------------
     class Meta:
         # Nombre exacto de la tabla en la base de datos
-        db_table = 'Producto'
+        db_table = 'Productos'

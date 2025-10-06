@@ -1,8 +1,8 @@
 from django.urls import path, include
 from HomeApp.views import renderTemplateHome  # Importa la view que renderiza el template del home
 from CrudProductosApp import views           # Importa views de la app CrudProductosApp
-from CrudCategoriasApp import views          # Importa views de la app CrudCategoriasApp
-from CrudBodegaApp import views              # Importa views de la app CrudBodegaApp
+from CrudCategoriaProductoApp import views          # Importa views de la app CrudCategoriasApp
+from CrudBodegasApp import views              # Importa views de la app CrudBodegaApp
 
 # Lista de rutas para la aplicación HomeApp y sus secciones relacionadas
 urlpatterns = [
@@ -16,9 +16,9 @@ urlpatterns = [
 
     # Rutas para CRUD de categorías
     # Todas las URLs definidas en CrudCategoriasApp.urls se incluirán bajo /crudcategorias/
-    path('crudcategorias/', include("CrudCategoriasApp.urls")),
+    path('', include("CrudCategoriaProductoApp.urls")),
 
     # Rutas para CRUD de bodegas
     # Todas las URLs definidas en CrudBodegaApp.urls se incluirán bajo /crudbodegas/
-    path('crudbodegas/', include("CrudBodegaApp.urls")),
+    path('', include("CrudBodegasApp.urls")),
 ]

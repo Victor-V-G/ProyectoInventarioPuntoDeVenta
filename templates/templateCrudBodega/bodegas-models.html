@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LISTA DE BODEGAS</title>
+    <link rel="stylesheet" href="{%static 'css/models-style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>LISTA DE BODEGAS</h1>
+    </header>
+    {% if Bodegas %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Bodega</th>
+                <th>Ubicacion Bodega</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bod in Bodegas %}
+            <tr>
+                <td>{{ bod.NombreBodega }}</td>
+                <td>{{ bod.UbicacionBodega }}</td>
+                <td>
+                    <a href="/adminhome/crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}"><button>ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-bodegas/eliminar-bodega/{{ bod.IdBodega }}"><button>ELIMINAR</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div>NO HAY BODEGAS</div>
+    {% endif %}
+
+    <a href="/adminhome/"><button type="button">VOLVER</button></a>
+    <a href="registro-bodega/"><button type="button">REGISTRAR BODEGA</button></a>
+</body>
+</html>

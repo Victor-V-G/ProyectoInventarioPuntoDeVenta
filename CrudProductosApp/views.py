@@ -1,12 +1,12 @@
 # Importaciones necesarias
 from django.shortcuts import render, redirect  # 'render' para mostrar templates y 'redirect' para redirigir
-from CrudProductosApp.models import Producto  # Importa el modelo Producto
+from CrudProductosApp.models import Productos  # Importa el modelo Producto
 from . import forms  # Importa los formularios de la app CrudProductosApp
 
 # ========================================================================
 # VISTA: Mostrar todos los productos
 # ========================================================================
-def productoData(request):
+def productosData(request):
     """
     Obtiene todos los registros de productos de la base de datos
     y los envía al template 'producto-models.html' para mostrarlos.
@@ -17,15 +17,15 @@ def productoData(request):
     Retorna:
     - render: Renderiza el template con los datos de los productos.
     """
-    producto = Producto.objects.all()  # Consulta todos los productos
-    data = {'Producto': producto}  # Diccionario con los datos para el template
-    return render(request, 'templateCrudProducto/producto-models.html', data)
+    productos = Productos.objects.all()  # Consulta todos los productos
+    data = {'Productos': productos}  # Diccionario con los datos para el template
+    return render(request, 'templateCrudProducto/productos-models.html', data)
 
 
 # ========================================================================
 # VISTA: Registro de un nuevo producto
 # ========================================================================
-def productoRegistrationView(request):
+def productosRegistrationView(request):
     """
     Permite registrar un nuevo producto mediante un formulario.
     Si la solicitud es POST y el formulario es válido, guarda los datos
@@ -52,7 +52,7 @@ def productoRegistrationView(request):
             print("FECHA DE VENCIMIENTO: ", form.cleaned_data['FechaDeVencimiento'])
             
             form.save()  # Guarda el nuevo producto en la base de datos
-            return redirect('/adminhome/crud-producto/')  # Redirige al listado de productos
+            return redirect('/adminhome/crud-productos/')  # Redirige al listado de productos
     
     data = {'form': form}  # Diccionario con el formulario
     return render(request, 'templateCrudProducto/registro-producto.html', data)
@@ -72,14 +72,14 @@ def actualizarProducto(request, IdProducto):
     Retorna:
     - render: Renderiza el template 'registro-producto.html' con el formulario.
     """
-    producto = Producto.objects.get(IdProducto=IdProducto)  # Obtiene el producto por su ID
+    producto = Productos.objects.get(IdProducto=IdProducto)  # Obtiene el producto por su ID
     form = forms.ProductoRegistrationForm(instance=producto)  # Formulario precargado con datos del producto
 
     if request.method == 'POST':  # Si se envían datos para actualizar
         form = forms.ProductoRegistrationForm(request.POST, instance=producto)
         if form.is_valid():
             form.save()  # Guarda los cambios en la base de datos
-            return redirect('/adminhome/crud-producto/')  # Redirige al listado de productos
+            return redirect('/adminhome/crud-productos/')  # Redirige al listado de productos
     
     data = {'form': form}  # Diccionario con el formulario
     return render(request, 'templateCrudProducto/registro-producto.html', data)
@@ -100,6 +100,6 @@ def eliminarProducto(request, IdProducto):
     Retorna:
     - redirect: Redirige a la página de listado de productos después de eliminar.
     """
-    producto = Producto.objects.get(IdProducto=IdProducto)  # Obtiene el producto a eliminar
+    producto = Productos.objects.get(IdProducto=IdProducto)  # Obtiene el producto a eliminar
     producto.delete()  # Elimina el registro de la base de datos
-    return redirect('/adminhome/crud-producto/')  # Redirige al listado de productos
+    return redirect('/adminhome/crud-productos/')  # Redirige al listado de productos

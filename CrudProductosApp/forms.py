@@ -1,6 +1,6 @@
 # Importaciones necesarias
 from django import forms  # Importa el módulo de formularios de Django
-from CrudProductosApp.models import Producto  # Importa el modelo Producto
+from CrudProductosApp.models import Productos  # Importa el modelo Producto
 
 # ========================================================================
 # Formulario: Registro de Productos
@@ -16,5 +16,5 @@ class ProductoRegistrationForm(forms.ModelForm):
     Hereda de forms.ModelForm, lo que permite mapear los campos del modelo automáticamente.
     """
     class Meta:
-        model = Producto  # Modelo en el que se basa el formulario
+        model = Productos  # Modelo en el que se basa el formulario
         fields = '__all__'  # Incluye todos los campos del modelo en el formulario

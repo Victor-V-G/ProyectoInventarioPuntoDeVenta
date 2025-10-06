@@ -1,6 +1,6 @@
 # Importaciones necesarias
 from django.contrib import admin  # Permite registrar modelos en el panel de administración de Django
-from CrudProductosApp.models import Producto  # Importa el modelo Producto
+from CrudProductosApp.models import Productos  # Importa el modelo Producto
 
 # ------------------------------------------------------------------------
 # Nota para desarrollo
@@ -33,4 +33,4 @@ class ProductoAdmin(admin.ModelAdmin):
 # ========================================================================
 # Esto permite que podamos gestionar los registros de Producto directamente
 # desde el panel de administración de Django (crear, leer, actualizar y eliminar)
-admin.site.register(Producto)
+admin.site.register(Productos)

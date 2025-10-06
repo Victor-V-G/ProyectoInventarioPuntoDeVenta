@@ -10,25 +10,25 @@ urlpatterns = [
     # Ruta para mostrar todos los productos
     # --------------------------------------------------------------------
     # http://<tu_dominio>/crud-producto/
-    path('crud-producto/', views.productoData),
+    path('crud-productos/', views.productosData),
 
     # --------------------------------------------------------------------
     # Ruta para registrar un nuevo producto mediante formulario
     # --------------------------------------------------------------------
     # http://<tu_dominio>/crud-producto/registro-producto/
-    path('crud-producto/registro-producto/', views.productoRegistrationView),
+    path('crud-productos/registro-producto/', views.productosRegistrationView),
 
     # --------------------------------------------------------------------
     # Ruta para actualizar un producto existente
     # --------------------------------------------------------------------
     # <int:IdProducto> indica que se espera un número entero correspondiente al ID del producto
     # http://<tu_dominio>/crud-producto/actualizar-producto/1
-    path('crud-producto/actualizar-producto/<int:IdProducto>', views.actualizarProducto),
+    path('crud-productos/actualizar-producto/<int:IdProducto>', views.actualizarProducto),
 
     # --------------------------------------------------------------------
     # Ruta para eliminar un producto
     # --------------------------------------------------------------------
     # <int:IdProducto> indica que se espera un número entero correspondiente al ID del producto
     # http://<tu_dominio>/crud-producto/eliminar-producto/1
-    path('crud-producto/eliminar-producto/<int:IdProducto>', views.eliminarProducto)
+    path('crud-productos/eliminar-producto/<int:IdProducto>', views.eliminarProducto)
 ]

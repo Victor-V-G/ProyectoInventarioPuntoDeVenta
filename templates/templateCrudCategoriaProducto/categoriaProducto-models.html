@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LISTA DE CATEGORIAS</title>
+    <link rel="stylesheet" href="{%static 'css/models-style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>LISTA DE CATEGORIAS</h1>
+    </header>
+    {% if CategoriaProducto %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre Categoria</th>
+                <th>Descripcion Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bod in CategoriaProducto %}
+            <tr>
+                <td>{{ bod.NombreCategoria }}</td>
+                <td>{{ bod.DescripcionCategoria }}</td>
+                <td>
+                    <a href="/adminhome/crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoria }}"><button>ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-categoriaProducto/eliminar-categoriaProducto/{{ bod.IdCategoria }}"><button>ELIMINAR</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <div>NO HAY CATEGORIAS</div>
+    {% endif %}
+
+    <a href="/adminhome/"><button type="button">VOLVER</button></a>
+    <a href="registro-categoriaProducto/"><button type="button">REGISTRAR CATEGORIA</button></a>
+</body>
+</html>

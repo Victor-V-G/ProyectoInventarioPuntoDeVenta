@@ -71,7 +71,7 @@ ENGINE = InnoDB;
 -- Table `punto-de-venta-db`.`Cargos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Cargos` (
-  `IdCargos` INT NOT NULL,
+  `IdCargos` INT NOT NULL AUTO_INCREMENT,
   `TipoDeCargo` ENUM('Gerente', 'Bodeguero') NOT NULL,
   `EstadoDelCargo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`IdCargos`))
@@ -126,7 +126,7 @@ ENGINE = InnoDB;
 -- Table `punto-de-venta-db`.`Bodegas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `punto-de-venta-db`.`Bodegas` (
-  `IdBodega` INT NOT NULL,
+  `IdBodega` INT NOT NULL AUTO_INCREMENT,
   `CategoriaBodegaUusuario_IdAccionesBodega` INT NOT NULL,
   `NombreBodega` VARCHAR(55) NOT NULL,
   `UbicacionBodega` VARCHAR(65) NOT NULL,
