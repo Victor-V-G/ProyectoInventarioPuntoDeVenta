@@ -17,7 +17,7 @@ def categoriaProductoRegistracionView(request):
         if form.is_valid():
             print("FORM VALIDO")
             print("NOMBRE: ", form.cleaned_data['NombreCategoria'])
-            print("DESCRIPCION: ", form.cleaned_data['DescripcionCategoria'])
+            print("DESCRIPCION: ", form.cleaned_data['Descripcion'])
 
             form.save()
             return redirect('/adminhome/crud-categoriaProducto/')
@@ -26,9 +26,9 @@ def categoriaProductoRegistracionView(request):
     return render(request, 'templateCrudCategoriaProducto/registro-categoriaProducto.html', data)
 
 
-def actualizarCategoriaProducto(request, IdCategoria):
+def actualizarCategoriaProducto(request, IdCategoriaProducto):
 
-    categoriaProducto = CategoriaProducto.objects.get(IdCategoria=IdCategoria)
+    categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
     form = forms.CategoriaProductoRegistracionForm(instance=categoriaProducto)
 
     if request.method == 'POST':
@@ -41,8 +41,8 @@ def actualizarCategoriaProducto(request, IdCategoria):
     data = {'form': form}
     return render(request, 'templateCrudCategoriaProducto/registro-categoriaProducto.html', data)
 
-def eliminarCategoriaProducto(request, IdCategoria):
+def eliminarCategoriaProducto(request, IdCategoriaProducto):
 
-    categoriaProducto = CategoriaProducto.objects.get(IdCategoria=IdCategoria)
+    categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
     categoriaProducto.delete()
     return redirect('/adminhome/crud-categoriaProducto/')

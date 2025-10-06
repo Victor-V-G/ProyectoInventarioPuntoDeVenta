@@ -18,11 +18,11 @@ python manage.py migrate --fake CrudUsuariosApp 0001
 
 #despues 
 
-python manage.py migrate --fake CrudBodegaSApp 0001
+python manage.py migrate --fake CrudBodegasApp 0001
 
 #despues 
 
-python manage.py migrate --fake CrudCategoriaProductoApp  0001
+python manage.py migrate --fake CrudCategoriaProductoApp 0001
 
 #al ultimo aplicar: 
 

@@ -15,6 +15,7 @@
     <table>
         <thead>
             <tr>
+                <th>ID CATEGORIA PRODUCTO</th>
                 <th>Nombre Categoria</th>
                 <th>Descripcion Categoria</th>
                 <th>Acciones</th>
@@ -23,11 +24,12 @@
         <tbody>
             {% for bod in CategoriaProducto %}
             <tr>
+                <td>{{ bod.IdCategoriaProducto}}</td>
                 <td>{{ bod.NombreCategoria }}</td>
-                <td>{{ bod.DescripcionCategoria }}</td>
+                <td>{{ bod.Descripcion }}</td>
                 <td>
-                    <a href="/adminhome/crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoria }}"><button>ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-categoriaProducto/eliminar-categoriaProducto/{{ bod.IdCategoria }}"><button>ELIMINAR</button></a>
+                    <a href="/adminhome/crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}"><button>ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-categoriaProducto/eliminar-categoriaProducto/{{ bod.IdCategoriaProducto }}"><button>ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}

@@ -4,7 +4,7 @@ from CrudCategoriaProductoApp.models import CategoriaProducto
 # Register your models here.
 class CategoriaProductoAdmin(admin.ModelAdmin):
     list_display = [
-        'NombreCategroia', 
+        'NombreCategoria', 
         'Descripcion']
 
 admin.site.register(CategoriaProducto)

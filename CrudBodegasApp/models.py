@@ -6,6 +6,5 @@ class Bodegas(models.Model):
     NombreBodega = models.CharField(max_length=55, db_column='NombreBodega', verbose_name='Nombre')
     UbicacionBodega = models.CharField(max_length=65, db_column='UbicacionBodega', verbose_name='Ubicacion')
 
-
-class Meta:
-    db_table = 'Bodegas'
+    class Meta:
+        db_table = 'Bodegas'

@@ -4,10 +4,10 @@ from . import forms
 
 # Create your views here.
 def bodegasData(request):
-    
     bodegas = Bodegas.objects.all()
     data = {'Bodegas': bodegas}
     return render(request, 'templateCrudBodega/bodegas-models.html', data)
+
 
 def bodegasRegistracionView(request):
     form = forms.BodegaRegistracionForm()
@@ -27,7 +27,6 @@ def bodegasRegistracionView(request):
 
 
 def actualizarBodega(request, IdBodega):
-
     bodega = Bodegas.objects.get(IdBodega=IdBodega)
     form = forms.BodegaRegistracionForm(instance=bodega)
 
@@ -41,8 +40,8 @@ def actualizarBodega(request, IdBodega):
     data = {'form': form}
     return render(request, 'templateCrudBodega/registro-bodega.html', data)
 
-def eliminarBodega(request, IdBodega):
 
+def eliminarBodega(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)
     bodega.delete()
     return redirect('/adminhome/crud-bodegas/')
