@@ -9,7 +9,9 @@
 </head>
 <body>
     <header>
-        <h1>LISTA DE BODEGAS</h1>
+        <h1 class="header-title">LISTA DE BODEGAS</h1>
+        <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="registro-bodega/"><button class="button-header" type="button">REGISTRAR BODEGA</button></a>
     </header>
     {% if Bodegas %}
     <table>
@@ -39,7 +41,6 @@
         <div>NO HAY BODEGAS</div>
     {% endif %}
 
-    <a href="/adminhome/"><button type="button">VOLVER</button></a>
-    <a href="registro-bodega/"><button type="button">REGISTRAR BODEGA</button></a>
+    
 </body>
 </html>

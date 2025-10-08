@@ -9,7 +9,12 @@
 </head>
 <body>
     <!-- Título de la página -->
-    <header><h1>LISTA DE PRODUCTOS</h1></header>
+    <header>
+        <h1 class="header-title">LISTA DE PRODUCTOS</h1>
+        <!-- Botones de navegación -->
+        <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="registro-producto/"><button class="button-header" type="button">REGISTRAR PRODUCTO</button></a>
+    </header>
 
     <!-- Verifica si hay productos en la base de datos -->
     {% if Productos %}
@@ -53,8 +58,6 @@
         <div>NO HAY PRODUCTOS REGISTRADOS</div>
     {% endif %}
 
-    <!-- Botones de navegación -->
-    <a href="/adminhome/"><button type="button">VOLVER</button></a>
-    <a href="registro-producto/"><button type="button">REGISTRAR PRODUCTO</button></a>
+    
 </body>
 </html>

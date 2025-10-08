@@ -9,7 +9,12 @@
 </head>
 <body>
     
-    <header><h1>LISTA DE USUARIOS</h1></header>
+    <header>
+        <h1 class="header-title">LISTA DE USUARIOS</h1>
+        <!-- Botones de navegación -->
+        <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="registro-usuario/"><button class="button-header" type="button">REGISTRAR USUARIO</button></a>
+    </header>
 
     {%if Usuarios %}
 
@@ -41,8 +46,6 @@
         <div>NO HAY USUARIOS REGISTRADOS</div>
     {% endif %}
 
-    <!-- Botones de navegación -->
-    <a href="/adminhome/"><button type="button">VOLVER</button></a>
-    <a href="registro-usuario/"><button type="button">REGISTRAR USUARIO</button></a>
+    
 </body>
 </html>

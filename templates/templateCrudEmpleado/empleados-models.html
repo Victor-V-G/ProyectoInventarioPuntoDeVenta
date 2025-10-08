@@ -9,7 +9,12 @@
 </head>
 <body>
     <!-- Título de la página -->
-    <header><h1>LISTA DE EMPLEADOS</h1></header>
+    <header>
+        <h1 class="header-title">LISTA DE EMPLEADOS</h1>
+        <!-- Botones de navegación -->
+        <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="registro-empleado/"><button class="button-header" type="button">REGISTRAR EMPLEADO</button></a>
+    </header>
 
     <!-- Verifica si hay empleados en la base de datos -->
     {% if Empleados %}
@@ -49,8 +54,6 @@
         <div>NO HAY EMPLEADOS</div>
     {% endif %}
 
-    <!-- Botones de navegación -->
-    <a href="/adminhome/"><button type="button">VOLVER</button></a>
-    <a href="registro-empleado/"><button type="button">REGISTRAR EMPLEADO</button></a>
+    
 </body>
 </html>

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/forms-style.css' %}">
     <title>Registro de Usuarios</title>
 </head>
 <body>
@@ -12,7 +14,7 @@
     <!-- Formulario para crear o actualizar productos -->
     <form method="POST">
         {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
-        {{ form.as_p }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
+        {{ form.as_div }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
         <input type="submit" value="ENVIAR"> <!-- Botón para enviar el formulario -->
     </form>
     

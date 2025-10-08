@@ -48,6 +48,7 @@ def empleadoRegistrationView(request):
         if form.is_valid():  # Valida los datos del formulario
             # Se imprimen los datos validados en consola para depuración
             print("FORM ES VALIDO")
+            print("ID EMPLEADO: ", form.cleaned_data['IdEmpleado'])
             print("RUT: ", form.cleaned_data['Rut'])
             print("NOMBRE: ", form.cleaned_data['NombreEmpleado'])
             print("APELLIDO: ", form.cleaned_data['ApellidoEmpleado'])
@@ -64,7 +65,7 @@ def empleadoRegistrationView(request):
 # ========================================================================
 # VISTA: Actualizar un empleado existente
 # ========================================================================
-def actualizarEmpleado(request, Rut):
+def actualizarEmpleado(request, IdEmpleado):
     """
     Permite actualizar los datos de un empleado existente.
     El campo RUT se deshabilita para que no pueda ser modificado,
@@ -77,12 +78,8 @@ def actualizarEmpleado(request, Rut):
     Retorna:
     - render: Renderiza el template 'registro-empleado.html' con el formulario.
     """
-    empleado = Empleados.objects.get(Rut=Rut)  # Obtiene el empleado por su RUT
+    empleado = Empleados.objects.get(IdEmpleado=IdEmpleado)  # Obtiene el empleado por su RUT
     form = forms.EmpleadoRegistrationForm(instance=empleado)  # Crea un formulario precargado con los datos del empleado
-
-    #readonly hace que el campo no se pueda editar, pero sí se envía con el POST., esto debido a que si se actualiza el campo con llave primaria,
-    #este se duplica.
-    form.fields['Rut'].widget.attrs['readonly'] = True
 
     if request.method == 'POST':  # Si se envían datos para actualizar
         form = forms.EmpleadoRegistrationForm(request.POST, instance=empleado)  # Vincula los datos al formulario
@@ -97,7 +94,7 @@ def actualizarEmpleado(request, Rut):
 # ========================================================================
 # VISTA: Eliminar un empleado
 # ========================================================================
-def eliminarEmpleado(request, Rut):
+def eliminarEmpleado(request, IdEmpleado):
     """
     Elimina un empleado específico de la base de datos según su RUT
     y redirige al listado de empleados.
@@ -109,6 +106,6 @@ def eliminarEmpleado(request, Rut):
     Retorna:
     - redirect: Redirige a la página de listado de empleados después de eliminar.
     """
-    empleado = Empleados.objects.get(Rut=Rut)  # Obtiene el empleado a eliminar
+    empleado = Empleados.objects.get(IdEmpleado=IdEmpleado)  # Obtiene el empleado a eliminar
     empleado.delete()  # Elimina el registro de la base de datos
     return redirect('/adminhome/crud-empleado/')  # Redirige al listado de empleados

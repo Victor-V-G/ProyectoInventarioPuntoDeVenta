@@ -9,7 +9,9 @@
 </head>
 <body>
     <header>
-        <h1>LISTA DE CATEGORIAS</h1>
+        <h1 class="header-title">LISTA DE CATEGORIAS</h1>
+        <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="registro-categoriaProducto/"><button class="button-header" type="button">REGISTRAR CATEGORIA</button></a>
     </header>
     {% if CategoriaProducto %}
     <table>
@@ -39,7 +41,6 @@
         <div>NO HAY CATEGORIAS</div>
     {% endif %}
 
-    <a href="/adminhome/"><button type="button">VOLVER</button></a>
-    <a href="registro-categoriaProducto/"><button type="button">REGISTRAR CATEGORIA</button></a>
+    
 </body>
 </html>

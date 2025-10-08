@@ -10,7 +10,6 @@
 }
 
 html {
-    flex-wrap: wrap;
     font-family: 'General Sans', sans-serif;
     background-color: #D1D5DB;
     display: flex;
@@ -31,19 +30,24 @@ body {
 
 /* Encabezado principal */
 header {
-    position: sticky;
-    width: 17%;
+    width: 87%;
     height: 80px;
     background-color: #2d3748;
     color: #EBECF2;
     display: flex;
-    padding: 10px 0;
+    align-items: center;
+    justify-content: space-between;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    font-size: 16px;
-    align-items: center;
-    justify-content: center;
+    padding: 0 25px;
     font-weight: bold;
+    position: relative;
+}
+
+.header-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Tabla */
@@ -107,4 +111,12 @@ button {
 
 button:hover {
     background-color: #4a5568;
+}
+
+.button-header {
+    background-color: #4a5568;
+}
+
+.button-header:hover {
+    background-color: #788190;
 }
