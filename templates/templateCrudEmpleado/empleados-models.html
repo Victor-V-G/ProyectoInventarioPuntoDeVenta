@@ -16,6 +16,7 @@
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>RUT</th>
                 <th>Nombre</th>
                 <th>Apellido</th>
@@ -28,6 +29,7 @@
             <!-- Recorre todos los empleados y muestra sus datos -->
             {% for emp in Empleados %}
             <tr>
+                <td>{{ emp.IdEmpleado }}</td>
                 <td>{{ emp.Rut }}</td>
                 <td>{{ emp.NombreEmpleado }}</td>
                 <td>{{ emp.ApellidoEmpleado }}</td>
@@ -35,8 +37,8 @@
                 <td>{{ emp.NumeroTelefonoEmpleado }}</td>
                 <!-- Enlaces para actualizar o eliminar el empleado -->
                 <td>
-                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.Rut }}"><button>ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.Rut }}"><button>ELIMINAR</button></a>
+                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.IdEmpleado }}"><button>ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.IdEmpleado }}"><button>ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}

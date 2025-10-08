@@ -11,10 +11,16 @@ from django.db import models
 # ------------------------------------------------------------------------
 
 class Empleados(models.Model):
+    
+    # ID del empleado, clave primaria
+    # CharField: campo de texto, max_length=15
+    # db_column='RutEmpleado' indica que en la base de datos la columna se llama 'RutEmpleado'
+    IdEmpleado = models.AutoField(primary_key=True, db_column='IdEmpleado')
+
     # RUT del empleado, clave primaria
     # CharField: campo de texto, max_length=15
     # db_column='RutEmpleado' indica que en la base de datos la columna se llama 'RutEmpleado'
-    Rut = models.CharField(max_length=15, primary_key=True, db_column='RutEmpleado')
+    Rut = models.CharField(max_length=12, db_column='RutEmpleado', verbose_name="Rut")
 
     # Nombre del empleado
     # CharField: campo de texto, max_length=55

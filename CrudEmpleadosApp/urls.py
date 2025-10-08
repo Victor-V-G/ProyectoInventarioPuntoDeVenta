@@ -33,12 +33,12 @@ urlpatterns = [
     # --------------------------------------------------------------------
     # El parámetro <int:Rut> indica que se espera un número entero correspondiente al RUT del empleado
     # http://<tu_dominio>/crud-empleado/actualizar-empleado/12345678
-    path('crud-empleado/actualizar-empleado/<int:Rut>', views.actualizarEmpleado),
+    path('crud-empleado/actualizar-empleado/<int:IdEmpleado>', views.actualizarEmpleado),
 
     # --------------------------------------------------------------------
     # Ruta para eliminar un empleado
     # --------------------------------------------------------------------
     # Similar al anterior, <int:Rut> indica el RUT del empleado a eliminar
     # http://<tu_dominio>/crud-empleado/eliminar-empleado/12345678
-    path('crud-empleado/eliminar-empleado/<int:Rut>', views.eliminarEmpleado)
+    path('crud-empleado/eliminar-empleado/<int:IdEmpleado>', views.eliminarEmpleado)
 ]

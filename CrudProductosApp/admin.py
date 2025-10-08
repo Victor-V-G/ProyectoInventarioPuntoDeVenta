@@ -20,6 +20,7 @@ class ProductoAdmin(admin.ModelAdmin):
     """
     # 'list_display' define qué columnas se mostrarán en la lista de registros en el admin
     list_display = [
+        'IdProducto',
         'CodigoDeBarras', 
         'ValorProducto', 
         'StockProducto', 

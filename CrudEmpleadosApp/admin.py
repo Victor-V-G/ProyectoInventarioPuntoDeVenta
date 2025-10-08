@@ -19,7 +19,7 @@ class EmpleadoAdmin(admin.ModelAdmin):
     en el panel de administración de Django.
     """
     # 'list_display' define qué columnas se mostrarán en la lista de registros en el admin
-    list_display = ['RutEmpleado', 'NombreEmpleado', 'ApellidoEmpleado', 'EdadEmpleado', 'NumeroTelefonoEmpleado']
+    list_display = ['IdEmpleado','RutEmpleado', 'NombreEmpleado', 'ApellidoEmpleado', 'EdadEmpleado', 'NumeroTelefonoEmpleado']
 
 # ========================================================================
 # Registro del modelo en el panel de administración
