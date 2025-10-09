@@ -11,7 +11,7 @@
     <header>
         <h1 class="header-title">LISTA DE CARGOS</h1>
         <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
-        <a href="registro-cargo/"><button class="button-header" type="button">REGISTRAR CATEGORIA</button></a>
+        <a href="registro-cargo/"><button class="button-header" type="button">REGISTRAR CARGOS</button></a>
     </header>
     {% if Cargos %}
     <table>
@@ -38,7 +38,9 @@
         </tbody>
     </table>
     {% else %}
-        <div>NO HAY CARGOS</div>
+        <div class="no-registros">
+            <h1>NO HAY CARGOS REGISTRADOS</h1>
+        </div>
     {% endif %}
 
     

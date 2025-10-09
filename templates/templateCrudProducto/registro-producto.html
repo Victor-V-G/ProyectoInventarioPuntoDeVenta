@@ -1,24 +1,26 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/forms-style.css' %}">
     <title>Registro de Productos</title>
 </head>
 <body>
     <!-- Título de la página -->
-    <div>REGISTRO DE PRODUCTOS</div>
+    <header>
+        <h1 class="header-title">REGISTRO DE PRODUCTO</h1>
+        <!-- Botón para volver al listado de productos -->
+        <a href="/adminhome/crud-productos"><button class="button-header" type="button">VOLVER</button></a>
+    </header>
 
     <!-- Formulario para crear o actualizar productos -->
     <form method="POST">
         {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
-        {{ form.as_p }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
-        <input type="submit" value="ENVIAR"> <!-- Botón para enviar el formulario -->
+        {{ form.as_div }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
+        <input class="form-enviar" type="submit" value="ENVIAR"> <!-- Botón para enviar el formulario -->
     </form>
     
-    <!-- Botón para volver al listado de productos -->
-    <a href="/adminhome/crud-productos">
-        <button type="button">VOLVER</button>
-    </a>
 </body>
 </html>

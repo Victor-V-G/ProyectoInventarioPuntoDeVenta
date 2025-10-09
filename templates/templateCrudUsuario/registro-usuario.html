@@ -9,18 +9,18 @@
 </head>
 <body>
     <!-- Título de la página -->
-    <div>REGISTRO DE USUARIOS</div>
+    <header>
+        <h1 class="header-title">REGISTRO DE USUARIO</h1>
+        <!-- Botón para volver al listado de productos -->
+        <a href="/adminhome/crud-usuarios"><button class="button-header" type="button">VOLVER</button></a>
+    </header>
 
     <!-- Formulario para crear o actualizar productos -->
     <form method="POST">
         {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
         {{ form.as_div }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
-        <input type="submit" value="ENVIAR"> <!-- Botón para enviar el formulario -->
+        <input class="form-enviar" type="submit" value="ENVIAR"> <!-- Botón para enviar el formulario -->
     </form>
     
-    <!-- Botón para volver al listado de productos -->
-    <a href="/adminhome/crud-usuarios">
-        <button type="button">VOLVER</button>
-    </a>
 </body>
 </html>

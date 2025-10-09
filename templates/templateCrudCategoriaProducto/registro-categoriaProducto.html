@@ -1,20 +1,23 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/forms-style.css' %}">
     <title>Registro de Categorias</title>
 <body>
-    <div>REGISTRO DE CAREGORIAS</div>
+    
+    <header>
+        <h1 class="header-title">REGISTRO DE CATEGORIAS</h1>
+        <a href="/adminhome/crud-categoriaProducto"><button class="button-header" type="button">VOLVER</button></a>
+    </header>
     
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="ENVIAR">
+        {{ form.as_div }}
+        <input class="form-enviar" type="submit" value="ENVIAR">
     </form>
 
-    <a href="/adminhome/crud-categoriaProducto">
-        <button type="button">VOLVER</button>
-    </a>
 </body>
 </html>

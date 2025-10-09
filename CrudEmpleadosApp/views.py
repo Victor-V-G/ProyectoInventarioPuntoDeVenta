@@ -48,7 +48,6 @@ def empleadoRegistrationView(request):
         if form.is_valid():  # Valida los datos del formulario
             # Se imprimen los datos validados en consola para depuración
             print("FORM ES VALIDO")
-            print("ID EMPLEADO: ", form.cleaned_data['IdEmpleado'])
             print("RUT: ", form.cleaned_data['Rut'])
             print("NOMBRE: ", form.cleaned_data['NombreEmpleado'])
             print("APELLIDO: ", form.cleaned_data['ApellidoEmpleado'])
