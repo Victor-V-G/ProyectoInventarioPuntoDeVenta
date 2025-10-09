@@ -20,7 +20,7 @@ class Empleados(models.Model):
     # RUT del empleado, clave primaria
     # CharField: campo de texto, max_length=15
     # db_column='RutEmpleado' indica que en la base de datos la columna se llama 'RutEmpleado'
-    Rut = models.CharField(max_length=12, db_column='RutEmpleado', verbose_name="Rut")
+    Rut = models.CharField(max_length=12, db_column='RutEmpleado', verbose_name="Rut (01234567-k)")
 
     # Nombre del empleado
     # CharField: campo de texto, max_length=55
@@ -40,7 +40,7 @@ class Empleados(models.Model):
     # Teléfono del empleado
     # IntegerField: campo de número entero
     # db_column='NumeroTelefonoEmpleado' indica que en la base de datos la columna se llama 'NumeroTelefonoEmpleado'
-    NumeroTelefonoEmpleado = models.IntegerField(db_column='NumeroTelefonoEmpleado', verbose_name="Telefono")
+    NumeroTelefonoEmpleado = models.IntegerField(db_column='NumeroTelefonoEmpleado', verbose_name="Telefono (912345678)")
 
     # --------------------------------------------------------------------
     # Meta información del modelo
