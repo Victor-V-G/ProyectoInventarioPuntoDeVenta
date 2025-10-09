@@ -24,17 +24,20 @@ class EmpleadoRegistrationForm(forms.ModelForm):
     # Validaciones personalizadas
     # ====================================================================
     def clean_Rut(self):
+
         inputRut = self.cleaned_data['Rut'].strip().upper()  # Obtiene valor y elimina espacios al inicio y fin
         caracteres = r"^\d{7,8}-[\dK]$"
+
         """
-        Valida que el RUT del empleado no exceda los 9 caracteres.
-        Este método se llama automáticamente durante la validación del formulario.
+        Valida que el RUT tenga el formato chileno correcto:
+        - Solo se permiten entre 7 y 8 dígitos seguidos de un guion y un dígito o 'K'.
+        - Ejemplos válidos: 12345678-5, 1234567-K, 1234567-k
 
         Retorna:
-        - inputRut: El RUT validado si cumple la condición.
+        - inputRut: El RUT validado si cumple el formato.
 
         Lanza:
-        - forms.ValidationError si el RUT excede los 9 caracteres.
+        - forms.ValidationError si el formato no es válido.
         """
         if not re.match(caracteres, inputRut):  # Valida la longitud máxima
             raise forms.ValidationError("Ingrese un Rut Valido con guion y sin puntos.")  # Mensaje de error
@@ -47,7 +50,7 @@ class EmpleadoRegistrationForm(forms.ModelForm):
         caracteres = r"^[a-zA-ZñÑ]{4,}$"
 
         if not re.match(caracteres, inputNombre):  # Valida la longitud máxima
-            raise forms.ValidationError("Ingrese un Nombre valido con solo letras.")  # Mensaje de error
+            raise forms.ValidationError("Ingrese un Nombre valido con solo letras y mas de 3 letras.")  # Mensaje de error
         return inputNombre  # Devuelve el valor limpio si es válido
     
     def clean_ApellidoEmpleado(self):
@@ -55,7 +58,7 @@ class EmpleadoRegistrationForm(forms.ModelForm):
         caracteres = r"^([a-zA-ZñÑ]{2,})( [a-zA-ZñÑ]{2,})*$"
 
         if not re.match(caracteres, inputApellido):  # Valida la longitud máxima
-            raise forms.ValidationError("Ingrese un Apellido valido con solo letras.")  # Mensaje de error
+            raise forms.ValidationError("Ingrese un Apellido valido con solo letras y mas de 3 letras.")  # Mensaje de error
         return inputApellido  # Devuelve el valor limpio si es válido
 
     def clean_EdadEmpleado(self):
