@@ -1,6 +1,7 @@
 # Importaciones necesarias
 from django import forms  # Importa el módulo de formularios de Django
 from CrudEmpleadosApp.models import Empleados  # Importa el modelo Empleados
+import re
 
 # ========================================================================
 # Formulario: Registro de Empleados
@@ -22,18 +23,24 @@ class EmpleadoRegistrationForm(forms.ModelForm):
     # ====================================================================
     # Validaciones personalizadas
     # ====================================================================
-    def clean_RutEmpleado(self):
+    def clean_Rut(self):
         """
-        Valida que el RUT del empleado no exceda los 9 caracteres.
-        Este método se llama automáticamente durante la validación del formulario.
+        Valida que el RUT tenga el formato chileno correcto:
+        - Solo se permiten entre 7 y 8 dígitos seguidos de un guion y un dígito o 'K'.
+        - Ejemplos válidos: 12345678-5, 1234567-K, 1234567-k
 
         Retorna:
-        - inputRut: El RUT validado si cumple la condición.
+        - inputRut: El RUT validado si cumple el formato.
 
         Lanza:
-        - forms.ValidationError si el RUT excede los 9 caracteres.
+        - forms.ValidationError si el formato no es válido.
         """
-        inputRut = self.cleaned_data['Rut']  # Obtiene el valor ingresado en el formulario
-        if len(inputRut) > 9:  # Valida la longitud máxima
-            raise forms.ValidationError("El largo máximo del RUT son 9 caracteres.")  # Mensaje de error
-        return inputRut  # Devuelve el valor limpio si es válido
+        inputRut = self.cleaned_data.get('Rut')
+
+        # Expresión regular para formato RUT chileno
+        rut_pattern = r'^[0-9]{7,8}-[0-9Kk]$'
+
+        # Validar formato con regex
+        if not re.match(rut_pattern, inputRut):
+            raise forms.ValidationError("El formato del RUT no es válido. Debe ser 00000000-0 o 00000000-K.")
+        return inputRut
