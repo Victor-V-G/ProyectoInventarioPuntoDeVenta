@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LISTA DE CATEGORIAS</title>
+    <script src='{%static "js/crudVolver.js" %}'></script>
     <link rel="stylesheet" href="{%static 'css/models-style.css' %}">
 </head>
 <body>
     <header>
         <h1 class="header-title">LISTA DE CATEGORIAS</h1>
-        <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+        <button class="button-header" type="button" onclick="crudVolver()">VOLVER</button>
         <a href="registro-categoriaProducto/"><button class="button-header" type="button">REGISTRAR CATEGORIA</button></a>
     </header>
     {% if CategoriaProducto %}
@@ -30,7 +31,7 @@
                 <td>{{ bod.NombreCategoria }}</td>
                 <td>{{ bod.Descripcion }}</td>
                 <td>
-                    <a href="/adminhome/crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}"><button>ACTUALIZAR</button></a>
+                    <button type="button" onclick="regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')">ACTUALIZAR</button>
                     <a href="/adminhome/crud-categoriaProducto/eliminar-categoriaProducto/{{ bod.IdCategoriaProducto }}"><button>ELIMINAR</button></a>
                 </td>
             </tr>

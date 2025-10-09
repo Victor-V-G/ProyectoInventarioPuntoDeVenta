@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/forms-style.css' %}">
     <title>Registro de Productos</title>
+    <script src='{%static "js/crudVolver.js" %}'></script>
 </head>
 <body>
     <!-- Título de la página -->
     <header>
         <h1 class="header-title">REGISTRO DE PRODUCTO</h1>
         <!-- Botón para volver al listado de productos -->
-        <a href="/adminhome/crud-productos"><button class="button-header" type="button">VOLVER</button></a>
+        <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
     </header>
 
     <!-- Formulario para crear o actualizar productos -->
@@ -21,6 +22,11 @@
         {{ form.as_div }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
         <input class="form-enviar" type="submit" value="ENVIAR"> <!-- Botón para enviar el formulario -->
     </form>
-    
+    {% if valor %}
+    <script>
+        // Llamamos a tu función que estaba en mi_script.js
+        regresarCrudProducto(); 
+    </script>
+    {% endif %}
 </body>
 </html>

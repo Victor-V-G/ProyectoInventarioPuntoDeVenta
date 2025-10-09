@@ -26,6 +26,7 @@ class EmpleadoRegistrationForm(forms.ModelForm):
     def clean_Rut(self):
         inputRut = self.cleaned_data['Rut'].strip().upper()  # Obtiene valor y elimina espacios al inicio y fin
         caracteres = r"^\d{7,8}-[\dK]$"
+        query = Empleados.objects.filter(Rut=inputRut)
         """
         Valida que el RUT del empleado no exceda los 9 caracteres.
         Este método se llama automáticamente durante la validación del formulario.
@@ -38,21 +39,23 @@ class EmpleadoRegistrationForm(forms.ModelForm):
         """
         if not re.match(caracteres, inputRut):  # Valida la longitud máxima
             raise forms.ValidationError("Ingrese un Rut Valido con guion y sin puntos.")  # Mensaje de error
-        if Empleados.objects.filter(Rut=inputRut).exists():
+        if self.instance.pk:
+            query = query.exclude(pk=self.instance.pk)
+        if query.exists():
             raise forms.ValidationError("Este RUT ya está registrado.")
         return inputRut  # Devuelve el valor limpio si es válido
     
     def clean_NombreEmpleado(self):
-        inputNombre = self.cleaned_data['NombreEmpleado'].strip()  # Obtiene valor y elimina espacios al inicio y fin
-        caracteres = r"^[a-zA-ZñÑ]{4,}$"
+        inputNombre = self.cleaned_data['NombreEmpleado'].strip().capitalize()  # Obtiene valor y elimina espacios al inicio y fin
+        caracteres = r"^[A-ZÁÉÍÓÚÑa-záéíóúñ]{3,}$"
 
         if not re.match(caracteres, inputNombre):  # Valida la longitud máxima
-            raise forms.ValidationError("Ingrese un Nombre valido con solo letras.")  # Mensaje de error
+            raise forms.ValidationError("Ingrese un Nombre valido con solo letras y sin espacios.")  # Mensaje de error
         return inputNombre  # Devuelve el valor limpio si es válido
     
     def clean_ApellidoEmpleado(self):
-        inputApellido = self.cleaned_data['ApellidoEmpleado'].strip()  # Obtiene valor y elimina espacios al inicio y fin
-        caracteres = r"^([a-zA-ZñÑ]{2,})( [a-zA-ZñÑ]{2,})*$"
+        inputApellido = self.cleaned_data['ApellidoEmpleado'].strip().title()  # Obtiene valor y elimina espacios al inicio y fin
+        caracteres = r"^([A-ZÁÉÍÓÚÑa-záéíóúñ]{2,})( [A-ZÁÉÍÓÚÑa-záéíóúñ]{2,})*$"
 
         if not re.match(caracteres, inputApellido):  # Valida la longitud máxima
             raise forms.ValidationError("Ingrese un Apellido valido con solo letras.")  # Mensaje de error

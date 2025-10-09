@@ -52,9 +52,10 @@ def productosRegistrationView(request):
             print("FECHA DE VENCIMIENTO: ", form.cleaned_data['FechaDeVencimiento'])
             
             form.save()  # Guarda el nuevo producto en la base de datos
-            return redirect('/adminhome/crud-productos/')  # Redirige al listado de productos
     
-    data = {'form': form}  # Diccionario con el formulario
+    data = {
+        'form': form,
+        'valor': form.is_valid()}  # Diccionario con el formulario
     return render(request, 'templateCrudProducto/registro-producto.html', data)
 
 
@@ -79,9 +80,10 @@ def actualizarProducto(request, IdProducto):
         form = forms.ProductoRegistrationForm(request.POST, instance=producto)
         if form.is_valid():
             form.save()  # Guarda los cambios en la base de datos
-            return redirect('/adminhome/crud-productos/')  # Redirige al listado de productos
     
-    data = {'form': form}  # Diccionario con el formulario
+    data = {
+        'form': form,
+        'valor': form.is_valid()}  # Diccionario con el formulario
     return render(request, 'templateCrudProducto/registro-producto.html', data)
 
 

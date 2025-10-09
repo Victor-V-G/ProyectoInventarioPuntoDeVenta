@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/forms-style.css' %}">
+    <script src='{%static "js/crudVolver.js" %}'></script>
     <title>Registro de Categorias</title>
 <body>
     
     <header>
         <h1 class="header-title">REGISTRO DE CATEGORIAS</h1>
-        <a href="/adminhome/crud-categoriaProducto"><button class="button-header" type="button">VOLVER</button></a>
+        <button class="button-header" type="button" onclick="regresarCrudCategoriaProducto()">VOLVER</button>
     </header>
     
     <form method="POST">
@@ -18,6 +19,11 @@
         {{ form.as_div }}
         <input class="form-enviar" type="submit" value="ENVIAR">
     </form>
-
+    {% if valor %}
+    <script>
+        // Llamamos a tu función que estaba en mi_script.js
+        regresarCrudCategoriaProducto();
+    </script>
+    {% endif %}
 </body>
 </html>

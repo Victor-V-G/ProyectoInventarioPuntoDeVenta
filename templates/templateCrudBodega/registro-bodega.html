@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/forms-style.css' %}">
+    <script src='{%static "js/crudVolver.js" %}'></script>
     <title>Registro de Bodegas</title>
 <body>
 
     <header>
         <h1 class="header-title">REGISTRO DE BODEGAS</h1>
-        <a href="/adminhome/crud-bodegas"><button class="button-header" type="button">VOLVER</button></a>
+        <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
     </header>
     
     <form method="POST">
@@ -18,6 +19,10 @@
         {{ form.as_div }}
         <input class="form-enviar" type="submit" value="ENVIAR">
     </form>
-
+    {% if valor %}
+    <script>
+        regresarCrudBodega(); 
+    </script>
+    {% endif %}
 </body>
 </html>

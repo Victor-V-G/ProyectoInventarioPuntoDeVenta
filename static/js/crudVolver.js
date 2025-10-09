@@ -18,99 +18,57 @@ function crudVolver(){
 /* FUNCIONES DE PRODUCTO */
 
 /* Función para regresar al CRUD de productos según categoría */
-function regresarCrudProducto() {
-  let categoria = localStorage.getItem("categoria")
+function regresarCrudProducto(){
+  const categoria = localStorage.getItem("categoria")
   
   if (categoria == "admin") {
-    window.location.href = "/adminhome/crudproductos"
+    window.location.href = "/adminhome/crud-productos/"
   }
   else if (categoria == "home") {
-    window.location.href = "/home/crudproductos"
-  }
-}
-
-/* Función para ir al formulario de agregar producto según categoría */
-function irAgregarProductoFormulario() {
-  let categoria = localStorage.getItem("categoria")
-  
-  if (categoria == "admin") {
-    window.location.href = "/adminhome/crudproductos/agregar-producto"
-  }
-  else if (categoria == "home") {
-    window.location.href = "/home/crudproductos/agregar-producto"
+    window.location.href = "/home/crud-productos/"
   }
 }
 
 /*-----------------------------------------------------------*/
-/* FUNCIONES DE BODEGAS */
+/* FUNCIONES DE CATEGORIAS */
 
-/* Función para ir a la sección de acción de producto a bodega según categoría */
-function accionProductoABodega() {
-  let categoria = localStorage.getItem("categoria")
+/* Función para regresar al CRUD de CATEGORIA según categoría */
+function regresarCrudCategoriaProducto(){
+  const categoria = localStorage.getItem("categoria")
   
   if (categoria == "admin") {
-    window.location.href = "/adminhome/crudbodegas/accion-producto-a-bodega"
+    window.location.href = "/adminhome/crud-categoriaProducto/"
   }
   else if (categoria == "home") {
-    window.location.href = "/home/crudbodegas/accion-producto-a-bodega"
+    window.location.href = "/home/crud-categoriaProducto/"
   }
 }
 
-/* Función para ir al formulario de acción en bodegas y guardar la acción seleccionada */
-function accionIrAlFormulario() {
-  let categoria = localStorage.getItem("categoria")
-
-  // Captura el valor del input donde se selecciona la acción
-  let eDato = document.getElementById("accionARealizar")
-  let vDato = eDato.value
-
-  // Guarda la acción seleccionada en localStorage para usarla en el registro
-  localStorage.setItem("accion", vDato);
-
-  // Redirige al formulario correspondiente según categoría
-  if (categoria == "admin") {
-    window.location.href = "/adminhome/crudbodegas/accion-producto-a-bodega/formulario-bodega"
-  }
-  else if (categoria == "home") {
-    window.location.href = "/home/crudbodegas/accion-producto-a-bodega/formulario-bodega"
-  }
-}
-
-/* Función para regresar al CRUD de bodegas según categoría */
-function regresarCrudBodega() {
-  let categoria = localStorage.getItem("categoria")
-  
-  if (categoria == "admin") {
-    window.location.href = "/adminhome/crudbodegas"
-  }
-  else if (categoria == "home") {
-    window.location.href = "/home/crudbodegas"
-  }
-}
 
 /*-----------------------------------------------------------*/
-/* FUNCIONES DE CATEGORÍAS */
+/* FUNCIONES DE BODEGA */
 
-/* Función para ir al formulario de agregar categoría según categoría de usuario */
-function accionIrAlFormularioCategorias() {
-  let categoria = localStorage.getItem("categoria")
+/* Función para regresar al CRUD de BODEGA según categoría */
+function regresarCrudBodega(){
+  const categoria = localStorage.getItem("categoria")
   
   if (categoria == "admin") {
-    window.location.href = "/adminhome/crudcategorias/formulario-categoria"
+    window.location.href = "/adminhome/crud-bodegas/"
   }
   else if (categoria == "home") {
-    window.location.href = "/home/crudcategorias/formulario-categoria"
+    window.location.href = "/home/crud-bodegas/"
   }
 }
 
-/* Función para regresar al CRUD de categorías según categoría de usuario */
-function regresarCrudCategorias() {
-  let categoria = localStorage.getItem("categoria")
+
+/* FUNCION GLOBAL PARA VOLVER ATRAS EN UN REGISTRO, ACTUALIZAR*/
+function regresarAdminOrHome(path){
+  const categoria = localStorage.getItem("categoria")
   
   if (categoria == "admin") {
-    window.location.href = "/adminhome/crudcategorias"
+    window.location.href = "/adminhome/" + path;
   }
   else if (categoria == "home") {
-    window.location.href = "/home/crudcategorias"
+    window.location.href = "/home/" + path;
   }
 }

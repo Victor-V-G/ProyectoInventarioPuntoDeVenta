@@ -20,9 +20,11 @@ def bodegasRegistracionView(request):
             print("UBICACION: ", form.cleaned_data['UbicacionBodega'])
 
             form.save()
-            return redirect('/adminhome/crud-bodegas/')
-    
-    data = {'form': form}
+
+    data = {
+        'form': form,
+        'valor': form.is_valid()
+        }
     return render(request, 'templateCrudBodega/registro-bodega.html', data)
 
 
@@ -35,9 +37,11 @@ def actualizarBodega(request, IdBodega):
 
         if form.is_valid():
             form.save()
-            return redirect('/adminhome/crud-bodegas/')
-    
-    data = {'form': form}
+
+    data = {
+        'form': form,
+        'valor': form.is_valid()
+        }
     return render(request, 'templateCrudBodega/registro-bodega.html', data)
 
 
@@ -45,3 +49,6 @@ def eliminarBodega(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)
     bodega.delete()
     return redirect('/adminhome/crud-bodegas/')
+
+
+
