@@ -31,8 +31,8 @@
                 <td>{{ bod.NombreBodega }}</td>
                 <td>{{ bod.UbicacionBodega }}</td>
                 <td>
-                    <button type="button" onclick="regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')">ACTUALIZAR</button>
-                    <a href="/adminhome/crud-bodegas/eliminar-bodega/{{ bod.IdBodega }}"><button>ELIMINAR</button></a>
+                    <button type="button" onclick="regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')" onclick="return confirm('¿Seguro que deseas actualizar esta bodega?')">ACTUALIZAR</button>
+                    <a href="/adminhome/crud-bodegas/eliminar-bodega/{{ bod.IdBodega }}"><button onclick="return confirm('¿Seguro que deseas eliminar esta bodega?')">ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}

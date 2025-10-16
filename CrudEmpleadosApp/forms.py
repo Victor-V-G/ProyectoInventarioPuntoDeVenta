@@ -23,10 +23,10 @@ class EmpleadoRegistrationForm(forms.ModelForm):
     # ====================================================================
     # Validaciones personalizadas
     # ====================================================================
-    def clean_Rut(self):
-        inputRut = self.cleaned_data['Rut'].strip().upper()  # Obtiene valor y elimina espacios al inicio y fin
+    def clean_RutEmpleado(self):
+        inputRut = self.cleaned_data['RutEmpleado'].strip().upper()  # Obtiene valor y elimina espacios al inicio y fin
         caracteres = r"^\d{7,8}-[\dK]$"
-        query = Empleados.objects.filter(Rut=inputRut)
+        query = Empleados.objects.filter(RutEmpleado=inputRut)
         """
         Valida que el RUT del empleado no exceda los 9 caracteres.
         Este método se llama automáticamente durante la validación del formulario.

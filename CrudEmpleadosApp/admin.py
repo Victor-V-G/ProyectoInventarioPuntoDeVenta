@@ -20,6 +20,10 @@ class EmpleadoAdmin(admin.ModelAdmin):
     """
     # 'list_display' define qué columnas se mostrarán en la lista de registros en el admin
     list_display = ['IdEmpleado','RutEmpleado', 'NombreEmpleado', 'ApellidoEmpleado', 'EdadEmpleado', 'NumeroTelefonoEmpleado']
+    list_filter = ('IdEmpleado',)
+    search_fields = ('Nombre', 'RutEmpleado')
+    list_per_page = 10  # paginación
+    empty_value_display = '— Sin dato —'
 
 # ========================================================================
 # Registro del modelo en el panel de administración

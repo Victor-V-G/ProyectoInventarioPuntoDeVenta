@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import UniqueConstraint
 # Create your models here.
 class Cargos(models.Model):
 
@@ -14,3 +14,10 @@ class Cargos(models.Model):
 
     class Meta:
         db_table = 'Cargos'
+        constraints = [
+            UniqueConstraint(fields=['IdCargos'], name='unique_id_cargos'),
+        ]
+
+
+    def __str__(self):
+        return f"ID: {self.IdCargos}, Tipo de Cargo: {self.TipoDeCargo}, Estado del Cargo: {self.EstadoDelCargo}"

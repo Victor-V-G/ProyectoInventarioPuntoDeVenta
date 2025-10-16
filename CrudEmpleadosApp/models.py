@@ -1,6 +1,6 @@
 # Importación de la clase base para modelos de Django
 from django.db import models
-
+from django.db.models import UniqueConstraint
 # ------------------------------------------------------------------------
 # Modelo: Empleados
 # ------------------------------------------------------------------------
@@ -20,7 +20,7 @@ class Empleados(models.Model):
     # RUT del empleado, clave primaria
     # CharField: campo de texto, max_length=15
     # db_column='RutEmpleado' indica que en la base de datos la columna se llama 'RutEmpleado'
-    Rut = models.CharField(max_length=12, db_column='RutEmpleado', verbose_name="Rut (01234567-k)")
+    RutEmpleado = models.CharField(max_length=12, db_column='RutEmpleado', verbose_name="Rut (01234567-k)")
 
     # Nombre del empleado
     # CharField: campo de texto, max_length=55
@@ -49,3 +49,15 @@ class Empleados(models.Model):
         # db_table indica el nombre exacto de la tabla en la base de datos
         # Evita que Django cree una tabla con un nombre por defecto como 'CrudEmpleadosApp_Empleados'
         db_table = 'Empleados'
+        constraints = [
+            UniqueConstraint(fields=['IdEmpleado'], name='unique_id_empleado'),
+            UniqueConstraint(fields=['RutEmpleado'], name='unique_rut_empleado'),
+        ]
+    # --------------------------------------------------------------------
+    # MÉTODO __STR__ IMPLEMENTADO
+    # --------------------------------------------------------------------
+    # Devuelve una representación legible del objeto.
+    # En este caso, el nombre completo del empleado.
+    # --------------------------------------------------------------------
+    def __str__(self):
+        return f"ID: {self.IdEmpleado}, Nombre: {self.NombreEmpleado}, Apellido: {self.ApellidoEmpleado}, Rut: {self.RutEmpleado}, Edad: {self.EdadEmpleado}, Telefono: {self.NumeroTelefonoEmpleado} "

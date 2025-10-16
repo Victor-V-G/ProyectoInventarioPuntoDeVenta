@@ -35,15 +35,15 @@
             {% for emp in Empleados %}
             <tr>
                 <td>{{ emp.IdEmpleado }}</td>
-                <td>{{ emp.Rut }}</td>
+                <td>{{ emp.RutEmpleado }}</td>
                 <td>{{ emp.NombreEmpleado }}</td>
                 <td>{{ emp.ApellidoEmpleado }}</td>
                 <td>{{ emp.EdadEmpleado }}</td>
                 <td>{{ emp.NumeroTelefonoEmpleado }}</td>
                 <!-- Enlaces para actualizar o eliminar el empleado -->
                 <td>
-                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.IdEmpleado }}"><button>ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.IdEmpleado }}"><button>ELIMINAR</button></a>
+                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.IdEmpleado }}"><button onclick="return confirm('¿Seguro que deseas actualizar este empleado?')">ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.IdEmpleado }}"><button onclick="return confirm('¿Seguro que deseas eliminar este empleado?')">ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}

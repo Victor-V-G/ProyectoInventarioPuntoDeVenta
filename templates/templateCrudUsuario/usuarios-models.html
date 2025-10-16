@@ -35,8 +35,8 @@
                 <td>{{ usu.Password }}</td>
                 <!-- Enlaces para actualizar o eliminar el usuario -->
                 <td>
-                    <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}"><button>ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-usuarios/eliminar-usuario/{{ usu.IdUsuarios }}"><button>ELIMINAR</button></a>
+                    <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}"><button onclick="return confirm('¿Seguro que deseas actualizar este producto?')">ACTUALIZAR</button></a>
+                    <a href="/adminhome/crud-usuarios/eliminar-usuario/{{ usu.IdUsuarios }}"><button onclick="return confirm('¿Seguro que deseas eliminar este producto?')">ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}

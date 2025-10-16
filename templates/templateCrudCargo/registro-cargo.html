@@ -16,7 +16,8 @@
     <form method="POST">
         {% csrf_token %}
         {{ form.as_div }}
-        <input class="form-enviar" type="submit" value="ENVIAR">
+        <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')"/>
+        
     </form>
 
 </body>

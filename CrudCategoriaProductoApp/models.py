@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.db.models import UniqueConstraint
 # Create your models here.
 class CategoriaProducto(models.Model):
     IdCategoriaProducto = models.AutoField(primary_key=True, db_column='IdCategoriaProducto')
@@ -8,3 +8,9 @@ class CategoriaProducto(models.Model):
 
     class Meta:
         db_table = 'CategoriaProducto'
+        constraints = [
+            UniqueConstraint(fields=['IdCategoriaProducto'], name='unique_id_categoria_producto'),
+        ]
+
+    def __str__(self):
+        return f"ID: {self.IdCategoriaProducto}, Nombre: {self.NombreCategoria}, Descripcion: {self.Descripcion}"
