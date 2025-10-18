@@ -4,30 +4,6 @@ UTILIZAR:
 
 python manage.py makemigrations
 
-#despues: 
-
-python manage.py migrate --fake CrudEmpleadosApp 0001
-
-#despues: 
-
-python manage.py migrate --fake CrudProductosApp 0001
-
-#despues 
-
-python manage.py migrate --fake CrudUsuariosApp 0001
-
-#despues 
-
-python manage.py migrate --fake CrudBodegasApp 0001
-
-#despues 
-
-python manage.py migrate --fake CrudCategoriaProductoApp 0001
-
-#despues 
-
-python manage.py migrate --fake CrudCargosApp 0001
-
 #al ultimo aplicar: 
 
 python manage.py migrate

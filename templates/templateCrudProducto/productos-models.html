@@ -47,7 +47,7 @@
                 <td>{{ pro.FechaDeVencimiento }}</td>
                 <!-- Enlaces para actualizar o eliminar el producto -->
                 <td>
-                    <button type="button" onclick="regresarAdminOrHome('crud-productos/actualizar-producto/{{ pro.IdProducto }}')"  onclick="return confirm('¿Seguro que deseas actualizar este producto?')">ACTUALIZAR</button>
+                    <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar este producto?')) {regresarAdminOrHome('crud-productos/actualizar-producto/{{ pro.IdProducto }}')}">ACTUALIZAR</button>
                     <a href="/adminhome/crud-productos/eliminar-producto/{{ pro.IdProducto }}"><button  onclick="return confirm('¿Seguro que deseas eliminar este producto?')">ELIMINAR</button></a>
                 </td>
             </tr>

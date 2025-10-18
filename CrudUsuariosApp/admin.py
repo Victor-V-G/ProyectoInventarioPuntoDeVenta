@@ -9,8 +9,18 @@ from CrudUsuariosApp.models import Usuarios
 #Campos en models con AutoIncrement no se colocan en list_display
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ['IdUsuarios', 'Username', 'Password']
+    list_display = [
+        'IdUsuarios',
+        'Username',
+        'Password']
+    list_filter = [
+        'IdUsuarios',
+        'Username']
+    search_fields = [
+        'IdUsuarios',
+        'Username']
+    list_per_page = 10
 
 
 # Register your models here.
-admin.site.register(Usuarios)
+admin.site.register(Usuarios, UsuarioAdmin)

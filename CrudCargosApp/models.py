@@ -8,7 +8,7 @@ class Cargos(models.Model):
         ('Bodeguero', 'Bodeguero'),
     ]
 
-    IdCargos = models.AutoField(primary_key=True, db_column='IdCargos')
+    IdCargos = models.AutoField(primary_key=True, db_column='IdCargos', verbose_name='Id Cargo')
     TipoDeCargo = models.CharField(max_length=55, choices=TIPO_DE_CARGO, db_column='TipoDeCargo', verbose_name='Tipo de cargo')
     EstadoDelCargo = models.CharField(max_length=45, db_column='EstadoDelCargo', verbose_name='Estado del cargo')
 

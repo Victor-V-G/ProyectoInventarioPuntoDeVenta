@@ -31,7 +31,7 @@
                 <td>{{ bod.NombreCategoria }}</td>
                 <td>{{ bod.Descripcion }}</td>
                 <td>
-                    <button type="button" onclick="regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')" onclick="return confirm('¿Seguro que deseas actualizar esta Catgeoria?')">ACTUALIZAR</button>
+                    <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta Catgeoria?')) {regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')}">ACTUALIZAR</button>
                     <a href="/adminhome/crud-categoriaProducto/eliminar-categoriaProducto/{{ bod.IdCategoriaProducto }}"><button onclick="return confirm('¿Seguro que deseas eliminar esta Categoria?')">ELIMINAR</button></a>
                 </td>
             </tr>

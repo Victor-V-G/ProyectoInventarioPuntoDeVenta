@@ -14,11 +14,6 @@ from CrudProductosApp.models import Productos  # Importa el modelo Producto
 # Configuración personalizada del panel de administración para Productos
 # ========================================================================
 class ProductoAdmin(admin.ModelAdmin):
-    """
-    Permite personalizar la forma en que se muestran los registros del modelo Producto
-    en el panel de administración de Django.
-    """
-    # 'list_display' define qué columnas se mostrarán en la lista de registros en el admin
     list_display = [
         'IdProducto',
         'CodigoDeBarras', 
@@ -26,12 +21,20 @@ class ProductoAdmin(admin.ModelAdmin):
         'StockProducto', 
         'NombreProducto', 
         'MarcaProducto', 
-        'FechaDeVencimiento'
-    ]
+        'FechaDeVencimiento']
+    list_filter = [
+        "IdProducto", 
+        "CodigoDeBarras",
+        "NombreProducto"]
+    search_fields = [
+        'IdProducto',
+        'CodigoDeBarras',
+        'NombreProducto']
+    list_per_page = 10
 
 # ========================================================================
 # Registro del modelo en el panel de administración
 # ========================================================================
 # Esto permite que podamos gestionar los registros de Producto directamente
 # desde el panel de administración de Django (crear, leer, actualizar y eliminar)
-admin.site.register(Productos)
+admin.site.register(Productos, ProductoAdmin)

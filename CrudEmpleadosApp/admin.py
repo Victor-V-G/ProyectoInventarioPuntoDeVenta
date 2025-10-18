@@ -14,20 +14,27 @@ from CrudEmpleadosApp.models import Empleados  # Importa el modelo Empleados
 # Configuración personalizada del panel de administración para Empleados
 # ========================================================================
 class EmpleadoAdmin(admin.ModelAdmin):
-    """
-    Permite personalizar la forma en que se muestran los registros del modelo Empleados
-    en el panel de administración de Django.
-    """
-    # 'list_display' define qué columnas se mostrarán en la lista de registros en el admin
-    list_display = ['IdEmpleado','RutEmpleado', 'NombreEmpleado', 'ApellidoEmpleado', 'EdadEmpleado', 'NumeroTelefonoEmpleado']
-    list_filter = ('IdEmpleado',)
-    search_fields = ('Nombre', 'RutEmpleado')
-    list_per_page = 10  # paginación
-    empty_value_display = '— Sin dato —'
+    list_display = [
+        "IdEmpleado",
+        "RutEmpleado", 
+        "NombreEmpleado",
+        "ApellidoEmpleado",
+        "EdadEmpleado",
+        "NumeroTelefonoEmpleado"]
+    list_filter = [
+        "RutEmpleado", 
+        "NombreEmpleado",
+        "ApellidoEmpleado"]
+    search_fields = [
+        "IdEmpleado",
+        "RutEmpleado", 
+        "NombreEmpleado",
+        "ApellidoEmpleado"]
+    list_per_page = 10
 
 # ========================================================================
 # Registro del modelo en el panel de administración
 # ========================================================================
 # Esto permite que podamos gestionar los registros de Empleados directamente
 # desde el panel de administración de Django (crear, leer, actualizar y eliminar)
-admin.site.register(Empleados)
+admin.site.register(Empleados, EmpleadoAdmin)
