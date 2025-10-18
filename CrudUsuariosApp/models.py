@@ -35,7 +35,7 @@ class Usuarios(models.Model):
         db_column='Password',
         validators=[
             validacion_password_segura,
-            MinLengthValidator(5, message="La password debe tener al menos 5 caracteres")]
+            MinLengthValidator(5, message="La password debe tener al menos 5 caracteres")],
     )
     
     #Aqui se llama a la tabla la cual queremos insertar/mostrar datos, esto evitando lo mencionado anteriormente
