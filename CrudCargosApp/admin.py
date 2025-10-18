@@ -16,4 +16,7 @@ class CargoAdmin(admin.ModelAdmin):
         "EstadoDelCargo"]
     list_per_page = 10
 
+    class Media:
+        js = ('js/confirmarGuardados.js',)
+
 admin.site.register(Cargos, CargoAdmin)

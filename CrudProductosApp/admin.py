@@ -22,15 +22,20 @@ class ProductoAdmin(admin.ModelAdmin):
         'NombreProducto', 
         'MarcaProducto', 
         'FechaDeVencimiento']
-    list_filter = [
-        "IdProducto", 
+    list_filter = [ 
         "CodigoDeBarras",
+        'ValorProducto', 
         "NombreProducto"]
     search_fields = [
         'IdProducto',
         'CodigoDeBarras',
-        'NombreProducto']
+        'NombreProducto',
+        'MarcaProducto', ]
     list_per_page = 10
+
+
+    class Media:
+        js = ('js/confirmarGuardados.js',)
 
 # ========================================================================
 # Registro del modelo en el panel de administración

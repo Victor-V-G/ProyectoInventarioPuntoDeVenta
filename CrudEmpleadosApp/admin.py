@@ -32,6 +32,9 @@ class EmpleadoAdmin(admin.ModelAdmin):
         "ApellidoEmpleado"]
     list_per_page = 10
 
+    class Media:
+        js = ('js/confirmarGuardados.js',)
+
 # ========================================================================
 # Registro del modelo en el panel de administración
 # ========================================================================

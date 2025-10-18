@@ -14,4 +14,7 @@ class CategoriaProductoAdmin(admin.ModelAdmin):
         "NombreCategoria"]
     list_per_page = 10
 
+    class Media:
+        js = ('js/confirmarGuardados.js',)
+        
 admin.site.register(CategoriaProducto, CategoriaProductoAdmin)

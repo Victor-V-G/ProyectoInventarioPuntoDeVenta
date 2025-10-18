@@ -15,5 +15,8 @@ class BodegaAdmin(admin.ModelAdmin):
         "NombreBodega", 
         "UbicacionBodega"]
     list_per_page = 10
+    
+    class Media:
+        js = ('js/confirmarGuardados.js',)
 
 admin.site.register(Bodegas, BodegaAdmin)

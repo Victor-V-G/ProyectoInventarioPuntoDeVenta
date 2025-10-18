@@ -14,12 +14,14 @@ class UsuarioAdmin(admin.ModelAdmin):
         'Username',
         'Password']
     list_filter = [
-        'IdUsuarios',
         'Username']
     search_fields = [
         'IdUsuarios',
         'Username']
     list_per_page = 10
+
+    class Media:
+        js = ('js/confirmarGuardados.js',)
 
 
 # Register your models here.
