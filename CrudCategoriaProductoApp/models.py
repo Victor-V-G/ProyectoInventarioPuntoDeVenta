@@ -76,7 +76,7 @@ class CategoriaProducto(models.Model):
         verbose_name='Nombre de la categoria',
         validators=[
             validacion_no_caracteres_especiales,
-            MinLengthValidator(5, message="Debes ingresar minimo 5 caracteres")
+            MinLengthValidator(3, message="Debes ingresar minimo 3 caracteres")
         ]
     )
     # --------------------------------------------------------------------
@@ -104,6 +104,28 @@ class CategoriaProducto(models.Model):
     )
     # --------------------------------------------------------------------
 
+    ESTADO = [
+        ('Activo', 'Activo'),
+        ('Pausado', 'Pausado'),
+    ]
+
+    # --------------------------------------------------------------------
+    Estado = models.CharField(
+        max_length=10,
+        choices=ESTADO,
+        db_column='Estado',
+    )
+    # --------------------------------------------------------------------
+
+    Observaciones = models.TextField(
+        max_length=500,
+        db_column='Observaciones',
+        verbose_name='Observaciones',
+        validators=[
+            validacion_no_caracteres_especiales,
+            MinLengthValidator(10, message="Debes ingresar minimo 10 caracteres")
+        ]
+    )
 
     # --------------------------------------------------------------------
     # Meta información del modelo
@@ -129,4 +151,4 @@ class CategoriaProducto(models.Model):
     # o en la shell de Django. Muestra los campos principales de la categoría.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdCategoriaProducto}, Nombre: {self.NombreCategoria}, Descripcion: {self.Descripcion}"
+        return f"ID: {self.IdCategoriaProducto}, Nombre: {self.NombreCategoria}, Descripcion: {self.Descripcion}, Estado: {self.Estado}, Observaciones: {self.Observaciones}"

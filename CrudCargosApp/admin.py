@@ -6,14 +6,18 @@ class CargoAdmin(admin.ModelAdmin):
     list_display = [
         "IdCargos",
         "TipoDeCargo", 
-        "EstadoDelCargo"]
+        "EstadoDelCargo",
+        "DescripcionDelCargo",
+        "SueldoBase"]
     list_filter = [
         "TipoDeCargo", 
-        "EstadoDelCargo"]
+        "EstadoDelCargo",
+        "SueldoBase"]
     search_fields = [
         "IdCargos",
         "TipoDeCargo", 
-        "EstadoDelCargo"]
+        "EstadoDelCargo",
+        "SueldoBase"]
     list_per_page = 10
 
     class Media:

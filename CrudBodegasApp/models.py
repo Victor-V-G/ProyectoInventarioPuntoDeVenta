@@ -105,6 +105,30 @@ class Bodegas(models.Model):
     )
     # --------------------------------------------------------------------
 
+    ESTADO_BODEGA = [
+        ('Activa', 'Activa'),
+        ('Inactiva', 'Inactiva'),
+        ('En Mantenimiento', 'En Mantenimiento')
+    ]
+
+    EstadoBodega = models.CharField(
+        max_length=20,
+        choices=ESTADO_BODEGA,
+        db_column='EstadoBodega',
+        verbose_name='Estado de la bodega',
+    )
+
+
+    ObservacionesBodega = models.TextField(
+        max_length=500,
+        db_column='ObservacionesBodega',
+        verbose_name='Observaciones sobre la bodega',
+        validators=[
+            validacion_no_caracteres_especiales,
+            MinLengthValidator(10, message="Debes ingresar minimo 10 caracteres")
+        ]
+    )
+
 
     # --------------------------------------------------------------------
     # Meta información del modelo
@@ -130,4 +154,4 @@ class Bodegas(models.Model):
     # Muestra los datos más relevantes: ID, nombre y ubicación de la bodega.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdBodega}, Nombre: {self.NombreBodega}, Ubicacion: {self.UbicacionBodega}"
+        return f"ID: {self.IdBodega}, Nombre: {self.NombreBodega}, Ubicacion: {self.UbicacionBodega}, Estado de la bodega: {self.EstadoBodega}, Observaciones: {self.ObservacionesBodega}"

@@ -24,6 +24,7 @@
                 <th>ID USUARIO</th>
                 <th>Username</th>
                 <th>Password</th>
+                <th>Correo Electronico</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td scope="row">{{ usu.IdUsuarios }}</td>
                 <td>{{ usu.Username }}</td>
                 <td>{{ usu.Password }}</td>
+                <td>{{ usu.CorreoElectronico }}</td>
                 <!-- Enlaces para actualizar o eliminar el usuario -->
                 <td>
                     <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}"><button onclick="return confirm('¿Seguro que deseas actualizar este producto?')">ACTUALIZAR</button></a>

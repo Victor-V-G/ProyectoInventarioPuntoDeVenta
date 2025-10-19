@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------
 from django.db import models
 from django.db.models import UniqueConstraint
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, EmailValidator
 from django.core.exceptions import ValidationError
 import re
 
@@ -94,6 +94,28 @@ class Usuarios(models.Model):
     )
     # --------------------------------------------------------------------
 
+    def clean(self):
+        super().clean()
+        if self.Password != self.ConfirmarPassword:
+            raise ValidationError({'ConfirmarPassword': 'Las passwords ingresadas no coinciden'})
+
+    ConfirmarPassword = models.CharField(
+        max_length=45,
+        db_column='ConfirmarPassword',
+        verbose_name='Confirmar password',
+        validators=[
+            MinLengthValidator(5, message="La password debe tener al menos 5 caracteres")
+        ]
+    )
+
+    CorreoElectronico = models.EmailField(
+        max_length=100,
+        db_column='CorreoElectronico',
+        verbose_name='Correo electronico',
+        validators=[EmailValidator(message="Debe ingresar un correo valido")],
+        error_messages={'unique': 'El correo electronico ingresado ya se encuentra ocupado, Por favor, intentelo con otro nuevamente.'}
+    )
+
 
     # --------------------------------------------------------------------
     # Meta información del modelo
@@ -108,6 +130,7 @@ class Usuarios(models.Model):
         constraints = [
             UniqueConstraint(fields=['IdUsuarios'], name='unique_id_usuarios'),
             UniqueConstraint(fields=['Username'], name='unique_username'),
+            UniqueConstraint(fields=['CorreoElectronico'], name='unique_correo_electronico'),
         ]
     # --------------------------------------------------------------------
 
@@ -120,4 +143,4 @@ class Usuarios(models.Model):
     # o en la consola interactiva. Muestra los datos más importantes del usuario.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdUsuarios}, USERNAME: {self.Username}, PASSWORD: {self.Password}"
+        return f"ID: {self.IdUsuarios}, USERNAME: {self.Username}, PASSWORD: {self.Password} CORREO ELECTRONICO: {self.CorreoElectronico}"

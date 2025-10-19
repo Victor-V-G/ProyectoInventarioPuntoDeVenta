@@ -6,12 +6,16 @@ class CategoriaProductoAdmin(admin.ModelAdmin):
     list_display = [
         "IdCategoriaProducto",
         "NombreCategoria", 
-        "Descripcion"]
+        "Descripcion",
+        "Estado",
+        "Observaciones"]
     list_filter = [
-        "NombreCategoria"]
+        "NombreCategoria",
+        "Estado"]
     search_fields = [
         "IdCategoriaProducto",
-        "NombreCategoria"]
+        "NombreCategoria",
+        "Estado"]
     list_per_page = 10
 
     class Media:

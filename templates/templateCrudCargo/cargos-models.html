@@ -20,6 +20,8 @@
                 <th>ID CARGO</th>
                 <th>TIPO DE CARGO</th>
                 <th>ESTADO DEL CARGO</th>
+                <th>DESCRIPCION DEL CARGO</th>
+                <th>SUELDO BASE</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -29,6 +31,8 @@
                 <td>{{ cag.IdCargos}}</td>
                 <td>{{ cag.TipoDeCargo }}</td>
                 <td>{{ cag.EstadoDelCargo }}</td>
+                <td>{{ cag.DescripcionDelCargo }}</td>
+                <td>{{ cag.SueldoBase }}</td>
                 <td>
                     <a href="/adminhome/crud-cargos/actualizar-cargo/{{ cag.IdCargos }}"><button onclick="return confirm('¿Seguro que deseas actualizar este cargo?')">ACTUALIZAR</button></a>
                     <a href="/adminhome/crud-cargos/eliminar-cargo/{{ cag.IdCargos }}"><button onclick="return confirm('¿Seguro que deseas eliminar este cargo?')">ELIMINAR</button></a>

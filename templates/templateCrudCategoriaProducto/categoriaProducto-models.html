@@ -21,6 +21,8 @@
                 <th>ID CATEGORIA PRODUCTO</th>
                 <th>Nombre Categoria</th>
                 <th>Descripcion Categoria</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -30,6 +32,8 @@
                 <td>{{ bod.IdCategoriaProducto}}</td>
                 <td>{{ bod.NombreCategoria }}</td>
                 <td>{{ bod.Descripcion }}</td>
+                <td>{{ bod.Estado }}</td>
+                <td>{{ bod.Observaciones }}</td>
                 <td>
                     <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta Catgeoria?')) {regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')}">ACTUALIZAR</button>
                     <a href="/adminhome/crud-categoriaProducto/eliminar-categoriaProducto/{{ bod.IdCategoriaProducto }}"><button onclick="return confirm('¿Seguro que deseas eliminar esta Categoria?')">ELIMINAR</button></a>

@@ -6,14 +6,18 @@ class BodegaAdmin(admin.ModelAdmin):
     list_display = [
         "IdBodega",
         "NombreBodega", 
-        "UbicacionBodega"]
+        "UbicacionBodega",
+        "EstadoBodega",
+        "ObservacionesBodega"]
     list_filter = [
         "NombreBodega", 
-        "UbicacionBodega"]
+        "UbicacionBodega",
+        "EstadoBodega"]
     search_fields = [
         "IdBodega",
         "NombreBodega", 
-        "UbicacionBodega"]
+        "UbicacionBodega",
+        "EstadoBodega"]
     list_per_page = 10
     
     class Media:

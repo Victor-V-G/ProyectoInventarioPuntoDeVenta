@@ -9,52 +9,74 @@ class UsuarioRegistrationForm(forms.ModelForm):
 
         labels = {
             'Username': 'Nombre de usuario',
-            'Password': 'Contraseña'
+            'Password': 'Contraseña',
+            'ConfirmarPassword': 'Confirmar contraseña',
+            'CorreoElectronico': 'Correo electrónico'
         }
+
         help_texts = {
-            'Username': 'Asegúrese de usar letras y numeros',
-            'Password': 'Debe usar minimo 1 letra y 1 numero'
+            'Username': 'Ingrese su nombre de usuario.',
+            'Password': 'La contraseña debe contener al menos 5 caracteres, debe contar con al menos 1 letra, 1 número',
+            'ConfirmarPassword': 'Repita la misma contraseña para confirmar.',
+            'CorreoElectronico': 'Ingrese un correo electrónico válido'
         }
+
         error_messages = {
             'Username': {
-                'required': 'Por favor introduzca el nombre de usuario',
-                'max_length': 'El nombre de usuario no puede exceder el limite permitido',
+                'required': 'Por favor introduzca el nombre de usuario.',
+                'max_length': 'El nombre de usuario no puede exceder el límite permitido.',
+                'unique': 'Este nombre de usuario ya se encuentra registrado.',
             },
             'Password': {
-                'required': 'Por favor introduzca una contraseña',
+                'required': 'Por favor introduzca una contraseña.',
+                'min_length': 'La contraseña debe tener al menos 5 caracteres.'
+            },
+            'ConfirmarPassword': {
+                'required': 'Debe confirmar su contraseña.',
+                'min_length': 'La contraseña debe tener al menos 5 caracteres.'
+            },
+            'CorreoElectronico': {
+                'required': 'Por favor introduzca su correo electrónico.',
+                'invalid': 'Ingrese un correo electrónico válido.',
+                'unique': 'El correo electrónico ingresado ya está en uso.'
             }
         }
+
         widgets = {
             'Username': forms.TextInput(attrs={
-                'placeholder': 'Ej: Pablo123'
+                'placeholder': 'Ej: Pablo123',
             }),
-            'Password': forms.TextInput(attrs={
-                'placeholder': 'Ej: Pablo_68'
+            'Password': forms.PasswordInput(attrs={
+                'placeholder': 'Ej: Pablo_68',
+            }),
+            'ConfirmarPassword': forms.PasswordInput(attrs={
+                'placeholder': 'Repita su contraseña',
+            }),
+            'CorreoElectronico': forms.EmailInput(attrs={
+                'placeholder': 'Ej: usuario@gmail.com',
             })
         }
 
 
     def clean_Username(self):
-        inputUsername = self.cleaned_data['Username'].strip().upper()  # Obtiene valor y elimina espacios al inicio y fin
-        caracteres = r"^[a-zA-Z]{5,}$"
-        
-        query = Usuarios.objects.filter(Username=inputUsername)
+        inputUsername = self.cleaned_data['Username']
+        caracteres = r'^[A-Za-z0-9_-]{5,}$'
+        if not re.match(caracteres, inputUsername):
+            raise forms.ValidationError("El nombre de usuario debe tener al menos 5 caracteres y solo puede contener letras, números, guiones (-) o guiones bajos (_), sin espacios.")
+        return inputUsername
 
-        if not re.match(caracteres, inputUsername):  # Valida la longitud máxima
-            raise forms.ValidationError("Ingrese un Usuario sin caracteres especiales de mas de 4 letras.")  # Mensaje de error
-        if self.instance.pk:
-            query = query.exclude(pk=self.instance.pk)
-        if query.exists():
-            raise forms.ValidationError("Este Usuario ya está registrado.")
-        return inputUsername  # Devuelve el valor limpio si es válido
-    
+
+    def clean_Username(self):
+        inputUsername = self.cleaned_data['Username']
+        if inputUsername.isdigit():
+            raise forms.ValidationError("El nombre de usuario no puede estar compuesto solo por números.")
+        return inputUsername
 
 
     def clean_Password(self):
-        inputPassword = self.cleaned_data['Password'].strip()  # Obtiene valor y elimina espacios al inicio y fin
-        caracteres = r'^(?=(?:[^A-Za-z]*[A-Za-z]){8,})(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{}|;:\'",.<>/?]).*$'
-
-        if not re.match(caracteres, inputPassword):  # Valida la longitud máxima
-            raise forms.ValidationError("Ingrese una contraseña valido con mas de 8 letras, 1 caracter especial y un numero.")  # Mensaje de error
-        return inputPassword  # Devuelve el valor limpio si es válido
+        inputPassword = self.cleaned_data['Password'].strip()  # Quita espacios
+        caracteres = r'^(?=.*[A-Za-z])(?=.*\d).{5,}$'
+        if not re.match(caracteres, inputPassword):
+            raise forms.ValidationError("La contraseña debe tener al menos 5 caracteres, incluyendo al menos una letra y un número.")
+        return inputPassword
     

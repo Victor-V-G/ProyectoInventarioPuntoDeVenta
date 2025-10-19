@@ -12,12 +12,15 @@ class UsuarioAdmin(admin.ModelAdmin):
     list_display = [
         'IdUsuarios',
         'Username',
-        'Password']
+        'Password',
+        'CorreoElectronico']
     list_filter = [
-        'Username']
+        'Username',
+        'CorreoElectronico']
     search_fields = [
         'IdUsuarios',
-        'Username']
+        'Username',
+        'CorreoElectronico']
     list_per_page = 10
 
     class Media:

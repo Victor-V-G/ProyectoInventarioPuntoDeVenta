@@ -18,6 +18,8 @@ def categoriaProductoRegistracionView(request):
             print("FORM VALIDO")
             print("NOMBRE: ", form.cleaned_data['NombreCategoria'])
             print("DESCRIPCION: ", form.cleaned_data['Descripcion'])
+            print("ESTADO: ", form.cleaned_data['Estado'])
+            print("OBSERVACIONES: ", form.cleaned_data['Observaciones'])
 
             form.save()
     

@@ -19,8 +19,10 @@
         <thead>
             <tr>
                 <th>ID BODEGA</th>
-                <th>Nombre Bodega</th>
-                <th>Ubicacion Bodega</th>
+                <th>Nombre bodega</th>
+                <th>Ubicacion bodega</th>
+                <th>Estado de la bodega</th>
+                <th>Observaciones</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -30,6 +32,8 @@
                 <td>{{ bod.IdBodega }}</td>
                 <td>{{ bod.NombreBodega }}</td>
                 <td>{{ bod.UbicacionBodega }}</td>
+                <td>{{ bod.EstadoBodega }}</td>
+                <td>{{ bod.ObservacionesBodega }}</td>
                 <td>
                     <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta bodega?')) {regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')}">ACTUALIZAR</button>
                     <a href="/adminhome/crud-bodegas/eliminar-bodega/{{ bod.IdBodega }}"><button onclick="return confirm('¿Seguro que deseas eliminar esta bodega?')">ELIMINAR</button></a>

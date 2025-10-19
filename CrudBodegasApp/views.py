@@ -18,7 +18,8 @@ def bodegasRegistracionView(request):
             print("FORM VALIDO")
             print("NOMBRE: ", form.cleaned_data['NombreBodega'])
             print("UBICACION: ", form.cleaned_data['UbicacionBodega'])
-
+            print("ESTADO DE LA BODEGA: ", form.cleaned_data['EstadoBodega'])
+            print("OBSERVACIONES: ", form.cleaned_data['ObservacionesBodega'])
             form.save()
 
     data = {

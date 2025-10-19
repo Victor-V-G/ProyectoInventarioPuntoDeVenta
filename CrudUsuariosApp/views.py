@@ -19,7 +19,9 @@ def usuariosRegistrationView(request):
             print("FORM ES VALIDO")
             print("USERNAME: ", form.cleaned_data['Username'])
             print("PASSWORD: ", form.cleaned_data['Password'])
-
+            print("CONFIRMAR PASSWORD: ", form.cleaned_data['ConfirmarPassword'])
+            print("CORREO ELECTRONICO: ", form.cleaned_data['CorreoElectronico'])
+            
             form.save()
             return redirect('/adminhome/crud-usuarios')
         

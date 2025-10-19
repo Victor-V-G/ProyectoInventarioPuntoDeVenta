@@ -7,7 +7,7 @@
 # ------------------------------------------------------------------------
 from django.db import models
 from django.db.models import UniqueConstraint
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator
 
 
 # ========================================================================
@@ -20,22 +20,7 @@ from django.core.validators import MinLengthValidator
 # ========================================================================
 class Cargos(models.Model):
 
-    # --------------------------------------------------------------------
-    # OPCIONES DISPONIBLES: Tipo de Cargo
-    # --------------------------------------------------------------------
-    # Se define una lista de tuplas con las opciones posibles para el campo TipoDeCargo.
-    # Este patrón se usa con el parámetro 'choices' para restringir los valores válidos.
-    # Ejemplo:
-    #   - 'Gerente'
-    #   - 'Bodeguero'
-    # --------------------------------------------------------------------
-    TIPO_DE_CARGO = [
-        ('Gerente', 'Gerente'),
-        ('Bodeguero', 'Bodeguero'),
-    ]
-    # --------------------------------------------------------------------
-
-
+    
     # --------------------------------------------------------------------
     # ID del cargo
     # --------------------------------------------------------------------
@@ -51,6 +36,20 @@ class Cargos(models.Model):
     )
     # --------------------------------------------------------------------
 
+    # --------------------------------------------------------------------
+    # OPCIONES DISPONIBLES: Tipo de Cargo
+    # --------------------------------------------------------------------
+    # Se define una lista de tuplas con las opciones posibles para el campo TipoDeCargo.
+    # Este patrón se usa con el parámetro 'choices' para restringir los valores válidos.
+    # Ejemplo:
+    #   - 'Gerente'
+    #   - 'Bodeguero'
+    # --------------------------------------------------------------------
+    TIPO_DE_CARGO = [
+        ('Gerente', 'Gerente'),
+        ('Bodeguero', 'Bodeguero'),
+    ]
+    # --------------------------------------------------------------------
 
     # --------------------------------------------------------------------
     # Tipo de cargo
@@ -69,6 +68,10 @@ class Cargos(models.Model):
     )
     # --------------------------------------------------------------------
 
+    ESTADOS = [
+        ('Activo', 'Activo'),
+        ('Inactivo', 'Inactivo'),
+    ]
 
     # --------------------------------------------------------------------
     # Estado del cargo
@@ -81,13 +84,27 @@ class Cargos(models.Model):
     #   - MinLengthValidator: asegura que el texto tenga al menos 4 caracteres.
     # --------------------------------------------------------------------
     EstadoDelCargo = models.CharField(
-        max_length=20,
+        max_length=10,
+        choices=ESTADOS,
         db_column='EstadoDelCargo',
-        verbose_name='Estado del cargo',
-        validators=[MinLengthValidator(4, message=("Debes ingresar al menos 4 caracteres"))]
+        verbose_name='Estado del cargo'
     )
     # --------------------------------------------------------------------
 
+
+    DescripcionDelCargo = models.TextField(
+        max_length=500,
+        db_column='DescripcionDelCargo',
+        verbose_name='Descripcion del cargo',
+        validators=[MinLengthValidator(10, message='Debe ingresar al menos 10 caracteres')]
+    )
+
+
+    SueldoBase = models.IntegerField(
+        db_column='SueldoBase',
+        verbose_name='Sueldo base',
+        validators=[MinValueValidator(150000, message='Sueldo base minimo es de $150.000')]
+    )
 
     # --------------------------------------------------------------------
     # Meta información del modelo
@@ -113,4 +130,4 @@ class Cargos(models.Model):
     # y para depuración, mostrando los datos principales del cargo.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdCargos}, Tipo de Cargo: {self.TipoDeCargo}, Estado del Cargo: {self.EstadoDelCargo}"
+        return f"ID: {self.IdCargos}, Tipo de Cargo: {self.TipoDeCargo}, Estado del Cargo: {self.EstadoDelCargo}, Descripcion del cargo: {self.DescripcionDelCargo}, Sueldo base: {self.SueldoBase}"

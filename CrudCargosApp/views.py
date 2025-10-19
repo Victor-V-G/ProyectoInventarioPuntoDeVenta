@@ -18,6 +18,8 @@ def cargosRegistracionView(request):
             print("FORM VALIDO")
             print("TIPO DE CARGO: ", form.cleaned_data['TipoDeCargo'])
             print("ESTADO DEL CARGO: ", form.cleaned_data['EstadoDelCargo'])
+            print("DESCRIPCION DEL CARGO: ", form.cleaned_data['DescripcionDelCargo'])
+            print("SUELDO BASE: ", form.cleaned_data['SueldoBase'])
 
             form.save()
             return redirect('/adminhome/crud-cargos/')
