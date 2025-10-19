@@ -7,7 +7,34 @@ class BodegaRegistracionForm(forms.ModelForm):
     class Meta:
         model = Bodegas
         fields = '__all__'
+        labels = {
+            'NombreBodega': 'Nombre de la bodega',
+            'UbicacionBodega': 'Ubicacion de la bodega',
+        }
+        help_texts = {
+            'NombreBodega': 'Ingrese el nombre de la bodega',
+            'UbicacionBodega': 'Indique la ubicacion de la bodega',
+        }
+        error_messages = {
+            'NombreBodega': {
+                'required': 'Por favor ingrese un nombre a la bodega',
+            },
+            'UbicacionBodega': {
+                'required': 'Por favor ingrese la ubicacion de la bodega',
+            },
+        }
+        widgets = {
+            'NombreBodega': forms.TextInput(attrs={
+                'placeholder': 'Ej: Bodega norte'
+            }),
+            'UbicacionBodega': forms.TextInput(attrs={
+                'placeholder': 'Ej: Primer piso'
+            }),
+        }
 
+
+
+        
     def clean_NombreBodega(self):
         inputNombreBodega = self.cleaned_data['NombreBodega'].strip().upper().title()  # Obtiene valor y elimina espacios al inicio y fin
         caracteres = r"^(?:\d+|[A-ZÁÉÍÓÚÑa-záéíóúñ]{2,})(?: (?:\d+|[A-ZÁÉÍÓÚÑa-záéíóúñ]{2,}))*$"

@@ -13,24 +13,82 @@ from datetime import date
 # ========================================================================
 
 class ProductoRegistrationForm(forms.ModelForm):
-    FechaDeVencimiento = forms.DateField(
-        label='Fecha de Vencimiento',
-        input_formats=['%d-%m-%Y'],
-        widget=forms.DateInput(
-            format='%d-%m-%Y',  # <-- Esto es clave
-            attrs={'placeholder': 'DD-MM-YYYY'}
-        ),
-        error_messages={'invalid': 'Ingrese una fecha válida en formato DD-MM-YYYY.'}
-    )
 
-    """
-    Formulario para registrar o actualizar productos.
-    Hereda de forms.ModelForm, lo que permite mapear los campos del modelo automáticamente.
-    """
+    # Definimos aquí el campo con su formato personalizado (respetando DD-MM-YYYY)
+    FechaDeVencimiento = forms.DateField(
+        input_formats=['%d-%m-%Y'],
+        label='Fecha de vencimiento',
+        help_text='Indique la fecha de vencimiento mencionada en el producto (DD-MM-YYYY).',
+        error_messages={
+            'required': 'Por favor introduzca la fecha de vencimiento del producto',
+            'invalid': 'Ingrese una fecha válida en formato DD-MM-YYYY.'
+        },
+        widget=forms.DateInput(
+            format='%d-%m-%Y',
+            attrs={'placeholder': 'DD-MM-YYYY', 'type': 'text'}
+        )
+    )
 
     class Meta:
         model = Productos  # Modelo en el que se basa el formulario
         fields = '__all__'  # Incluye todos los campos del modelo en el formulario
+        
+        labels = {
+            'CodigoDeBarras': 'Codigo de barras',
+            'ValorProducto': 'Valor',
+            'StockProducto': 'Stock',
+            'NombreProducto': 'Nombre del producto',
+            'MarcaProducto': 'Marca del producto',
+        }
+        help_texts = {
+            'CodigoDeBarras': 'Indique el codigo de barras del producto a registrar',
+            'ValorProducto': 'El valor aceptado es a partir de $1000',
+            'StockProducto': 'No esta permitido registrar el producto sin stock',
+            'NombreProducto': 'Ingrese el nombre tal cual muestra el producto',
+            'MarcaProducto': 'Indique la marca la cual pertenece el producto',
+        }
+        error_messages = {
+            'CodigoDeBarras': {
+                'required': 'Por favor introduzca el codigo de barras',
+                'unique': 'Este codigo de barras ya esta registrado',
+                'invalid': 'Ingrese solamente numeros y sin espacios',
+            },
+            'ValorProducto': {
+                'required': 'Por favor introduzca el valor del producto',
+                'invalid': 'Ingrese un valor valido',
+            },
+            'StockProducto': {
+                'required': 'Por favor introduzca el stock del producto',
+                'invalid': 'Ingrese un stock valido',
+            },
+            'NombreProducto': {
+                'required': 'Por favor introduzca el nombre del producto',
+            },
+            'MarcaProducto': {
+                'required': 'Por favor introduzca la marca del producto',
+            },
+        }
+        widgets = {
+            'CodigoDeBarras': forms.TextInput(attrs={
+                'placeholder': 'Ej: 7802900000328'
+            }),
+            'ValorProducto': forms.NumberInput(attrs={
+                'placeholder': 'Ej: $1500'
+            }),
+            'StockProducto': forms.NumberInput(attrs={
+                'placeholder': 'Ej: 5 (unidades)'
+            }),
+            'NombreProducto': forms.TextInput(attrs={
+                'placeholder': 'Ej: Papas fritas'
+            }),
+            'MarcaProducto': forms.TextInput(attrs={
+                'placeholder': 'Ej: Fruna'
+            }),
+        }
+    
+   
+
+
 
     def clean_CodigoDeBarras(self):
         inputCodigoDeBarras = self.cleaned_data['CodigoDeBarras']

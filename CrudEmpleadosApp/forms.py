@@ -12,6 +12,7 @@ import re
 # ========================================================================
 
 class EmpleadoRegistrationForm(forms.ModelForm):
+
     """
     Formulario para registrar o actualizar empleados.
     Hereda de forms.ModelForm, lo que permite mapear los campos del modelo automáticamente.
@@ -19,6 +20,65 @@ class EmpleadoRegistrationForm(forms.ModelForm):
     class Meta:
         model = Empleados  # Modelo en el que se basa el formulario
         fields = '__all__'  # Incluye todos los campos del modelo en el formulario
+
+        labels = {
+            'RutEmpleado': 'Rut del empleado',
+            'NombreEmpleado': 'Nombre',
+            'ApellidoEmpleado': 'Apellido',
+            'EdadEmpleado': 'Edad',
+            'NumeroTelefonoEmpleado': 'Numero telefonico',
+        }
+        help_texts = {
+            'RutEmpleado': 'Indique el rut del empleado a registrar',
+            'NombreEmpleado': 'Indique el nombre del empleado',
+            'ApellidoEmpleado': 'Indique el apellido del empleado',
+            'EdadEmpleado': 'Ingrese la edad del empleado',
+            'NumeroTelefonoEmpleado': 'Ingrese el numero telefonico del empleado',
+        }
+        error_messages = {
+            'RutEmpleado': {
+                'required': 'Por favor introduzca el rut',
+                'unique': 'Este rut ya esta registrado',
+                'invalid': 'Ingrese un rut valido (01234567-k) con guion y sin puntos.',
+            },
+            'NombreEmpleado': {
+                'required': 'Por favor introduzca el nombre del empleado',
+            },
+            'ApellidoEmpleado': {
+                'required': 'Por favor introduzca el apellido del empleado',
+            },
+            'EdadEmpleado': {
+                'required': 'Por favor introduzca la edad del empleado',
+                'invalid': 'Ingrese una edad valida',
+            },
+            'NumeroTelefonoEmpleado': {
+                'required': 'Por favor introduzca un numero telefonico',
+                'invalid': 'Ingrese un numero telefonico valido (912345678)',
+            },
+        }
+        widgets = {
+            'RutEmpleado': forms.TextInput(attrs={
+                'placeholder': 'Ej: (01234567-k)'
+            }),
+            'NombreEmpleado': forms.TextInput(attrs={
+                'placeholder': 'Ej: Pablo'
+            }),
+            'ApellidoEmpleado': forms.TextInput(attrs={
+                'placeholder': 'Ej: Campusano Sotomayor'
+            }),
+            'EdadEmpleado': forms.NumberInput(attrs={
+                'placeholder': 'Ej: 20 (años)'
+            }),
+            'NumeroTelefonoEmpleado': forms.NumberInput(attrs={
+                'placeholder': 'Ej: (912345678)'
+            }),
+        }
+
+
+
+
+
+
 
     # ====================================================================
     # Validaciones personalizadas

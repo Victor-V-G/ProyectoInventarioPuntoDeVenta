@@ -147,7 +147,6 @@ class Empleados(models.Model):
     #  - Sea menor o igual a 99 años.
     # --------------------------------------------------------------------
     EdadEmpleado = models.IntegerField(
-        max_length=2,
         db_column='EdadEmpleado', 
         verbose_name="Edad",
         validators=[
@@ -193,7 +192,6 @@ class Empleados(models.Model):
     # validators: aplica la función anterior para validar el formato.
     # --------------------------------------------------------------------
     NumeroTelefonoEmpleado = models.IntegerField(
-        max_length=9,
         db_column='NumeroTelefonoEmpleado', 
         verbose_name="Telefono (912345678)",
         validators=[validacion_largo_y_solo_numeros]

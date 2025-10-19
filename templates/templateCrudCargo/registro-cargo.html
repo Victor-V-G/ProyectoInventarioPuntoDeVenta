@@ -13,7 +13,7 @@
         <a href="/adminhome/crud-cargos"><button class="button-header" type="button">VOLVER</button></a>   
     </header>
     
-    <form method="POST">
+    <form method="POST" novalidate>
         {% csrf_token %}
         {{ form.as_div }}
         <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')"/>
