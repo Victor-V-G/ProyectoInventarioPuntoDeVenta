@@ -1,23 +1,116 @@
+# ------------------------------------------------------------------------
+# Importación de módulos y clases necesarias para el modelo
+# ------------------------------------------------------------------------
+# models: Permite definir clases que representan tablas en la base de datos.
+# UniqueConstraint: Se utiliza para establecer restricciones de unicidad a nivel de tabla.
+# MinLengthValidator: Valida que el texto cumpla una longitud mínima.
+# ------------------------------------------------------------------------
 from django.db import models
 from django.db.models import UniqueConstraint
-# Create your models here.
+from django.core.validators import MinLengthValidator
+
+
+# ========================================================================
+# Modelo: Cargos
+# ========================================================================
+# Este modelo representa la tabla 'Cargos' en la base de datos.
+# Cada atributo de la clase se mapea directamente a una columna de dicha tabla.
+# El uso de db_column asegura que los nombres de las columnas coincidan exactamente
+# con los de la base de datos, evitando que Django cree nombres por defecto.
+# ========================================================================
 class Cargos(models.Model):
 
+    # --------------------------------------------------------------------
+    # OPCIONES DISPONIBLES: Tipo de Cargo
+    # --------------------------------------------------------------------
+    # Se define una lista de tuplas con las opciones posibles para el campo TipoDeCargo.
+    # Este patrón se usa con el parámetro 'choices' para restringir los valores válidos.
+    # Ejemplo:
+    #   - 'Gerente'
+    #   - 'Bodeguero'
+    # --------------------------------------------------------------------
     TIPO_DE_CARGO = [
         ('Gerente', 'Gerente'),
         ('Bodeguero', 'Bodeguero'),
     ]
+    # --------------------------------------------------------------------
 
-    IdCargos = models.AutoField(primary_key=True, db_column='IdCargos', verbose_name='Id Cargo')
-    TipoDeCargo = models.CharField(max_length=55, choices=TIPO_DE_CARGO, db_column='TipoDeCargo', verbose_name='Tipo de cargo')
-    EstadoDelCargo = models.CharField(max_length=45, db_column='EstadoDelCargo', verbose_name='Estado del cargo')
 
+    # --------------------------------------------------------------------
+    # ID del cargo
+    # --------------------------------------------------------------------
+    # AutoField: crea un campo autoincremental único por cada registro.
+    # primary_key=True: lo define como la clave primaria de la tabla.
+    # db_column: indica el nombre exacto del campo en la base de datos.
+    # verbose_name: etiqueta legible que se muestra en el panel de administración.
+    # --------------------------------------------------------------------
+    IdCargos = models.AutoField(
+        primary_key=True,
+        db_column='IdCargos',
+        verbose_name='Id Cargo'
+    )
+    # --------------------------------------------------------------------
+
+
+    # --------------------------------------------------------------------
+    # Tipo de cargo
+    # --------------------------------------------------------------------
+    # CharField: almacena el tipo de cargo en formato de texto.
+    # max_length: limita el número máximo de caracteres (10).
+    # choices: define un conjunto cerrado de valores válidos (TIPO_DE_CARGO).
+    # db_column: nombre de la columna en la base de datos.
+    # verbose_name: nombre descriptivo mostrado en la interfaz del admin.
+    # --------------------------------------------------------------------
+    TipoDeCargo = models.CharField(
+        max_length=10,
+        choices=TIPO_DE_CARGO,
+        db_column='TipoDeCargo',
+        verbose_name='Tipo de cargo'
+    )
+    # --------------------------------------------------------------------
+
+
+    # --------------------------------------------------------------------
+    # Estado del cargo
+    # --------------------------------------------------------------------
+    # CharField: almacena el estado actual del cargo (por ejemplo: "Activo", "Inactivo").
+    # max_length: longitud máxima de 20 caracteres.
+    # db_column: nombre real de la columna en la base de datos.
+    # verbose_name: etiqueta visible en formularios y el panel administrativo.
+    # validators:
+    #   - MinLengthValidator: asegura que el texto tenga al menos 4 caracteres.
+    # --------------------------------------------------------------------
+    EstadoDelCargo = models.CharField(
+        max_length=20,
+        db_column='EstadoDelCargo',
+        verbose_name='Estado del cargo',
+        validators=[MinLengthValidator(4, message=("Debes ingresar al menos 4 caracteres"))]
+    )
+    # --------------------------------------------------------------------
+
+
+    # --------------------------------------------------------------------
+    # Meta información del modelo
+    # --------------------------------------------------------------------
+    # Define configuraciones adicionales de la clase:
+    #   - db_table: nombre exacto de la tabla que Django debe usar.
+    #   - constraints: define restricciones de unicidad a nivel de tabla.
+    # En este caso, asegura que el IdCargos no se repita en la tabla.
+    # --------------------------------------------------------------------
     class Meta:
         db_table = 'Cargos'
         constraints = [
             UniqueConstraint(fields=['IdCargos'], name='unique_id_cargos'),
         ]
+    # --------------------------------------------------------------------
 
 
+    # --------------------------------------------------------------------
+    # MÉTODO __STR__ IMPLEMENTADO
+    # --------------------------------------------------------------------
+    # Este método devuelve una representación legible del objeto.
+    # Es útil para mostrar la información en el panel de administración
+    # y para depuración, mostrando los datos principales del cargo.
+    # --------------------------------------------------------------------
     def __str__(self):
         return f"ID: {self.IdCargos}, Tipo de Cargo: {self.TipoDeCargo}, Estado del Cargo: {self.EstadoDelCargo}"
