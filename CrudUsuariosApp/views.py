@@ -42,8 +42,11 @@ def actualizarUsuario(request, IdUsuarios):
         form = forms.UsuarioRegistrationForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
+            messages.success(request, "Usuario actualizado correctamente")
             return redirect('/adminhome/crud-usuarios/')
-        
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
+            
     data = {'form': form}
     return render(request, 'templateCrudUsuario/registro-usuario.html', data)
 

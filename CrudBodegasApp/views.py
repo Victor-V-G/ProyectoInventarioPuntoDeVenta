@@ -43,6 +43,9 @@ def actualizarBodega(request, IdBodega):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Producto actualizado correctamente")
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
 
     data = {
         'form': form,

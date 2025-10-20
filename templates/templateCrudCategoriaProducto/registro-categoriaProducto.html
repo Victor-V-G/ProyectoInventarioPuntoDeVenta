@@ -1,6 +1,15 @@
 {% extends 'base-form.html' %}
 
     {% block title %}Registro de categorias{% endblock %}
+
+    {% block breadcrumb %}
+        <li>
+            <a onclick="crudVolver()">home > </a>
+            <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a>
+            <a>Formulario categoria</a>
+        </li>
+    {% endblock %}
+
     <!-- Título de la página -->
     {% block header_title %}
         <h1 class="header-title">REGISTRO DE CATEGORIAS</h1>

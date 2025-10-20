@@ -3,6 +3,14 @@
     <!-- Título de la página -->
     {% block title %}Registro de usuarios{% endblock %}
 
+    {% block breadcrumb %}
+        <li>
+            <a href="/adminhome/">Admin home > </a>
+            <a href="/adminhome/crud-usuarios">Crud usuarios > </a>
+            <a>Formulario usuario</a>
+        </li>
+    {% endblock %}
+
     {% block header_title %}
         <h1 class="header-title">REGISTRO DE USUARIO</h1>
         <!-- Botón para volver al listado de productos -->

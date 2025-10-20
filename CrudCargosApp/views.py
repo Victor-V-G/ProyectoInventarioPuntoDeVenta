@@ -42,7 +42,10 @@ def actualizarCargo(request, IdCargos):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Cargo actualizado correctamente")
             return redirect('/adminhome/crud-cargos/')
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
     
     data = {'form': form}
     return render(request, 'templateCrudCargo/registro-cargo.html', data)

@@ -13,18 +13,21 @@
 html {
     font-family: 'General Sans', sans-serif;
     background-color: #D1D5DB;
-    display: flex;
     width: 100%;
-    height: 100%;
+    min-height: 100vh; /* Permite crecer con el contenido */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto; /* Habilita scroll */
 }
 
 body {
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Ya no centra verticalmente */
     padding: 20px;
 }
 
@@ -147,4 +150,63 @@ input:focus {
 input:invalid:focus {
     border-color: #e53e3e;
     box-shadow: 0 0 6px rgba(229, 62, 62, 0.3);
+}
+
+
+/* ========================================= */
+/* ESTILO GLOBAL PARA BREADCRUMBS Y MENSAJES */
+/* ========================================= */
+
+/* Breadcrumbs (nav > ol > li > a) */
+nav {
+    width: 55%;
+    margin-bottom: 15px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1f2937;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+}
+
+nav ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+nav li {
+    display: inline;
+}
+
+nav a {
+    text-decoration: none;
+    color: #374151;
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    color: #1e40af;
+    text-decoration: underline;
+}
+
+/* Mensajes de feedback */
+section {
+    width: 55%;
+    margin: 10px auto 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0f2fe;
+    border-left: 6px solid #2563eb;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+section message {
+    font-weight: 600;
+    font-size: 17px;
+    text-align: center;
 }

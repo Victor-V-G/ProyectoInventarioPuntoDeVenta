@@ -1,6 +1,16 @@
 {% extends 'base-crud.html' %}
 
 {% block title %}Detalle de Producto{% endblock %}
+
+{% block breadcrumb %}
+    <li>
+        <a onclick="crudVolver()">home > </a>
+        <a onclick="regresarCrudProducto()">Crud producto > </a>
+        <a>Detalle producto</a>
+    </li>
+{% endblock %}
+
+
 <!-- Título de la página -->
 {% block header_title %}
     <h1 class="header-title">DETALLES PRODUCTO</h1>

@@ -3,6 +3,14 @@
     <!-- Título de la página -->
     {% block title %}Registro de empleados{% endblock %}
 
+    {% block breadcrumb %}
+        <li>
+            <a href="/adminhome/">Admin home > </a>
+            <a href="/adminhome/crud-empleado">Crud empleado > </a>
+            <a>Formulario empleado</a>
+        </li>
+    {% endblock %}
+
     {% block header_title %}
         <h1 class="header-title">REGISTRO DE EMPLEADOS</h1>
          <!-- Botón para volver al listado de empleados -->

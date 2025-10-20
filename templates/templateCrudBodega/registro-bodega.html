@@ -1,6 +1,15 @@
 {% extends 'base-form.html' %}
 
     {% block title %}Registro de Bodega{% endblock %}
+
+    {% block breadcrumb %}
+        <li>
+            <a onclick="crudVolver()">home > </a>
+            <a onclick="regresarCrudBodega()">Crud bodegas > </a>
+            <a>Formulario bodega</a>
+        </li>
+    {% endblock %}
+
     <!-- Título de la página -->
     {% block header_title %}
         <h1 class="header-title">REGISTRO DE BODEGAS</h1>

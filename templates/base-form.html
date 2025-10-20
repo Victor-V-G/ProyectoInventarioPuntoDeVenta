@@ -10,6 +10,13 @@
 </head>
 <body>
     
+    <nav>
+        <ol>
+            {% block breadcrumb %}{% endblock %}
+        </ol>
+    </nav>
+    
+    
     <!-- Mensajes de feedback -->
     {% if messages %}
         <section class="messages">

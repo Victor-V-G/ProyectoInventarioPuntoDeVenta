@@ -134,3 +134,62 @@ button:hover {
     font-weight: bold;
     font-size: 10px;
 }
+
+/* ========================================= */
+/* ESTILO GLOBAL PARA BREADCRUMBS Y MENSAJES */
+/* ========================================= */
+
+/* Breadcrumbs (nav > ol > li > a) */
+nav {
+    width: 87%;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1f2937;
+    background-color: transparent;
+    display: flex;
+    justify-content: flex-start;
+}
+
+nav ol {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+nav li {
+    display: inline;
+}
+
+nav a {
+    text-decoration: none;
+    color: #374151;
+    transition: 0.2s ease;
+}
+
+nav a:hover {
+    color: #1e40af;
+    text-decoration: underline;
+}
+
+/* Mensajes de feedback */
+section {
+    width: 87%;
+    margin: 10px auto 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0f2fe;
+    border-left: 6px solid #2563eb;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+section message {
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+}
+

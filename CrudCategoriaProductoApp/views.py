@@ -44,6 +44,9 @@ def actualizarCategoriaProducto(request, IdCategoriaProducto):
 
         if form.is_valid():
             form.save()
+            messages.success(request, "Categoria actualizada correctamente")
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
     
     data = {
         'form': form,

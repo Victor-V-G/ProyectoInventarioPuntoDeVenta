@@ -3,6 +3,14 @@
     <!-- Título de la página -->
     {% block title %}Registro de cargos{% endblock %}
 
+    {% block breadcrumb %}
+        <li>
+            <a href="/adminhome/">Admin home > </a>
+            <a href="/adminhome/crud-cargos">Crud cargos > </a>
+            <a>Formulario cargos</a>
+        </li>
+    {% endblock %}
+
     {% block header_title %}
         <h1 class="header-title">REGISTRO DE CARGOS</h1>
         <a href="/adminhome/crud-cargos"><button class="button-header" type="button">VOLVER</button></a>   

@@ -87,7 +87,10 @@ def actualizarEmpleado(request, IdEmpleado):
         form = forms.EmpleadoRegistrationForm(request.POST, instance=empleado)  # Vincula los datos al formulario
         if form.is_valid():  # Valida el formulario
             form.save()  # Guarda los cambios en la base de datos
+            messages.success(request, "Empleado actualizado correctamente")
             return redirect('/adminhome/crud-empleado/')  # Redirige al listado de empleados
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
 
     data = {'form': form}  # Diccionario con el formulario
     return render(request, 'templateCrudEmpleado/registro-empleado.html', data)

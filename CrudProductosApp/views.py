@@ -84,7 +84,10 @@ def actualizarProducto(request, IdProducto):
         form = forms.ProductoRegistrationForm(request.POST, instance=producto)
         if form.is_valid():
             form.save()  # Guarda los cambios en la base de datos
-    
+            messages.success(request, "Producto Actualizado correctamente")
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
+            
     data = {
         'form': form,
         'valor': form.is_valid()}  # Diccionario con el formulario

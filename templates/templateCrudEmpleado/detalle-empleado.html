@@ -2,10 +2,18 @@
 
 {% block title %}Detalle de empleado{% endblock %}
 
+{% block breadcrumb %}
+    <li>
+        <a href="/adminhome/">Admin home > </a>
+        <a href="/adminhome/crud-empleado">Crud empleado > </a>
+        <a>Detalle empleado</a>
+    </li>
+{% endblock %}
+
 {% block header_title %}
     <h1 class="header-title">DETALLE DE EMPLEADOS</h1>
     <!-- Botones de navegación -->
-    <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+    <a href="/adminhome/crud-empleado"><button class="button-header" type="button">VOLVER</button></a>
 {% endblock %}
 
 {% block content %}
