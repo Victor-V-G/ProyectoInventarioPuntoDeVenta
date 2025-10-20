@@ -1,21 +1,27 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base para mantener el mismo diseño y estructura general del CRUD -->
 
 {% block title %}Detalle de Bodegas{% endblock %}
+<!-- Define el título que aparecerá en la pestaña del navegador -->
 
 {% block breadcrumb %}
+    <!-- Muestra la ruta de navegación (breadcrumb) -->
     <li>
-        <a onclick="crudVolver()">home > </a>
-        <a onclick="regresarCrudBodega()">Crud bodegas > </a>
-        <a>Detalle bodega</a>
+        <a onclick="crudVolver()">home > </a> <!-- Enlace que usa JavaScript para volver a la página principal -->
+        <a onclick="regresarCrudBodega()">Crud bodegas > </a> <!-- Enlace para regresar al CRUD de bodegas -->
+        <a>Detalle bodega</a> <!-- Indica la página actual, sin enlace -->
     </li>
 {% endblock %}
+
 <!-- Título de la página -->
 {% block header_title %}
-    <h1 class="header-title">Detalle DE BODEGAS</h1>
+    <h1 class="header-title">Detalle DE BODEGAS</h1> <!-- Encabezado principal -->
     <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
+    <!-- Botón que permite regresar al listado de bodegas -->
 {% endblock %}
 
 {% block content %} 
+    <!-- Contenido principal: tabla con la información de la bodega -->
     <table>
         <thead>
             <tr>
@@ -28,6 +34,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- Fila con los datos de la bodega obtenidos desde el contexto -->
             <tr>
                 <td>{{ bod.IdBodega }}</td>
                 <td>{{ bod.NombreBodega }}</td>
@@ -35,7 +42,10 @@
                 <td>{{ bod.EstadoBodega }}</td>
                 <td>{{ bod.ObservacionesBodega }}</td>
                 <td>
+                    <!-- Botón para actualizar la bodega con confirmación -->
                     <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta bodega?')) {regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')}">ACTUALIZAR</button>
+                    
+                    <!-- Botón para ir a la página de confirmación de eliminación -->
                     <button type="button" onclick="{regresarAdminOrHome('crud-bodegas/confirmar-eliminar/{{ bod.IdBodega }}')}">ELIMINAR</button>
                 </td>
             </tr>

@@ -1,28 +1,38 @@
-{% extends 'base-crud.html' %}
+{% extends 'base-crud.html' %} 
+<!-- Extiende de la plantilla base 'base-crud.html', que contiene la estructura general de la página (header, mensajes, estilos, scripts, etc.) -->
 
 {% block title %}Confirmar eliminacion de usuario{% endblock %}
+<!-- Define el título de la página que se mostrará en la pestaña del navegador -->
 
 {% block breadcrumb %}
+    <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a href="/adminhome/">Admin home > </a>
-        <a href="/adminhome/crud-usuarios">Crud usuarios > </a>
-        <a>Confirmar eliminacion</a>
+        <a href="/adminhome/">Admin home > </a> <!-- Enlace a la página principal del admin -->
+        <a href="/adminhome/crud-usuarios">Crud usuarios > </a> <!-- Enlace al listado de usuarios -->
+        <a>Confirmar eliminacion</a> <!-- Página actual, sin enlace -->
     </li>
 {% endblock %}
 
 {% block header_title %}
+    <!-- Título principal que aparece dentro de la página -->
     <h1 class="header-title">CONFIRMACION DE ELIMINACION</h1>
 {% endblock %}
 
 {% block content %}
+    <!-- Bloque principal de contenido dinámico -->
     <section>
+        <!-- Mensaje de confirmación, mostrando el nombre de usuario que se eliminará -->
         <h1>¿Seguro que deseas eliminar el usuario: {{ usu.Username}} ?</h1>
         
-        <a href="/adminhome/crud-usuarios/"><button class="button-header" type="button">VOLVER</button></a>
+        <!-- Botón para regresar al listado de usuarios sin eliminar -->
+        <a href="/adminhome/crud-usuarios/">
+            <button class="button-header" type="button">VOLVER</button>
+        </a>
 
+        <!-- Formulario para eliminar el usuario -->
         <form method="POST" action="{% url 'eliminar-usuario' usu.IdUsuarios %}">
-            {% csrf_token %}
-            <button type="submit">ELIMINAR</button>
+            {% csrf_token %} <!-- Token de seguridad para prevenir ataques CSRF -->
+            <button type="submit">ELIMINAR</button> <!-- Botón de confirmación -->
         </form>
     </section>
 {% endblock %}

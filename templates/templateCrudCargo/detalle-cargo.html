@@ -1,21 +1,26 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base de CRUD, heredando estilos, scripts y estructura general -->
 
 {% block title %}Detalle de Cargos{% endblock %}
+<!-- Define el título de la página que aparece en la pestaña del navegador -->
 
 {% block breadcrumb %}
+    <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a href="/adminhome/">Admin home > </a>
-        <a href="/adminhome/crud-cargos">Crud cargos > </a>
-        <a>Detalle cargo</a>
+        <a href="/adminhome/">Admin home > </a> <!-- Enlace al home del administrador -->
+        <a href="/adminhome/crud-cargos">Crud cargos > </a> <!-- Enlace al CRUD de cargos -->
+        <a>Detalle cargo</a> <!-- Página actual (no clickeable) -->
     </li>
 {% endblock %}
 
 {% block header_title %}
+    <!-- Título principal de la página y botón de navegación -->
     <h1 class="header-title">Detalle DE CARGOS</h1>
     <a href="/adminhome/crud-cargos"><button class="button-header" type="button">VOLVER</button></a>
 {% endblock %}
 
 {% block content %}
+    <!-- Tabla que muestra los detalles de un cargo específico -->
     <table>
         <thead>
             <tr>
@@ -29,14 +34,20 @@
         </thead>
         <tbody>
             <tr>
+                <!-- Datos del cargo específico -->
                 <td>{{ cag.IdCargos}}</td>
                 <td>{{ cag.TipoDeCargo }}</td>
                 <td>{{ cag.EstadoDelCargo }}</td>
                 <td>{{ cag.DescripcionDelCargo }}</td>
                 <td>{{ cag.SueldoBase }}</td>
                 <td>
-                    <a href="/adminhome/crud-cargos/actualizar-cargo/{{ cag.IdCargos }}"><button onclick="return confirm('¿Seguro que deseas actualizar este cargo?')">ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-cargos/eliminar-cargo/{{ cag.IdCargos }}"><button>ELIMINAR</button></a>
+                    <!-- Botones para actualizar o eliminar el cargo -->
+                    <a href="/adminhome/crud-cargos/actualizar-cargo/{{ cag.IdCargos }}">
+                        <button onclick="return confirm('¿Seguro que deseas actualizar este cargo?')">ACTUALIZAR</button>
+                    </a>
+                    <a href="/adminhome/crud-cargos/eliminar-cargo/{{ cag.IdCargos }}">
+                        <button>ELIMINAR</button>
+                    </a>
                 </td>
             </tr>
         </tbody>

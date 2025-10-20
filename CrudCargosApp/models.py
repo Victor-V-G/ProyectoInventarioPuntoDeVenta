@@ -92,18 +92,19 @@ class Cargos(models.Model):
     # --------------------------------------------------------------------
 
 
+    # Campo para almacenar la descripción del cargo
     DescripcionDelCargo = models.TextField(
-        max_length=500,
-        db_column='DescripcionDelCargo',
-        verbose_name='Descripcion del cargo',
-        validators=[MinLengthValidator(10, message='Debe ingresar al menos 10 caracteres')]
+        max_length=500,  # Máximo de 500 caracteres
+        db_column='DescripcionDelCargo',  # Nombre de la columna en la base de datos
+        verbose_name='Descripcion del cargo',  # Nombre legible en el admin
+        validators=[MinLengthValidator(10, message='Debe ingresar al menos 10 caracteres')]  # Valida que tenga al menos 10 caracteres
     )
 
-
+    # Campo para almacenar el sueldo base del cargo
     SueldoBase = models.IntegerField(
-        db_column='SueldoBase',
-        verbose_name='Sueldo base',
-        validators=[MinValueValidator(150000, message='Sueldo base minimo es de $150.000')]
+        db_column='SueldoBase',  # Nombre de la columna en la base de datos
+        verbose_name='Sueldo base',  # Nombre legible en el admin
+        validators=[MinValueValidator(150000, message='Sueldo base minimo es de $150.000')]  # Valida que sea mínimo $150.000
     )
 
     # --------------------------------------------------------------------

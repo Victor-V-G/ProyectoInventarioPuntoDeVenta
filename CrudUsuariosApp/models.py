@@ -94,26 +94,45 @@ class Usuarios(models.Model):
     )
     # --------------------------------------------------------------------
 
-    def clean(self):
-        super().clean()
+    # ============================================================
+    # Validación general del formulario
+    # ============================================================
+    # Este método se llama automáticamente después de validar los campos individuales.
+    # Sirve para realizar validaciones que dependan de más de un campo.
+    def clean(self): 
+        super().clean()  # Llama a la limpieza y validación base del formulario
+    
+        # Valida que los campos Password y ConfirmarPassword coincidan
         if self.Password != self.ConfirmarPassword:
-            raise ValidationError({'ConfirmarPassword': 'Las passwords ingresadas no coinciden'})
+            raise ValidationError({
+                'ConfirmarPassword': 'Las passwords ingresadas no coinciden'
+            })
 
+
+    # ============================================================
+    # Campo para confirmar la contraseña ingresada por el usuario
+    # ============================================================
     ConfirmarPassword = models.CharField(
-        max_length=45,
-        db_column='ConfirmarPassword',
-        verbose_name='Confirmar password',
+        max_length=45,  # Limita la longitud máxima de la contraseña
+        db_column='ConfirmarPassword',  # Nombre de la columna en la base de datos
+        verbose_name='Confirmar password',  # Etiqueta legible en el admin y formularios
         validators=[
             MinLengthValidator(5, message="La password debe tener al menos 5 caracteres")
-        ]
+        ]  # Valida que tenga al menos 5 caracteres
     )
 
+
+    # ============================================================
+    # Campo de correo electrónico
+    # ============================================================
     CorreoElectronico = models.EmailField(
-        max_length=100,
-        db_column='CorreoElectronico',
-        verbose_name='Correo electronico',
-        validators=[EmailValidator(message="Debe ingresar un correo valido")],
-        error_messages={'unique': 'El correo electronico ingresado ya se encuentra ocupado, Por favor, intentelo con otro nuevamente.'}
+        max_length=100,  # Longitud máxima permitida
+        db_column='CorreoElectronico',  # Nombre de columna en la base de datos
+        verbose_name='Correo electronico',  # Etiqueta legible en el admin y formularios
+        validators=[EmailValidator(message="Debe ingresar un correo valido")],  # Valida formato de correo
+        error_messages={
+            'unique': 'El correo electronico ingresado ya se encuentra ocupado, Por favor, intentelo con otro nuevamente.'
+        }  # Mensaje personalizado si el correo ya existe
     )
 
 

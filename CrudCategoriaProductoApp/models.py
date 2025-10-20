@@ -103,27 +103,29 @@ class CategoriaProducto(models.Model):
         ]
     )
     # --------------------------------------------------------------------
-
+    # Lista de opciones posibles para el estado de la categoría
     ESTADO = [
-        ('Activo', 'Activo'),
-        ('Pausado', 'Pausado'),
+        ('Activo', 'Activo'),      # La categoría está activa
+        ('Pausado', 'Pausado'),    # La categoría está pausada
     ]
 
     # --------------------------------------------------------------------
+    # Campo Estado del modelo
     Estado = models.CharField(
-        max_length=10,
-        choices=ESTADO,
-        db_column='Estado',
+        max_length=10,    # Máxima longitud de 10 caracteres
+        choices=ESTADO,   # Se limita a las opciones definidas en ESTADO
+        db_column='Estado',  # Nombre de la columna en la base de datos
     )
     # --------------------------------------------------------------------
 
+    # Campo Observaciones del modelo
     Observaciones = models.TextField(
-        max_length=500,
-        db_column='Observaciones',
-        verbose_name='Observaciones',
-        validators=[
-            validacion_no_caracteres_especiales,
-            MinLengthValidator(10, message="Debes ingresar minimo 10 caracteres")
+        max_length=500,          # Máxima longitud de 500 caracteres
+        db_column='Observaciones',  # Nombre de la columna en la base de datos
+        verbose_name='Observaciones',  # Etiqueta legible para formularios y admin
+        validators=[             # Validadores personalizados
+            validacion_no_caracteres_especiales,  # No permite caracteres especiales
+            MinLengthValidator(10, message="Debes ingresar minimo 10 caracteres")  # Requiere al menos 10 caracteres
         ]
     )
 

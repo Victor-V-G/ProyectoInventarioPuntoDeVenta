@@ -1,32 +1,40 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base de CRUD, que incluye estilos, scripts y estructura general -->
 
 {% block title %}Confirmar eliminacion de categoria{% endblock %}
+<!-- Título de la página que se mostrará en la pestaña del navegador -->
 
 {% block breadcrumb %}
-        <li>
-            <a onclick="crudVolver()">home > </a>
-            <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a>
-            <a>Confirmar Eliminacion</a>
-        </li>
+    <!-- Breadcrumbs: ruta de navegación dentro del panel de administración -->
+    <li>
+        <a onclick="crudVolver()">home > </a> <!-- Enlace al home usando función JS -->
+        <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a> <!-- Enlace a listado de categorías usando función JS -->
+        <a>Confirmar Eliminacion</a> <!-- Página actual sin enlace -->
+    </li>
 {% endblock %}
 
 {% block header_title %}
+    <!-- Título principal de la página -->
     <h1 class="header-title">CONFIRMACION DE ELIMINACION</h1>
 {% endblock %}
 
 {% block content %}
+    <!-- Contenido principal: confirmación de eliminación -->
     <section>
         <h1>¿Seguro que deseas eliminar la categoria: {{ bod.NombreCategoria }} ?</h1>
-        
+        <!-- Muestra el nombre de la categoría que se desea eliminar -->
+
         <button class="button-header" type="button" onclick="regresarCrudCategoriaProducto()">VOLVER</button>
+        <!-- Botón para regresar al listado de categorías sin eliminar -->
 
         <form method="POST" action="{% url 'eliminar-categoria' bod.IdCategoriaProducto %}">
-            {% csrf_token %}
-            <button type="submit">ELIMINAR</button>
+            {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
+            <button type="submit">ELIMINAR</button> <!-- Botón que confirma la eliminación -->
         </form>
+
         {% if valor %}
         <script>
-            // Llamamos a tu función que estaba en mi_script.js
+            // Llama a la función JS que redirige automáticamente al listado de categorías
             regresarCrudCategoriaProducto(); 
         </script>
         {% endif %}

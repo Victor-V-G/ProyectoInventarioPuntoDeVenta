@@ -1,40 +1,47 @@
 <!DOCTYPE html>
-{% load static %}
+{% load static %} <!-- Carga la etiqueta 'static' de Django para gestionar archivos estáticos -->
+
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="{% static 'css/models-style.css' %}">
-    <script src='{%static "js/crudVolver.js" %}'></script>
+
+    <!-- Enlaza el script de JavaScript para funcionalidades de CRUD, como volver atrás -->
+    <script src='{% static "js/crudVolver.js" %}'></script>
+
+    <!-- Bloque de título dinámico que puede ser sobrescrito en cada página -->
     <title>{% block title %}{% endblock %}</title>
 </head>
+
 <body>
 
+    <!-- Barra de navegación (breadcrumbs) para mostrar la ruta dentro del sistema -->
     <nav>
         <ol>
-            {% block breadcrumb %}{% endblock %}
+            {% block breadcrumb %}{% endblock %} <!-- Bloque dinámico para ruta de navegación -->
         </ol>
     </nav>
     
-    <!-- Mensajes de feedback -->
+    <!-- Sección de mensajes de feedback (éxito, error o información) -->
     {% if messages %}
         <section class="messages">
             {% for message in messages %}
                 <div class="message">
-                    <h1>{{ message }}</h1>
+                    <h1>{{ message }}</h1> <!-- Muestra el contenido de cada mensaje -->
                 </div>
             {% endfor %}
         </section>
     {% endif %}
 
-    <!-- Header general -->
+    <!-- Header principal de la página -->
     <header class="main-header">
-        {% block header_title %}{% endblock %}
+        {% block header_title %}{% endblock %} <!-- Bloque dinámico para el título de la sección -->
     </header>
 
-    <!-- Contenido dinámico (tablas) -->
+    <!-- Bloque principal de contenido dinámico, como tablas de datos -->
     {% block content %}{% endblock %}
-    
 
 </body>
 </html>

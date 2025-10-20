@@ -1,23 +1,29 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base de CRUD, heredando estilos, scripts y estructura general -->
 
-    {% block title %}Lista de Bodegas{% endblock %}
+{% block title %}Lista de Bodegas{% endblock %}
+<!-- Título de la página que aparece en la pestaña del navegador -->
 
-    {% block breadcrumb %}
-        <li>
-            <a onclick="crudVolver()">Home > </a>
-            <a>Crud bodegas > </a>
-        </li>
-    {% endblock %}
+{% block breadcrumb %}
+    <!-- Breadcrumb para mostrar la navegación jerárquica -->
+    <li>
+        <a onclick="crudVolver()">Home > </a> <!-- Enlace al home, usando función JS para volver -->
+        <a>Crud bodegas > </a> <!-- Enlace al CRUD de bodegas (página actual no clickeable) -->
+    </li>
+{% endblock %}
 
-    <!-- Título de la página -->
-    {% block header_title %}
-        <h1 class="header-title">LISTA DE BODEGAS</h1>
-        <button class="button-header" type="button" onclick="crudVolver()">VOLVER</button>
-        <a href="registro-bodega/"><button class="button-header" type="button">REGISTRAR BODEGA</button></a>
-    {% endblock %}
+{% block header_title %}
+    <!-- Título principal de la página y botones de navegación -->
+    <h1 class="header-title">LISTA DE BODEGAS</h1>
+    <button class="button-header" type="button" onclick="crudVolver()">VOLVER</button>
+    <a href="registro-bodega/">
+        <button class="button-header" type="button">REGISTRAR BODEGA</button>
+    </a>
+{% endblock %}
 
-    {% block content %} 
-        {% if Bodegas %}
+{% block content %} 
+    <!-- Verifica si hay bodegas registradas -->
+    {% if Bodegas %}
         <table>
             <thead>
                 <tr>
@@ -30,6 +36,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Recorre todas las bodegas y muestra sus datos en filas -->
                 {% for bod in Bodegas %}
                 <tr>
                     <td>{{ bod.IdBodega }}</td>
@@ -37,6 +44,7 @@
                     <td>{{ bod.UbicacionBodega }}</td>
                     <td>{{ bod.EstadoBodega }}</td>
                     <td>{{ bod.ObservacionesBodega }}</td>
+                    <!-- Botones de acción para cada bodega -->
                     <td>
                         <button type="button" onclick="{regresarAdminOrHome('crud-bodegas/detalle-bodega/{{ bod.IdBodega }}')}">DETALLE</button>
                         <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta bodega?')) {regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')}">ACTUALIZAR</button>
@@ -46,9 +54,10 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% else %}
-            <div class="no-registros">
-                <h1>NO HAY BODEGAS REGISTRADAS</h1>
-            </div>
-        {% endif %}
-    {% endblock %}
+    {% else %}
+        <!-- Mensaje cuando no hay bodegas registradas -->
+        <div class="no-registros">
+            <h1>NO HAY BODEGAS REGISTRADAS</h1>
+        </div>
+    {% endif %}
+{% endblock %}

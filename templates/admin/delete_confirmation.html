@@ -48,11 +48,24 @@
   {% endblock %}
 {% endif %}
 <script>
+/* Espera a que todo el contenido del documento HTML se haya cargado completamente
+   antes de ejecutar el código JavaScript */
 document.addEventListener('DOMContentLoaded', function() {
+
+    // Busca dentro del formulario el botón de tipo "submit" (enviar/eliminar)
     const botonEliminar = document.querySelector('form input[type="submit"]');
+
+    // Verifica que el botón exista antes de intentar agregarle un evento
     if (botonEliminar) {
+
+        // Agrega un "listener" (escuchador) para el evento de clic en el botón
         botonEliminar.addEventListener('click', function(e) {
+
+            // Muestra una ventana de confirmación al usuario
+            // Si el usuario presiona "Cancelar", la función confirm() devuelve false
             if (!confirm('¿Seguro que deseas eliminar este registro definitivamente?')) {
+
+                // Previene la acción por defecto del formulario (que sería enviarse)
                 e.preventDefault();
             }
         });

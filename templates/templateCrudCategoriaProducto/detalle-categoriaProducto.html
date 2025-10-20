@@ -1,23 +1,27 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base de CRUD, que incluye estilos, scripts y la estructura general -->
 
 {% block title %}Detalles de Categorias{% endblock %}
+<!-- Título de la página que se muestra en la pestaña del navegador -->
 
 {% block breadcrumb %}
-        <li>
-            <a onclick="crudVolver()">home > </a>
-            <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a>
-            <a>Detalle categoria</a>
-        </li>
-    {% endblock %}
+    <!-- Breadcrumbs: ruta de navegación dentro del panel de administración -->
+    <li>
+        <a onclick="crudVolver()">home > </a> <!-- Enlace al home usando función JS -->
+        <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a> <!-- Enlace al listado de categorías usando función JS -->
+        <a>Detalle categoria</a> <!-- Página actual sin enlace -->
+    </li>
+{% endblock %}
 
-<!-- Título de la página -->
 {% block header_title %}
+    <!-- Título principal de la página -->
     <h1 class="header-title">DETALLES DE CATEGORIAS</h1>
+    <!-- Botón para volver al listado de categorías -->
     <button class="button-header" type="button" onclick="regresarCrudCategoriaProducto()">VOLVER</button>
 {% endblock %}
 
-
-{% block content %} 
+{% block content %}
+    <!-- Contenido principal: muestra los detalles de la categoría seleccionada -->
     <table>
         <thead>
             <tr>
@@ -31,11 +35,13 @@
         </thead>
         <tbody>
             <tr>
+                <!-- Datos de la categoría -->
                 <td>{{ bod.IdCategoriaProducto}}</td>
                 <td>{{ bod.NombreCategoria }}</td>
                 <td>{{ bod.Descripcion }}</td>
                 <td>{{ bod.Estado }}</td>
                 <td>{{ bod.Observaciones }}</td>
+                <!-- Botones para actualizar o eliminar la categoría -->
                 <td>
                     <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta Catgeoria?')) {regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')}">ACTUALIZAR</button>
                     <button type="button" onclick="{regresarAdminOrHome('crud-categoriaProducto/confirmar-eliminar/{{ bod.IdCategoriaProducto }}')}">ELIMINAR</button>

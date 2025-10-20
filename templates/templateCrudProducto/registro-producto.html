@@ -1,33 +1,44 @@
 {% extends 'base-form.html' %}
+<!-- Extiende la plantilla base para formularios, que ya incluye estilos y scripts generales -->
 
-    {% block title %}Registro de Producto{% endblock %}
+{% block title %}Registro de Producto{% endblock %}
+<!-- Título que se muestra en la pestaña del navegador -->
 
-    {% block breadcrumb %}
-        <li>
-            <a onclick="crudVolver()">home > </a>
-            <a onclick="regresarCrudProducto()">Crud producto > </a>
-            <a>Formulario producto</a>
-        </li>
-    {% endblock %}
+{% block breadcrumb %}
+    <!-- Breadcrumbs: indican la ruta de navegación dentro del sistema -->
+    <li>
+        <a onclick="crudVolver()">home > </a> <!-- Llama a función JS para regresar al home -->
+        <a onclick="regresarCrudProducto()">Crud producto > </a> <!-- Regresa al listado de productos -->
+        <a>Formulario producto</a> <!-- Página actual sin enlace -->
+    </li>
+{% endblock %}
 
-    <!-- Título de la página -->
-    {% block header_title %}
-        <h1 class="header-title">REGISTRO DE PRODUCTO</h1>
-        <!-- Botón para volver al listado de productos -->
-        <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
-    {% endblock %}
+{% block header_title %}
+    <!-- Título principal de la página -->
+    <h1 class="header-title">REGISTRO DE PRODUCTO</h1>
+    <!-- Botón para volver al listado de productos -->
+    <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
+{% endblock %}
 
+{% block content %}
     <!-- Formulario para crear o actualizar productos -->
-    {% block content %}
-        <form method="POST" novalidate>
-            {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
-            {{ form.as_div }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
-            <input class="form-enviar" type="submit" value="ENVIAR"  onclick="return confirm('¿Seguro que deseas enviar estos datos?')"> <!-- Botón para enviar el formulario -->
-        </form>
-        {% if valor %}
-        <script>
-            // Llamamos a tu función que estaba en mi_script.js
-            regresarCrudProducto(); 
-        </script>
-        {% endif %}
-    {% endblock %}
+    <form method="POST" novalidate>
+        {% csrf_token %} 
+        <!-- Token de seguridad de Django para proteger contra CSRF -->
+
+        {{ form.as_div }} 
+        <!-- Renderiza automáticamente todos los campos del formulario como bloques <div> -->
+
+        <input class="form-enviar" type="submit" value="ENVIAR"  
+               onclick="return confirm('¿Seguro que deseas enviar estos datos?')">
+        <!-- Botón de envío con confirmación JS antes de enviar -->
+
+    </form>
+
+    {% if valor %}
+    <script>
+        // Si valor es True, se llama a la función JS para regresar al listado de productos automáticamente
+        regresarCrudProducto(); 
+    </script>
+    {% endif %}
+{% endblock %}

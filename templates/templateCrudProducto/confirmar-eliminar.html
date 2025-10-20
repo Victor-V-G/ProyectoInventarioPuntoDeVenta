@@ -1,32 +1,41 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base que contiene la estructura general, estilos y scripts comunes -->
 
 {% block title %}Confirmar eliminacion de usuario{% endblock %}
+<!-- Define el título de la pestaña del navegador -->
 
 {% block breadcrumb %}
+    <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a onclick="crudVolver()">home > </a>
-        <a onclick="regresarCrudProducto()">Crud Producto > </a>
-        <a>Confirmar eliminacion</a>
+        <a onclick="crudVolver()">home > </a> <!-- Enlace que llama a función JS para volver al home -->
+        <a onclick="regresarCrudProducto()">Crud Producto > </a> <!-- Enlace que llama a función JS para volver al CRUD de productos -->
+        <a>Confirmar eliminacion</a> <!-- Página actual, sin enlace -->
     </li>
 {% endblock %}
 
 {% block header_title %}
+    <!-- Título principal dentro de la página -->
     <h1 class="header-title">CONFIRMACION DE ELIMINACION</h1>
 {% endblock %}
 
 {% block content %}
+    <!-- Bloque principal de contenido dinámico -->
     <section>
+        <!-- Mensaje de confirmación mostrando el nombre del producto -->
         <h1>¿Seguro que deseas eliminar el producto: {{ pro.NombreProducto }} ?</h1>
         
+        <!-- Botón de volver, llama a función JS para regresar al listado -->
         <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
 
+        <!-- Formulario POST para eliminar el producto -->
         <form method="POST" action="{% url 'eliminar-producto' pro.IdProducto %}">
-            {% csrf_token %}
+            {% csrf_token %} <!-- Token de seguridad contra CSRF -->
             <button type="submit">ELIMINAR</button>
         </form>
+
         {% if valor %}
+        <!-- Si 'valor' es True, se ejecuta la función JS para redireccionar automáticamente -->
         <script>
-            // Llamamos a tu función que estaba en mi_script.js
             regresarCrudProducto(); 
         </script>
         {% endif %}

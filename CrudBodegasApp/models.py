@@ -105,29 +105,32 @@ class Bodegas(models.Model):
     )
     # --------------------------------------------------------------------
 
+    # Opciones disponibles para el estado de la bodega
     ESTADO_BODEGA = [
         ('Activa', 'Activa'),
         ('Inactiva', 'Inactiva'),
         ('En Mantenimiento', 'En Mantenimiento')
     ]
 
+    # Campo para guardar el estado de la bodega
     EstadoBodega = models.CharField(
-        max_length=20,
-        choices=ESTADO_BODEGA,
-        db_column='EstadoBodega',
-        verbose_name='Estado de la bodega',
+        max_length=20,                           # Máximo 20 caracteres
+        choices=ESTADO_BODEGA,                   # Solo puede ser una de las opciones definidas arriba
+        db_column='EstadoBodega',                # Nombre de la columna en la base de datos
+        verbose_name='Estado de la bodega',      # Nombre visible en el panel de administración
     )
 
-
+    # Campo para observaciones o notas adicionales
     ObservacionesBodega = models.TextField(
-        max_length=500,
-        db_column='ObservacionesBodega',
-        verbose_name='Observaciones sobre la bodega',
-        validators=[
-            validacion_no_caracteres_especiales,
-            MinLengthValidator(10, message="Debes ingresar minimo 10 caracteres")
+        max_length=500,                          # Hasta 500 caracteres permitidos
+        db_column='ObservacionesBodega',         # Nombre de la columna en la base de datos
+        verbose_name='Observaciones sobre la bodega',  # Nombre visible en el admin
+        validators=[                             # Reglas de validación
+        validacion_no_caracteres_especiales,        # No se permiten caracteres especiales
+        MinLengthValidator(10, message="Debes ingresar mínimo 10 caracteres")  # Al menos 10 caracteres
         ]
     )
+
 
 
     # --------------------------------------------------------------------

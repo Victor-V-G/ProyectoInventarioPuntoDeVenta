@@ -1,28 +1,35 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base de CRUD, heredando estilos, scripts y estructura general -->
 
 {% block title %}Confirmar eliminacion de usuario{% endblock %}
+<!-- Define el título de la página que aparece en la pestaña del navegador -->
 
 {% block breadcrumb %}
+    <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a href="/adminhome/">Admin home > </a>
-        <a href="/adminhome/crud-cargos">Crud cargos > </a>
-        <a>Confirmar Eliminacion</a>
+        <a href="/adminhome/">Admin home > </a> <!-- Enlace al home del administrador -->
+        <a href="/adminhome/crud-cargos">Crud cargos > </a> <!-- Enlace al CRUD de cargos -->
+        <a>Confirmar Eliminacion</a> <!-- Página actual (no clickeable) -->
     </li>
 {% endblock %}
 
 {% block header_title %}
+    <!-- Título principal de la página -->
     <h1 class="header-title">CONFIRMACION DE ELIMINACION</h1>
 {% endblock %}
 
 {% block content %}
     <section>
+        <!-- Pregunta de confirmación al usuario sobre la eliminación -->
         <h1>¿Seguro que deseas eliminar el cargo: {{ cag.TipoDeCargo}} ?</h1>
         
+        <!-- Botón para volver al listado de cargos sin realizar cambios -->
         <a href="/adminhome/crud-cargos/"><button class="button-header" type="button">VOLVER</button></a>
 
+        <!-- Formulario para confirmar la eliminación del cargo -->
         <form method="POST" action="{% url 'eliminar-cargo' cag.IdCargos %}">
-            {% csrf_token %}
-            <button type="submit">ELIMINAR</button>
+            {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
+            <button type="submit">ELIMINAR</button> <!-- Botón para enviar el formulario y eliminar -->
         </form>
     </section>
 {% endblock %}

@@ -1,24 +1,27 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base que contiene la estructura general, estilos y scripts comunes -->
 
 {% block title %}Detalle de Producto{% endblock %}
+<!-- Define el título de la pestaña del navegador -->
 
 {% block breadcrumb %}
+    <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a onclick="crudVolver()">home > </a>
-        <a onclick="regresarCrudProducto()">Crud producto > </a>
-        <a>Detalle producto</a>
+        <a onclick="crudVolver()">home > </a> <!-- Llama a función JS para volver al home -->
+        <a onclick="regresarCrudProducto()">Crud producto > </a> <!-- Llama a función JS para volver al listado de productos -->
+        <a>Detalle producto</a> <!-- Página actual, sin enlace -->
     </li>
 {% endblock %}
 
-
-<!-- Título de la página -->
 {% block header_title %}
+    <!-- Título principal de la página -->
     <h1 class="header-title">DETALLES PRODUCTO</h1>
-    <!-- Botón para volver al listado de productos -->
+    <!-- Botón para volver al listado de productos, usa función JS -->
     <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
 {% endblock %}
 
 {% block content %}
+    <!-- Tabla que muestra los detalles del producto -->
     <table>
         <thead>
             <tr>
@@ -35,6 +38,7 @@
         </thead>
         <tbody>
             <tr>
+                <!-- Mostramos los valores del producto usando variables de Django -->
                 <td scope="row">{{ pro.IdProducto }}</td>
                 <td>{{ pro.CodigoDeBarras }}</td>
                 <td>{{ pro.ValorProducto }}</td>
@@ -43,10 +47,21 @@
                 <td>{{ pro.FechaDeRegistroProducto }}</td>
                 <td>{{ pro.MarcaProducto }}</td>
                 <td>{{ pro.FechaDeVencimiento }}</td>
-                <!-- Enlaces para actualizar o eliminar el producto -->
+                <!-- Botones para actualizar o eliminar producto -->
                 <td>
-                    <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar este producto?')) {regresarAdminOrHome('crud-productos/actualizar-producto/{{ pro.IdProducto }}')}">ACTUALIZAR</button>
-                    <button type="button" onclick="{regresarAdminOrHome('crud-productos/confirmar-eliminar/{{ pro.IdProducto }}')}">ELIMINAR</button>
+                    <!-- Actualización: confirma con un popup y redirige usando JS -->
+                    <button type="button" 
+                        onclick="if (confirm('¿Seguro que deseas actualizar este producto?')) {
+                            regresarAdminOrHome('crud-productos/actualizar-producto/{{ pro.IdProducto }}')
+                        }">
+                        ACTUALIZAR
+                    </button>
+
+                    <!-- Eliminación: redirige a la página de confirmación de eliminación -->
+                    <button type="button" 
+                        onclick="{regresarAdminOrHome('crud-productos/confirmar-eliminar/{{ pro.IdProducto }}')}">
+                        ELIMINAR
+                    </button>
                 </td>
             </tr>
         </tbody>

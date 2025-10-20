@@ -1,30 +1,47 @@
 {% extends 'base-form.html' %}
+<!-- Hereda la estructura y los estilos desde la plantilla base para formularios (base-form.html) -->
 
-    {% block title %}Registro de Bodega{% endblock %}
+{% block title %}Registro de Bodega{% endblock %}
+<!-- Define el título de la página que se mostrará en la pestaña del navegador -->
 
-    {% block breadcrumb %}
-        <li>
-            <a onclick="crudVolver()">home > </a>
-            <a onclick="regresarCrudBodega()">Crud bodegas > </a>
-            <a>Formulario bodega</a>
-        </li>
-    {% endblock %}
+{% block breadcrumb %}
+<!-- Sección de navegación (migas de pan) que indica la ruta actual dentro del sistema -->
+    <li>
+        <!-- Enlace que llama a una función JavaScript para volver al menú principal -->
+        <a onclick="crudVolver()">home > </a>
+        <!-- Enlace que llama a la función JavaScript que regresa al CRUD de bodegas -->
+        <a onclick="regresarCrudBodega()">Crud bodegas > </a>
+        <!-- Texto que indica que el usuario se encuentra en el formulario de registro -->
+        <a>Formulario bodega</a>
+    </li>
+{% endblock %}
 
-    <!-- Título de la página -->
-    {% block header_title %}
-        <h1 class="header-title">REGISTRO DE BODEGAS</h1>
-        <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
-    {% endblock %}
+<!-- Título principal que se muestra en la parte superior de la página -->
+{% block header_title %}
+    <h1 class="header-title">REGISTRO DE BODEGAS</h1>
+    <!-- Botón que permite volver a la vista del CRUD de bodegas -->
+    <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
+{% endblock %}
     
-    {% block content %}
-        <form method="POST" novalidate>
-            {% csrf_token %}
-            {{ form.as_div }}
-            <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')">
-        </form>
-        {% if valor %}
-        <script>
-            regresarCrudBodega(); 
-        </script>
-        {% endif %}
-    {% endblock %}
+{% block content %}
+<!-- Contenido principal de la página: el formulario de registro de bodegas -->
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        <!-- Token de seguridad de Django para prevenir ataques CSRF -->
+        
+        {{ form.as_div }}
+        <!-- Renderiza automáticamente los campos del formulario dentro de etiquetas <div> -->
+        
+        <!-- Botón de envío con confirmación antes de enviar los datos -->
+        <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')">
+    </form>
+
+    {% if valor %}
+    <!-- Si la variable 'valor' está presente (por ejemplo, tras enviar el formulario correctamente) -->
+    <script>
+        // Llama a la función que redirige al listado principal de bodegas
+        regresarCrudBodega(); 
+    </script>
+    {% endif %}
+{% endblock %}
+<!-- Fin del bloque de contenido -->

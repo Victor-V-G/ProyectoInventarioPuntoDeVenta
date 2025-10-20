@@ -1,32 +1,40 @@
 {% extends 'base-crud.html' %}
+<!-- Extiende la plantilla base de CRUD, heredando estilos, scripts y estructura general -->
 
 {% block title %}Confirmar eliminacion de bodega{% endblock %}
+<!-- Título de la página que aparece en la pestaña del navegador -->
 
 {% block breadcrumb %}
+    <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a onclick="crudVolver()">home > </a>
-        <a onclick="regresarCrudBodega()">Crud bodegas > </a>
-        <a>Confirmar Eliminacion</a>
+        <a onclick="crudVolver()">home > </a> <!-- Enlace a home usando función JS para volver -->
+        <a onclick="regresarCrudBodega()">Crud bodegas > </a> <!-- Enlace al listado de bodegas -->
+        <a>Confirmar Eliminacion</a> <!-- Página actual, no clickeable -->
     </li>
 {% endblock %}
 
 {% block header_title %}
+    <!-- Título principal de la página -->
     <h1 class="header-title">CONFIRMACION DE ELIMINACION</h1>
 {% endblock %}
 
 {% block content %}
     <section>
+        <!-- Pregunta de confirmación mostrando el nombre de la bodega -->
         <h1>¿Seguro que deseas eliminar la bodega: {{ bod.NombreBodega }} ?</h1>
         
+        <!-- Botón para volver al listado de bodegas -->
         <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
 
+        <!-- Formulario para enviar la eliminación vía POST -->
         <form method="POST" action="{% url 'eliminar-bodega' bod.IdBodega %}">
-            {% csrf_token %}
+            {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
             <button type="submit">ELIMINAR</button>
         </form>
+
         {% if valor %}
+        <!-- Si hay un valor que indica acción exitosa, se llama automáticamente a la función JS para regresar -->
         <script>
-            // Llamamos a tu función que estaba en mi_script.js
             regresarCrudBodega(); 
         </script>
         {% endif %}
