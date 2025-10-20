@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect  # 'render' para mostrar templates y 'redirect' para redirigir a otra URL
 from CrudEmpleadosApp.models import Empleados  # Importa el modelo Empleados desde la app CrudEmpleadosApp
 from . import forms  # Importa los formularios definidos en forms.py de la misma app
-
+from django.contrib import messages
 # Nota general:
 # Se utiliza 'redirect' después de procesar un formulario para evitar problemas de rutas
 # y evitar que se vuelvan a enviar los datos si el usuario recarga la página.
@@ -55,8 +55,11 @@ def empleadoRegistrationView(request):
             print("TELEFONO: ", form.cleaned_data['NumeroTelefonoEmpleado'])
             
             form.save()  # Guarda el nuevo empleado en la base de datos
+            messages.success(request, "Empleado registrado correctamente")
             return redirect('/adminhome/crud-empleado/')  # Redirige a la página de listado de empleados
-
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
+            
     data = {'form': form}  # Diccionario con el formulario para enviarlo al template
     return render(request, 'templateCrudEmpleado/registro-empleado.html', data)
 
@@ -93,18 +96,24 @@ def actualizarEmpleado(request, IdEmpleado):
 # ========================================================================
 # VISTA: Eliminar un empleado
 # ========================================================================
+def confirmarEliminar(request, IdEmpleado):
+    empleado = Empleados.objects.get(IdEmpleado=IdEmpleado)
+    data = {'emp' : empleado}
+    return render(request, 'templateCrudEmpleado/confirmar-eliminar.html', data)
+
+
 def eliminarEmpleado(request, IdEmpleado):
-    """
-    Elimina un empleado específico de la base de datos según su RUT
-    y redirige al listado de empleados.
-
-    Parámetros:
-    - request: Objeto HttpRequest con información de la solicitud.
-    - Rut: Identificador único del empleado a eliminar.
-
-    Retorna:
-    - redirect: Redirige a la página de listado de empleados después de eliminar.
-    """
     empleado = Empleados.objects.get(IdEmpleado=IdEmpleado)  # Obtiene el empleado a eliminar
-    empleado.delete()  # Elimina el registro de la base de datos
-    return redirect('/adminhome/crud-empleado/')  # Redirige al listado de empleados
+    if request.method == 'POST':
+        empleado.delete()
+        messages.success(request, f"El empleado '{empleado.NombreEmpleado}' fue eliminado correctamente.")
+        return redirect('/adminhome/crud-empleado/')
+    else:
+        messages.error(request, "Método no permitido para eliminar usuarios.")
+        return redirect('/adminhome/crud-empleado/')
+    
+#Detalle
+def detalleEmpleado(request, IdEmpleado):
+    empleado = Empleados.objects.get(IdEmpleado=IdEmpleado) 
+    data = {'emp' : empleado}
+    return render(request, 'templateCrudEmpleado/detalle-empleado.html', data)

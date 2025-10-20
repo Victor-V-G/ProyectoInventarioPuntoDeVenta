@@ -1,0 +1,37 @@
+{% extends 'base-crud.html' %}
+
+{% block title %}Detalles de Categorias{% endblock %}
+<!-- Título de la página -->
+{% block header_title %}
+    <h1 class="header-title">DETALLES DE CATEGORIAS</h1>
+    <button class="button-header" type="button" onclick="regresarCrudCategoriaProducto()">VOLVER</button>
+{% endblock %}
+
+
+{% block content %} 
+    <table>
+        <thead>
+            <tr>
+                <th>ID CATEGORIA PRODUCTO</th>
+                <th>Nombre Categoria</th>
+                <th>Descripcion Categoria</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ bod.IdCategoriaProducto}}</td>
+                <td>{{ bod.NombreCategoria }}</td>
+                <td>{{ bod.Descripcion }}</td>
+                <td>{{ bod.Estado }}</td>
+                <td>{{ bod.Observaciones }}</td>
+                <td>
+                    <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta Catgeoria?')) {regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')}">ACTUALIZAR</button>
+                    <button type="button" onclick="{regresarAdminOrHome('crud-categoriaProducto/confirmar-eliminar/{{ bod.IdCategoriaProducto }}')}">ELIMINAR</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

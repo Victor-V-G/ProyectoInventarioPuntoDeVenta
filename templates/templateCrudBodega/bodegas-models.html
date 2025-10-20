@@ -1,53 +1,46 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LISTA DE BODEGAS</title>
-    <script src='{%static "js/crudVolver.js" %}'></script>
-    <link rel="stylesheet" href="{%static 'css/models-style.css' %}">
-</head>
-<body>
-    <header>
+{% extends 'base-crud.html' %}
+
+    {% block title %}Lista de Bodegas{% endblock %}
+    <!-- Título de la página -->
+    {% block header_title %}
         <h1 class="header-title">LISTA DE BODEGAS</h1>
         <button class="button-header" type="button" onclick="crudVolver()">VOLVER</button>
         <a href="registro-bodega/"><button class="button-header" type="button">REGISTRAR BODEGA</button></a>
-    </header>
-    {% if Bodegas %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID BODEGA</th>
-                <th>Nombre bodega</th>
-                <th>Ubicacion bodega</th>
-                <th>Estado de la bodega</th>
-                <th>Observaciones</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for bod in Bodegas %}
-            <tr>
-                <td>{{ bod.IdBodega }}</td>
-                <td>{{ bod.NombreBodega }}</td>
-                <td>{{ bod.UbicacionBodega }}</td>
-                <td>{{ bod.EstadoBodega }}</td>
-                <td>{{ bod.ObservacionesBodega }}</td>
-                <td>
-                    <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta bodega?')) {regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')}">ACTUALIZAR</button>
-                    <a href="/adminhome/crud-bodegas/eliminar-bodega/{{ bod.IdBodega }}"><button onclick="return confirm('¿Seguro que deseas eliminar esta bodega?')">ELIMINAR</button></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <div class="no-registros">
-            <h1>NO HAY BODEGAS REGISTRADAS</h1>
-        </div>
-    {% endif %}
+    {% endblock %}
 
-    
-</body>
-</html>
+    {% block content %} 
+        {% if Bodegas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID BODEGA</th>
+                    <th>Nombre bodega</th>
+                    <th>Ubicacion bodega</th>
+                    <th>Estado de la bodega</th>
+                    <th>Observaciones</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bod in Bodegas %}
+                <tr>
+                    <td>{{ bod.IdBodega }}</td>
+                    <td>{{ bod.NombreBodega }}</td>
+                    <td>{{ bod.UbicacionBodega }}</td>
+                    <td>{{ bod.EstadoBodega }}</td>
+                    <td>{{ bod.ObservacionesBodega }}</td>
+                    <td>
+                        <button type="button" onclick="{regresarAdminOrHome('crud-bodegas/detalle-bodega/{{ bod.IdBodega }}')}">DETALLE</button>
+                        <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta bodega?')) {regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')}">ACTUALIZAR</button>
+                        <button type="button" onclick="{regresarAdminOrHome('crud-bodegas/confirmar-eliminar/{{ bod.IdBodega }}')}">ELIMINAR</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <div class="no-registros">
+                <h1>NO HAY BODEGAS REGISTRADAS</h1>
+            </div>
+        {% endif %}
+    {% endblock %}

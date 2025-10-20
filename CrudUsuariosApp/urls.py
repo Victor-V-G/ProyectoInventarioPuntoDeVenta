@@ -17,7 +17,7 @@ urlpatterns = [
     path('crud-usuarios/confirmar-eliminar/<int:IdUsuarios>', views.confirmarEliminar),
 
     #Eliminar
-    path('crud-usuarios/confirmar-eliminar/eliminar-usuario/<int:IdUsuarios>', views.eliminarUsuario),
+    path('crud-usuarios/eliminar-usuario/<int:IdUsuarios>/', views.eliminarUsuario, name='eliminar-usuario'),
 
     #Detalle
     path('crud-usuarios/detalle-usuario/<int:IdUsuarios>', views.detalleUsuario),

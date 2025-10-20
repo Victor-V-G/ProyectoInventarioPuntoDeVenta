@@ -1,52 +1,46 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LISTA DE CARGOS</title>
-    <link rel="stylesheet" href="{%static 'css/models-style.css' %}">
-</head>
-<body>
-    <header>
+{% extends 'base-crud.html' %}
+
+    {% block title %}Lista de Cargos{% endblock %}
+    
+    {% block header_title %}
         <h1 class="header-title">LISTA DE CARGOS</h1>
         <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
         <a href="registro-cargo/"><button class="button-header" type="button">REGISTRAR CARGOS</button></a>
-    </header>
-    {% if Cargos %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID CARGO</th>
-                <th>TIPO DE CARGO</th>
-                <th>ESTADO DEL CARGO</th>
-                <th>DESCRIPCION DEL CARGO</th>
-                <th>SUELDO BASE</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cag in Cargos %}
-            <tr>
-                <td>{{ cag.IdCargos}}</td>
-                <td>{{ cag.TipoDeCargo }}</td>
-                <td>{{ cag.EstadoDelCargo }}</td>
-                <td>{{ cag.DescripcionDelCargo }}</td>
-                <td>{{ cag.SueldoBase }}</td>
-                <td>
-                    <a href="/adminhome/crud-cargos/actualizar-cargo/{{ cag.IdCargos }}"><button onclick="return confirm('¿Seguro que deseas actualizar este cargo?')">ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-cargos/eliminar-cargo/{{ cag.IdCargos }}"><button onclick="return confirm('¿Seguro que deseas eliminar este cargo?')">ELIMINAR</button></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <div class="no-registros">
-            <h1>NO HAY CARGOS REGISTRADOS</h1>
-        </div>
-    {% endif %}
+    {% endblock %}
 
-    
-</body>
-</html>
+    {% block content %}
+        {% if Cargos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID CARGO</th>
+                    <th>TIPO DE CARGO</th>
+                    <th>ESTADO DEL CARGO</th>
+                    <th>DESCRIPCION DEL CARGO</th>
+                    <th>SUELDO BASE</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cag in Cargos %}
+                <tr>
+                    <td>{{ cag.IdCargos}}</td>
+                    <td>{{ cag.TipoDeCargo }}</td>
+                    <td>{{ cag.EstadoDelCargo }}</td>
+                    <td>{{ cag.DescripcionDelCargo }}</td>
+                    <td>{{ cag.SueldoBase }}</td>
+                    <td>
+                        <a href="/adminhome/crud-cargos/detalle-cargo/{{ cag.IdCargos }}"><button>DETALLE</button></a>
+                        <a href="/adminhome/crud-cargos/actualizar-cargo/{{ cag.IdCargos }}"><button onclick="return confirm('¿Seguro que deseas actualizar este cargo?')">ACTUALIZAR</button></a>
+                        <a href="/adminhome/crud-cargos/confirmar-eliminar/{{ cag.IdCargos }}"><button>ELIMINAR</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <div class="no-registros">
+                <h1>NO HAY CARGOS REGISTRADOS</h1>
+            </div>
+        {% endif %}
+    {% endblock %}

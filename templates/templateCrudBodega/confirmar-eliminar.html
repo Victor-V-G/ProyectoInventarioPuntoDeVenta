@@ -1,0 +1,28 @@
+{% extends 'base-crud.html' %}
+
+{% block title %}Confirmar eliminacion de bodega{% endblock %}
+
+{% block header_title %}
+    <h1 class="header-title">CONFIRMACION DE ELIMINACION</h1>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>¿Seguro que deseas eliminar la bodega: {{ bod.NombreBodega }} ?</h1>
+        
+        <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
+
+        <form method="POST" action="{% url 'eliminar-bodega' bod.IdBodega %}">
+            {% csrf_token %}
+            <button type="submit">ELIMINAR</button>
+        </form>
+        {% if valor %}
+        <script>
+            // Llamamos a tu función que estaba en mi_script.js
+            regresarCrudBodega(); 
+        </script>
+        {% endif %}
+    </section>
+{% endblock %}
+
+    

@@ -40,5 +40,12 @@ urlpatterns = [
     # --------------------------------------------------------------------
     # Similar al anterior, <int:Rut> indica el RUT del empleado a eliminar
     # http://<tu_dominio>/crud-empleado/eliminar-empleado/12345678
-    path('crud-empleado/eliminar-empleado/<int:IdEmpleado>', views.eliminarEmpleado)
+    path('crud-empleado/eliminar-empleado/<int:IdEmpleado>', views.eliminarEmpleado, name='eliminar-empleado'),
+
+
+    #Confirmacion Eliminar
+    path('crud-empleado/confirmar-eliminar/<int:IdEmpleado>', views.confirmarEliminar),
+
+    #Detalle
+    path('crud-empleado/detalle-empleado/<int:IdEmpleado>', views.detalleEmpleado),
 ]

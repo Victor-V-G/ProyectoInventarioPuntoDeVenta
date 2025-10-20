@@ -1,0 +1,44 @@
+{% extends 'base-crud.html' %}
+
+{% block title %}Detalle de Producto{% endblock %}
+<!-- Título de la página -->
+{% block header_title %}
+    <h1 class="header-title">DETALLES PRODUCTO</h1>
+    <!-- Botón para volver al listado de productos -->
+    <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
+{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID PRODUCTO</th>
+                <th>Código de barras</th>
+                <th>Valor</th>
+                <th>Stock</th>
+                <th>Nombre del producto</th>
+                <th>Fecha de registro</th>
+                <th>Marca</th>
+                <th>Fecha de vencimiento</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">{{ pro.IdProducto }}</td>
+                <td>{{ pro.CodigoDeBarras }}</td>
+                <td>{{ pro.ValorProducto }}</td>
+                <td>{{ pro.StockProducto }}</td>
+                <td>{{ pro.NombreProducto }}</td>
+                <td>{{ pro.FechaDeRegistroProducto }}</td>
+                <td>{{ pro.MarcaProducto }}</td>
+                <td>{{ pro.FechaDeVencimiento }}</td>
+                <!-- Enlaces para actualizar o eliminar el producto -->
+                <td>
+                    <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar este producto?')) {regresarAdminOrHome('crud-productos/actualizar-producto/{{ pro.IdProducto }}')}">ACTUALIZAR</button>
+                    <button type="button" onclick="{regresarAdminOrHome('crud-productos/confirmar-eliminar/{{ pro.IdProducto }}')}">ELIMINAR</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

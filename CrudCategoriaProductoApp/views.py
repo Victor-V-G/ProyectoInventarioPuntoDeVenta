@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from CrudCategoriaProductoApp.models import CategoriaProducto
 from . import forms
+from django.contrib import messages
+
 
 # Create your views here.
 def categoriaProductoData(request):
@@ -22,6 +24,9 @@ def categoriaProductoRegistracionView(request):
             print("OBSERVACIONES: ", form.cleaned_data['Observaciones'])
 
             form.save()
+            messages.success(request, "Categoria registrada correctamente")
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
     
     data = {
         'form': form,
@@ -45,8 +50,24 @@ def actualizarCategoriaProducto(request, IdCategoriaProducto):
         'valor': form.is_valid()}
     return render(request, 'templateCrudCategoriaProducto/registro-categoriaProducto.html', data)
 
-def eliminarCategoriaProducto(request, IdCategoriaProducto):
 
+def confirmarEliminar(request, IdCategoriaProducto):
     categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
-    categoriaProducto.delete()
-    return redirect('/adminhome/crud-categoriaProducto/')
+    data = {'bod' : categoriaProducto}
+    return render(request, 'templateCrudCategoriaProducto/confirmar-eliminar.html', data)
+
+
+def eliminarCategoriaProducto(request, IdCategoriaProducto):
+    categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
+    if request.method == 'POST':
+        categoriaProducto.delete()
+        messages.success(request, f"La categoria '{categoriaProducto.NombreCategoria}' fue eliminado correctamente.")
+        return render(request, 'templateCrudCategoriaProducto/redireccion.html')
+    else:
+        messages.error(request, "Método no permitido para eliminar usuarios.")
+
+#Detalle
+def detalleCategoriaProducto(request, IdCategoriaProducto):
+    categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
+    data = {'bod' : categoriaProducto}
+    return render(request, 'templateCrudCategoriaProducto/detalle-categoriaProducto.html', data)

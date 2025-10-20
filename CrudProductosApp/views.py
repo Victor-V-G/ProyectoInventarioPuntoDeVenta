@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect  # 'render' para mostrar templates y 'redirect' para redirigir
 from CrudProductosApp.models import Productos  # Importa el modelo Producto
 from . import forms  # Importa los formularios de la app CrudProductosApp
+from django.contrib import messages
 
 # ========================================================================
 # VISTA: Mostrar todos los productos
@@ -52,6 +53,9 @@ def productosRegistrationView(request):
             print("FECHA DE VENCIMIENTO: ", form.cleaned_data['FechaDeVencimiento'])
             
             form.save()  # Guarda el nuevo producto en la base de datos
+            messages.success(request, "Producto registrado correctamente")
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
     
     data = {
         'form': form,
@@ -90,18 +94,25 @@ def actualizarProducto(request, IdProducto):
 # ========================================================================
 # VISTA: Eliminar un producto
 # ========================================================================
+
+
+def confirmarEliminar(request, IdProducto):
+    producto = Productos.objects.get(IdProducto=IdProducto)
+    data = {'pro' : producto}
+    return render(request, 'templateCrudProducto/confirmar-eliminar.html', data)
+
+
 def eliminarProducto(request, IdProducto):
-    """
-    Elimina un producto específico de la base de datos según su IdProducto
-    y redirige al listado de productos.
+    producto = Productos.objects.get(IdProducto=IdProducto)
+    if request.method == 'POST':
+        producto.delete()
+        messages.success(request, f"El producto '{producto.NombreProducto}' fue eliminado correctamente.")
+        return render(request, 'templateCrudProducto/redireccion.html')
+    else:
+        messages.error(request, "Método no permitido para eliminar usuarios.")
 
-    Parámetros:
-    - request: Objeto HttpRequest con información de la solicitud.
-    - IdProducto: Identificador único del producto a eliminar.
-
-    Retorna:
-    - redirect: Redirige a la página de listado de productos después de eliminar.
-    """
-    producto = Productos.objects.get(IdProducto=IdProducto)  # Obtiene el producto a eliminar
-    producto.delete()  # Elimina el registro de la base de datos
-    return redirect('/adminhome/crud-productos/')  # Redirige al listado de productos
+#Detalle
+def detalleProducto(request, IdProducto):
+    producto = Productos.objects.get(IdProducto=IdProducto)
+    data = {'pro' : producto}
+    return render(request, 'templateCrudProducto/detalle-producto.html', data)

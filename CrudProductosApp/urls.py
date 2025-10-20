@@ -30,5 +30,11 @@ urlpatterns = [
     # --------------------------------------------------------------------
     # <int:IdProducto> indica que se espera un número entero correspondiente al ID del producto
     # http://<tu_dominio>/crud-producto/eliminar-producto/1
-    path('crud-productos/eliminar-producto/<int:IdProducto>', views.eliminarProducto)
+    path('crud-productos/eliminar-producto/<int:IdProducto>', views.eliminarProducto, name='eliminar-producto'),
+
+    #Confirmacion Eliminar
+    path('crud-productos/confirmar-eliminar/<int:IdProducto>', views.confirmarEliminar),
+
+    #Detalle
+    path('crud-productos/detalle-producto/<int:IdProducto>', views.detalleProducto),
 ]

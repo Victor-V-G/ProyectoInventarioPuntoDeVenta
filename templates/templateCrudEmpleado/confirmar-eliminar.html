@@ -1,0 +1,20 @@
+{% extends 'base-crud.html' %}
+
+{% block title %}Confirmar eliminacion de empleado{% endblock %}
+
+{% block header_title %}
+    <h1 class="header-title">CONFIRMACION DE ELIMINACION</h1>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>¿Seguro que deseas eliminar el empleado: {{ emp.NombreEmpleado }} ?</h1>
+        
+        <a href="/adminhome/crud-empleado/"><button class="button-header" type="button">VOLVER</button></a>
+
+        <form method="POST" action="{% url 'eliminar-empleado' emp.IdEmpleado %}">
+            {% csrf_token %}
+            <button type="submit">ELIMINAR</button>
+        </form>
+    </section>
+{% endblock %}

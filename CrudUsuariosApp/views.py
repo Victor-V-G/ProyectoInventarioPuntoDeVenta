@@ -57,8 +57,14 @@ def confirmarEliminar(request, IdUsuarios):
 
 def eliminarUsuario(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
-    usuario.delete()
-    return redirect('/adminhome/crud-usuarios/')
+
+    if request.method == 'POST':
+        usuario.delete()
+        messages.success(request, f"El usuario '{usuario.Username}' fue eliminado correctamente.")
+        return redirect('/adminhome/crud-usuarios/')
+    else:
+        messages.error(request, "Método no permitido para eliminar usuarios.")
+        return redirect('/adminhome/crud-usuarios/')
 
 
 #Detalle

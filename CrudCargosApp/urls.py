@@ -8,5 +8,11 @@ urlpatterns = [
     path('crud-cargos/', views.cargosData),
     path('crud-cargos/registro-cargo/', views.cargosRegistracionView),
     path('crud-cargos/actualizar-cargo/<int:IdCargos>', views.actualizarCargo),
-    path('crud-cargos/eliminar-cargo/<int:IdCargos>', views.eliminarCargo)
+    path('crud-cargos/eliminar-cargo/<int:IdCargos>', views.eliminarCargo, name='eliminar-cargo'),
+    #Confirmacion Eliminar
+    path('crud-cargos/confirmar-eliminar/<int:IdCargos>', views.confirmarEliminar),
+
+    #Detalle
+    path('crud-cargos/detalle-cargo/<int:IdCargos>', views.detalleCargo),
+
 ]

@@ -1,61 +1,52 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/models-style.css' %}">
-    <title>Listado de Empleados</title>
-</head>
-<body>
-    <!-- Título de la página -->
-    <header>
+{% extends 'base-crud.html' %}
+
+    {% block title %}Lista de Empleados{% endblock %}
+    
+    {% block header_title %}
         <h1 class="header-title">LISTA DE EMPLEADOS</h1>
         <!-- Botones de navegación -->
         <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
         <a href="registro-empleado/"><button class="button-header" type="button">REGISTRAR EMPLEADO</button></a>
-    </header>
-
+    {% endblock %}
     <!-- Verifica si hay empleados en la base de datos -->
-    {% if Empleados %}
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>RUT</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Edad</th>
-                <th>Telefono</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Recorre todos los empleados y muestra sus datos -->
-            {% for emp in Empleados %}
-            <tr>
-                <td>{{ emp.IdEmpleado }}</td>
-                <td>{{ emp.RutEmpleado }}</td>
-                <td>{{ emp.NombreEmpleado }}</td>
-                <td>{{ emp.ApellidoEmpleado }}</td>
-                <td>{{ emp.EdadEmpleado }}</td>
-                <td>{{ emp.NumeroTelefonoEmpleado }}</td>
-                <!-- Enlaces para actualizar o eliminar el empleado -->
-                <td>
-                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.IdEmpleado }}"><button onclick="return confirm('¿Seguro que deseas actualizar este empleado?')">ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-empleado/eliminar-empleado/{{ emp.IdEmpleado }}"><button onclick="return confirm('¿Seguro que deseas eliminar este empleado?')">ELIMINAR</button></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <!-- Mensaje cuando no hay empleados -->
-        <div class="no-registros">
-            <h1>NO HAY EMPLEADOS REGISTRADOS</h1>
-        </div>
-    {% endif %}
-
-    
-</body>
-</html>
+    {% block content %}
+        {% if Empleados %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>RUT</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Telefono</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Recorre todos los empleados y muestra sus datos -->
+                {% for emp in Empleados %}
+                <tr>
+                    <td>{{ emp.IdEmpleado }}</td>
+                    <td>{{ emp.RutEmpleado }}</td>
+                    <td>{{ emp.NombreEmpleado }}</td>
+                    <td>{{ emp.ApellidoEmpleado }}</td>
+                    <td>{{ emp.EdadEmpleado }}</td>
+                    <td>{{ emp.NumeroTelefonoEmpleado }}</td>
+                    <!-- Enlaces para actualizar o eliminar el empleado -->
+                    <td>
+                        <a href="/adminhome/crud-empleado/detalle-empleado/{{ emp.IdEmpleado }}"><button>DETALLE</button></a>
+                        <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.IdEmpleado }}"><button onclick="return confirm('¿Seguro que deseas actualizar este empleado?')">ACTUALIZAR</button></a>
+                        <a href="/adminhome/crud-empleado/confirmar-eliminar/{{ emp.IdEmpleado }}"><button>ELIMINAR</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <!-- Mensaje cuando no hay empleados -->
+            <div class="no-registros">
+                <h1>NO HAY EMPLEADOS REGISTRADOS</h1>
+            </div>
+        {% endif %}
+    {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from CrudBodegasApp.models import Bodegas
 from . import forms
+from django.contrib import messages
 
 # Create your views here.
 def bodegasData(request):
@@ -21,6 +22,10 @@ def bodegasRegistracionView(request):
             print("ESTADO DE LA BODEGA: ", form.cleaned_data['EstadoBodega'])
             print("OBSERVACIONES: ", form.cleaned_data['ObservacionesBodega'])
             form.save()
+            messages.success(request, "Producto registrado correctamente")
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
+
 
     data = {
         'form': form,
@@ -45,11 +50,24 @@ def actualizarBodega(request, IdBodega):
         }
     return render(request, 'templateCrudBodega/registro-bodega.html', data)
 
+def confirmarEliminar(request, IdBodega):
+    bodega = Bodegas.objects.get(IdBodega=IdBodega)
+    data = {'bod' : bodega}
+    return render(request, 'templateCrudBodega/confirmar-eliminar.html', data)
+
 
 def eliminarBodega(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)
-    bodega.delete()
-    return redirect('/adminhome/crud-bodegas/')
+    if request.method == 'POST':
+        bodega.delete()
+        messages.success(request, f"La Bodega '{bodega.NombreBodega}' fue eliminada correctamente.")
+        return render(request, 'templateCrudBodega/redireccion.html')
+    else:
+        messages.error(request, "Método no permitido para eliminar usuarios.")
 
 
-
+#Detalle
+def detalleBodega(request, IdBodega):
+    bodega = Bodegas.objects.get(IdBodega=IdBodega)
+    data = {'bod' : bodega}
+    return render(request, 'templateCrudBodega/detalle-bodega.html', data)

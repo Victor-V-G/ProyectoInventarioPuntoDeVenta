@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from CrudCargosApp.models import Cargos
 from . import forms
+from django.contrib import messages
 
 # Create your views here.
 def cargosData(request):
@@ -22,7 +23,11 @@ def cargosRegistracionView(request):
             print("SUELDO BASE: ", form.cleaned_data['SueldoBase'])
 
             form.save()
+            messages.success(request, "Cargo registrado correctamente")
             return redirect('/adminhome/crud-cargos/')
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
+
     
     data = {'form': form}
     return render(request, 'templateCrudCargo/registro-cargo.html', data)
@@ -42,8 +47,28 @@ def actualizarCargo(request, IdCargos):
     data = {'form': form}
     return render(request, 'templateCrudCargo/registro-cargo.html', data)
 
+#Eliminar
+def confirmarEliminar(request, IdCargos):
+    cargo = Cargos.objects.get(IdCargos=IdCargos)
+    data = {'cag' : cargo}
+    return render(request, 'templateCrudCargo/confirmar-eliminar.html', data)
+
 
 def eliminarCargo(request, IdCargos):
     cargo = Cargos.objects.get(IdCargos=IdCargos)
-    cargo.delete()
-    return redirect('/adminhome/crud-cargos/')
+
+    if request.method == 'POST':
+        cargo.delete()
+        messages.success(request, f"El cargo '{cargo.TipoDeCargo}' fue eliminado correctamente.")
+        return redirect('/adminhome/crud-cargos/')
+    else:
+        messages.error(request, "Método no permitido para eliminar usuarios.")
+        return redirect('/adminhome/crud-cargos/')
+    
+
+#Detalle
+def detalleCargo(request, IdCargos):
+    cargo = Cargos.objects.get(IdCargos=IdCargos)
+    data = {'cag' : cargo}
+    return render(request, 'templateCrudCargo/detalle-cargo.html', data)
+

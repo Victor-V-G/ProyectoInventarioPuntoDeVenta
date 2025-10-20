@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/forms-style.css' %}"> 
-    <title>Registro de Cargos</title>
-<body>
-    
-    <header>
+{% extends 'base-form.html' %}
+
+    <!-- Título de la página -->
+    {% block title %}Registro de cargos{% endblock %}
+
+    {% block header_title %}
         <h1 class="header-title">REGISTRO DE CARGOS</h1>
         <a href="/adminhome/crud-cargos"><button class="button-header" type="button">VOLVER</button></a>   
-    </header>
+    {% endblock %}
     
-    <form method="POST" novalidate>
-        {% csrf_token %}
-        {{ form.as_div }}
-        <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')"/>
-        
-    </form>
-
-</body>
-</html>
+    {% block content %}
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            {{ form.as_div }}
+            <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')"/>
+        </form>
+    {% endblock %}
