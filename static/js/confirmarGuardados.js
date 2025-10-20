@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const BotonDeGuardado = document.querySelector('input[name="_save"]');
     const BotonDeGuardado1 = document.querySelector('input[name="_addanother"]');
     const BotonDeGuardado2 = document.querySelector('input[name="_continue"]');
+    const BotonDeGuardado3 = document.querySelector('form[action$="delete/"] input[type="submit"]');
 
     if (BotonDeGuardado) {
         BotonDeGuardado.addEventListener('click', function(e) {
@@ -24,6 +25,14 @@ document.addEventListener('DOMContentLoaded', function() {
         BotonDeGuardado2.addEventListener('click', function(e) {
             // Muestra confirmación antes de guardar
             if (!confirm('¿Seguro que deseas guardar y seguir editando esta edicion?')) {
+                e.preventDefault();  // Cancela el guardado si el usuario presiona "Cancelar"
+            }
+        });
+    }
+    if (BotonDeGuardado3) {
+        BotonDeGuardado3.addEventListener('click', function(e) {
+            // Muestra confirmación antes de guardar
+            if (!confirm('¿Seguro que deseas eliminar esta edicion?')) {
                 e.preventDefault();  // Cancela el guardado si el usuario presiona "Cancelar"
             }
         });

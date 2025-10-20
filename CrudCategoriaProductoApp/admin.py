@@ -108,5 +108,10 @@ class CategoriaProductoAdmin(admin.ModelAdmin):
         count = queryset.count()
         super().delete_queryset(request, queryset)
         self.message_user(request, f"Se han eliminado {count} Categorias de Productos correctamente.")
-        
+
+# ========================================================================
+# Registro del modelo en el panel de administración
+# ========================================================================
+# Esto permite que podamos gestionar los registros directamente
+# desde el panel de administración de Django (crear, leer, actualizar y eliminar)
 admin.site.register(CategoriaProducto, CategoriaProductoAdmin)
