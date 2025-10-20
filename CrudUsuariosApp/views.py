@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from CrudUsuariosApp.models import Usuarios
 from . import forms
+from django.contrib import messages
 
 #Models
 def usuariosData(request):
@@ -23,7 +24,10 @@ def usuariosRegistrationView(request):
             print("CORREO ELECTRONICO: ", form.cleaned_data['CorreoElectronico'])
             
             form.save()
+            messages.success(request, "Usuario registrado correctamente")
             return redirect('/adminhome/crud-usuarios')
+        else:
+            messages.error(request, "Corrige los errores en el formulario antes de continuar")
         
     data = {'form': form}
     return render(request, 'templateCrudUsuario/registro-usuario.html', data)
@@ -45,7 +49,21 @@ def actualizarUsuario(request, IdUsuarios):
 
 
 #Eliminar
+def confirmarEliminar(request, IdUsuarios):
+    usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
+    data = {'usu' : usuario}
+    return render(request, 'templateCrudUsuario/confirmar-eliminar.html', data)
+
+
 def eliminarUsuario(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
     usuario.delete()
     return redirect('/adminhome/crud-usuarios/')
+
+
+#Detalle
+def detalleUsuario(request, IdUsuarios):
+    usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
+    data = {'usu' : usuario}
+    return render(request, 'templateCrudUsuario/detalle-usuario.html', data)
+

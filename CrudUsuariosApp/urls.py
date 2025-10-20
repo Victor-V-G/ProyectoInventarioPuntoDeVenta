@@ -13,6 +13,12 @@ urlpatterns = [
     #Actualizar
     path('crud-usuarios/actualizar-usuario/<int:IdUsuarios>', views.actualizarUsuario),
 
+    #Confirmacion Eliminar
+    path('crud-usuarios/confirmar-eliminar/<int:IdUsuarios>', views.confirmarEliminar),
+
     #Eliminar
-    path('crud-usuarios/eliminar-usuario/<int:IdUsuarios>', views.eliminarUsuario)
+    path('crud-usuarios/confirmar-eliminar/eliminar-usuario/<int:IdUsuarios>', views.eliminarUsuario),
+
+    #Detalle
+    path('crud-usuarios/detalle-usuario/<int:IdUsuarios>', views.detalleUsuario),
 ]

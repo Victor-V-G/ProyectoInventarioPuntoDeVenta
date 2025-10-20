@@ -1,55 +1,46 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/models-style.css' %}">
-    <title>USUARIO MODELS</title>
-</head>
-<body>
+{% extends 'base-crud.html' %}
+
+    {% block title %}Lista de Usuarios{% endblock %}
     
-    <header>
+    {% block header_title %}
         <h1 class="header-title">LISTA DE USUARIOS</h1>
         <!-- Botones de navegación -->
         <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
         <a href="registro-usuario/"><button class="button-header" type="button">REGISTRAR USUARIO</button></a>
-    </header>
+    {% endblock %}
 
-    {%if Usuarios %}
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID USUARIO</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Correo Electronico</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for usu in Usuarios %}
-            <tr>
-                <td scope="row">{{ usu.IdUsuarios }}</td>
-                <td>{{ usu.Username }}</td>
-                <td>{{ usu.Password }}</td>
-                <td>{{ usu.CorreoElectronico }}</td>
-                <!-- Enlaces para actualizar o eliminar el usuario -->
-                <td>
-                    <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}"><button onclick="return confirm('¿Seguro que deseas actualizar este producto?')">ACTUALIZAR</button></a>
-                    <a href="/adminhome/crud-usuarios/eliminar-usuario/{{ usu.IdUsuarios }}"><button onclick="return confirm('¿Seguro que deseas eliminar este producto?')">ELIMINAR</button></a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <div class="no-registros">
-            <h1>NO HAY USUARIOS REGISTRADOS</h1>
-        </div>
-    {% endif %}
-
-    
-</body>
-</html>
+    {% block content %}
+        {%if Usuarios %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID USUARIO</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Correo Electronico</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usu in Usuarios %}
+                <tr>
+                    <td scope="row">{{ usu.IdUsuarios }}</td>
+                    <td>{{ usu.Username }}</td>
+                    <td>{{ usu.Password }}</td>
+                    <td>{{ usu.CorreoElectronico }}</td>
+                    <!-- Enlaces para actualizar o eliminar el usuario -->
+                    <td>
+                        <a href="/adminhome/crud-usuarios/detalle-usuario/{{ usu.IdUsuarios }}"><button>DETALLE</button></a>
+                        <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}"><button onclick="return confirm('¿Seguro que deseas actualizar este producto?')">ACTUALIZAR</button></a>
+                        <a href="/adminhome/crud-usuarios/confirmar-eliminar/{{ usu.IdUsuarios }}"><button>ELIMINAR</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <div class="no-registros">
+                <h1>NO HAY USUARIOS REGISTRADOS</h1>
+            </div>
+        {% endif %}
+    {% endblock %}

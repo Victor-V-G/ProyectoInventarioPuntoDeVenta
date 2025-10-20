@@ -1,0 +1,16 @@
+{% extends 'base-crud.html' %}
+
+{% block title %}Confirmar eliminacion de usuario{% endblock %}
+
+{% block header_title %}
+    <h1 class="header-title">DETALLE DEL USUARIO</h1>
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h1>¿Seguro que deseas eliminar el usuario?</h1>
+        
+        <a href="/adminhome/crud-usuarios/"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="/adminhome/crud-usuarios/confirmar-eliminar/eliminar-usuario/{{ usu.IdUsuarios }}"><button>ELIMINAR</button></a>
+    </section>
+{% endblock %}

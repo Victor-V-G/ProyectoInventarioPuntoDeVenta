@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/models-style.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <!-- Mensajes de feedback -->
+    {% if messages %}
+        <section class="messages">
+            {% for message in messages %}
+                <div class="message">
+                    <h1>{{ message }}</h1>
+                </div>
+            {% endfor %}
+        </section>
+    {% endif %}
+
+    <!-- Header general -->
+    <header class="main-header">
+        {% block header_title %}{% endblock %}
+    </header>
+
+    <!-- Contenido dinámico (tablas) -->
+    {% block content %}{% endblock %}
+    
+
+</body>
+</html>
