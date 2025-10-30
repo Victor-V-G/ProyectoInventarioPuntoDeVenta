@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'CrudCategoriaProductoApp',
     'CrudBodegasApp',
     'CrudCargosApp',
+    'bootstrap_datepicker_plus'
 ]
 
 MIDDLEWARE = [
@@ -121,13 +122,20 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-cl' #Lenguaje pagina
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago' # Zona horaria
 
-USE_I18N = True
+USE_I18N = True # Traduccion de texto
 
-USE_TZ = True
+USE_L10N = True #Fechas segun horario definido en Time_Zone
+
+USE_TZ = True #Usa la zona horaria especificada en Time_Zone
+
+
+##FORMATEO DE FECHAS PARA SER DIA-MES-AÑO
+DATE_INPUT_FORMATS = ['%d-%m-%Y'] ##Define datos de fecha que django aceptara como validos
+DATE_FORMAT = 'd-m-Y' ##Define como django mostrara las fechas
 
 
 # Static files (CSS, JavaScript, Images)

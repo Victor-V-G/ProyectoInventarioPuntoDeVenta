@@ -3,6 +3,7 @@ from django import forms  # Importa el módulo de formularios de Django
 from CrudProductosApp.models import Productos  # Importa el modelo Producto
 import re
 from datetime import date
+from bootstrap_datepicker_plus.widgets import DatePickerInput #Importacion de wiget de fehc
 
 # ========================================================================
 # Formulario: Registro de Productos
@@ -26,7 +27,7 @@ class ProductoRegistrationForm(forms.ModelForm):
         },
         widget=forms.DateInput(
             format='%d-%m-%Y',
-            attrs={'placeholder': 'DD-MM-YYYY', 'type': 'text'}  # Tipo text para permitir máscara
+            attrs={'placeholder': 'DD-MM-YYYY', 'type': 'date'}  # Tipo text para permitir máscara
         )
     )
 

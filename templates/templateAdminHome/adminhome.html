@@ -1,81 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-{%load static%}
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME ADMIN</title>
-    <link rel="stylesheet" href="{%static 'css/admin-home-style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin-home-style.css' %}">
 </head>
 <body class="inicio-div-style">
 
-    <div >
+    <header>
+        <h1>PANEL DE ADMINISTRACION</h1>
+    </header>
 
-        <header>
+    <main>
 
-            <h1>BIENVENIDO ADMIN. ELIJA UNA OPCION.</h1>
+        <nav>
 
-        </header>
+            <a href="/adminhome/crud-empleado/">
+                <button class="area-empleados">
+                    <img src="{% static 'images/business-people.png' %}" class="inicio-style-img">
+                    <span>CRUD EMPLEADOS</span>
+                </button>
+            </a>
 
-        <main>
+            <a href="/adminhome/crud-usuarios/">
+                <button class="area-usuarios">
+                    <img src="{% static 'images/user-interface.png' %}" class="inicio-style-img">
+                    <span>CRUD USUARIOS</span>
+                </button>
+            </a>
 
-            <nav>
+            <a href="/adminhome/crud-productos/">
+                <button class="area-productos">
+                    <img src="{% static 'images/caja-de-entrega.png' %}" class="inicio-style-img">
+                    <span>CRUD PRODUCTOS</span>
+                </button>
+            </a>
 
-                <a href="/adminhome/crud-empleado/">
-                    <button>
-                        <img src="{%static 'images/business-people.png'%}" class="inicio-style-img">
-                        <span>ACCEDER CRUD EMPLEADOS</span>
-                    </button>
-                    
-                </a>
+            <a href="/adminhome/crud-categoriaProducto/">
+                <button class="area-categorias">
+                    <img src="{% static 'images/categorizacion.png' %}" class="inicio-style-img">
+                    <span>CRUD CATEGORÍAS</span>
+                </button>
+            </a>
 
-                <a href="/adminhome/crud-usuarios/">
-                    <button>
-                        <img src="{%static 'images/user-interface.png'%}" class="inicio-style-img">
-                        <span>ACCEDER CRUD USUARIOS</span>
-                    </button>
-                </a>
+            <a href="/adminhome/crud-bodegas/">
+                <button class="area-bodegas">
+                    <img src="{% static 'images/bodega.png' %}" class="inicio-style-img">
+                    <span>CRUD BODEGAS</span>
+                </button>
+            </a>
 
-                <a href="/adminhome/crud-productos/">
-                    <button>
-                        <img src="{%static 'images/caja-de-entrega.png'%}" class="inicio-style-img">
-                        <span>ACCEDER CRUD PRODUCTOS</span>
-                    </button>
-                </a>
+            <a href="/adminhome/crud-cargos/">
+                <button class="area-cargos">
+                    <img src="{% static 'images/cargos.png' %}" class="inicio-style-img">
+                    <span>CRUD CARGOS</span>
+                </button>
+            </a>
 
-                <a href="/adminhome/crud-categoriaProducto/">
-                    <button>
-                        <img src="{%static 'images/categorizacion.png'%}" class="inicio-style-img">
-                        <span>ACCEDER CRUD CATEGORIAS</span>
-                    </button>
-                </a>
+            <a href="/">
+                <button class="area-cerrar">
+                    <img src="{% static 'images/cerrar-sesion.png' %}" class="inicio-style-img">
+                    <span>CERRAR SESIÓN</span>
+                </button>
+            </a>
 
-                <a href="/adminhome/crud-bodegas/">
-                    <button>
-                        <img src="{%static 'images/bodega.png'%}" class="inicio-style-img">
-                        <span>ACCEDER CRUD BODEGA</span>
-                    </button>
-                </a>
+        </nav>
 
-                <a href="/adminhome/crud-cargos/">
-                    <button>
-                        <img src="{%static 'images/cargos.png'%}" class="inicio-style-img">
-                        <span>ACCEDER CRUD CARGOS</span>
-                    </button>
-                </a>
-
-                <a href="/">
-                    <button>
-                        <img src="{%static 'images/cerrar-sesion.png'%}" class="inicio-style-img">
-                        <span>CERRAR SESION</span>
-                    </button>
-                </a>
-
-            </nav>
-            
-        </main>
-
-    </div>
+    </main>
 
 </body>
 </html>
