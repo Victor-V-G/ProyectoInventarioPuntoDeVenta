@@ -16,7 +16,13 @@
     <!-- Título principal de la página -->
     <h1 class="header-title">LISTA DE PRODUCTOS</h1>
     <!-- Botones de navegación -->
-    <button class="button-header" type="button" onclick="crudVolver()">VOLVER</button>
+     
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'adminhome' %}">Volver al Panel Admin</a>
+    {% else %}
+        <a href="{% url 'home' %}">Volver al Inicio</a>
+    {% endif %}
+
     <!-- Botón para registrar un nuevo producto -->
     <a href="registro-producto/"><button class="button-header" type="button">REGISTRAR PRODUCTO</button></a>
 {% endblock %}

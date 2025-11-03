@@ -16,7 +16,7 @@ urlpatterns = [
 
     # Ruta raíz del home de administrador
     # Al acceder a la raíz (''), se ejecuta la view renderAdminHome
-    path('', renderAdminHome),
+    path('', renderAdminHome, name='adminhome'),
 
     # Rutas para CRUD de empleados
     # Todas las URLs definidas en CrudEmpleadosApp.urls se incluyen bajo /crudempleados/

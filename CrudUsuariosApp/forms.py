@@ -1,13 +1,18 @@
 from django import forms
 from CrudUsuariosApp.models import Usuarios
 import re
+from django.contrib.auth.hashers import make_password
 
 # Formulario para registrar usuarios basado en el modelo Usuarios
 class UsuarioRegistrationForm(forms.ModelForm):
+    ConfirmarPassword = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Repita su contraseña'}),
+        label="Confirmar contraseña"
+    )
 
     class Meta:
         model = Usuarios  # Modelo en el que se basa el formulario
-        fields = '__all__'  # Incluye todos los campos del modelo
+        fields = ['Username', 'Password', 'ConfirmarPassword', 'CorreoElectronico']  # Incluye todos los campos del modelo
 
         # Etiquetas visibles en el formulario
         labels = {
@@ -86,5 +91,16 @@ class UsuarioRegistrationForm(forms.ModelForm):
             )
 
         return inputPassword
-
     
+
+    def clean(self):
+        cleaned_data = super().clean()
+        Password = cleaned_data.get("Password")
+        ConfirmarPassword = cleaned_data.get("ConfirmarPassword")
+
+        if Password != ConfirmarPassword:
+            raise forms.ValidationError("Las contraseñas no coinciden")
+        
+        cleaned_data["Password"] = make_password(Password)
+    
+        return cleaned_data

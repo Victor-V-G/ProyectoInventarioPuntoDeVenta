@@ -8,7 +8,7 @@ from CrudBodegasApp import views              # Importa views de la app CrudBode
 urlpatterns = [
     # Ruta raíz de HomeApp ('/')
     # Al acceder a la raíz de HomeApp, se ejecuta la view renderTemplateHome
-    path('', renderTemplateHome),
+    path('', renderTemplateHome, name='home'),
 
     # Rutas para CRUD de productos
     # Todas las URLs definidas en CrudProductosApp.urls se incluirán bajo /crudproductos/

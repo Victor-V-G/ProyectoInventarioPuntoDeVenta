@@ -94,32 +94,6 @@ class Usuarios(models.Model):
     )
     # --------------------------------------------------------------------
 
-    # ============================================================
-    # Validación general del formulario
-    # ============================================================
-    # Este método se llama automáticamente después de validar los campos individuales.
-    # Sirve para realizar validaciones que dependan de más de un campo.
-    def clean(self): 
-        super().clean()  # Llama a la limpieza y validación base del formulario
-    
-        # Valida que los campos Password y ConfirmarPassword coincidan
-        if self.Password != self.ConfirmarPassword:
-            raise ValidationError({
-                'ConfirmarPassword': 'Las passwords ingresadas no coinciden'
-            })
-
-
-    # ============================================================
-    # Campo para confirmar la contraseña ingresada por el usuario
-    # ============================================================
-    ConfirmarPassword = models.CharField(
-        max_length=128,  # Limita la longitud máxima de la contraseña
-        db_column='ConfirmarPassword',  # Nombre de la columna en la base de datos
-        verbose_name='Confirmar password',  # Etiqueta legible en el admin y formularios
-        validators=[
-            MinLengthValidator(5, message="La password debe tener al menos 5 caracteres")
-        ]  # Valida que tenga al menos 5 caracteres
-    )
 
 
     # ============================================================

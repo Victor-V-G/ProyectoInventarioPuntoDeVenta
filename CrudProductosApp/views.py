@@ -54,6 +54,7 @@ def productosRegistrationView(request):
             
             form.save()  # Guarda el nuevo producto en la base de datos
             messages.success(request, "Producto registrado correctamente")
+
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
     

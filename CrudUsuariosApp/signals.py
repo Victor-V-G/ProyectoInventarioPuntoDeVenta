@@ -15,7 +15,6 @@ def CrearUsuarioAdminDefault(sender, **kwargs):
         Usuarios.objects.create(
             Username="Admin",
             Password=make_password("Admin123"),
-            ConfirmarPassword="Admin123",
             CorreoElectronico="admin@gmail.com",
         )
         print("Usuario admin creado con éxito automáticamente")

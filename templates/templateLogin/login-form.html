@@ -1,0 +1,21 @@
+{% extends 'base-form.html' %}
+<!-- Extiende la plantilla base para formularios que incluye estilos y scripts específicos para formularios -->
+
+{% block title %}LOGIN{% endblock %}
+<!-- Título de la página que se mostrará en la pestaña del navegador -->
+
+{% block header_title %}
+    <!-- Título principal de la página y botón para volver al listado de empleados -->
+    <h1>LOGIN</h1>
+{% endblock %}
+
+{% block content %}
+    <!-- Contenido principal: formulario para registrar o actualizar empleados -->
+    <form method="POST" novalidate>
+        {% csrf_token %} <!-- Token de seguridad obligatorio en Django para prevenir CSRF -->
+        {{ form.as_div }} <!-- Renderiza automáticamente todos los campos del formulario dentro de divs -->
+        <input class="form-enviar" type="submit" value="ENVIAR">
+        <!-- Botón para enviar el formulario con confirmación del usuario -->
+    </form>
+{% endblock %}
+
