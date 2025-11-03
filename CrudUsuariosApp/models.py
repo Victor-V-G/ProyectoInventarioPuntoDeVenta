@@ -85,7 +85,7 @@ class Usuarios(models.Model):
     # db_column: mapea al campo real en la base de datos.
     # --------------------------------------------------------------------
     Password = models.CharField(
-        max_length=45, 
+        max_length=128, 
         db_column='Password',
         validators=[
             validacion_password_segura,
@@ -113,7 +113,7 @@ class Usuarios(models.Model):
     # Campo para confirmar la contraseña ingresada por el usuario
     # ============================================================
     ConfirmarPassword = models.CharField(
-        max_length=45,  # Limita la longitud máxima de la contraseña
+        max_length=128,  # Limita la longitud máxima de la contraseña
         db_column='ConfirmarPassword',  # Nombre de la columna en la base de datos
         verbose_name='Confirmar password',  # Etiqueta legible en el admin y formularios
         validators=[

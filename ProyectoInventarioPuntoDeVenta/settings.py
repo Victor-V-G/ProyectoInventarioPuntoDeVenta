@@ -42,12 +42,11 @@ INSTALLED_APPS = [
     'AdminHomeApp',
     'HomeApp',
     'CrudEmpleadosApp',
-    'CrudUsuariosApp',
     'CrudProductosApp',
     'CrudCategoriaProductoApp',
     'CrudBodegasApp',
     'CrudCargosApp',
-    'bootstrap_datepicker_plus'
+    'CrudUsuariosApp.apps.CrudusuariosappConfig'
 ]
 
 MIDDLEWARE = [

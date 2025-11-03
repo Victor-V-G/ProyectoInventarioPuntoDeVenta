@@ -3,7 +3,6 @@ from django import forms  # Importa el módulo de formularios de Django
 from CrudProductosApp.models import Productos  # Importa el modelo Producto
 import re
 from datetime import date
-from bootstrap_datepicker_plus.widgets import DatePickerInput #Importacion de wiget de fehc
 
 # ========================================================================
 # Formulario: Registro de Productos
