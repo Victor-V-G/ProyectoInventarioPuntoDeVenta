@@ -3,6 +3,8 @@ from django import forms  # Importa el módulo de formularios de Django
 from CrudProductosApp.models import Productos  # Importa el modelo Producto
 import re
 from datetime import date
+from CrudCategoriaProductoApp.models import CategoriaProducto #Se importa el models para hacer uso de la llave foranea
+
 
 # ========================================================================
 # Formulario: Registro de Productos
@@ -148,3 +150,9 @@ class ProductoRegistrationForm(forms.ModelForm):
             raise forms.ValidationError("La fecha de vencimiento no puede ser anterior a la fecha actual.")
 
         return inputFechaDeVencimiento
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['CategoriaProducto'].queryset = CategoriaProducto.objects.all()
+        self.fields['CategoriaProducto'].label_from_instance = lambda obj: obj.NombreCategoria

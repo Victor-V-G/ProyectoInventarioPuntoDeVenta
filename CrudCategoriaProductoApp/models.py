@@ -142,6 +142,7 @@ class CategoriaProducto(models.Model):
         constraints = [
             UniqueConstraint(fields=['IdCategoriaProducto'], name='unique_id_categoria_producto'),
         ]
+        
     # --------------------------------------------------------------------
 
 

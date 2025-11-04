@@ -12,6 +12,7 @@ from django.db.models import UniqueConstraint
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.utils import timezone
 from django.core.exceptions import ValidationError
+from CrudCategoriaProductoApp.models import CategoriaProducto #Se importa el models para hacer uso de la llave foranea
 
 
 # ========================================================================
@@ -162,6 +163,22 @@ class Productos(models.Model):
     # --------------------------------------------------------------------
 
 
+    ###LLAVE FORANEA###
+    CategoriaProducto = models.ForeignKey(
+        CategoriaProducto, #Modelo Relacionado
+        on_delete=models.SET_NULL,
+        related_name="producto", #Para acceder a el desde categoria
+        db_column="CatgeoriaProductoId", #Nombre que tendra en la base de datos
+        null=True, #Si puede quedar nulo
+        blank=False #Si puede quedar vacio
+    )
+    #models.CASCADE → borra también el relacionado.
+    #models.PROTECT → impide borrarlo si está en uso.
+    #models.SET_NULL → pone NULL en la FK.
+    #models.SET_DEFAULT → asigna valor por defecto
+
+    #default="Sin valor", #Lo que ocurrre segun la lista de abajo si se elimina
+
     # --------------------------------------------------------------------
     # Meta información del modelo
     # --------------------------------------------------------------------
@@ -187,4 +204,6 @@ class Productos(models.Model):
     # Devuelve una cadena legible con la información principal del producto.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdProducto}, NOMBRE: {self.NombreProducto}, CODIGO DE BARRAS: {self.CodigoDeBarras}, VALOR: {self.ValorProducto}, STOCK: {self.StockProducto}, MARCA: {self.MarcaProducto}, FECHA DE REGISTRO: {self.FechaDeRegistroProducto}, FECHA DE VENCIMIENTO: {self.FechaDeVencimiento}"
+        return f"ID: {self.IdProducto}, NOMBRE: {self.NombreProducto}, CODIGO DE BARRAS: {self.CodigoDeBarras}, VALOR: {self.ValorProducto}, STOCK: {self.StockProducto}, MARCA: {self.MarcaProducto}, FECHA DE REGISTRO: {self.FechaDeRegistroProducto}, FECHA DE VENCIMIENTO: {self.FechaDeVencimiento}, CATEGORIA PRODUCTO: {self.CategoriaProducto}"
+    
+    
