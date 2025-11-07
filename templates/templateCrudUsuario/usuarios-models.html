@@ -34,6 +34,8 @@
                     <th>Username</th>
                     <th>Password</th>
                     <th>Correo Electronico</th>
+                    <th>Empleado Asociado</th>
+                    <th>Cargo Asociado</th>
                     <th>Acciones</th> <!-- Columna para botones de acciones -->
                 </tr>
             </thead>
@@ -45,6 +47,8 @@
                         <td>{{ usu.Username }}</td>
                         <td>{{ usu.Password }}</td>
                         <td>{{ usu.CorreoElectronico }}</td>
+                        <td>{{ usu.Empleado }}</td>
+                        <td>{{ usu.Cargo }}</td>
                         <td>
                             <!-- Botones de acción para cada usuario -->
                             <a href="/adminhome/crud-usuarios/detalle-usuario/{{ usu.IdUsuarios }}">

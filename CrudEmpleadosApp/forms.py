@@ -30,6 +30,8 @@ class EmpleadoRegistrationForm(forms.ModelForm):
             'ApellidoEmpleado': 'Apellido',
             'EdadEmpleado': 'Edad',
             'NumeroTelefonoEmpleado': 'Numero telefonico',
+            'Empleado': 'Empleado Seleccionado',
+            'Cargo': 'Cargo Seleccionado'
         }
 
         # Ayudas que se muestran como hint en los campos
@@ -39,6 +41,8 @@ class EmpleadoRegistrationForm(forms.ModelForm):
             'ApellidoEmpleado': 'Indique el apellido del empleado',
             'EdadEmpleado': 'Ingrese la edad del empleado',
             'NumeroTelefonoEmpleado': 'Ingrese el numero telefonico del empleado',
+            'Empleado': 'Eliga un Empleado',
+            'Cargo': 'Eliga un Cargo'
         }
 
         # Mensajes de error personalizados

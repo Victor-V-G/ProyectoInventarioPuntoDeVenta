@@ -225,4 +225,4 @@ class Empleados(models.Model):
     # Muestra los datos principales del empleado en una sola línea.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdEmpleado}, Nombre: {self.NombreEmpleado}, Apellido: {self.ApellidoEmpleado}, Rut: {self.RutEmpleado}, Edad: {self.EdadEmpleado}, Telefono: {self.NumeroTelefonoEmpleado} "
+        return f"Nombre Completo: {self.NombreEmpleado} {self.ApellidoEmpleado}, Rut: {self.RutEmpleado}"

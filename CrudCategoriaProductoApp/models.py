@@ -154,4 +154,4 @@ class CategoriaProducto(models.Model):
     # o en la shell de Django. Muestra los campos principales de la categoría.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdCategoriaProducto}, Nombre: {self.NombreCategoria}, Descripcion: {self.Descripcion}, Estado: {self.Estado}, Observaciones: {self.Observaciones}"
+        return f"NOMBRE: {self.NombreCategoria}, DESCRIPCION: {self.Descripcion}"

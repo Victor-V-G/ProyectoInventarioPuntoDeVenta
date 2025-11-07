@@ -13,6 +13,7 @@ def usuariosData(request):
 #Form
 def usuariosRegistrationView(request):
     form = forms.UsuarioRegistrationForm()
+    actualizar = False
 
     if request.method == 'POST':
         form = forms.UsuarioRegistrationForm(request.POST)
@@ -22,6 +23,8 @@ def usuariosRegistrationView(request):
             print("PASSWORD: ", form.cleaned_data['Password'])
             print("CONFIRMAR PASSWORD: ", form.cleaned_data['ConfirmarPassword'])
             print("CORREO ELECTRONICO: ", form.cleaned_data['CorreoElectronico'])
+            print("USUARIO SELECCIONADO", form.cleaned_data['Usuario'])
+            print("CARGO SELECCIONADO", form.cleaned_data['Cargo'])
             
             form.save()
             messages.success(request, "Usuario registrado correctamente")
@@ -29,17 +32,20 @@ def usuariosRegistrationView(request):
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
         
-    data = {'form': form}
+    data = {
+        'form': form,
+        'actualizar': actualizar}
     return render(request, 'templateCrudUsuario/registro-usuario.html', data)
 
 
 #Actualizar
 def actualizarUsuario(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
-    form = forms.UsuarioRegistrationForm(instance=usuario)
+    form = forms.UsuarioUpdateForm(instance=usuario)
+    actualizar = True
 
     if request.method == 'POST':
-        form = forms.UsuarioRegistrationForm(request.POST, instance=usuario)
+        form = forms.UsuarioUpdateForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
             messages.success(request, "Usuario actualizado correctamente")
@@ -47,7 +53,9 @@ def actualizarUsuario(request, IdUsuarios):
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
             
-    data = {'form': form}
+    data = {
+        'form': form,
+        'actualizar': actualizar}
     return render(request, 'templateCrudUsuario/registro-usuario.html', data)
 
 

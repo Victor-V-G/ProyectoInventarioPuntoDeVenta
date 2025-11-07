@@ -162,15 +162,15 @@ class Productos(models.Model):
     )
     # --------------------------------------------------------------------
 
-
     ###LLAVE FORANEA###
     CategoriaProducto = models.ForeignKey(
         CategoriaProducto, #Modelo Relacionado
         on_delete=models.SET_NULL,
         related_name="producto", #Para acceder a el desde categoria
-        db_column="CatgeoriaProductoId", #Nombre que tendra en la base de datos
+        db_column="CategoriaProductoId", #Nombre que tendra en la base de datos
         null=True, #Si puede quedar nulo
-        blank=False #Si puede quedar vacio
+        blank=True #Si puede quedar vacio
+        #SI NULL Y BLANK QUEDAN EN FALSE LA VALIDACION PERSONALIZADA QUEDA INACTIVA
     )
     #models.CASCADE → borra también el relacionado.
     #models.PROTECT → impide borrarlo si está en uso.
@@ -178,6 +178,7 @@ class Productos(models.Model):
     #models.SET_DEFAULT → asigna valor por defecto
 
     #default="Sin valor", #Lo que ocurrre segun la lista de abajo si se elimina
+
 
     # --------------------------------------------------------------------
     # Meta información del modelo

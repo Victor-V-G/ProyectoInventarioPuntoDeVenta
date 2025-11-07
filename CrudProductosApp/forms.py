@@ -17,21 +17,6 @@ from CrudCategoriaProductoApp.models import CategoriaProducto #Se importa el mod
 # Formulario para registrar productos basado en el modelo Productos
 class ProductoRegistrationForm(forms.ModelForm):
 
-    # Campo personalizado de fecha de vencimiento con formato DD-MM-YYYY
-    FechaDeVencimiento = forms.DateField(
-        input_formats=['%d-%m-%Y'],  # Formato de entrada esperado
-        label='Fecha de vencimiento',
-        help_text='Indique la fecha de vencimiento mencionada en el producto (DD-MM-YYYY).',
-        error_messages={
-            'required': 'Por favor introduzca la fecha de vencimiento del producto',
-            'invalid': 'Ingrese una fecha válida en formato DD-MM-YYYY.'
-        },
-        widget=forms.DateInput(
-            format='%d-%m-%Y',
-            attrs={'placeholder': 'DD-MM-YYYY', 'type': 'date'}  # Tipo text para permitir máscara
-        )
-    )
-
     class Meta:
         model = Productos  # Modelo al que está vinculado el formulario
         fields = '__all__'  # Incluye todos los campos del modelo
@@ -43,6 +28,8 @@ class ProductoRegistrationForm(forms.ModelForm):
             'StockProducto': 'Stock',
             'NombreProducto': 'Nombre del producto',
             'MarcaProducto': 'Marca del producto',
+            'CategoriaProducto': 'Categoria del Producto',
+            'FechaDeVencimiento': 'Fecha de vencimiento',
         }
 
         # Ayudas que aparecen junto a los campos
@@ -52,6 +39,8 @@ class ProductoRegistrationForm(forms.ModelForm):
             'StockProducto': 'No esta permitido registrar el producto sin stock',
             'NombreProducto': 'Ingrese el nombre tal cual muestra el producto',
             'MarcaProducto': 'Indique la marca la cual pertenece el producto',
+            'CategoriaProducto': 'Seleccione la categoria del producto (Previamente registrada.)',
+            'FechaDeVencimiento': 'Indique la fecha de vencimiento mencionada en el producto (DD-MM-YYYY).',
         }
 
         # Mensajes de error personalizados
@@ -75,6 +64,10 @@ class ProductoRegistrationForm(forms.ModelForm):
             'MarcaProducto': {
                 'required': 'Por favor introduzca la marca del producto',
             },
+            'FechaDeVencimiento': {
+                'required': 'Por favor introduzca la fecha de vencimiento del producto',
+                'invalid': 'Ingrese una fecha válida en formato DD-MM-YYYY.'
+            }
         }
 
         # Widgets para personalizar el HTML de cada campo
@@ -84,6 +77,7 @@ class ProductoRegistrationForm(forms.ModelForm):
             'StockProducto': forms.NumberInput(attrs={'placeholder': 'Ej: 5 (unidades)'}),
             'NombreProducto': forms.TextInput(attrs={'placeholder': 'Ej: Papas fritas'}),
             'MarcaProducto': forms.TextInput(attrs={'placeholder': 'Ej: Fruna'}),
+            'FechaDeVencimiento': forms.DateInput(format='%Y-%m-%d', attrs={'placeholder': 'DD-MM-YYYY', 'type': 'date'}),
         }
 
     # ====================================================================
@@ -151,8 +145,29 @@ class ProductoRegistrationForm(forms.ModelForm):
 
         return inputFechaDeVencimiento
 
+    ###VALIDACION FOREIGN KEY
+    def clean_CategoriaProducto(self):
+        # Obtiene la categoría seleccionada
+        ExisteCategoriaProducto = self.cleaned_data.get('CategoriaProducto')
+        # Si no existen categorías registradas en la BD
+        if not CategoriaProducto.objects.exists():
+            raise forms.ValidationError("Debes registrar al menos una categoría para poder seleccionar una.")
+        # Si el usuario no seleccionó ninguna categoría
+        if ExisteCategoriaProducto is None:
+            raise forms.ValidationError("Debes seleccionar una categoría de producto.")
+        # Retorna la categoría válida
+        return ExisteCategoriaProducto
 
     def __init__(self, *args, **kwargs):
+        # Llama al constructor original del formulario
         super().__init__(*args, **kwargs)
+
+        # Fuerza el formato de fecha (AAAA-MM-DD) para el campo FechaDeVencimiento
+        self.fields['FechaDeVencimiento'].input_formats = ['%Y-%m-%d']
+        
+        # Configura el campo de categoría para que muestre todas las categorías disponibles
         self.fields['CategoriaProducto'].queryset = CategoriaProducto.objects.all()
+        # Define cómo se mostrará cada categoría en el desplegable (usa su nombre)
         self.fields['CategoriaProducto'].label_from_instance = lambda obj: obj.NombreCategoria
+        # Establece una etiqueta por defecto cuando no se ha seleccionado una categoría
+        self.fields['CategoriaProducto'].empty_label = "Seleccione una categoria existente."

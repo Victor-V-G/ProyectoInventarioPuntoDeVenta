@@ -32,6 +32,8 @@
                 <th>Username</th>
                 <th>Password</th>
                 <th>Correo Electronico</th>
+                <th>Empleado Asociado</th>
+                <th>Cargo Asociado</th>
                 <th>Acciones</th> <!-- Columna para botones de acciones -->
             </tr>
         </thead>
@@ -42,6 +44,8 @@
                 <td>{{ usu.Username }}</td>
                 <td>{{ usu.Password }}</td>
                 <td>{{ usu.CorreoElectronico }}</td>
+                <td>{{ usu.Empleado }}</td>
+                <td>{{ usu.Cargo }}</td>
                 <td>
                     <!-- Botón para actualizar el usuario, con confirmación -->
                     <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}">

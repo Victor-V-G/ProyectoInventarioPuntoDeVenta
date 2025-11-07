@@ -12,7 +12,8 @@ from django.db.models import UniqueConstraint
 from django.core.validators import MinLengthValidator, EmailValidator
 from django.core.exceptions import ValidationError
 import re
-
+from CrudEmpleadosApp.models import Empleados ##Para usar con llaves foraneas
+from CrudCargosApp.models import Cargos ##Para usar con llaves foraneas
 
 # ========================================================================
 # Modelo: Usuarios
@@ -127,6 +128,33 @@ class Usuarios(models.Model):
         ]
     # --------------------------------------------------------------------
 
+    ###LLAVES FORANEAS###
+    Empleado = models.ForeignKey(
+        Empleados, #Modelo Relacionado
+        on_delete=models.SET_NULL,
+        related_name="usuario", #Para acceder a el desde categoria
+        db_column="EmpleadoId", #Nombre que tendra en la base de datos
+        null=True, #Si puede quedar nulo
+        blank=True #Si puede quedar vacio
+        #SI NULL Y BLANK QUEDAN EN FALSE LA VALIDACION PERSONALIZADA QUEDA INACTIVA
+    )
+
+    Cargo = models.ForeignKey(
+        Cargos, #Modelo Relacionado
+        on_delete=models.SET_NULL,
+        related_name="cargo", #Para acceder a el desde categoria
+        db_column="CargoId", #Nombre que tendra en la base de datos
+        null=True, #Si puede quedar nulo
+        blank=True #Si puede quedar vacio
+        #SI NULL Y BLANK QUEDAN EN FALSE LA VALIDACION PERSONALIZADA QUEDA INACTIVA
+    )
+
+    #models.CASCADE → borra también el relacionado.
+    #models.PROTECT → impide borrarlo si está en uso.
+    #models.SET_NULL → pone NULL en la FK.
+    #models.SET_DEFAULT → asigna valor por defecto
+
+    #default="Sin valor", #Lo que ocurrre segun la lista de abajo si se elimina
 
     # --------------------------------------------------------------------
     # MÉTODO __STR__ IMPLEMENTADO

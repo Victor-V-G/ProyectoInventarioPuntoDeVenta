@@ -19,16 +19,20 @@ class UsuarioAdmin(admin.ModelAdmin):
         'IdUsuarios',
         'Username',
         'Password',
-        'CorreoElectronico']
+        'CorreoElectronico',
+        'Empleado',
+        'Cargo']
     # Campos por los cuales se puede filtrar en la barra lateral
     list_filter = [
         'Username',
-        'CorreoElectronico']
+        'CorreoElectronico',
+        'Cargo']
     # Campos que se pueden buscar en la barra de búsqueda del admin
     search_fields = [
         'IdUsuarios',
         'Username',
-        'CorreoElectronico']
+        'CorreoElectronico',
+        'Empleado',]
     # Número de registros a mostrar por página en la lista del admin
     list_per_page = 10
 
@@ -39,7 +43,7 @@ class UsuarioAdmin(admin.ModelAdmin):
             'fields': ('Username','Password','ConfirmarPassword')
         }),
         ('A detalle', {
-            'fields': ('CorreoElectronico',)
+            'fields': ('CorreoElectronico','Empleado','Cargo')
         })
     )
 

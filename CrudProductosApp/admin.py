@@ -23,7 +23,8 @@ class ProductoAdmin(admin.ModelAdmin):
         'StockProducto', 
         'NombreProducto', 
         'MarcaProducto', 
-        'FechaDeVencimiento']
+        'FechaDeVencimiento',
+        'CategoriaProducto']
     # Campos por los cuales se puede filtrar en la barra lateral
     list_filter = [ 
         "CodigoDeBarras",
@@ -44,7 +45,7 @@ class ProductoAdmin(admin.ModelAdmin):
             'fields': ('CodigoDeBarras','ValorProducto','StockProducto')
         }),
         ('A detalle', {
-            'fields': ('NombreProducto', 'MarcaProducto','FechaDeVencimiento')
+            'fields': ('NombreProducto', 'MarcaProducto','FechaDeVencimiento','CategoriaProducto')
         })
     )
 

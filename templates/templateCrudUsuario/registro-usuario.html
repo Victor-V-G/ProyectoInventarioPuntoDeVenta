@@ -1,9 +1,12 @@
-{% extends 'base-form.html' %}
+{% extends 'base-form.html' %}  <!-- Hereda la plantilla base para mantener el diseño consistente -->
+
+{% load static %} <!-- Permite usar la etiqueta para cargar archivos estáticos -->
 
     <!-- Título de la página -->
     {% block title %}Registro de usuarios{% endblock %}
 
     {% block breadcrumb %}
+        <!-- Breadcrumb: ruta de navegación dentro del admin -->
         <li>
             <a href="/adminhome/">Admin home > </a>
             <a href="/adminhome/crud-usuarios">Crud usuarios > </a>
@@ -12,16 +15,93 @@
     {% endblock %}
 
     {% block header_title %}
+        <!-- Encabezado de la página con botón para volver -->
         <h1 class="header-title">REGISTRO DE USUARIO</h1>
-        <!-- Botón para volver al listado de productos -->
         <a href="/adminhome/crud-usuarios"><button class="button-header" type="button">VOLVER</button></a>
     {% endblock %}
 
-    <!-- Formulario para crear o actualizar productos -->
     {% block content %}
+        <!-- Muestra errores generales (no asociados a un campo específico) -->
+        {% if form.non_field_errors %}
+            <ul class="errorlist">
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- Formulario de registro o actualización de usuario -->
         <form method="POST" novalidate>
-            {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
-            {{ form.as_div }} <!-- Renderiza automáticamente todos los campos del formulario como párrafos -->
-            <input class="form-enviar" type="submit" value="ENVIAR"  onclick="return confirm('¿Seguro que deseas enviar estos datos?')"> <!-- Botón para enviar el formulario -->
+            {% csrf_token %} <!-- Token de seguridad de Django -->
+
+            <!-- Campos del formulario renderizados individualmente con errores -->
+            {{ form.Username.label_tag }}
+            {% for error in form.Username.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+            {{ form.Username }}
+
+            {{ form.CorreoElectronico.label_tag }}
+            {% for error in form.CorreoElectronico.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+            {{ form.CorreoElectronico }}
+
+            {{ form.Empleado.label_tag }}
+            {% for error in form.Empleado.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+            {{ form.Empleado }}
+
+            {{ form.Cargo.label_tag }}
+            {% for error in form.Cargo.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+            {{ form.Cargo }}
+
+            {% if actualizar %}
+                <!-- Checkbox para cambiar contraseña solo visible al actualizar -->
+                <label>
+                    <input type="checkbox" id="id_CambiarPassword" name="CambiarPassword">¿Cambiar contraseña?
+                </label>
+
+                <!-- Campos de nueva contraseña ocultos por defecto -->
+                <div id="password-fields" style="display:none;">
+                    {{ form.Password.label_tag }}
+                    {% for error in form.Password.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                    {{ form.Password }}
+
+                    {{ form.ConfirmarPassword.label_tag }}
+                    {% for error in form.ConfirmarPassword.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                    {{ form.ConfirmarPassword }}
+                </div>
+            {% else %}
+                <!-- Campos de contraseña visibles al registrar un nuevo usuario -->
+                {{ form.Password.label_tag }}
+                {% for error in form.Password.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+                {{ form.Password }}
+
+                {{ form.ConfirmarPassword.label_tag }}
+                {% for error in form.ConfirmarPassword.errors %}
+                    <span class="error">{{ error }}</span>
+                {% endfor %}
+                {{ form.ConfirmarPassword }}
+            {% endif %}
+
+            <!-- Botón de envío del formulario con confirmación -->
+            <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')">
         </form>
+
+        {% block extra_js %}
+            <!-- Script que controla mostrar/ocultar los campos de contraseña -->
+            <script src="{% static 'js/contrasenia.js' %}"></script>
+        {% endblock %}
+
     {% endblock %}
+

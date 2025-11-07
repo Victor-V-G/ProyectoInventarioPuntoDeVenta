@@ -131,4 +131,4 @@ class Cargos(models.Model):
     # y para depuración, mostrando los datos principales del cargo.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdCargos}, Tipo de Cargo: {self.TipoDeCargo}, Estado del Cargo: {self.EstadoDelCargo}, Descripcion del cargo: {self.DescripcionDelCargo}, Sueldo base: {self.SueldoBase}"
+        return f"Tipo de Cargo: {self.TipoDeCargo}, Descripcion del cargo: {self.DescripcionDelCargo}, Sueldo base: {self.SueldoBase}"
