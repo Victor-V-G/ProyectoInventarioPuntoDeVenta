@@ -10,35 +10,19 @@ from CrudCargosApp import views  # Importa views de la app CrudBodegaApp
 
 # Lista principal de rutas del proyecto
 urlpatterns = [
-    # Ruta para el panel de administración de Django
-    # Acceder a /admin/ abre el panel de administración estándar de Django
-    path('admin/', admin.site.urls),
 
-    # Ruta raíz del home de administrador
-    # Al acceder a la raíz (''), se ejecuta la view renderAdminHome
     path('', renderAdminHome, name='adminhome'),
 
-    # Rutas para CRUD de empleados
-    # Todas las URLs definidas en CrudEmpleadosApp.urls se incluyen bajo /crudempleados/
-    path("", include("CrudEmpleadosApp.urls")),
+    path("", include("CrudEmpleadosApp.urls_admin")),
 
-    # Rutas para CRUD de usuarios
-    # Todas las URLs definidas en CrudUsuariosApp.urls se incluyen bajo /crudusuarios/
-    path("", include("CrudUsuariosApp.urls")),
+    path("", include("CrudUsuariosApp.urls_admin")),
 
-    # Rutas para CRUD de productos
-    # Todas las URLs definidas en CrudProductosApp.urls se incluyen bajo /crudproductos/
-    path("", include("CrudProductosApp.urls")),
+    path("", include("CrudCargosApp.urls_admin")),
 
-    # Rutas para CRUD de categorías
-    # Todas las URLs definidas en CrudCategoriasApp.urls se incluyen bajo /crudcategorias/
-    path("", include("CrudCategoriaProductoApp.urls")),
+    path("", include("CrudProductosApp.urls_admin")),
 
-    # Rutas para CRUD de bodegas
-    # Todas las URLs definidas en CrudBodegaApp.urls se incluyen bajo /crudbodegas/
-    path("", include("CrudBodegasApp.urls")),
+    path("", include("CrudBodegasApp.urls_admin")),
 
-    # Rutas para CRUD de cargos
-    # Todas las URLs definidas en CrudCargosApp.urls se incluyen bajo /crudCargos/
-    path("", include("CrudCargosApp.urls"))
+    path("", include("CrudCategoriaProductoApp.urls_admin")),
+
 ]

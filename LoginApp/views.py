@@ -23,7 +23,7 @@ def renderLoginForm(request):
         try:
             UsuarioRecuperado = Usuarios.objects.get(Username=UsernameInput)
         except Usuarios.DoesNotExist:
-            messages.error(request, "El username ingresado no existe")
+            messages.error(request, "Contraseña o identificador de usuario incorrectos. Escriba la contraseña y el identificador de usuario correctos e inténtelo de nuevo.")
             return render(request, 'templateLogin/login-form.html', data)
 
         if check_password(PasswordInput, UsuarioRecuperado.Password):
@@ -40,6 +40,6 @@ def renderLoginForm(request):
                 return redirect('home/')
             
         else:
-            messages.error(request, "Password incorrecta, intentelo nuevamente.")
+            messages.error(request, "Contraseña o identificador de usuario incorrectos. Escriba la contraseña y el identificador de usuario correctos e inténtelo de nuevo.")
 
     return render(request, 'templateLogin/login-form.html', data)

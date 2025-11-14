@@ -15,7 +15,13 @@
 {% block header_title %}
     <!-- Título principal de la página y botones de navegación -->
     <h1 class="header-title">LISTA DE BODEGAS</h1>
-    <button class="button-header" type="button" onclick="crudVolver()">VOLVER</button>
+
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'adminhome' %}">Volver al Panel Admin</a>
+    {% else %}
+        <a href="{% url 'home' %}">Volver al Inicio</a>
+    {% endif %}
+
     <a href="registro-bodega/">
         <button class="button-header" type="button">REGISTRAR BODEGA</button>
     </a>

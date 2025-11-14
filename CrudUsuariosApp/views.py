@@ -23,7 +23,7 @@ def usuariosRegistrationView(request):
             print("PASSWORD: ", form.cleaned_data['Password'])
             print("CONFIRMAR PASSWORD: ", form.cleaned_data['ConfirmarPassword'])
             print("CORREO ELECTRONICO: ", form.cleaned_data['CorreoElectronico'])
-            print("USUARIO SELECCIONADO", form.cleaned_data['Usuario'])
+            print("EMPLEADO SELECCIONADO", form.cleaned_data['Empleado'])
             print("CARGO SELECCIONADO", form.cleaned_data['Cargo'])
             
             form.save()

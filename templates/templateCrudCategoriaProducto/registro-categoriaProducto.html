@@ -7,17 +7,28 @@
 {% block breadcrumb %}
     <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a onclick="crudVolver()">home > </a> <!-- Botón para regresar al home -->
-        <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a> <!-- Botón para regresar al listado de categorías -->
-        <a>Formulario categoria</a> <!-- Página actual -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'admin-crud-categoria' %}">Crud Categoria > </a>
+            <a>Formulario categoria</a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a href="{% url 'crud-categoria' %}">Crud Categoria > </a>
+            <a>Formulario categoria</a>
+        {% endif %}
     </li>
 {% endblock %}
 
 {% block header_title %}
     <!-- Título principal de la página -->
     <h1 class="header-title">REGISTRO DE CATEGORIAS</h1>
+
     <!-- Botón para volver al listado de categorías -->
-    <button class="button-header" type="button" onclick="regresarCrudCategoriaProducto()">VOLVER</button>
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'admin-crud-categoria' %}">Volver</a>
+    {% else %}
+        <a href="{% url 'crud-categoria' %}">Volver</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -28,11 +39,4 @@
         <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')">
         <!-- Botón de envío con confirmación -->
     </form>
-
-    {% if valor %}
-    <script>
-        // Si la variable 'valor' es verdadera, se llama a la función JavaScript que redirige al listado de categorías
-        regresarCrudCategoriaProducto();
-    </script>
-    {% endif %}
 {% endblock %}

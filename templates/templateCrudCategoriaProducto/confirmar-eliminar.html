@@ -7,9 +7,15 @@
 {% block breadcrumb %}
     <!-- Breadcrumbs: ruta de navegación dentro del panel de administración -->
     <li>
-        <a onclick="crudVolver()">home > </a> <!-- Enlace al home usando función JS -->
-        <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a> <!-- Enlace a listado de categorías usando función JS -->
-        <a>Confirmar Eliminacion</a> <!-- Página actual sin enlace -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'admin-crud-categoria' %}">Crud Categoria > </a>
+            <a>Confirmar Eliminacion</a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a href="{% url 'crud-categoria' %}">Crud Categoria > </a>
+            <a>Confirmar Eliminacion</a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -24,20 +30,24 @@
         <h1>¿Seguro que deseas eliminar la categoria: {{ bod.NombreCategoria }} ?</h1>
         <!-- Muestra el nombre de la categoría que se desea eliminar -->
 
-        <button class="button-header" type="button" onclick="regresarCrudCategoriaProducto()">VOLVER</button>
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'admin-crud-categoria' %}">Volver</a>
+        {% else %}
+            <a href="{% url 'crud-categoria' %}">Volver</a>
+        {% endif %}
         <!-- Botón para regresar al listado de categorías sin eliminar -->
 
-        <form method="POST" action="{% url 'eliminar-categoria' bod.IdCategoriaProducto %}">
+        <form method="POST" 
+            action="
+                {% if request.session.Usuario_Username == "Admin" %}
+                    {% url 'admin-eliminar-categoria' bod.IdCategoriaProducto %}
+                {% else %}
+                    {% url 'eliminar-categoria' bod.IdCategoriaProducto %}
+                {% endif %}
+            ">
             {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
             <button type="submit">ELIMINAR</button> <!-- Botón que confirma la eliminación -->
         </form>
-
-        {% if valor %}
-        <script>
-            // Llama a la función JS que redirige automáticamente al listado de categorías
-            regresarCrudCategoriaProducto(); 
-        </script>
-        {% endif %}
     </section>
 {% endblock %}
 

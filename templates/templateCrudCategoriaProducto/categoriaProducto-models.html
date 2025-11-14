@@ -7,18 +7,34 @@
 {% block breadcrumb %}
     <!-- Breadcrumbs: ruta de navegación dentro del panel de administración -->
     <li>
-        <a onclick="crudVolver()">Home > </a> <!-- Enlace al inicio usando función JS para volver -->
-        <a>Crud Categoria > </a> <!-- Página actual sin enlace, indica la sección de categorías -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a>Crud Categoria > </a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a>Crud Categoria > </a>
+        {% endif %}
     </li>
 {% endblock %}
 
 {% block header_title %}
     <!-- Título principal de la página y botones de navegación -->
     <h1 class="header-title">LISTA DE CATEGORIAS</h1>
-    <button class="button-header" type="button" onclick="crudVolver()">VOLVER</button>
-    <!-- Botón para volver al home o sección anterior -->
-    <a href="registro-categoriaProducto/"><button class="button-header" type="button">REGISTRAR CATEGORIA</button></a>
-    <!-- Botón para ir al formulario de registro de nueva categoría -->
+
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'adminhome' %}">Volver al Panel Admin</a>
+    {% else %}
+        <a href="{% url 'home' %}">Volver al Inicio</a>
+    {% endif %}
+
+    <!-- Botón para registrar una nueva categoria -->
+
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'admin-registrar-categoria' %}">REGISTRAR</a>
+    {% else %}
+        <a href="{% url 'registrar-categoria' %}">REGISTRAR</a>
+    {% endif %}
+
 {% endblock %}
 
 {% block content %}
@@ -47,9 +63,15 @@
                     <td>{{ bod.Observaciones }}</td>
                     <!-- Botones de acción: Detalle, Actualizar, Eliminar -->
                     <td>
-                        <button type="button" onclick="{regresarAdminOrHome('crud-categoriaProducto/detalle-categoriaProducto/{{ bod.IdCategoriaProducto }}')}">DETALLE</button>
-                        <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta Catgeoria?')) {regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')}">ACTUALIZAR</button>
-                        <button type="button" onclick="{regresarAdminOrHome('crud-categoriaProducto/confirmar-eliminar/{{ bod.IdCategoriaProducto }}')}">ELIMINAR</button>
+                        {% if request.session.Usuario_Username == "Admin" %}
+                            <a href="{% url 'admin-detalle-categoria' bod.IdCategoriaProducto %}">DETALLE</a>
+                            <a href="{% url 'admin-actualizar-categoria' bod.IdCategoriaProducto %}">ACTUALIZAR</a>
+                            <a href="{% url 'admin-confirmar-eliminar-categoria' bod.IdCategoriaProducto %}">ELIMINAR</a>
+                        {% else %}
+                            <a href="{% url 'detalle-categoria' bod.IdCategoriaProducto %}">DETALLE</a>
+                            <a href="{% url 'actualizar-categoria' bod.IdCategoriaProducto %}">ACTUALIZAR</a>
+                            <a href="{% url 'confirmar-eliminar-categoria' bod.IdCategoriaProducto %}">ELIMINAR</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

@@ -7,8 +7,13 @@
 {% block breadcrumb %}
     <!-- Breadcrumbs: indica la ruta de navegación dentro del sistema -->
     <li>
-        <a onclick="crudVolver()">Home > </a> <!-- Llama a función JS para volver al home -->
-        <a>Crud Productos > </a> <!-- Página actual sin enlace -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a>Crud Productos > </a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a>Crud Productos > </a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -24,7 +29,12 @@
     {% endif %}
 
     <!-- Botón para registrar un nuevo producto -->
-    <a href="registro-producto/"><button class="button-header" type="button">REGISTRAR PRODUCTO</button></a>
+    
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'admin-registrar-producto' %}">REGISTRAR</a>
+    {% else %}
+        <a href="{% url 'registrar-producto' %}">REGISTRAR</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -61,12 +71,15 @@
                     <td>{{ pro.CategoriaProducto }}</td>
                     <!-- Botones de acción: Detalle, Actualizar y Eliminar -->
                     <td>
-                        <!-- Botón detalle: llama función JS para ir al detalle del producto -->
-                        <button type="button" onclick="{regresarAdminOrHome('crud-productos/detalle-producto/{{ pro.IdProducto }}')}">DETALLE</button>
-                        <!-- Botón actualizar: muestra confirmación y redirige con JS -->
-                        <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar este producto?')) {regresarAdminOrHome('crud-productos/actualizar-producto/{{ pro.IdProducto }}')}">ACTUALIZAR</button>
-                        <!-- Botón eliminar: redirige a la página de confirmación de eliminación -->
-                        <button type="button" onclick="{regresarAdminOrHome('crud-productos/confirmar-eliminar/{{ pro.IdProducto }}')}">ELIMINAR</button>
+                        {% if request.session.Usuario_Username == "Admin" %}
+                            <a href="{% url 'admin-detalle-producto' pro.IdProducto %}">DETALLE</a>
+                            <a href="{% url 'admin-actualizar-producto' pro.IdProducto %}">ACTUALIZAR</a>
+                            <a href="{% url 'admin-confirmar-eliminar-producto' pro.IdProducto %}">ELIMINAR</a>
+                        {% else %}
+                            <a href="{% url 'detalle-producto' pro.IdProducto %}">DETALLE</a>
+                            <a href="{% url 'actualizar-producto' pro.IdProducto %}">ACTUALIZAR</a>
+                            <a href="{% url 'confirmar-eliminar-producto' pro.IdProducto %}">ELIMINAR</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

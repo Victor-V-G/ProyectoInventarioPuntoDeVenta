@@ -39,15 +39,23 @@ def categoriaProductoRegistracionView(request):
             form.save()
             # Muestra mensaje de éxito en la interfaz
             messages.success(request, "Categoria registrada correctamente")
+
+            # ========================================================================
+            # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+            # ========================================================================
+            UsuarioLogeado = request.session.get('Usuario_Username')
+            if UsuarioLogeado == "Admin":
+                #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+                return redirect('admin-crud-categoria')
+            else:
+                return redirect('crud-categoria')
+            # ========================================================================
         else:
             # Muestra mensaje de error si el formulario no es válido
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
     
     # Datos a enviar al template
-    data = {
-        'form': form,
-        'valor': form.is_valid()
-    }
+    data = {'form': form}
     return render(request, 'templateCrudCategoriaProducto/registro-categoriaProducto.html', data)
 
 # --------------------------------------------------------------------
@@ -64,14 +72,22 @@ def actualizarCategoriaProducto(request, IdCategoriaProducto):
         if form.is_valid():  # Si los datos son válidos
             form.save()  # Guarda los cambios
             messages.success(request, "Categoria actualizada correctamente")
+
+            # ========================================================================
+            # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+            # ========================================================================
+            UsuarioLogeado = request.session.get('Usuario_Username')
+            if UsuarioLogeado == "Admin":
+                #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+                return redirect('admin-crud-categoria')
+            else:
+                return redirect('crud-categoria')
+            # ========================================================================
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
     
     # Datos a enviar al template
-    data = {
-        'form': form,
-        'valor': form.is_valid()
-    }
+    data = {'form': form}
     return render(request, 'templateCrudCategoriaProducto/registro-categoriaProducto.html', data)
 
 # --------------------------------------------------------------------
@@ -93,7 +109,17 @@ def eliminarCategoriaProducto(request, IdCategoriaProducto):
     if request.method == 'POST':  # Solo permite eliminación vía POST
         categoriaProducto.delete()  # Elimina el registro
         messages.success(request, f"La categoria '{categoriaProducto.NombreCategoria}' fue eliminado correctamente.")
-        return render(request, 'templateCrudCategoriaProducto/redireccion.html')
+        
+        # ========================================================================
+        # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+        # ========================================================================
+        UsuarioLogeado = request.session.get('Usuario_Username')
+        if UsuarioLogeado == "Admin":
+            #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+            return redirect('admin-crud-categoria')
+        else:
+            return redirect('crud-categoria')
+        # ========================================================================
     else:
         # Si no es método POST, muestra mensaje de error
         messages.error(request, "Método no permitido para eliminar usuarios.")

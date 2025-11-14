@@ -1,106 +1,197 @@
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,700&display=swap');
 
-* {
+/* ==================================== */
+/*            RESET & BASE              */
+/* ==================================== */
+
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #D1D5DB;
+    font-family: "General Sans", sans-serif;
 }
 
-html {
-    font-family: 'General Sans', sans-serif;
-    background-color: #EBECF2;
-}
+/* ==================================== */
+/*           GRID PRINCIPAL             */
+/* ==================================== */
 
-/* ======== HEADER Y MAIN ======== */
-.inicio-div-style header {
-    text-align: center;
-    width: 100%;
-    height: 90px;
-    background-color: rgb(107, 33, 33);
-}
-
-.inicio-div-style main {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-/* ======== NAV COMO GRID MANUAL ======== */
-.inicio-div-style nav {
+.parent {
     display: grid;
-    width: 850px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    grid-template-columns: 1fr 1fr 1fr;  
-    grid-template-rows: auto auto auto; 
-    gap: 15px;
-
-    grid-template-areas:
-        "empleados usuarios productos"
-        "categorias bodegas cargos"
-        "cerrar cerrar cerrar";
-}
-
-/* Conexión de áreas */
-.area-empleados { 
-    grid-area: empleados; 
-}
-
-.area-usuarios { 
-    grid-area: usuarios; 
-}
-
-.area-productos { 
-    grid-area: productos; 
-}
-
-.area-categorias {
-    grid-area: categorias; 
-}
-
-.area-bodegas { 
-    grid-area: bodegas; 
-}
-
-.area-cargos { 
-    grid-area: cargos; 
-}
-
-.area-cerrar { 
-    grid-area: cerrar; 
-}
-
-
-/* ======== BOTONES ======== */
-.inicio-div-style a {
-    text-decoration: none;
-    color: black;
-}
-
-.inicio-div-style button {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 100vh;
     width: 100%;
-    height: 150px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: white;
-    cursor: pointer;
+    gap: 0;
+}
+
+/* ==================================== */
+/*                DIV 1                 */
+/* ==================================== */
+
+.div1 {
+    grid-row: span 5 / span 5;
+    background: #f8f9fa;
+    padding: 25px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+
+/* ==================================== */
+/*                DIV 2                 */
+/* ==================================== */
+
+.div2 {
+    grid-column: span 4 / span 4;
+    background: #e0f2fe;
+    padding: 20px;
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-panel {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+/* ==================================== */
+/*                DIV 4                 */
+/* ==================================== */
+
+.div4 {
+    grid-row: span 4 / span 4;
+    grid-column-start: 2;
+    grid-row-start: 2;
+
+    background: #f8f9fa;
+    padding: 25px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+/* ==================================== */
+/*                DIV 3                 */
+/* ==================================== */
+
+.div3 {
+    grid-column: span 3 / span 3;
+    grid-row: span 4 / span 4;
+    grid-column-start: 3;
+    grid-row-start: 2;
+
+    background: #ffffff;
+    padding: 40px 50px;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 35px;
+}
+
+.titulo-cruds {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+/* ==================================== */
+/*          GRID CRUD CARDS             */
+/* ==================================== */
+
+.crud-grid {
+    width: 90%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 24px;
     justify-content: center;
-    gap: 10px;
-    font-size: 14px;
-    font-weight: bold;
 }
 
-.inicio-div-style button:hover {
-    background-color: #dfe0e4;
+/* ==================================== */
+/*              CRUD CARDS              */
+/* ==================================== */
+
+.crud-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px 18px;
+
+    border: 1px solid #d1d5db;
+    box-shadow:
+        0px 2px 4px rgba(0,0,0,0.04),
+        0px 6px 14px rgba(0,0,0,0.06);
+
+    text-decoration: none;
+    color: #1f2937;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    transition: all 0.25s ease;
 }
 
-/* ======== ICONOS ======== */
-.inicio-style-img {
-    width: 45px;
-    height: 45px;
+.crud-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow:
+        0px 8px 20px rgba(0,0,0,0.12),
+        0px 4px 10px rgba(0,0,0,0.08);
+    border-color: #2563eb;
+}
+
+.crud-icon {
+    width: 52px;
+    height: 52px;
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+.crud-card:hover .crud-icon {
+    transform: scale(1.07);
+    opacity: 1;
+}
+
+.crud-card span {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+    letter-spacing: 0.2px;
+    text-align: center;
+}
+
+/* ==================================== */
+/*          BOTÓN CERRAR SESIÓN         */
+/* ==================================== */
+
+.cerrar-sesion {
+    background: #fee2e2;
+    border-color: #fecaca;
+    color: #b91c1c;
+}
+
+.cerrar-sesion:hover {
+    background: #fecaca;
+    border-color: #dc2626;
+    color: #7f1d1d;
 }

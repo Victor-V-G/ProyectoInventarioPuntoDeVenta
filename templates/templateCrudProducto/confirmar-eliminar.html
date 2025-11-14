@@ -7,9 +7,15 @@
 {% block breadcrumb %}
     <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a onclick="crudVolver()">home > </a> <!-- Enlace que llama a función JS para volver al home -->
-        <a onclick="regresarCrudProducto()">Crud Producto > </a> <!-- Enlace que llama a función JS para volver al CRUD de productos -->
-        <a>Confirmar eliminacion</a> <!-- Página actual, sin enlace -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'admin-crud-producto' %}">Crud Productos > </a>
+            <a>Confirmar eliminacion</a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a href="{% url 'crud-producto' %}">Crud Productos > </a>
+            <a>Confirmar eliminacion</a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -25,20 +31,24 @@
         <h1>¿Seguro que deseas eliminar el producto: {{ pro.NombreProducto }} ?</h1>
         
         <!-- Botón de volver, llama a función JS para regresar al listado -->
-        <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'admin-crud-producto' %}">Volver</a>
+        {% else %}
+            <a href="{% url 'crud-producto' %}">Volver</a>
+        {% endif %}
 
         <!-- Formulario POST para eliminar el producto -->
-        <form method="POST" action="{% url 'eliminar-producto' pro.IdProducto %}">
+        <form method="POST" 
+            action="
+                {% if request.session.Usuario_Username == "Admin" %}
+                    {% url 'admin-eliminar-producto' pro.IdProducto %}
+                {% else %}
+                    {% url 'eliminar-producto' pro.IdProducto %}
+                {% endif %}
+            ">
             {% csrf_token %} <!-- Token de seguridad contra CSRF -->
             <button type="submit">ELIMINAR</button>
         </form>
-
-        {% if valor %}
-        <!-- Si 'valor' es True, se ejecuta la función JS para redireccionar automáticamente -->
-        <script>
-            regresarCrudProducto(); 
-        </script>
-        {% endif %}
     </section>
 {% endblock %}
 

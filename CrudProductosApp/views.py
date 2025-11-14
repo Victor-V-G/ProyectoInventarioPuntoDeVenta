@@ -55,13 +55,21 @@ def productosRegistrationView(request):
             
             form.save()  # Guarda el nuevo producto en la base de datos
             messages.success(request, "Producto registrado correctamente")
-
+            
+            # ========================================================================
+            # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+            # ========================================================================
+            UsuarioLogeado = request.session.get('Usuario_Username')
+            if UsuarioLogeado == "Admin":
+                #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+                return redirect('admin-crud-producto')
+            else:
+                return redirect('crud-producto')
+            # ========================================================================
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
     
-    data = {
-        'form': form,
-        'valor': form.is_valid()}  # Diccionario con el formulario
+    data = {'form': form,}  # Diccionario con el formulario
     return render(request, 'templateCrudProducto/registro-producto.html', data)
 
 
@@ -87,12 +95,21 @@ def actualizarProducto(request, IdProducto):
         if form.is_valid():
             form.save()  # Guarda los cambios en la base de datos
             messages.success(request, "Producto Actualizado correctamente")
+
+            # ========================================================================
+            # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+            # ========================================================================
+            UsuarioLogeado = request.session.get('Usuario_Username')
+            if UsuarioLogeado == "Admin":
+                #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+                return redirect('admin-crud-producto')
+            else:
+                return redirect('crud-producto')
+            # ========================================================================
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
             
-    data = {
-        'form': form,
-        'valor': form.is_valid()}  # Diccionario con el formulario
+    data = {'form': form,}  # Diccionario con el formulario
     return render(request, 'templateCrudProducto/registro-producto.html', data)
 
 
@@ -112,7 +129,17 @@ def eliminarProducto(request, IdProducto):
     if request.method == 'POST':
         producto.delete()
         messages.success(request, f"El producto '{producto.NombreProducto}' fue eliminado correctamente.")
-        return render(request, 'templateCrudProducto/redireccion.html')
+        
+        # ========================================================================
+        # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+        # ========================================================================
+        UsuarioLogeado = request.session.get('Usuario_Username')
+        if UsuarioLogeado == "Admin":
+            #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+            return redirect('admin-crud-producto')
+        else:
+            return redirect('crud-producto')
+        # ========================================================================
     else:
         messages.error(request, "Método no permitido para eliminar usuarios.")
 

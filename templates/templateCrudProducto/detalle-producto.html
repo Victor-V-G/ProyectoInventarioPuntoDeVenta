@@ -7,9 +7,15 @@
 {% block breadcrumb %}
     <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a onclick="crudVolver()">home > </a> <!-- Llama a función JS para volver al home -->
-        <a onclick="regresarCrudProducto()">Crud producto > </a> <!-- Llama a función JS para volver al listado de productos -->
-        <a>Detalle producto</a> <!-- Página actual, sin enlace -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'admin-crud-producto' %}">Crud Productos > </a>
+            <a>Detalle producto</a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a href="{% url 'crud-producto' %}">Crud Productos > </a>
+            <a>Detalle producto</a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -17,7 +23,11 @@
     <!-- Título principal de la página -->
     <h1 class="header-title">DETALLES PRODUCTO</h1>
     <!-- Botón para volver al listado de productos, usa función JS -->
-    <button class="button-header" type="button" onclick="regresarCrudProducto()">VOLVER</button>
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'admin-crud-producto' %}">Volver</a>
+    {% else %}
+        <a href="{% url 'crud-producto' %}">Volver</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -52,18 +62,13 @@
                 <!-- Botones para actualizar o eliminar producto -->
                 <td>
                     <!-- Actualización: confirma con un popup y redirige usando JS -->
-                    <button type="button" 
-                        onclick="if (confirm('¿Seguro que deseas actualizar este producto?')) {
-                            regresarAdminOrHome('crud-productos/actualizar-producto/{{ pro.IdProducto }}')
-                        }">
-                        ACTUALIZAR
-                    </button>
-
-                    <!-- Eliminación: redirige a la página de confirmación de eliminación -->
-                    <button type="button" 
-                        onclick="{regresarAdminOrHome('crud-productos/confirmar-eliminar/{{ pro.IdProducto }}')}">
-                        ELIMINAR
-                    </button>
+                    {% if request.session.Usuario_Username == "Admin" %}
+                        <a href="{% url 'admin-actualizar-producto' pro.IdProducto %}">ACTUALIZAR</a>
+                        <a href="{% url 'admin-confirmar-eliminar-producto' pro.IdProducto %}">ELIMINAR</a>
+                    {% else %}
+                        <a href="{% url 'actualizar-producto' pro.IdProducto %}">ACTUALIZAR</a>
+                        <a href="{% url 'confirmar-eliminar-producto' pro.IdProducto %}">ELIMINAR</a>
+                    {% endif %}
                 </td>
             </tr>
         </tbody>

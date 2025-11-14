@@ -7,9 +7,15 @@
 {% block breadcrumb %}
     <!-- Breadcrumbs: ruta de navegación dentro del panel de administración -->
     <li>
-        <a onclick="crudVolver()">home > </a> <!-- Enlace al home usando función JS -->
-        <a onclick="regresarCrudCategoriaProducto()">Crud categoria > </a> <!-- Enlace al listado de categorías usando función JS -->
-        <a>Detalle categoria</a> <!-- Página actual sin enlace -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'admin-crud-categoria' %}">Crud Categoria > </a>
+            <a>Detalle categoria</a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a href="{% url 'crud-categoria' %}">Crud Categoria > </a>
+            <a>Detalle categoria</a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -17,7 +23,11 @@
     <!-- Título principal de la página -->
     <h1 class="header-title">DETALLES DE CATEGORIAS</h1>
     <!-- Botón para volver al listado de categorías -->
-    <button class="button-header" type="button" onclick="regresarCrudCategoriaProducto()">VOLVER</button>
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'admin-crud-categoria' %}">Volver</a>
+    {% else %}
+        <a href="{% url 'crud-categoria' %}">Volver</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -43,8 +53,13 @@
                 <td>{{ bod.Observaciones }}</td>
                 <!-- Botones para actualizar o eliminar la categoría -->
                 <td>
-                    <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta Catgeoria?')) {regresarAdminOrHome('crud-categoriaProducto/actualizar-categoriaProducto/{{ bod.IdCategoriaProducto }}')}">ACTUALIZAR</button>
-                    <button type="button" onclick="{regresarAdminOrHome('crud-categoriaProducto/confirmar-eliminar/{{ bod.IdCategoriaProducto }}')}">ELIMINAR</button>
+                    {% if request.session.Usuario_Username == "Admin" %}
+                        <a href="{% url 'admin-actualizar-categoria' bod.IdCategoriaProducto %}">ACTUALIZAR</a>
+                        <a href="{% url 'admin-confirmar-eliminar-categoria' bod.IdCategoriaProducto %}">ELIMINAR</a>
+                    {% else %}
+                        <a href="{% url 'actualizar-categoria' bod.IdCategoriaProducto %}">ACTUALIZAR</a>
+                        <a href="{% url 'confirmar-eliminar-categoria' bod.IdCategoriaProducto %}">ELIMINAR</a>
+                    {% endif %}
                 </td>
             </tr>
         </tbody>
