@@ -54,6 +54,7 @@
                     <th>Marca</th>
                     <th>Fecha de vencimiento</th>
                     <th>Categoria del Producto</th>
+                    <th>Bodega asociada</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -70,6 +71,7 @@
                     <td>{{ pro.MarcaProducto }}</td>
                     <td>{{ pro.FechaDeVencimiento }}</td>
                     <td>{{ pro.CategoriaProducto }}</td>
+                    <td>{{ pro.Bodegas }}</d>
                     <!-- Botones de acción: Detalle, Actualizar y Eliminar -->
                     <td>
                         {% if request.session.Usuario_Username == "Admin" %}

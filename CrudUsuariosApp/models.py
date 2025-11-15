@@ -164,4 +164,4 @@ class Usuarios(models.Model):
     # o en la consola interactiva. Muestra los datos más importantes del usuario.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdUsuarios}, USERNAME: {self.Username}, PASSWORD: {self.Password} CORREO ELECTRONICO: {self.CorreoElectronico}"
+        return f"ID: {self.IdUsuarios}, USERNAME: {self.Username}, CORREO ELECTRONICO: {self.CorreoElectronico}"

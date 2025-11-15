@@ -4,7 +4,7 @@ from CrudProductosApp.models import Productos  # Importa el modelo Producto
 import re
 from datetime import date
 from CrudCategoriaProductoApp.models import CategoriaProducto #Se importa el models para hacer uso de la llave foranea
-
+from CrudBodegasApp.models import Bodegas
 
 # ========================================================================
 # Formulario: Registro de Productos
@@ -28,8 +28,9 @@ class ProductoRegistrationForm(forms.ModelForm):
             'StockProducto': 'Stock',
             'NombreProducto': 'Nombre del producto',
             'MarcaProducto': 'Marca del producto',
-            'CategoriaProducto': 'Categoria del Producto',
             'FechaDeVencimiento': 'Fecha de vencimiento',
+            'CategoriaProducto': 'Categoria del Producto',
+            'Bodegas': 'Asociar Bodega'
         }
 
         # Ayudas que aparecen junto a los campos
@@ -39,8 +40,9 @@ class ProductoRegistrationForm(forms.ModelForm):
             'StockProducto': 'No esta permitido registrar el producto sin stock',
             'NombreProducto': 'Ingrese el nombre tal cual muestra el producto',
             'MarcaProducto': 'Indique la marca la cual pertenece el producto',
-            'CategoriaProducto': 'Seleccione la categoria del producto (Previamente registrada.)',
             'FechaDeVencimiento': 'Indique la fecha de vencimiento mencionada en el producto (DD-MM-YYYY).',
+            'CategoriaProducto': 'Indique la categoria a la que pertenece el producto',
+            'Bodegas': 'Indique la bodega a la cual se asociara el producto'
         }
 
         # Mensajes de error personalizados
@@ -67,7 +69,13 @@ class ProductoRegistrationForm(forms.ModelForm):
             'FechaDeVencimiento': {
                 'required': 'Por favor introduzca la fecha de vencimiento del producto',
                 'invalid': 'Ingrese una fecha válida en formato DD-MM-YYYY.'
-            }
+            },
+            'CategoriaProducto': {
+                'required': 'Por favor introduzca la categoria del producto',
+            },
+            'Bodegas': {
+                'required': 'Por favor introduzca la bodega a la que se asociara el producto',
+            },
         }
 
         # Widgets para personalizar el HTML de cada campo
@@ -78,6 +86,8 @@ class ProductoRegistrationForm(forms.ModelForm):
             'NombreProducto': forms.TextInput(attrs={'placeholder': 'Ej: Papas fritas'}),
             'MarcaProducto': forms.TextInput(attrs={'placeholder': 'Ej: Fruna'}),
             'FechaDeVencimiento': forms.DateInput(format='%Y-%m-%d', attrs={'placeholder': 'DD-MM-YYYY', 'type': 'date'}),
+            'CategoriaProducto': forms.Select(attrs={'placeholder': 'Ej: xxx'}),
+            'Bodegas': forms.Select(attrs={'placeholder': 'Ej: xxx'}),
         }
 
     # ====================================================================
@@ -145,7 +155,7 @@ class ProductoRegistrationForm(forms.ModelForm):
 
         return inputFechaDeVencimiento
 
-    ###VALIDACION FOREIGN KEY
+    ###VALIDACION FOREIGN KEY CATEGORIA
     def clean_CategoriaProducto(self):
         # Obtiene la categoría seleccionada
         ExisteCategoriaProducto = self.cleaned_data.get('CategoriaProducto')
@@ -158,16 +168,29 @@ class ProductoRegistrationForm(forms.ModelForm):
         # Retorna la categoría válida
         return ExisteCategoriaProducto
 
-    def __init__(self, *args, **kwargs):
-        # Llama al constructor original del formulario
-        super().__init__(*args, **kwargs)
+    ###VALIDACION FOREIGN KEY BODEGA
+    def clean_Bodegas(self):
+        # Obtiene la categoría seleccionada
+        ExisteBodegas = self.cleaned_data.get('Bodegas')
+        # Si no existen bodegas registradas en la BD
+        if not Bodegas.objects.exists():
+            raise forms.ValidationError("Debes registrar al menos una bodega para poder seleccionar una.")
+        # Si el usuario no seleccionó ninguna bodega
+        if ExisteBodegas is None:
+            raise forms.ValidationError("Debes seleccionar una bodega para el producto.")
+        # Retorna la categoría válida
+        return ExisteBodegas
+    
+    # def __init__(self, *args, **kwargs):
+    #     # Llama al constructor original del formulario
+    #     super().__init__(*args, **kwargs)
 
-        # Fuerza el formato de fecha (AAAA-MM-DD) para el campo FechaDeVencimiento
-        self.fields['FechaDeVencimiento'].input_formats = ['%Y-%m-%d']
+    #     # Fuerza el formato de fecha (AAAA-MM-DD) para el campo FechaDeVencimiento
+    #     self.fields['FechaDeVencimiento'].input_formats = ['%Y-%m-%d']
         
-        # Configura el campo de categoría para que muestre todas las categorías disponibles
-        self.fields['CategoriaProducto'].queryset = CategoriaProducto.objects.all()
-        # Define cómo se mostrará cada categoría en el desplegable (usa su nombre)
-        self.fields['CategoriaProducto'].label_from_instance = lambda obj: obj.NombreCategoria
-        # Establece una etiqueta por defecto cuando no se ha seleccionado una categoría
-        self.fields['CategoriaProducto'].empty_label = "Seleccione una categoria existente."
+    #     # Configura el campo de categoría para que muestre todas las categorías disponibles
+    #     self.fields['CategoriaProducto'].queryset = CategoriaProducto.objects.all()
+    #     # Define cómo se mostrará cada categoría en el desplegable (usa su nombre)
+    #     self.fields['CategoriaProducto'].label_from_instance = lambda obj: obj.NombreCategoria
+    #     # Establece una etiqueta por defecto cuando no se ha seleccionado una categoría
+    #     self.fields['CategoriaProducto'].empty_label = "Seleccione una categoria existente."

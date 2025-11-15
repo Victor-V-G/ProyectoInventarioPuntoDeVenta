@@ -56,7 +56,8 @@ def actualizarUsuario(request, IdUsuarios):
             
     data = {
         'form': form,
-        'actualizar': actualizar
+        'actualizar': actualizar,
+        'UsuarioActual': usuario
     }
     return render(request, 'templateCrudUsuario/registro-usuario.html', data)
 

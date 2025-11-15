@@ -193,3 +193,7 @@ section message {
     text-align: center;
 }
 
+.btn-disabled {
+    opacity: 0.5;
+    pointer-events: none; /* evita que se pueda clicar */
+}

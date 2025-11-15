@@ -30,7 +30,6 @@
                 <!-- Encabezados de la tabla mostrando los campos del usuario -->
                 <th>ID USUARIO</th>
                 <th>Username</th>
-                <th>Password</th>
                 <th>Correo Electronico</th>
                 <th>Empleado Asociado</th>
                 <th>Cargo Asociado</th>
@@ -42,17 +41,40 @@
                 <!-- Fila con los datos del usuario actual -->
                 <td scope="row">{{ usu.IdUsuarios }}</td>
                 <td>{{ usu.Username }}</td>
-                <td>{{ usu.Password }}</td>
                 <td>{{ usu.CorreoElectronico }}</td>
-                <td>{{ usu.Empleado }}</td>
-                <td>{{ usu.Cargo }}</td>
+
+                {% if usu.Username == "Admin" %}
+                    <td>NO APLICA</td>
+                {% else %}
+                    {% if usu.Empleado %}
+                        <td>{{ usu.Empleado }}</td>
+                    {% else %}
+                        <td>NO ASOCIADO</td>
+                    {% endif %}
+                {% endif %}
+
+                {% if usu.Username == "Admin" %}
+                    <td>NO APLICA</td>
+                {% else %}
+                    {% if usu.Cargo %}
+                        <td>{{ usu.Cargo }}</td>
+                    {% else %}
+                        <td>NO ASOCIADO</td>
+                    {% endif %}
+                {% endif %}
+
                 <td>
                     <a href="{% url 'admin-actualizar-usuario' usu.IdUsuarios %}">
                         <button>ACTUALIZAR</button>
                     </a>
-                    <a href="{% url 'admin-confirmar-eliminar-usuario' usu.IdUsuarios %}">
-                        <button>ELIMINAR</button>
-                    </a>
+                    
+                    {% if usu.Username == "Admin" %}
+                        <button disabled class="btn-disabled">ELIMINAR</button>
+                    {% else %}
+                        <a href="{% url 'admin-confirmar-eliminar-usuario' usu.IdUsuarios %}">
+                            <button>ELIMINAR</button>
+                        </a>
+                    {% endif %}
                 </td>
             </tr>
         </tbody>

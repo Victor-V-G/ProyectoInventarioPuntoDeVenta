@@ -2,21 +2,32 @@ from django import forms
 from CrudUsuariosApp.models import Usuarios
 import re
 from django.contrib.auth.hashers import make_password
-from CrudEmpleadosApp.models import Empleados ##Para usar con llaves foraneas
-from CrudCargosApp.models import Cargos ##Para usar con llaves foraneas
+from CrudEmpleadosApp.models import Empleados
+from CrudCargosApp.models import Cargos
 
-# Formulario para registrar usuarios basado en el modelo Usuarios
+
+# =============================================================================
+# FORMULARIO DE REGISTRO DE USUARIOS (UsuarioRegistrationForm)
+# =============================================================================
+# Este formulario se utiliza para CREAR usuarios nuevos.
+# Incluye campos personalizados, validaciones avanzadas y manejo de llaves foráneas.
+# =============================================================================
+
 class UsuarioRegistrationForm(forms.ModelForm):
+
+    # Campo extra (NO existe en la BD). Solo se usa para validar la contraseña.
     ConfirmarPassword = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Repita su contraseña'}),
         label="Confirmar contraseña"
     )
 
+    # =============================================================================
+    # CONFIGURACIÓN DE CAMPOS (class Meta)
+    # =============================================================================
     class Meta:
-        model = Usuarios  # Modelo en el que se basa el formulario
-        fields = ['Username','CorreoElectronico','Empleado','Cargo','Password','ConfirmarPassword',]
+        model = Usuarios
+        fields = ['Username', 'CorreoElectronico', 'Empleado', 'Cargo', 'Password', 'ConfirmarPassword']
 
-        # Etiquetas visibles en el formulario
         labels = {
             'Username': 'Nombre de usuario',
             'Password': 'Contraseña',
@@ -26,159 +37,195 @@ class UsuarioRegistrationForm(forms.ModelForm):
             'Cargo': 'Cargo seleccionado'
         }
 
-        # Ayudas que aparecen junto a los campos
         help_texts = {
-            'Username': 'Ingrese su nombre de usuario.',
-            'Password': 'La contraseña debe contener al menos 5 caracteres, debe contar con al menos 1 letra, 1 número',
-            'ConfirmarPassword': 'Repita la misma contraseña para confirmar.',
-            'CorreoElectronico': 'Ingrese un correo electrónico válido',
-            'Empleado': 'Seleccione el Empleado del Usuario (Previamente registrado.)',
-            'Cargo': 'Seleccione el Cargo del Usuario (Previamente registrado.)',
+            'Username': 'Ingrese un nombre de usuario válido.',
+            'Password': 'Debe tener al menos 5 caracteres, 1 letra y 1 número.',
+            'ConfirmarPassword': 'Repita la contraseña.',
+            'CorreoElectronico': 'Ingrese un correo electrónico válido.',
+            'Empleado': 'Seleccione un empleado existente.',
+            'Cargo': 'Seleccione un cargo existente.'
         }
 
-        # Mensajes de error personalizados
         error_messages = {
             'Username': {
-                'required': 'Por favor introduzca el nombre de usuario.',
-                'max_length': 'El nombre de usuario no puede exceder el límite permitido.',
-                'unique': 'Este nombre de usuario ya se encuentra registrado.',
-            },
-            'Password': {
-                'required': 'Por favor introduzca una contraseña.',
-                'min_length': 'La contraseña debe tener al menos 5 caracteres.'
-            },
-            'ConfirmarPassword': {
-                'required': 'Debe confirmar su contraseña.',
-                'min_length': 'La contraseña debe tener al menos 5 caracteres.',
+                'required': 'Debe ingresar un nombre de usuario.',
+                'unique': 'Este nombre de usuario ya existe.'
             },
             'CorreoElectronico': {
-                'required': 'Por favor introduzca su correo electrónico.',
-                'invalid': 'Ingrese un correo electrónico válido.',
-                'unique': 'El correo electrónico ingresado ya está en uso.'
+                'invalid': 'Debe ingresar un correo válido.',
+                'unique': 'El correo ya está en uso.'
             }
         }
 
-        # Widgets para personalizar el HTML de cada campo
         widgets = {
             'Username': forms.TextInput(attrs={'placeholder': 'Ej: Pablo123'}),
             'Password': forms.PasswordInput(attrs={'placeholder': 'Ej: Pablo_68'}),
             'ConfirmarPassword': forms.PasswordInput(attrs={'placeholder': 'Repita su contraseña'}),
-            'CorreoElectronico': forms.EmailInput(attrs={'placeholder': 'Ej: usuario@gmail.com'}),
+            'CorreoElectronico': forms.EmailInput(attrs={'placeholder': 'Ej: usuario@gmail.com'})
         }
 
-    # ====================================================================
-    # Validaciones personalizadas por campo
-    # ====================================================================
 
-    # Valida que el nombre de usuario tenga al menos 5 caracteres y solo contenga letras, números, guiones o guiones bajos
+    # =============================================================================
+    # VALIDACIÓN DE USERNAME
+    # =============================================================================
     def clean_Username(self):
         inputUsername = self.cleaned_data['Username']
-        caracteres = r'^[A-Za-z0-9_-]{5,}$'
-        query = Usuarios.objects.filter(Username=inputUsername)  # Verifica duplicados
+        patron = r'^[A-Za-z0-9_-]{5,}$'
+        query = Usuarios.objects.filter(Username=inputUsername)
 
-        # Si es actualización, excluye el propio registro
+        # Si es actualización, excluir su propio registro
         if self.instance.pk:
             query = query.exclude(pk=self.instance.pk)
-        if not re.match(caracteres, inputUsername):
+
+        if not re.match(patron, inputUsername):
             raise forms.ValidationError(
-                "El nombre de usuario debe tener al menos 5 caracteres y solo puede contener letras, números, guiones (-) o guiones bajos (_), sin espacios."
+                "Debe tener mínimo 5 caracteres y solo letras, números, '-' o '_'."
             )
-        # Valida duplicados
-        if query.exists():
-            raise forms.ValidationError("Este usuario ya está registrado.")
-        # Valida que el nombre de usuario no sea solo números
+
         if inputUsername.isdigit():
-            raise forms.ValidationError("El nombre de usuario no puede estar compuesto solo por números.")
-        
+            raise forms.ValidationError("El nombre no puede ser solo números.")
+
+        if query.exists():
+            raise forms.ValidationError("Este usuario ya existe.")
+
         return inputUsername
 
-    # Valida que la contraseña tenga al menos 5 caracteres y contenga al menos una letra y un número
-    def clean_Password(self):
-        inputPassword = self.cleaned_data['Password'].strip()  # Quita espacios
-        caracteres = r'^(?=.*[A-Za-z])(?=.*\d).{5,}$'
 
-        if not re.match(caracteres, inputPassword):
+    # =============================================================================
+    # VALIDACIÓN DE PASSWORD
+    # =============================================================================
+    def clean_Password(self):
+        inputPassword = self.cleaned_data['Password'].strip()
+        patron = r'^(?=.*[A-Za-z])(?=.*\d).{5,}$'
+
+        if not re.match(patron, inputPassword):
             raise forms.ValidationError(
-                "La contraseña debe tener al menos 5 caracteres, incluyendo al menos una letra y un número."
+                "La contraseña debe tener al menos 5 caracteres, 1 letra y 1 número."
             )
 
         return inputPassword
-    
 
+
+    # =============================================================================
+    # VALIDACIÓN GLOBAL DEL FORMULARIO
+    # =============================================================================
     def clean(self):
         cleaned_data = super().clean()
+
         Password = cleaned_data.get("Password")
         ConfirmarPassword = cleaned_data.get("ConfirmarPassword")
 
         if Password != ConfirmarPassword:
-            raise forms.ValidationError("Las contraseñas no coinciden")
-        
+            raise forms.ValidationError("Las contraseñas no coinciden.")
+
+        # Se hashea aquí para guardar en BD
         cleaned_data["Password"] = make_password(Password)
-    
+
         return cleaned_data
 
-    ###VALIDACION FOREIGN KEY
+
+    # =============================================================================
+    # VALIDACIÓN DE FOREIGN KEYS — EMPLEADO
+    # =============================================================================
     def clean_Empleado(self):
-        # Obtiene el empleado seleccionado
-        ExisteEmpleado = self.cleaned_data.get('Empleado')
-        query = Usuarios.objects.filter(Empleado=ExisteEmpleado)  # Verifica duplicados
-        # Si no existen empleados registrados en la BD
+        empleado = self.cleaned_data.get('Empleado')
+        query = Usuarios.objects.filter(Empleado=empleado)
+
         if not Empleados.objects.exists():
-            raise forms.ValidationError("Debes registrar al menos un empleado para poder seleccionar uno.")
-        # Si el usuario no seleccionó ninguna empleado
+            raise forms.ValidationError("Debe registrar empleados primero.")
+
         if self.instance.pk:
             query = query.exclude(pk=self.instance.pk)
+
         if query.exists():
-            raise forms.ValidationError("Este Empleado ya esta en uso.")
-        if ExisteEmpleado is None:
-            raise forms.ValidationError("Debes seleccionar un empleado.")
-        # Retorna la categoría válida
-        return ExisteEmpleado
-    
+            raise forms.ValidationError("Este empleado ya está asignado a un usuario.")
+
+        if empleado is None:
+            raise forms.ValidationError("Debe seleccionar un empleado.")
+
+        return empleado
+
+
+    # =============================================================================
+    # VALIDACIÓN DE FOREIGN KEYS — CARGO
+    # =============================================================================
     def clean_Cargo(self):
-        # Obtiene el cargo seleccionado
-        ExisteCargo = self.cleaned_data.get('Cargo')
-        # Si no cargos registrados en la BD
+        cargo = self.cleaned_data.get('Cargo')
+
         if not Cargos.objects.exists():
-            raise forms.ValidationError("Debes registrar al menos un cargo para poder seleccionar uno.")
-        # Si el usuario no seleccionó ninguna cargo
-        if ExisteCargo is None:
-            raise forms.ValidationError("Debes seleccionar un cargo.")
-        # Retorna la categoría válida
-        return ExisteCargo
-    
+            raise forms.ValidationError("Debe registrar cargos primero.")
+
+        if cargo is None:
+            raise forms.ValidationError("Debe seleccionar un cargo.")
+
+        return cargo
+
+
+    # =============================================================================
+    # CONFIGURACIÓN DINÁMICA DE CAMPOS (__init__)
+    # =============================================================================
+    # Este __init__ se ejecuta SIEMPRE que se crea el formulario (crear o actualizar).
+    #
+    # Se usa para configurar:
+    #   - queryset: qué datos se muestran
+    #   - label_from_instance: cómo se muestran los datos
+    #   - empty_label: texto inicial del select
+    #
+    # Explicación de *args y **kwargs:
+    #   *args      → argumentos posicionales (sin nombre)
+    #   **kwargs   → argumentos con nombre (data, instance, initial, etc.)
+    #
+    # Es obligatorio manejarlos para no romper cómo Django construye el formulario.
+    # =============================================================================
     def __init__(self, *args, **kwargs):
-        # Llama al constructor original del formulario
+
+        # Construcción inicial estándar del ModelForm
         super().__init__(*args, **kwargs)
-        
-        # Configura el campo de empleado para que muestre todos los empleados disponibles
+
+        # =========================================================================
+        # CONFIGURAR SELECT 'Empleado'
+        # =========================================================================
         self.fields['Empleado'].queryset = Empleados.objects.all()
-        # Define cómo se mostrará cada empleado en el desplegable (usa su nombre)
-        self.fields['Empleado'].label_from_instance = lambda obj: f"{obj.NombreEmpleado} {obj.ApellidoEmpleado} - RUT: {obj.RutEmpleado}"
-        # Establece una etiqueta por defecto cuando no se ha seleccionado un empleado
+
+        self.fields['Empleado'].label_from_instance = (
+            lambda obj: f"{obj.NombreEmpleado} {obj.ApellidoEmpleado} - RUT: {obj.RutEmpleado}"
+        )
+
         self.fields['Empleado'].empty_label = "Seleccione un empleado existente."
 
-        # Configura el campo de cargo para que muestre todos los empleados disponibles
+        # =========================================================================
+        # CONFIGURAR SELECT 'Cargo'
+        # =========================================================================
         self.fields['Cargo'].queryset = Cargos.objects.all()
-        # Define cómo se mostrará cada cargo en el desplegable (usa su nombre)
-        self.fields['Cargo'].label_from_instance = lambda obj: f"{obj.TipoDeCargo} - Descripcion: {obj.DescripcionDelCargo}"
-        # Establece una etiqueta por defecto cuando no se ha seleccionado un cargo
-        self.fields['Cargo'].empty_label = "Seleccione un cargo existente."
 
+        self.fields['Cargo'].label_from_instance = (
+            lambda obj: f"{obj.TipoDeCargo} - {obj.DescripcionDelCargo}"
+        )
+
+        self.fields['Cargo'].empty_label = "Seleccione un cargo existente."
+        
+
+
+
+# =============================================================================
+# FORMULARIO DE ACTUALIZACIÓN DE USUARIOS (UsuarioUpdateForm)
+# =============================================================================
+# Este formulario sirve para EDITAR un usuario existente.
+# Incluye:
+#   - Checkbox para decidir si cambiar contraseña
+#   - Validaciones diferentes al formulario de registro
+#   - Empleado bloqueado (no editable)
+# =============================================================================
 
 class UsuarioUpdateForm(forms.ModelForm):
-    # Checkbox para indicar si se desea cambiar la contraseña
-    CambiarPassword = forms.BooleanField(
-        required=False,
-        label="Cambiar contraseña"
-    )
-    # Campo para la nueva contraseña
+
+    # Campos opcionales para cambiar password
+    CambiarPassword = forms.BooleanField(required=False, label="Cambiar contraseña")
     Password = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Nueva contraseña'}),
         required=False,
         label="Nueva contraseña"
     )
-    # Campo para confirmar la nueva contraseña
     ConfirmarPassword = forms.CharField(
         widget=forms.PasswordInput(attrs={'placeholder': 'Confirmar contraseña'}),
         required=False,
@@ -189,112 +236,129 @@ class UsuarioUpdateForm(forms.ModelForm):
         model = Usuarios
         fields = ['Username', 'CorreoElectronico', 'Empleado', 'Cargo']
 
-        labels = {
-            'Username': 'Nombre de usuario',
-            'CorreoElectronico': 'Correo electrónico',
-            'Empleado': 'Empleado seleccionado',
-            'Cargo': 'Cargo seleccionado'
-        }
-
-        # Ayudas para los campos
-        help_texts = {
-            'Username': 'Ingrese su nombre de usuario.',
-            'CorreoElectronico': 'Ingrese un correo electrónico válido',
-            'Cargo': 'Seleccione el Cargo del Usuario (Previamente registrado.)',
-        }
-
-        # Mensajes de error personalizados
-        error_messages = {
-            'Username': {
-                'required': 'Por favor introduzca el nombre de usuario.',
-                'max_length': 'El nombre de usuario no puede exceder el límite permitido.',
-                'unique': 'Este nombre de usuario ya se encuentra registrado.',
-            },
-            'CorreoElectronico': {
-                'required': 'Por favor introduzca su correo electrónico.',
-                'invalid': 'Ingrese un correo electrónico válido.',
-                'unique': 'El correo electrónico ingresado ya está en uso.'
-            }
-        }
-
-        # Widgets para personalizar el HTML
         widgets = {
             'Username': forms.TextInput(attrs={'placeholder': 'Ej: Pablo123'}),
             'CorreoElectronico': forms.EmailInput(attrs={'placeholder': 'Ej: usuario@gmail.com'}),
         }
 
-    # Validación del campo Username
-    def clean_Username(self):
-        inputUsername = self.cleaned_data['Username']
-        caracteres = r'^[A-Za-z0-9_-]{5,}$'
-        query = Usuarios.objects.filter(Username=inputUsername)
 
-        # Excluir el propio registro en actualización
+    # =============================================================================
+    # VALIDACIÓN USERNAME
+    # =============================================================================
+    def clean_Username(self):
+        username = self.cleaned_data['Username']
+        patron = r'^[A-Za-z0-9_-]{5,}$'
+        query = Usuarios.objects.filter(Username=username)
+
         if self.instance.pk:
             query = query.exclude(pk=self.instance.pk)
 
-        # Validar formato
-        if not re.match(caracteres, inputUsername):
-            raise forms.ValidationError(
-                "El nombre de usuario debe tener al menos 5 caracteres y solo puede contener letras, números, guiones (-) o guiones bajos (_), sin espacios."
-            )
+        if not re.match(patron, username):
+            raise forms.ValidationError("Formato inválido para Username.")
 
-        # Validar duplicados
         if query.exists():
-            raise forms.ValidationError("Este usuario ya está registrado.")
+            raise forms.ValidationError("Este nombre de usuario ya existe.")
 
-        # Validar que no sea solo números
-        if inputUsername.isdigit():
-            raise forms.ValidationError("El nombre de usuario no puede estar compuesto solo por números.")
-        
-        return inputUsername
+        if username.isdigit():
+            raise forms.ValidationError("No puede ser solo números.")
 
-    # Validación general del formulario (contraseñas)
+        return username
+
+
+    # =============================================================================
+    # VALIDACIÓN GLOBAL — CAMBIO DE CONTRASEÑA
+    # =============================================================================
     def clean(self):
         cleaned_data = super().clean()
-        cambiar = cleaned_data.get("CambiarPassword")
-        nuevaPassword = cleaned_data.get("Password")
-        confirmarPassword = cleaned_data.get("ConfirmarPassword")
-        caracteres = r'^(?=.*[A-Za-z])(?=.*\d).{5,}$'
 
-        # Solo valida si se marcó el checkbox
+        cambiar = cleaned_data.get("CambiarPassword")
+        nueva = cleaned_data.get("Password")
+        confirmar = cleaned_data.get("ConfirmarPassword")
+
+        patron = r'^(?=.*[A-Za-z])(?=.*\d).{5,}$'
+
         if cambiar:
-            if not nuevaPassword or not confirmarPassword:
-                raise forms.ValidationError("Debe ingresar y confirmar la nueva contraseña.")
-            if nuevaPassword != confirmarPassword:
+            if not nueva or not confirmar:
+                raise forms.ValidationError("Debe ingresar y confirmar la contraseña.")
+
+            if nueva != confirmar:
                 raise forms.ValidationError("Las contraseñas no coinciden.")
-            if not re.match(caracteres, nuevaPassword):
+
+            if not re.match(patron, nueva):
                 raise forms.ValidationError(
-                    "La contraseña debe tener al menos 5 caracteres, incluyendo una letra y un número."
+                    "Debe contener mínimo 5 caracteres, 1 letra y 1 número."
                 )
+
         return cleaned_data
 
-    # Guarda el formulario, aplicando el cambio de contraseña si corresponde
+
+    # =============================================================================
+    # MÉTODO SAVE DEL UPDATE
+    # =============================================================================
+    # Este save aplica el cambio de contraseña solo si el usuario marcó la opción
+    # "CambiarPassword". Si no, guarda solo los demás datos.
+    # =============================================================================
     def save(self, commit=True):
+
         user = super().save(commit=False)
+
         cambiar = self.cleaned_data.get("CambiarPassword")
         nueva = self.cleaned_data.get("Password")
 
         if cambiar and nueva:
-            user.Password = make_password(nueva)  # Hashea la contraseña
+            user.Password = make_password(nueva)
 
         if commit:
             user.save()
+
         return user
 
-    # Validación del campo Cargo
-    def clean_Cargo(self):
-        ExisteCargo = self.cleaned_data.get('Cargo')
-        if not Cargos.objects.exists():
-            raise forms.ValidationError("Debes registrar al menos un cargo para poder seleccionar uno.")
-        if ExisteCargo is None:
-            raise forms.ValidationError("Debes seleccionar un cargo.")
-        return ExisteCargo
 
-    # Inicialización del formulario
+    # =============================================================================
+    # VALIDACIÓN DEL CAMPO Cargo
+    # =============================================================================
+    def clean_Cargo(self):
+        cargo = self.cleaned_data.get('Cargo')
+
+        if not Cargos.objects.exists():
+            raise forms.ValidationError("Debe registrar cargos primero.")
+
+        if cargo is None:
+            raise forms.ValidationError("Debe seleccionar un cargo válido.")
+
+        return cargo
+
+
+
+    # =============================================================================
+    # CONFIGURACIÓN DINÁMICA DE CAMPOS (__init__) EN FORMULARIO DE ACTUALIZACIÓN
+    # =============================================================================
+    # Aquí se aplican dos cosas:
+    #
+    #   1) Se deshabilita 'Empleado' → NO se permite cambiar el empleado asignado.
+    #
+    #   2) Se configura el select 'Cargo' igual que en el registro:
+    #       - queryset
+    #       - label_from_instance
+    #       - empty_label
+    #
+    # Se mantiene *args y **kwargs para compatibilidad con Django.
+    # =============================================================================
     def __init__(self, *args, **kwargs):
+        
         super().__init__(*args, **kwargs)
-        self.fields['Empleado'].disabled = True  # No permitir cambios en empleado
+
+        # Bloquear campo Empleado (no editable)
+        self.fields['Empleado'].disabled = True
+        
+
         self.fields['Cargo'].queryset = Cargos.objects.all()
-        self.fields['Cargo'].label_from_instance = lambda obj: f"{obj.TipoDeCargo} - {obj.DescripcionDelCargo}"
+
+        self.fields['Cargo'].label_from_instance = (
+            lambda obj: f"{obj.TipoDeCargo} - {obj.DescripcionDelCargo}"
+        )
+
         self.fields['Cargo'].empty_label = "Seleccione un cargo existente."
+    
+
+        
