@@ -7,8 +7,13 @@
 {% block breadcrumb %}
     <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a onclick="crudVolver()">Home > </a> <!-- Enlace al home, usando función JS para volver -->
-        <a>Crud bodegas > </a> <!-- Enlace al CRUD de bodegas (página actual no clickeable) -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a>Crud Bodegas > </a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a>Crud Bodegas > </a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -22,9 +27,13 @@
         <a href="{% url 'home' %}">Volver al Inicio</a>
     {% endif %}
 
-    <a href="registro-bodega/">
-        <button class="button-header" type="button">REGISTRAR BODEGA</button>
-    </a>
+
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'admin-registrar-bodega' %}">REGISTRAR</a>
+    {% else %}
+        <a href="{% url 'registrar-bodega' %}">REGISTRAR</a>
+    {% endif %}
+
 {% endblock %}
 
 {% block content %} 
@@ -52,9 +61,15 @@
                     <td>{{ bod.ObservacionesBodega }}</td>
                     <!-- Botones de acción para cada bodega -->
                     <td>
-                        <button type="button" onclick="{regresarAdminOrHome('crud-bodegas/detalle-bodega/{{ bod.IdBodega }}')}">DETALLE</button>
-                        <button type="button" onclick="if (confirm('¿Seguro que deseas actualizar esta bodega?')) {regresarAdminOrHome('crud-bodegas/actualizar-bodega/{{ bod.IdBodega }}')}">ACTUALIZAR</button>
-                        <button type="button" onclick="{regresarAdminOrHome('crud-bodegas/confirmar-eliminar/{{ bod.IdBodega }}')}">ELIMINAR</button>
+                        {% if request.session.Usuario_Username == "Admin" %}
+                            <a href="{% url 'admin-detalle-bodega' bod.IdBodega %}">DETALLE</a>
+                            <a href="{% url 'admin-actualizar-bodega' bod.IdBodega %}">ACTUALIZAR</a>
+                            <a href="{% url 'admin-confirmar-eliminar-bodega' bod.IdBodega %}">ELIMINAR</a>
+                        {% else %}
+                            <a href="{% url 'detalle-bodega' bod.IdBodega %}">DETALLE</a>
+                            <a href="{% url 'actualizar-bodega' bod.IdBodega %}">ACTUALIZAR</a>
+                            <a href="{% url 'confirmar-eliminar-bodega' bod.IdBodega %}">ELIMINAR</a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

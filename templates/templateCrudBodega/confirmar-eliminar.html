@@ -7,9 +7,15 @@
 {% block breadcrumb %}
     <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a onclick="crudVolver()">home > </a> <!-- Enlace a home usando función JS para volver -->
-        <a onclick="regresarCrudBodega()">Crud bodegas > </a> <!-- Enlace al listado de bodegas -->
-        <a>Confirmar Eliminacion</a> <!-- Página actual, no clickeable -->
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'admin-crud-bodega' %}">Crud Bodegas > </a>
+            <a>Confirmar Eliminacion</a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a href="{% url 'crud-bodega' %}">Crud Bodegas > </a>
+            <a>Confirmar Eliminacion</a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -24,20 +30,24 @@
         <h1>¿Seguro que deseas eliminar la bodega: {{ bod.NombreBodega }} ?</h1>
         
         <!-- Botón para volver al listado de bodegas -->
-        <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'admin-crud-bodega' %}">Volver</a>
+        {% else %}
+            <a href="{% url 'crud-bodega' %}">Volver</a>
+        {% endif %} 
 
         <!-- Formulario para enviar la eliminación vía POST -->
-        <form method="POST" action="{% url 'eliminar-bodega' bod.IdBodega %}">
+        <form method="POST" 
+            action="
+                {% if request.session.Usuario_Username == "Admin" %}
+                    {% url 'admin-eliminar-bodega' bod.IdBodega %}
+                {% else %}
+                    {% url 'eliminar-bodega' bod.IdBodega %}
+                {% endif %}
+            ">
             {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
             <button type="submit">ELIMINAR</button>
         </form>
-
-        {% if valor %}
-        <!-- Si hay un valor que indica acción exitosa, se llama automáticamente a la función JS para regresar -->
-        <script>
-            regresarCrudBodega(); 
-        </script>
-        {% endif %}
     </section>
 {% endblock %}
 

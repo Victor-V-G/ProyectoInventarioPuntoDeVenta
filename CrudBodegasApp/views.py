@@ -27,14 +27,22 @@ def bodegasRegistracionView(request):
             
             form.save()  # Guarda la nueva bodega en la base de datos
             messages.success(request, "Producto registrado correctamente")  # Muestra mensaje de éxito
+
+            # ========================================================================
+            # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+            # ========================================================================
+            UsuarioLogeado = request.session.get('Usuario_Username')
+            if UsuarioLogeado == "Admin":
+                #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+                return redirect('admin-crud-bodega')
+            else:
+                return redirect('crud-bodega')
+            # ========================================================================
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")  # Mensaje de error
 
     # Se envía al template el formulario (vacío o con errores)
-    data = {
-        'form': form,
-        'valor': form.is_valid()  # Indica si el formulario fue válido o no
-    }
+    data = {'form': form}
     return render(request, 'templateCrudBodega/registro-bodega.html', data)
 
 
@@ -49,14 +57,22 @@ def actualizarBodega(request, IdBodega):
         if form.is_valid():  # Si los datos son válidos
             form.save()  # Guarda los cambios en la base de datos
             messages.success(request, "Producto actualizado correctamente")
+
+            # ========================================================================
+            # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+            # ========================================================================
+            UsuarioLogeado = request.session.get('Usuario_Username')
+            if UsuarioLogeado == "Admin":
+                #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+                return redirect('admin-crud-bodega')
+            else:
+                return redirect('crud-bodega')
+            # ========================================================================
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
 
     # Devuelve el formulario (ya sea editado o con errores)
-    data = {
-        'form': form,
-        'valor': form.is_valid()
-    }
+    data = {'form': form}
     return render(request, 'templateCrudBodega/registro-bodega.html', data)
 
 
@@ -73,7 +89,17 @@ def eliminarBodega(request, IdBodega):
     if request.method == 'POST':  # Solo permite eliminar con método POST (por seguridad)
         bodega.delete()  # Elimina la bodega de la base de datos
         messages.success(request, f"La Bodega '{bodega.NombreBodega}' fue eliminada correctamente.")
-        return render(request, 'templateCrudBodega/redireccion.html')  # Redirige o muestra confirmación
+        
+        # ========================================================================
+        # METODO DE REDIRECCION MEDIANTE USUARIO LOGGEADO
+        # ========================================================================
+        UsuarioLogeado = request.session.get('Usuario_Username')
+        if UsuarioLogeado == "Admin":
+            #Accede a la ruta nombrada de urls_admin.py, nombrada como name='admin-crud-producto'
+            return redirect('admin-crud-bodega')
+        else:
+            return redirect('crud-bodega')
+        # ========================================================================
     else:
         messages.error(request, "Método no permitido para eliminar usuarios.")  # Evita eliminación con GET
 

@@ -7,7 +7,7 @@
 {% block breadcrumb %}
     <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace al home del administrador -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace al inicio del panel de administración -->
         <a>Crud cargos > </a> <!-- Enlace al CRUD de cargos (no clickeable) -->
     </li>
 {% endblock %}
@@ -16,9 +16,9 @@
     <!-- Título principal de la página -->
     <h1 class="header-title">LISTA DE CARGOS</h1>
     <!-- Botón para volver al home -->
-    <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
+    <a href="{% url 'adminhome' %}"><button class="button-header" type="button">VOLVER</button></a>
     <!-- Botón para registrar un nuevo cargo -->
-    <a href="registro-cargo/"><button class="button-header" type="button">REGISTRAR CARGOS</button></a>
+    <a href="{% url 'admin-registrar-cargo' %}"><button class="button-header" type="button">REGISTRAR CARGOS</button></a>
 {% endblock %}
 
 {% block content %}
@@ -46,11 +46,11 @@
                 <td>{{ cag.SueldoBase }}</td>
                 <!-- Enlaces para ver detalle, actualizar o eliminar el cargo -->
                 <td>
-                    <a href="/adminhome/crud-cargos/detalle-cargo/{{ cag.IdCargos }}"><button>DETALLE</button></a>
-                    <a href="/adminhome/crud-cargos/actualizar-cargo/{{ cag.IdCargos }}">
+                    <a href="{% url 'admin-detalle-cargo' cag.IdCargos %}"><button>DETALLE</button></a>
+                    <a href="{% url 'admin-actualizar-cargo' cag.IdCargos %}">
                         <button onclick="return confirm('¿Seguro que deseas actualizar este cargo?')">ACTUALIZAR</button>
                     </a>
-                    <a href="/adminhome/crud-cargos/confirmar-eliminar/{{ cag.IdCargos }}"><button>ELIMINAR</button></a>
+                    <a href="{% url 'admin-confirmar-eliminar-cargo' cag.IdCargos %}"><button>ELIMINAR</button></a>
                 </td>
             </tr>
             {% endfor %}

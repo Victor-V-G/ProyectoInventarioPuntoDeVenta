@@ -6,7 +6,7 @@ urlpatterns = [
 
     path('crud-bodegas/', views.bodegasData, name='admin-crud-bodega'),
 
-    path('crud-bodegas/registro-bodega/', views.bodegasRegistracionView, name='admin-registro-bodega'),
+    path('crud-bodegas/registro-bodega/', views.bodegasRegistracionView, name='admin-registrar-bodega'),
 
     path('crud-bodegas/detalle-bodega/<int:IdBodega>', views.detalleBodega, name='admin-detalle-bodega'),
 

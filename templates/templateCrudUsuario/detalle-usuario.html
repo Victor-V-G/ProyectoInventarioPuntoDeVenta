@@ -7,8 +7,8 @@
 {% block breadcrumb %}
     <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace a la página principal del admin -->
-        <a href="/adminhome/crud-usuarios">Crud usuarios > </a> <!-- Enlace al listado de usuarios -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace a la página principal del admin -->
+        <a href="{% url 'admin-crud-usuario' %}">Crud usuarios > </a> <!-- Enlace al listado de usuarios -->
         <a>Detalle usuario</a> <!-- Página actual, sin enlace -->
     </li>
 {% endblock %}
@@ -17,7 +17,7 @@
     <!-- Título principal dentro de la página -->
     <h1 class="header-title">DETALLE DEL USUARIO</h1>
     <!-- Botón para regresar al listado de usuarios -->
-    <a href="/adminhome/crud-usuarios/">
+    <a href="{% url 'admin-crud-usuario' %}">
         <button class="button-header" type="button">VOLVER</button>
     </a>
 {% endblock %}
@@ -47,12 +47,10 @@
                 <td>{{ usu.Empleado }}</td>
                 <td>{{ usu.Cargo }}</td>
                 <td>
-                    <!-- Botón para actualizar el usuario, con confirmación -->
-                    <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}">
-                        <button onclick="return confirm('¿Seguro que deseas actualizar este producto?')">ACTUALIZAR</button>
+                    <a href="{% url 'admin-actualizar-usuario' usu.IdUsuarios %}">
+                        <button>ACTUALIZAR</button>
                     </a>
-                    <!-- Botón para eliminar el usuario, redirige a la página de confirmación -->
-                    <a href="/adminhome/crud-usuarios/confirmar-eliminar/{{ usu.IdUsuarios }}">
+                    <a href="{% url 'admin-confirmar-eliminar-usuario' usu.IdUsuarios %}">
                         <button>ELIMINAR</button>
                     </a>
                 </td>

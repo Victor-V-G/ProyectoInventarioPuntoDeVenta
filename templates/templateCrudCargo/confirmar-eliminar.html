@@ -7,8 +7,8 @@
 {% block breadcrumb %}
     <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace al home del administrador -->
-        <a href="/adminhome/crud-cargos">Crud cargos > </a> <!-- Enlace al CRUD de cargos -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace al inicio del panel de administración -->
+        <a href="{% url 'admin-crud-cargo' %}">Crud cargos > </a> <!-- Enlace al CRUD de cargos -->
         <a>Confirmar Eliminacion</a> <!-- Página actual (no clickeable) -->
     </li>
 {% endblock %}
@@ -24,10 +24,10 @@
         <h1>¿Seguro que deseas eliminar el cargo: {{ cag.TipoDeCargo}} ?</h1>
         
         <!-- Botón para volver al listado de cargos sin realizar cambios -->
-        <a href="/adminhome/crud-cargos/"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="{% url 'admin-crud-cargo' %}"><button class="button-header" type="button">VOLVER</button></a>
 
         <!-- Formulario para confirmar la eliminación del cargo -->
-        <form method="POST" action="{% url 'eliminar-cargo' cag.IdCargos %}">
+        <form method="POST" action="{% url 'admin-eliminar-cargo' cag.IdCargos %}">
             {% csrf_token %} <!-- Token de seguridad obligatorio en Django -->
             <button type="submit">ELIMINAR</button> <!-- Botón para enviar el formulario y eliminar -->
         </form>

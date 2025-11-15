@@ -7,8 +7,8 @@
 {% block breadcrumb %}
     <!-- Breadcrumbs: muestran la ruta de navegación dentro del panel de administración -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace al inicio del panel de administración -->
-        <a href="/adminhome/crud-empleado">Crud empleado > </a> <!-- Enlace al listado de empleados -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace al inicio del panel -->
+        <a href="{% url 'admin-crud-empleado' %}">Crud empleado > </a> <!-- Enlace a la sección de empleados -->
         <a>Detalle empleado</a> <!-- Página actual sin enlace -->
     </li>
 {% endblock %}
@@ -17,7 +17,7 @@
     <!-- Título principal que aparece en la cabecera de la página -->
     <h1 class="header-title">DETALLE DE EMPLEADOS</h1>
     <!-- Botón para regresar al listado de empleados -->
-    <a href="/adminhome/crud-empleado"><button class="button-header" type="button">VOLVER</button></a>
+    <a href="{% url 'admin-crud-empleado' %}"><button class="button-header" type="button">VOLVER</button></a>
 {% endblock %}
 
 {% block content %}
@@ -46,13 +46,11 @@
                 <!-- Enlaces para actualizar o eliminar el empleado -->
                 <td>
                     <!-- Botón para actualizar el empleado con confirmación -->
-                    <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.IdEmpleado }}">
+                    <a href="{% url 'admin-actualizar-empleado' emp.IdEmpleado %}">
                         <button onclick="return confirm('¿Seguro que deseas actualizar este empleado?')">ACTUALIZAR</button>
                     </a>
                     <!-- Botón para eliminar el empleado -->
-                    <a href="/adminhome/crud-empleado/confirmar-eliminar/{{ emp.IdEmpleado }}">
-                        <button>ELIMINAR</button>
-                    </a>
+                    <a href="{% url 'admin-confirmar-eliminar-empleado' emp.IdEmpleado %}"><button>ELIMINAR</button></a>
                 </td>
             </tr>
         </tbody>

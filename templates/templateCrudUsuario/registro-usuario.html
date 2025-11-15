@@ -8,8 +8,8 @@
     {% block breadcrumb %}
         <!-- Breadcrumb: ruta de navegación dentro del admin -->
         <li>
-            <a href="/adminhome/">Admin home > </a>
-            <a href="/adminhome/crud-usuarios">Crud usuarios > </a>
+            <a href="{% url 'adminhome' %}">Admin home > </a>
+            <a href="{% url 'admin-crud-usuario' %}">Crud usuarios > </a>
             <a>Formulario usuario</a>
         </li>
     {% endblock %}
@@ -17,7 +17,7 @@
     {% block header_title %}
         <!-- Encabezado de la página con botón para volver -->
         <h1 class="header-title">REGISTRO DE USUARIO</h1>
-        <a href="/adminhome/crud-usuarios"><button class="button-header" type="button">VOLVER</button></a>
+        <a href="{% url 'admin-crud-usuario' %}"><button class="button-header" type="button">VOLVER</button></a>
     {% endblock %}
 
     {% block content %}

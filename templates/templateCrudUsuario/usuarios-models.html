@@ -7,7 +7,7 @@
 {% block breadcrumb %}
     <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace a la página principal del admin -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace a la página principal del admin -->
         <a>Crud usuarios > </a> <!-- Página actual, sin enlace -->
     </li>
 {% endblock %}
@@ -17,8 +17,8 @@
     <h1 class="header-title">LISTA DE USUARIOS</h1>
     
     <!-- Botones de navegación rápidos -->
-    <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
-    <a href="registro-usuario/"><button class="button-header" type="button">REGISTRAR USUARIO</button></a>
+    <a href="{% url 'adminhome' %}"><button class="button-header" type="button">VOLVER</button></a>
+    <a href="{% url 'admin-registrar-usuario' %}"><button class="button-header" type="button">REGISTRAR USUARIO</button></a>
 {% endblock %}
 
 {% block content %}
@@ -51,13 +51,13 @@
                         <td>{{ usu.Cargo }}</td>
                         <td>
                             <!-- Botones de acción para cada usuario -->
-                            <a href="/adminhome/crud-usuarios/detalle-usuario/{{ usu.IdUsuarios }}">
+                            <a href="{% url 'admin-detalle-usuario' usu.IdUsuarios %}">
                                 <button>DETALLE</button>
                             </a>
-                            <a href="/adminhome/crud-usuarios/actualizar-usuario/{{ usu.IdUsuarios }}">
-                                <button onclick="return confirm('¿Seguro que deseas actualizar este producto?')">ACTUALIZAR</button>
+                            <a href="{% url 'admin-actualizar-usuario' usu.IdUsuarios %}">
+                                <button>ACTUALIZAR</button>
                             </a>
-                            <a href="/adminhome/crud-usuarios/confirmar-eliminar/{{ usu.IdUsuarios }}">
+                            <a href="{% url 'admin-confirmar-eliminar-usuario' usu.IdUsuarios %}">
                                 <button>ELIMINAR</button>
                             </a>
                         </td>

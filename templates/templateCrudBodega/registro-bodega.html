@@ -7,12 +7,15 @@
 {% block breadcrumb %}
 <!-- Sección de navegación (migas de pan) que indica la ruta actual dentro del sistema -->
     <li>
-        <!-- Enlace que llama a una función JavaScript para volver al menú principal -->
-        <a onclick="crudVolver()">home > </a>
-        <!-- Enlace que llama a la función JavaScript que regresa al CRUD de bodegas -->
-        <a onclick="regresarCrudBodega()">Crud bodegas > </a>
-        <!-- Texto que indica que el usuario se encuentra en el formulario de registro -->
-        <a>Formulario bodega</a>
+        {% if request.session.Usuario_Username == "Admin" %}
+            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'admin-crud-bodega' %}">Crud Bodegas > </a>
+            <a>Formulario bodega</a>
+        {% else %}
+            <a href="{% url 'home' %}">Home ></a>
+            <a href="{% url 'crud-bodega' %}">Crud Bodegas > </a>
+            <a>Formulario bodega</a>
+        {% endif %}
     </li>
 {% endblock %}
 
@@ -20,7 +23,11 @@
 {% block header_title %}
     <h1 class="header-title">REGISTRO DE BODEGAS</h1>
     <!-- Botón que permite volver a la vista del CRUD de bodegas -->
-    <button class="button-header" type="button" onclick="regresarCrudBodega()">VOLVER</button>
+    {% if request.session.Usuario_Username == "Admin" %}
+        <a href="{% url 'admin-crud-bodega' %}">Volver</a>
+    {% else %}
+        <a href="{% url 'crud-bodega' %}">Volver</a>
+    {% endif %}
 {% endblock %}
     
 {% block content %}
@@ -33,15 +40,8 @@
         <!-- Renderiza automáticamente los campos del formulario dentro de etiquetas <div> -->
         
         <!-- Botón de envío con confirmación antes de enviar los datos -->
-        <input class="form-enviar" type="submit" value="ENVIAR" onclick="return confirm('¿Seguro que deseas enviar estos datos?')">
+        <input class="form-enviar" type="submit" value="ENVIAR" 
+            onclick="return confirm('¿Seguro que deseas enviar estos datos?')">
     </form>
-
-    {% if valor %}
-    <!-- Si la variable 'valor' está presente (por ejemplo, tras enviar el formulario correctamente) -->
-    <script>
-        // Llama a la función que redirige al listado principal de bodegas
-        regresarCrudBodega(); 
-    </script>
-    {% endif %}
 {% endblock %}
 <!-- Fin del bloque de contenido -->

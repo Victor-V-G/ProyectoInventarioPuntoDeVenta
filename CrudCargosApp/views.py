@@ -28,7 +28,7 @@ def cargosRegistracionView(request):
 
             form.save()  # Guarda el cargo en la base de datos
             messages.success(request, "Cargo registrado correctamente")  # Mensaje de éxito
-            return redirect('/adminhome/crud-cargos/')  # Redirige al listado de cargos
+            return redirect('admin-crud-cargo')  # Redirige al listado de cargos
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")  # Mensaje de error
 
@@ -46,7 +46,7 @@ def actualizarCargo(request, IdCargos):
         if form.is_valid():  # Valida los datos
             form.save()  # Guarda los cambios
             messages.success(request, "Cargo actualizado correctamente")  # Mensaje de éxito
-            return redirect('/adminhome/crud-cargos/')  # Redirige al listado
+            return redirect('admin-crud-cargo')  # Redirige al listado
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")  # Mensaje de error
 
@@ -68,10 +68,10 @@ def eliminarCargo(request, IdCargos):
     if request.method == 'POST':  # Solo permite eliminar si se envía POST
         cargo.delete()  # Elimina el registro de la base de datos
         messages.success(request, f"El cargo '{cargo.TipoDeCargo}' fue eliminado correctamente.")  # Mensaje de éxito
-        return redirect('/adminhome/crud-cargos/')  # Redirige al listado
+        return redirect('admin-crud-cargo')  # Redirige al listado
     else:
         messages.error(request, "Método no permitido para eliminar usuarios.")  # Mensaje si no es POST
-        return redirect('/adminhome/crud-cargos/')  # Redirige al listado
+        return redirect('admin-crud-cargo')  # Redirige al listado
 
 
 # Vista para mostrar los detalles de un cargo específico

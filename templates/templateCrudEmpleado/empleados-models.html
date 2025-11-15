@@ -7,7 +7,7 @@
 {% block breadcrumb %}
     <!-- Breadcrumbs: muestran la ruta de navegación dentro del panel de administración -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace al inicio del panel de administración -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace al inicio del panel de administración -->
         <a>Crud empleado > </a> <!-- Página actual sin enlace -->
     </li>
 {% endblock %}
@@ -16,9 +16,8 @@
     <!-- Título principal de la página y botones de navegación -->
     <h1 class="header-title">LISTA DE EMPLEADOS</h1>
     <!-- Botón para volver al inicio del panel de administración -->
-    <a href="/adminhome/"><button class="button-header" type="button">VOLVER</button></a>
-    <!-- Botón para registrar un nuevo empleado -->
-    <a href="registro-empleado/"><button class="button-header" type="button">REGISTRAR EMPLEADO</button></a>
+    <a href="{% url 'adminhome' %}"><button class="button-header" type="button">VOLVER</button></a>
+    <a href="{% url 'admin-registrar-empleado' %}"><button class="button-header" type="button">REGISTRAR EMPLEADO</button></a>
 {% endblock %}
 
 {% block content %}
@@ -50,13 +49,13 @@
                     <!-- Enlaces para realizar acciones sobre el empleado -->
                     <td>
                         <!-- Botón para ver el detalle del empleado -->
-                        <a href="/adminhome/crud-empleado/detalle-empleado/{{ emp.IdEmpleado }}"><button>DETALLE</button></a>
+                        <a href="{% url 'admin-detalle-empleado' emp.IdEmpleado %}"><button>DETALLE</button></a>
                         <!-- Botón para actualizar el empleado con confirmación -->
-                        <a href="/adminhome/crud-empleado/actualizar-empleado/{{ emp.IdEmpleado }}">
+                        <a href="{% url 'admin-actualizar-empleado' emp.IdEmpleado %}">
                             <button onclick="return confirm('¿Seguro que deseas actualizar este empleado?')">ACTUALIZAR</button>
                         </a>
                         <!-- Botón para eliminar el empleado -->
-                        <a href="/adminhome/crud-empleado/confirmar-eliminar/{{ emp.IdEmpleado }}"><button>ELIMINAR</button></a>
+                        <a href="{% url 'admin-confirmar-eliminar-empleado' emp.IdEmpleado %}"><button>ELIMINAR</button></a>
                     </td>
                 </tr>
                 {% endfor %}

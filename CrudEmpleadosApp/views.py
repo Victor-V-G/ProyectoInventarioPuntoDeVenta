@@ -56,7 +56,7 @@ def empleadoRegistrationView(request):
             
             form.save()  # Guarda el nuevo empleado en la base de datos
             messages.success(request, "Empleado registrado correctamente")
-            return redirect('/adminhome/crud-empleado/')  # Redirige a la página de listado de empleados
+            return redirect('admin-crud-empleado')  # Redirige a la página de listado de empleados
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
             
@@ -88,7 +88,7 @@ def actualizarEmpleado(request, IdEmpleado):
         if form.is_valid():  # Valida el formulario
             form.save()  # Guarda los cambios en la base de datos
             messages.success(request, "Empleado actualizado correctamente")
-            return redirect('/adminhome/crud-empleado/')  # Redirige al listado de empleados
+            return redirect('admin-crud-empleado')  # Redirige al listado de empleados
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
 
@@ -110,10 +110,10 @@ def eliminarEmpleado(request, IdEmpleado):
     if request.method == 'POST':
         empleado.delete()
         messages.success(request, f"El empleado '{empleado.NombreEmpleado}' fue eliminado correctamente.")
-        return redirect('/adminhome/crud-empleado/')
+        return redirect('admin-crud-empleado')
     else:
         messages.error(request, "Método no permitido para eliminar usuarios.")
-        return redirect('/adminhome/crud-empleado/')
+        return redirect('admin-crud-empleado')
     
 #Detalle
 def detalleEmpleado(request, IdEmpleado):

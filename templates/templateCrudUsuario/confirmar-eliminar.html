@@ -7,8 +7,8 @@
 {% block breadcrumb %}
     <!-- Bloque de navegación (breadcrumbs) que indica la ruta dentro del sistema -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace a la página principal del admin -->
-        <a href="/adminhome/crud-usuarios">Crud usuarios > </a> <!-- Enlace al listado de usuarios -->
+        <a href="{% url 'adminhome' %}">Admin home > </a>
+        <a href="{% url 'admin-crud-usuario' %}">Crud usuarios > </a>
         <a>Confirmar eliminacion</a> <!-- Página actual, sin enlace -->
     </li>
 {% endblock %}
@@ -25,12 +25,12 @@
         <h1>¿Seguro que deseas eliminar el usuario: {{ usu.Username}} ?</h1>
         
         <!-- Botón para regresar al listado de usuarios sin eliminar -->
-        <a href="/adminhome/crud-usuarios/">
+        <a href="{% url 'admin-crud-usuario' %}">
             <button class="button-header" type="button">VOLVER</button>
         </a>
 
         <!-- Formulario para eliminar el usuario -->
-        <form method="POST" action="{% url 'eliminar-usuario' usu.IdUsuarios %}">
+        <form method="POST" action="{% url 'admin-eliminar-usuario' usu.IdUsuarios %}">
             {% csrf_token %} <!-- Token de seguridad para prevenir ataques CSRF -->
             <button type="submit">ELIMINAR</button> <!-- Botón de confirmación -->
         </form>

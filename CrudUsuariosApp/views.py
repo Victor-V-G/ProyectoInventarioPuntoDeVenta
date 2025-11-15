@@ -28,13 +28,14 @@ def usuariosRegistrationView(request):
             
             form.save()
             messages.success(request, "Usuario registrado correctamente")
-            return redirect('/adminhome/crud-usuarios')
+            return redirect('admin-crud-usuario')
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
         
     data = {
         'form': form,
-        'actualizar': actualizar}
+        'actualizar': actualizar
+    }
     return render(request, 'templateCrudUsuario/registro-usuario.html', data)
 
 
@@ -49,13 +50,14 @@ def actualizarUsuario(request, IdUsuarios):
         if form.is_valid():
             form.save()
             messages.success(request, "Usuario actualizado correctamente")
-            return redirect('/adminhome/crud-usuarios/')
+            return redirect('admin-crud-usuario')
         else:
             messages.error(request, "Corrige los errores en el formulario antes de continuar")
             
     data = {
         'form': form,
-        'actualizar': actualizar}
+        'actualizar': actualizar
+    }
     return render(request, 'templateCrudUsuario/registro-usuario.html', data)
 
 
@@ -72,10 +74,10 @@ def eliminarUsuario(request, IdUsuarios):
     if request.method == 'POST':
         usuario.delete()
         messages.success(request, f"El usuario '{usuario.Username}' fue eliminado correctamente.")
-        return redirect('/adminhome/crud-usuarios/')
+        return redirect('admin-crud-usuario')
     else:
         messages.error(request, "Método no permitido para eliminar usuarios.")
-        return redirect('/adminhome/crud-usuarios/')
+        return redirect('admin-crud-usuario')
 
 
 #Detalle

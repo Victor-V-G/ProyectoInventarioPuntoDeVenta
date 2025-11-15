@@ -7,8 +7,8 @@
 {% block breadcrumb %}
     <!-- Breadcrumbs: muestran la ruta de navegación dentro del panel de administración -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace al inicio del panel -->
-        <a href="/adminhome/crud-empleado">Crud empleado > </a> <!-- Enlace a la sección de empleados -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace al inicio del panel -->
+        <a href="{% url 'admin-crud-empleado' %}">Crud empleado > </a> <!-- Enlace a la sección de empleados -->
         <a>Formulario empleado</a> <!-- Página actual sin enlace -->
     </li>
 {% endblock %}
@@ -16,7 +16,7 @@
 {% block header_title %}
     <!-- Título principal de la página y botón para volver al listado de empleados -->
     <h1 class="header-title">REGISTRO DE EMPLEADOS</h1>
-    <a href="/adminhome/crud-empleado"><button class="button-header" type="button">VOLVER</button></a>
+    <a href="{% url 'admin-crud-empleado' %}"><button class="button-header" type="button">VOLVER</button></a>
 {% endblock %}
 
 {% block content %}

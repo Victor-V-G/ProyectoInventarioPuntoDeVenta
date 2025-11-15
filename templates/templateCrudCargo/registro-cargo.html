@@ -7,8 +7,8 @@
 {% block breadcrumb %}
     <!-- Breadcrumb para mostrar la navegación jerárquica -->
     <li>
-        <a href="/adminhome/">Admin home > </a> <!-- Enlace al home del administrador -->
-        <a href="/adminhome/crud-cargos">Crud cargos > </a> <!-- Enlace al CRUD de cargos -->
+        <a href="{% url 'adminhome' %}">Admin home > </a> <!-- Enlace al inicio del panel de administración -->
+        <a href="{% url 'admin-crud-cargo' %}">Crud cargos > </a> <!-- Enlace al CRUD de cargos -->
         <a>Formulario cargos</a> <!-- Página actual (no clickeable) -->
     </li>
 {% endblock %}
@@ -16,7 +16,7 @@
 {% block header_title %}
     <!-- Título principal de la página y botón de navegación -->
     <h1 class="header-title">REGISTRO DE CARGOS</h1>
-    <a href="/adminhome/crud-cargos">
+    <a href="{% url 'admin-crud-cargo' %}">
         <button class="button-header" type="button">VOLVER</button>
     </a>   
 {% endblock %}
