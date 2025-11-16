@@ -5,7 +5,6 @@ from django.shortcuts import render
 from AuditoriaApp.models import AuditoriaBodega, AuditoriaCargo, AuditoriaCategoria, AuditoriaEmpleado, AuditoriaProducto, AuditoriaUsuario
 # Importa el modelo 'AuditoriaBodega', que representa la tabla donde se guardan
 # los registros de auditoría (qué pasó, en qué bodega, quién lo hizo, cuándo, etc.).
-
 from CrudUsuariosApp.models import Usuarios
 # Importa el modelo 'Usuarios' para poder buscar al usuario logueado en la base de datos.
 
@@ -158,3 +157,23 @@ def RegistrarAuditoriaUsuario(request, usuario, accion):
         Accion=accion
     )
 #---------------------------------------------------------------------------#
+
+
+def AuditoriaData(request):
+    auditoriaBodega = AuditoriaBodega.objects.all()
+    auditoriaCargo = AuditoriaCargo.objects.all()
+    auditoriaCategoria = AuditoriaCategoria.objects.all()
+    auditoriaEmpleado = AuditoriaEmpleado.objects.all()
+    auditoriaProducto = AuditoriaProducto.objects.all()
+    auditoriaUsuario = AuditoriaUsuario.objects.all()
+
+    data = {
+        'AuditoriaBodega': auditoriaBodega,
+        'AuditoriaCargo': auditoriaCargo,
+        'AuditoriaCategoria': auditoriaCategoria,
+        'AuditoriaEmpleado': auditoriaEmpleado,
+        'AuditoriaProducto': auditoriaProducto,
+        'AuditoriaUsuario': auditoriaUsuario,
+    }
+
+    return render(request, 'templateAuditoria/auditorias-mostrar.html', data)

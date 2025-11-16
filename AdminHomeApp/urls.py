@@ -25,4 +25,5 @@ urlpatterns = [
 
     path("", include("CrudCategoriaProductoApp.urls_admin")),
 
+    path("", include("AuditoriaApp.urls")),
 ]
