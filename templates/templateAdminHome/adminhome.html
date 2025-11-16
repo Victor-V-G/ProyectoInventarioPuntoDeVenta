@@ -13,8 +13,18 @@
 
     <!-- DIV 1 -->
     <div class="div1">
-        <h2>Datos a completar (Div 1)</h2>
-        <p>Aquí puedes agregar cualquier información adicional.</p>
+
+        <img src="{% static 'images/usuario.png' %}" class="crud-user-logo">
+        
+        {% if Usuario %}
+            {% for usu in Usuario %}
+                <h1>USERNAME:</h1>
+                <h1>{{ usu.Username }}</h1>
+                <h1>CORREO ELECTRONICO:</h1>
+                <h1>{{ usu.CorreoElectronico }}</h1>
+            {% endfor %}
+        {% endif %}
+
 
         <a href={% url 'Logout' %} class="crud-card cerrar-sesion">
             <img src="{% static 'images/cerrar-sesion.png' %}" class="crud-icon">
@@ -29,10 +39,9 @@
 
     <!-- DIV 4 -->
     <div class="div4">
-        <h2>Datos a completar (Div 4)</h2>
-        <p>Espacio lateral inferior.</p>
-
+        <h2>Vista de Auditoria</h2>
         <a href="{% url 'auditorias' %}" class="crud-card">
+            <img src="{% static 'images/buscar.png' %}" class="crud-icon">
             <span>AUDITORIAS</span>
         </a>
     </div>

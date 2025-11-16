@@ -30,30 +30,61 @@ html, body {
 /*                DIV 1                 */
 /* ==================================== */
 
+
 .div1 {
     grid-row: span 5 / span 5;
     background: #f8f9fa;
     padding: 25px;
     border: 1px solid #cbd5e1;
-    border-radius: 12px;
+    
 
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+    /* ✔ Distribuye arriba / centro / abajo */
     justify-content: space-between;
-    overflow-y: auto;
+
+    /* ✔ SIN scroll */
+    overflow: hidden;
+
+    text-align: center;
 }
 
+/* Imagen de usuario */
+.crud-user-logo {
+    width: 210px;
+    height: 140px;
+    opacity: 0.95;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+/* Centro (username + email) */
+.div1 h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+
+    margin: -60px 0;   /* ✔ espacio pequeño y limpio */
+}
+
+/* Botón de cerrar sesión */
+.div1 .cerrar-sesion {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
 /* ==================================== */
 /*                DIV 2                 */
 /* ==================================== */
 
 .div2 {
     grid-column: span 4 / span 4;
-    background: #e0f2fe;
+    background-color: #2d3748;
     padding: 20px;
-    border: 1px solid #93c5fd;
-    border-radius: 12px;
-
+    border: 1px solid #2d3748;
+    
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,7 +93,7 @@ html, body {
 .titulo-panel {
     font-size: 28px;
     font-weight: 700;
-    color: #1f2937;
+    color: white;
     margin: 0;
 }
 
@@ -78,9 +109,29 @@ html, body {
     background: #f8f9fa;
     padding: 25px;
     border: 1px solid #cbd5e1;
-    border-radius: 12px;
-    overflow-y: auto;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;       /* ✔ vertical */
+    justify-content: space-between; /* ✔ texto arriba / botón abajo */
+    align-items: center;
 }
+
+/* Título */
+.div4 h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+    margin-top: 10rem;             /* ✔ pequeño margen superior */
+    text-align: center;
+}
+
+/* Botón AUDITORIAS */
+.div4 a {
+    margin-bottom: 12rem;          /* ✔ lo envía hacia abajo */
+}
+
 
 /* ==================================== */
 /*                DIV 3                 */
@@ -95,7 +146,7 @@ html, body {
     background: #ffffff;
     padding: 40px 50px;
     border: 1px solid #cbd5e1;
-    border-radius: 14px;
+
 
     overflow-y: auto;
 
@@ -109,8 +160,8 @@ html, body {
     font-size: 26px;
     font-weight: 700;
     color: #1f2937;
-    margin-bottom: 0;
     letter-spacing: -0.5px;
+    margin-bottom: 0;
     text-align: center;
 }
 
@@ -186,7 +237,7 @@ html, body {
 
 .cerrar-sesion {
     background: #fee2e2;
-    border-color: #fecaca;
+    border: 1px solid #fecaca;
     color: #b91c1c;
 }
 
