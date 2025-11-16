@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect  # 'render' para mostrar templates
 from CrudProductosApp.models import Productos  # Importa el modelo Producto
 from . import forms  # Importa los formularios de la app CrudProductosApp
 from django.contrib import messages
+from AuditoriaApp.views import RegistrarAuditoriaProducto
 
 # ========================================================================
 # VISTA: Mostrar todos los productos
@@ -54,7 +55,8 @@ def productosRegistrationView(request):
             print("CATEGORIA DEL PRODUCTO: ", form.cleaned_data['CategoriaProducto'])
             print("BODEGA ASOCIADA: ", form.cleaned_data['Bodegas'])
 
-            form.save()  # Guarda el nuevo producto en la base de datos
+            producto_nuevo = form.save()  # Guarda el nuevo producto en la base de datos
+            RegistrarAuditoriaProducto(request, producto_nuevo, "REGISTRAR")
             messages.success(request, "Producto registrado correctamente")
             
             # ========================================================================
@@ -94,7 +96,8 @@ def actualizarProducto(request, IdProducto):
     if request.method == 'POST':  # Si se envían datos para actualizar
         form = forms.ProductoRegistrationForm(request.POST, instance=producto)
         if form.is_valid():
-            form.save()  # Guarda los cambios en la base de datos
+            producto_actualizar = form.save()  # Guarda los cambios en la base de datos
+            RegistrarAuditoriaProducto(request, producto_actualizar, "ACTUALIZAR")
             messages.success(request, "Producto Actualizado correctamente")
 
             # ========================================================================
@@ -128,6 +131,7 @@ def confirmarEliminar(request, IdProducto):
 def eliminarProducto(request, IdProducto):
     producto = Productos.objects.get(IdProducto=IdProducto)
     if request.method == 'POST':
+        RegistrarAuditoriaProducto(request, producto, "ELIMINAR")
         producto.delete()
         messages.success(request, f"El producto '{producto.NombreProducto}' fue eliminado correctamente.")
         

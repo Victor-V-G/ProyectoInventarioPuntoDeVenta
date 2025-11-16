@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from CrudCargosApp.models import Cargos
 from . import forms
 from django.contrib import messages
-
+from AuditoriaApp.views import RegistrarAuditoriaCargo
 # Importante: se asume que ya se importaron forms, messages, redirect y render
 
 # Vista para mostrar todos los cargos en una tabla/listado
@@ -26,7 +26,8 @@ def cargosRegistracionView(request):
             print("DESCRIPCION DEL CARGO: ", form.cleaned_data['DescripcionDelCargo'])
             print("SUELDO BASE: ", form.cleaned_data['SueldoBase'])
 
-            form.save()  # Guarda el cargo en la base de datos
+            cargo_nuevo = form.save()  # Guarda el cargo en la base de datos
+            RegistrarAuditoriaCargo(request, cargo_nuevo, "REGISTRAR")
             messages.success(request, "Cargo registrado correctamente")  # Mensaje de éxito
             return redirect('admin-crud-cargo')  # Redirige al listado de cargos
         else:
@@ -44,7 +45,8 @@ def actualizarCargo(request, IdCargos):
     if request.method == 'POST':  # Si se envía el formulario con cambios
         form = forms.CargoRegistracionForm(request.POST, instance=cargo)  # Carga los datos actualizados
         if form.is_valid():  # Valida los datos
-            form.save()  # Guarda los cambios
+            cargo_actualizado = form.save()  # Guarda los cambios
+            RegistrarAuditoriaCargo(request, cargo_actualizado, "ACTUALIZAR")
             messages.success(request, "Cargo actualizado correctamente")  # Mensaje de éxito
             return redirect('admin-crud-cargo')  # Redirige al listado
         else:
@@ -64,8 +66,8 @@ def confirmarEliminar(request, IdCargos):
 # Vista para eliminar un cargo
 def eliminarCargo(request, IdCargos):
     cargo = Cargos.objects.get(IdCargos=IdCargos)  # Obtiene el cargo por su ID
-
     if request.method == 'POST':  # Solo permite eliminar si se envía POST
+        RegistrarAuditoriaCargo(request, cargo, "ELIMINAR")
         cargo.delete()  # Elimina el registro de la base de datos
         messages.success(request, f"El cargo '{cargo.TipoDeCargo}' fue eliminado correctamente.")  # Mensaje de éxito
         return redirect('admin-crud-cargo')  # Redirige al listado

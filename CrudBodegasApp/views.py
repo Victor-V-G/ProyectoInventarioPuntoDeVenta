@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from CrudBodegasApp.models import Bodegas
 from . import forms
 from django.contrib import messages
+from AuditoriaApp.views import RegistrarAuditoriaBodega
 
 # Vista para mostrar todas las bodegas registradas
 def bodegasData(request):
@@ -25,7 +26,8 @@ def bodegasRegistracionView(request):
             print("ESTADO DE LA BODEGA: ", form.cleaned_data['EstadoBodega'])
             print("OBSERVACIONES: ", form.cleaned_data['ObservacionesBodega'])
             
-            form.save()  # Guarda la nueva bodega en la base de datos
+            nueva_bodega = form.save()  # Guarda la nueva bodega en la base de datos
+            RegistrarAuditoriaBodega(request, nueva_bodega, "REGISTRAR") #AUDITORIA REGISTRAR
             messages.success(request, "Producto registrado correctamente")  # Muestra mensaje de éxito
 
             # ========================================================================
@@ -55,7 +57,8 @@ def actualizarBodega(request, IdBodega):
         form = forms.BodegaRegistracionForm(request.POST, instance=bodega)  # Actualiza con los datos enviados
 
         if form.is_valid():  # Si los datos son válidos
-            form.save()  # Guarda los cambios en la base de datos
+            actualizar_bodega = form.save()  # Guarda los cambios en la base de datos
+            RegistrarAuditoriaBodega(request, actualizar_bodega, "ACTUALIZAR")
             messages.success(request, "Producto actualizado correctamente")
 
             # ========================================================================
@@ -87,6 +90,7 @@ def confirmarEliminar(request, IdBodega):
 def eliminarBodega(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)  # Busca la bodega a eliminar
     if request.method == 'POST':  # Solo permite eliminar con método POST (por seguridad)
+        RegistrarAuditoriaBodega(request, bodega, "ELIMINAR")
         bodega.delete()  # Elimina la bodega de la base de datos
         messages.success(request, f"La Bodega '{bodega.NombreBodega}' fue eliminada correctamente.")
         

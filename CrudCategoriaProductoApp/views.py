@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from CrudCategoriaProductoApp.models import CategoriaProducto
 from . import forms
 from django.contrib import messages
+from AuditoriaApp.views import RegistrarAuditoriaCategoria
 
 
 # Create your views here.
@@ -36,7 +37,8 @@ def categoriaProductoRegistracionView(request):
             print("OBSERVACIONES: ", form.cleaned_data['Observaciones'])
 
             # Guarda el nuevo registro en la base de datos
-            form.save()
+            categoria_nueva = form.save()
+            RegistrarAuditoriaCategoria(request, categoria_nueva, "REGISTRAR")
             # Muestra mensaje de éxito en la interfaz
             messages.success(request, "Categoria registrada correctamente")
 
@@ -70,7 +72,8 @@ def actualizarCategoriaProducto(request, IdCategoriaProducto):
         # Vuelve a inicializar el formulario con los datos enviados
         form = forms.CategoriaProductoRegistracionForm(request.POST, instance=categoriaProducto)
         if form.is_valid():  # Si los datos son válidos
-            form.save()  # Guarda los cambios
+            categoria_actualizar = form.save()  # Guarda los cambios
+            RegistrarAuditoriaCategoria(request, categoria_actualizar, "ACTUALIZAR")
             messages.success(request, "Categoria actualizada correctamente")
 
             # ========================================================================
@@ -107,6 +110,7 @@ def eliminarCategoriaProducto(request, IdCategoriaProducto):
     categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
     
     if request.method == 'POST':  # Solo permite eliminación vía POST
+        RegistrarAuditoriaCategoria(request, categoriaProducto, "ELIMINAR")
         categoriaProducto.delete()  # Elimina el registro
         messages.success(request, f"La categoria '{categoriaProducto.NombreCategoria}' fue eliminado correctamente.")
         

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from CrudUsuariosApp.models import Usuarios
 from . import forms
 from django.contrib import messages
+from AuditoriaApp.views import RegistrarAuditoriaUsuario
 
 #Models
 def usuariosData(request):
@@ -26,7 +27,8 @@ def usuariosRegistrationView(request):
             print("EMPLEADO SELECCIONADO", form.cleaned_data['Empleado'])
             print("CARGO SELECCIONADO", form.cleaned_data['Cargo'])
             
-            form.save()
+            usuario_registrado = form.save()
+            RegistrarAuditoriaUsuario(request, usuario_registrado, "REGISTRAR")
             messages.success(request, "Usuario registrado correctamente")
             return redirect('admin-crud-usuario')
         else:
@@ -48,7 +50,8 @@ def actualizarUsuario(request, IdUsuarios):
     if request.method == 'POST':
         form = forms.UsuarioUpdateForm(request.POST, instance=usuario)
         if form.is_valid():
-            form.save()
+            usuario_actualizado = form.save()
+            RegistrarAuditoriaUsuario(request, usuario_actualizado, "ACTUALIZAR")
             messages.success(request, "Usuario actualizado correctamente")
             return redirect('admin-crud-usuario')
         else:
@@ -73,6 +76,7 @@ def eliminarUsuario(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
 
     if request.method == 'POST':
+        RegistrarAuditoriaUsuario(request, usuario, "ELIMINAR")
         usuario.delete()
         messages.success(request, f"El usuario '{usuario.Username}' fue eliminado correctamente.")
         return redirect('admin-crud-usuario')

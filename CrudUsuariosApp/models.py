@@ -110,24 +110,6 @@ class Usuarios(models.Model):
         }  # Mensaje personalizado si el correo ya existe
     )
 
-
-    # --------------------------------------------------------------------
-    # Meta información del modelo
-    # --------------------------------------------------------------------
-    # Clase interna que define configuraciones adicionales del modelo:
-    #  - db_table: nombre exacto de la tabla en la base de datos.
-    #  - constraints: restricciones de unicidad para campos específicos.
-    #    Evita que se repitan IDs o usernames dentro de la tabla.
-    # --------------------------------------------------------------------
-    class Meta:
-        db_table = 'Usuarios'
-        constraints = [
-            UniqueConstraint(fields=['IdUsuarios'], name='unique_id_usuarios'),
-            UniqueConstraint(fields=['Username'], name='unique_username'),
-            UniqueConstraint(fields=['CorreoElectronico'], name='unique_correo_electronico'),
-        ]
-    # --------------------------------------------------------------------
-
     ###LLAVES FORANEAS###
     Empleado = models.ForeignKey(
         Empleados, #Modelo Relacionado
@@ -148,6 +130,25 @@ class Usuarios(models.Model):
         blank=True #Si puede quedar vacio
         #SI NULL Y BLANK QUEDAN EN FALSE LA VALIDACION PERSONALIZADA QUEDA INACTIVA
     )
+    
+    # --------------------------------------------------------------------
+    # Meta información del modelo
+    # --------------------------------------------------------------------
+    # Clase interna que define configuraciones adicionales del modelo:
+    #  - db_table: nombre exacto de la tabla en la base de datos.
+    #  - constraints: restricciones de unicidad para campos específicos.
+    #    Evita que se repitan IDs o usernames dentro de la tabla.
+    # --------------------------------------------------------------------
+    class Meta:
+        db_table = 'Usuarios'
+        constraints = [
+            UniqueConstraint(fields=['IdUsuarios'], name='unique_id_usuarios'),
+            UniqueConstraint(fields=['Username'], name='unique_username'),
+            UniqueConstraint(fields=['CorreoElectronico'], name='unique_correo_electronico'),
+        ]
+    # --------------------------------------------------------------------
+
+    
 
     #models.CASCADE → borra también el relacionado.
     #models.PROTECT → impide borrarlo si está en uso.

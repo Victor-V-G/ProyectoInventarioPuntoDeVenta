@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'CrudCategoriaProductoApp',
     'CrudBodegasApp',
     'CrudCargosApp',
-    'CrudUsuariosApp.apps.CrudusuariosappConfig'
+    'CrudUsuariosApp.apps.CrudusuariosappConfig',
+    'AuditoriaApp',
 ]
 
 MIDDLEWARE = [

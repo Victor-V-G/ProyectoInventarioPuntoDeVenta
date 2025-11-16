@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect  # 'render' para mostrar templates
 from CrudEmpleadosApp.models import Empleados  # Importa el modelo Empleados desde la app CrudEmpleadosApp
 from . import forms  # Importa los formularios definidos en forms.py de la misma app
 from django.contrib import messages
+from AuditoriaApp.views import RegistrarAuditoriaEmpleado
 # Nota general:
 # Se utiliza 'redirect' después de procesar un formulario para evitar problemas de rutas
 # y evitar que se vuelvan a enviar los datos si el usuario recarga la página.
@@ -54,7 +55,8 @@ def empleadoRegistrationView(request):
             print("EDAD: ", form.cleaned_data['EdadEmpleado'])
             print("TELEFONO: ", form.cleaned_data['NumeroTelefonoEmpleado'])
             
-            form.save()  # Guarda el nuevo empleado en la base de datos
+            empleado_nuevo = form.save()  # Guarda el nuevo empleado en la base de datos
+            RegistrarAuditoriaEmpleado(request, empleado_nuevo, "REGISTRAR")
             messages.success(request, "Empleado registrado correctamente")
             return redirect('admin-crud-empleado')  # Redirige a la página de listado de empleados
         else:
@@ -86,7 +88,8 @@ def actualizarEmpleado(request, IdEmpleado):
     if request.method == 'POST':  # Si se envían datos para actualizar
         form = forms.EmpleadoRegistrationForm(request.POST, instance=empleado)  # Vincula los datos al formulario
         if form.is_valid():  # Valida el formulario
-            form.save()  # Guarda los cambios en la base de datos
+            empleado_actualizado = form.save()  # Guarda los cambios en la base de datos
+            RegistrarAuditoriaEmpleado(request, empleado_actualizado, "ACTUALIZAR")
             messages.success(request, "Empleado actualizado correctamente")
             return redirect('admin-crud-empleado')  # Redirige al listado de empleados
         else:
@@ -108,6 +111,7 @@ def confirmarEliminar(request, IdEmpleado):
 def eliminarEmpleado(request, IdEmpleado):
     empleado = Empleados.objects.get(IdEmpleado=IdEmpleado)  # Obtiene el empleado a eliminar
     if request.method == 'POST':
+        RegistrarAuditoriaEmpleado(request, empleado, "ELIMINAR")
         empleado.delete()
         messages.success(request, f"El empleado '{empleado.NombreEmpleado}' fue eliminado correctamente.")
         return redirect('admin-crud-empleado')
