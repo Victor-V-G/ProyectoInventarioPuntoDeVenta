@@ -52,7 +52,8 @@ def productosRegistrationView(request):
             print("MARCA: ", form.cleaned_data['MarcaProducto'])
             print("FECHA DE VENCIMIENTO: ", form.cleaned_data['FechaDeVencimiento'])
             print("CATEGORIA DEL PRODUCTO: ", form.cleaned_data['CategoriaProducto'])
-            
+            print("BODEGA ASOCIADA: ", form.cleaned_data['Bodegas'])
+
             form.save()  # Guarda el nuevo producto en la base de datos
             messages.success(request, "Producto registrado correctamente")
             

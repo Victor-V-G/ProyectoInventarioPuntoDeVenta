@@ -24,7 +24,9 @@ class ProductoAdmin(admin.ModelAdmin):
         'NombreProducto', 
         'MarcaProducto', 
         'FechaDeVencimiento',
-        'CategoriaProducto']
+        'CategoriaProducto',
+        'Bodegas'
+    ]
     # Campos por los cuales se puede filtrar en la barra lateral
     list_filter = [ 
         "CodigoDeBarras",

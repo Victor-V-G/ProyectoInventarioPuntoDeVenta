@@ -157,4 +157,4 @@ class Bodegas(models.Model):
     # Muestra los datos más relevantes: ID, nombre y ubicación de la bodega.
     # --------------------------------------------------------------------
     def __str__(self):
-        return f"ID: {self.IdBodega}, Nombre: {self.NombreBodega}, Ubicacion: {self.UbicacionBodega}, Estado de la bodega: {self.EstadoBodega}, Observaciones: {self.ObservacionesBodega}"
+        return f"NOMBRE: {self.NombreBodega}, UBICACION: {self.UbicacionBodega}"

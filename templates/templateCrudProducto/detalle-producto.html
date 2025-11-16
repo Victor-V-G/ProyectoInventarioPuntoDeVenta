@@ -59,8 +59,18 @@
                 <td>{{ pro.FechaDeRegistroProducto }}</td>
                 <td>{{ pro.MarcaProducto }}</td>
                 <td>{{ pro.FechaDeVencimiento }}</td>
-                <td>{{ pro.CategoriaProducto }}</td>
-                <td>{{ pro.Bodegas }}</d>
+                
+                {% if pro.CategoriaProducto %}
+                    <td>{{ pro.CategoriaProducto }}</td>
+                {% else %}
+                    <td>NO ASOCIADO</td>
+                {% endif %}    
+                
+                {% if pro.Bodegas %}
+                    <td>{{ pro.Bodegas }}</td>
+                {% else %}
+                    <td>NO ASOCIADO</td>
+                {% endif %} 
                 <!-- Botones para actualizar o eliminar producto -->
                 <td>
                     <!-- Actualización: confirma con un popup y redirige usando JS -->

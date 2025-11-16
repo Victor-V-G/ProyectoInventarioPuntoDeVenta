@@ -86,8 +86,6 @@ class ProductoRegistrationForm(forms.ModelForm):
             'NombreProducto': forms.TextInput(attrs={'placeholder': 'Ej: Papas fritas'}),
             'MarcaProducto': forms.TextInput(attrs={'placeholder': 'Ej: Fruna'}),
             'FechaDeVencimiento': forms.DateInput(format='%Y-%m-%d', attrs={'placeholder': 'DD-MM-YYYY', 'type': 'date'}),
-            'CategoriaProducto': forms.Select(attrs={'placeholder': 'Ej: xxx'}),
-            'Bodegas': forms.Select(attrs={'placeholder': 'Ej: xxx'}),
         }
 
     # ====================================================================
@@ -181,16 +179,25 @@ class ProductoRegistrationForm(forms.ModelForm):
         # Retorna la categoría válida
         return ExisteBodegas
     
-    # def __init__(self, *args, **kwargs):
-    #     # Llama al constructor original del formulario
-    #     super().__init__(*args, **kwargs)
 
-    #     # Fuerza el formato de fecha (AAAA-MM-DD) para el campo FechaDeVencimiento
-    #     self.fields['FechaDeVencimiento'].input_formats = ['%Y-%m-%d']
+    def __init__(self, *args, **kwargs):
+        # Llama al constructor original del formulario
+        super().__init__(*args, **kwargs)
+
+        # Fuerza el formato de fecha (AAAA-MM-DD) para el campo FechaDeVencimiento
+        self.fields['FechaDeVencimiento'].input_formats = ['%Y-%m-%d']
         
-    #     # Configura el campo de categoría para que muestre todas las categorías disponibles
-    #     self.fields['CategoriaProducto'].queryset = CategoriaProducto.objects.all()
-    #     # Define cómo se mostrará cada categoría en el desplegable (usa su nombre)
-    #     self.fields['CategoriaProducto'].label_from_instance = lambda obj: obj.NombreCategoria
-    #     # Establece una etiqueta por defecto cuando no se ha seleccionado una categoría
-    #     self.fields['CategoriaProducto'].empty_label = "Seleccione una categoria existente."
+        # Configura el campo de categoría para que muestre todas las categorías disponibles
+        self.fields['CategoriaProducto'].queryset = CategoriaProducto.objects.all()
+         # Define cómo se mostrará cada categoría en el desplegable (usa su nombre)
+        self.fields['CategoriaProducto'].label_from_instance = lambda obj: obj.NombreCategoria
+         # Establece una etiqueta por defecto cuando no se ha seleccionado una categoría
+        self.fields['CategoriaProducto'].empty_label = "Seleccione una categoria existente."
+
+
+        # Configura el campo de categoría para que muestre todas las categorías disponibles
+        self.fields['Bodegas'].queryset = Bodegas.objects.all()
+         # Define cómo se mostrará cada categoría en el desplegable (usa su nombre)
+        self.fields['Bodegas'].label_from_instance = lambda obj: obj.NombreBodega
+         # Establece una etiqueta por defecto cuando no se ha seleccionado una categoría
+        self.fields['Bodegas'].empty_label = "Seleccione una bodega existente."

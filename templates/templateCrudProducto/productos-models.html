@@ -70,8 +70,19 @@
                     <td>{{ pro.FechaDeRegistroProducto }}</td>
                     <td>{{ pro.MarcaProducto }}</td>
                     <td>{{ pro.FechaDeVencimiento }}</td>
-                    <td>{{ pro.CategoriaProducto }}</td>
-                    <td>{{ pro.Bodegas }}</d>
+    
+                    {% if pro.CategoriaProducto %}
+                        <td>{{ pro.CategoriaProducto }}</td>
+                    {% else %}
+                        <td>NO ASOCIADO</td>
+                    {% endif %}    
+                    
+                    {% if pro.Bodegas %}
+                        <td>{{ pro.Bodegas }}</td>
+                    {% else %}
+                        <td>NO ASOCIADO</td>
+                    {% endif %} 
+                    
                     <!-- Botones de acción: Detalle, Actualizar y Eliminar -->
                     <td>
                         {% if request.session.Usuario_Username == "Admin" %}
