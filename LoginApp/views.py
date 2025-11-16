@@ -43,3 +43,8 @@ def renderLoginForm(request):
             messages.error(request, "Contraseña o identificador de usuario incorrectos. Escriba la contraseña y el identificador de usuario correctos e inténtelo de nuevo.")
 
     return render(request, 'templateLogin/login-form.html', data)
+
+
+def renderLogout(request):
+    request.session.flush()
+    return redirect('Login')

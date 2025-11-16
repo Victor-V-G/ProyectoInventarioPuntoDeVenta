@@ -4,6 +4,7 @@ from CrudEmpleadosApp.models import Empleados  # Importa el modelo Empleados des
 from . import forms  # Importa los formularios definidos en forms.py de la misma app
 from django.contrib import messages
 from AuditoriaApp.views import RegistrarAuditoriaEmpleado
+from LoginApp.decorators import solo_admin
 # Nota general:
 # Se utiliza 'redirect' después de procesar un formulario para evitar problemas de rutas
 # y evitar que se vuelvan a enviar los datos si el usuario recarga la página.
@@ -11,6 +12,7 @@ from AuditoriaApp.views import RegistrarAuditoriaEmpleado
 # ========================================================================
 # VISTA: Mostrar todos los empleados
 # ========================================================================
+@solo_admin
 def empleadosData(request):
     """
     Obtiene todos los registros de empleados de la base de datos
@@ -30,6 +32,7 @@ def empleadosData(request):
 # ========================================================================
 # VISTA: Registro de un nuevo empleado
 # ========================================================================
+@solo_admin
 def empleadoRegistrationView(request):
     """
     Permite registrar un nuevo empleado mediante un formulario.
@@ -69,6 +72,7 @@ def empleadoRegistrationView(request):
 # ========================================================================
 # VISTA: Actualizar un empleado existente
 # ========================================================================
+@solo_admin
 def actualizarEmpleado(request, IdEmpleado):
     """
     Permite actualizar los datos de un empleado existente.
@@ -102,12 +106,13 @@ def actualizarEmpleado(request, IdEmpleado):
 # ========================================================================
 # VISTA: Eliminar un empleado
 # ========================================================================
+@solo_admin
 def confirmarEliminar(request, IdEmpleado):
     empleado = Empleados.objects.get(IdEmpleado=IdEmpleado)
     data = {'emp' : empleado}
     return render(request, 'templateCrudEmpleado/confirmar-eliminar.html', data)
 
-
+@solo_admin
 def eliminarEmpleado(request, IdEmpleado):
     empleado = Empleados.objects.get(IdEmpleado=IdEmpleado)  # Obtiene el empleado a eliminar
     if request.method == 'POST':
@@ -120,6 +125,7 @@ def eliminarEmpleado(request, IdEmpleado):
         return redirect('admin-crud-empleado')
     
 #Detalle
+@solo_admin
 def detalleEmpleado(request, IdEmpleado):
     empleado = Empleados.objects.get(IdEmpleado=IdEmpleado) 
     data = {'emp' : empleado}

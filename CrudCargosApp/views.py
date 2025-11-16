@@ -3,9 +3,11 @@ from CrudCargosApp.models import Cargos
 from . import forms
 from django.contrib import messages
 from AuditoriaApp.views import RegistrarAuditoriaCargo
+from LoginApp.decorators import solo_admin
 # Importante: se asume que ya se importaron forms, messages, redirect y render
 
 # Vista para mostrar todos los cargos en una tabla/listado
+@solo_admin
 def cargosData(request):
     cargos = Cargos.objects.all()  # Obtiene todos los registros del modelo Cargos
     data = {'Cargos': cargos}  # Diccionario con los cargos para enviarlos a la plantilla
@@ -13,6 +15,7 @@ def cargosData(request):
 
 
 # Vista para registrar un nuevo cargo
+@solo_admin
 def cargosRegistracionView(request):
     form = forms.CargoRegistracionForm()  # Crea un formulario vacío
 
@@ -38,6 +41,7 @@ def cargosRegistracionView(request):
 
 
 # Vista para actualizar un cargo existente
+@solo_admin
 def actualizarCargo(request, IdCargos):
     cargo = Cargos.objects.get(IdCargos=IdCargos)  # Obtiene el cargo por su ID
     form = forms.CargoRegistracionForm(instance=cargo)  # Crea un formulario con los datos existentes
@@ -57,6 +61,7 @@ def actualizarCargo(request, IdCargos):
 
 
 # Vista para mostrar confirmación antes de eliminar un cargo
+@solo_admin
 def confirmarEliminar(request, IdCargos):
     cargo = Cargos.objects.get(IdCargos=IdCargos)  # Obtiene el cargo por su ID
     data = {'cag' : cargo}  # Diccionario con el cargo
@@ -64,6 +69,7 @@ def confirmarEliminar(request, IdCargos):
 
 
 # Vista para eliminar un cargo
+@solo_admin
 def eliminarCargo(request, IdCargos):
     cargo = Cargos.objects.get(IdCargos=IdCargos)  # Obtiene el cargo por su ID
     if request.method == 'POST':  # Solo permite eliminar si se envía POST
@@ -77,6 +83,7 @@ def eliminarCargo(request, IdCargos):
 
 
 # Vista para mostrar los detalles de un cargo específico
+@solo_admin
 def detalleCargo(request, IdCargos):
     cargo = Cargos.objects.get(IdCargos=IdCargos)  # Obtiene el cargo por su ID
     data = {'cag' : cargo}  # Diccionario con el cargo

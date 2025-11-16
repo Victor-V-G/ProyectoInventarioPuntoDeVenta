@@ -3,12 +3,14 @@ from CrudCategoriaProductoApp.models import CategoriaProducto
 from . import forms
 from django.contrib import messages
 from AuditoriaApp.views import RegistrarAuditoriaCategoria
+from LoginApp.decorators import login_requerido
 
 
 # Create your views here.
 
 # --------------------------------------------------------------------
 # Vista para mostrar todos los registros de CategoriaProducto
+@login_requerido
 def categoriaProductoData(request):
     # Obtiene todos los objetos de la tabla CategoriaProducto
     categoriaProducto = CategoriaProducto.objects.all()
@@ -21,6 +23,7 @@ def categoriaProductoData(request):
 
 # --------------------------------------------------------------------
 # Vista para registrar una nueva categoría de producto
+@login_requerido
 def categoriaProductoRegistracionView(request):
     # Inicializa el formulario vacío
     form = forms.CategoriaProductoRegistracionForm()
@@ -62,6 +65,7 @@ def categoriaProductoRegistracionView(request):
 
 # --------------------------------------------------------------------
 # Vista para actualizar una categoría de producto existente
+@login_requerido
 def actualizarCategoriaProducto(request, IdCategoriaProducto):
     # Obtiene el registro específico según su ID
     categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
@@ -95,6 +99,7 @@ def actualizarCategoriaProducto(request, IdCategoriaProducto):
 
 # --------------------------------------------------------------------
 # Vista para mostrar la confirmación antes de eliminar
+@login_requerido
 def confirmarEliminar(request, IdCategoriaProducto):
     # Obtiene la categoría a eliminar según su ID
     categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
@@ -105,6 +110,7 @@ def confirmarEliminar(request, IdCategoriaProducto):
 
 # --------------------------------------------------------------------
 # Vista para eliminar la categoría de producto
+@login_requerido
 def eliminarCategoriaProducto(request, IdCategoriaProducto):
     # Obtiene la categoría a eliminar
     categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)
@@ -130,6 +136,7 @@ def eliminarCategoriaProducto(request, IdCategoriaProducto):
 
 # --------------------------------------------------------------------
 # Vista para mostrar el detalle de una categoría de producto
+@login_requerido
 def detalleCategoriaProducto(request, IdCategoriaProducto):
     # Obtiene la categoría específica
     categoriaProducto = CategoriaProducto.objects.get(IdCategoriaProducto=IdCategoriaProducto)

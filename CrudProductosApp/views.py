@@ -4,10 +4,12 @@ from CrudProductosApp.models import Productos  # Importa el modelo Producto
 from . import forms  # Importa los formularios de la app CrudProductosApp
 from django.contrib import messages
 from AuditoriaApp.views import RegistrarAuditoriaProducto
+from LoginApp.decorators import login_requerido
 
 # ========================================================================
 # VISTA: Mostrar todos los productos
 # ========================================================================
+@login_requerido
 def productosData(request):
     """
     Obtiene todos los registros de productos de la base de datos
@@ -27,6 +29,7 @@ def productosData(request):
 # ========================================================================
 # VISTA: Registro de un nuevo producto
 # ========================================================================
+@login_requerido
 def productosRegistrationView(request):
     """
     Permite registrar un nuevo producto mediante un formulario.
@@ -79,6 +82,7 @@ def productosRegistrationView(request):
 # ========================================================================
 # VISTA: Actualizar un producto existente
 # ========================================================================
+@login_requerido
 def actualizarProducto(request, IdProducto):
     """
     Permite actualizar los datos de un producto existente.
@@ -121,13 +125,13 @@ def actualizarProducto(request, IdProducto):
 # VISTA: Eliminar un producto
 # ========================================================================
 
-
+@login_requerido
 def confirmarEliminar(request, IdProducto):
     producto = Productos.objects.get(IdProducto=IdProducto)
     data = {'pro' : producto}
     return render(request, 'templateCrudProducto/confirmar-eliminar.html', data)
 
-
+@login_requerido
 def eliminarProducto(request, IdProducto):
     producto = Productos.objects.get(IdProducto=IdProducto)
     if request.method == 'POST':
@@ -149,6 +153,7 @@ def eliminarProducto(request, IdProducto):
         messages.error(request, "Método no permitido para eliminar usuarios.")
 
 #Detalle
+@login_requerido
 def detalleProducto(request, IdProducto):
     producto = Productos.objects.get(IdProducto=IdProducto)
     data = {'pro' : producto}

@@ -3,8 +3,10 @@ from CrudBodegasApp.models import Bodegas
 from . import forms
 from django.contrib import messages
 from AuditoriaApp.views import RegistrarAuditoriaBodega
+from LoginApp.decorators import login_requerido
 
 # Vista para mostrar todas las bodegas registradas
+@login_requerido
 def bodegasData(request):
     bodegas = Bodegas.objects.all()  # Obtiene todas las bodegas de la base de datos
     data = {'Bodegas': bodegas}      # Crea un diccionario con los datos
@@ -12,6 +14,7 @@ def bodegasData(request):
 
 
 # Vista para registrar una nueva bodega
+@login_requerido
 def bodegasRegistracionView(request):
     form = forms.BodegaRegistracionForm()  # Crea un formulario vacío por defecto
 
@@ -49,6 +52,7 @@ def bodegasRegistracionView(request):
 
 
 # Vista para actualizar (editar) una bodega existente
+@login_requerido
 def actualizarBodega(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)  # Busca la bodega por su ID
     form = forms.BodegaRegistracionForm(instance=bodega)  # Carga los datos actuales en el formulario
@@ -80,6 +84,7 @@ def actualizarBodega(request, IdBodega):
 
 
 # Vista para mostrar la página de confirmación de eliminación
+@login_requerido
 def confirmarEliminar(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)  # Busca la bodega a eliminar
     data = {'bod': bodega}  # Envía los datos al template
@@ -87,6 +92,7 @@ def confirmarEliminar(request, IdBodega):
 
 
 # Vista para eliminar una bodega de la base de datos
+@login_requerido
 def eliminarBodega(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)  # Busca la bodega a eliminar
     if request.method == 'POST':  # Solo permite eliminar con método POST (por seguridad)
@@ -109,6 +115,7 @@ def eliminarBodega(request, IdBodega):
 
 
 # Vista para mostrar el detalle de una bodega específica
+@login_requerido
 def detalleBodega(request, IdBodega):
     bodega = Bodegas.objects.get(IdBodega=IdBodega)  # Busca la bodega por ID
     data = {'bod': bodega}  # Envía los datos al template

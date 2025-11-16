@@ -3,8 +3,10 @@ from CrudUsuariosApp.models import Usuarios
 from . import forms
 from django.contrib import messages
 from AuditoriaApp.views import RegistrarAuditoriaUsuario
+from LoginApp.decorators import solo_admin
 
 #Models
+@solo_admin
 def usuariosData(request):
     usuarios = Usuarios.objects.all()
     data = {'Usuarios' : usuarios}
@@ -12,6 +14,7 @@ def usuariosData(request):
 
 
 #Form
+@solo_admin
 def usuariosRegistrationView(request):
     form = forms.UsuarioRegistrationForm()
     actualizar = False
@@ -42,6 +45,7 @@ def usuariosRegistrationView(request):
 
 
 #Actualizar
+@solo_admin
 def actualizarUsuario(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
     form = forms.UsuarioUpdateForm(instance=usuario)
@@ -66,12 +70,13 @@ def actualizarUsuario(request, IdUsuarios):
 
 
 #Eliminar
+@solo_admin
 def confirmarEliminar(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
     data = {'usu' : usuario}
     return render(request, 'templateCrudUsuario/confirmar-eliminar.html', data)
 
-
+@solo_admin
 def eliminarUsuario(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
 
@@ -86,6 +91,7 @@ def eliminarUsuario(request, IdUsuarios):
 
 
 #Detalle
+@solo_admin
 def detalleUsuario(request, IdUsuarios):
     usuario = Usuarios.objects.get(IdUsuarios=IdUsuarios)
     data = {'usu' : usuario}

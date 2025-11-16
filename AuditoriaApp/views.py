@@ -7,6 +7,7 @@ from AuditoriaApp.models import AuditoriaBodega, AuditoriaCargo, AuditoriaCatego
 # los registros de auditoría (qué pasó, en qué bodega, quién lo hizo, cuándo, etc.).
 from CrudUsuariosApp.models import Usuarios
 # Importa el modelo 'Usuarios' para poder buscar al usuario logueado en la base de datos.
+from LoginApp.decorators import solo_admin
 
 
 def RegistrarAuditoriaBodega(request, bodega, accion):
@@ -66,6 +67,7 @@ def RegistrarAuditoriaBodega(request, bodega, accion):
     # en el momento de crear este registro.
 
 #---------------------------------------------------------------------------#
+
 def RegistrarAuditoriaCargo(request, cargo, accion):
     
     username = request.session.get("Usuario_Username")
@@ -85,6 +87,7 @@ def RegistrarAuditoriaCargo(request, cargo, accion):
 
 
 #---------------------------------------------------------------------------#
+
 def RegistrarAuditoriaCategoria(request, categoria, accion):
     
     username = request.session.get("Usuario_Username")
@@ -104,6 +107,7 @@ def RegistrarAuditoriaCategoria(request, categoria, accion):
 
 
 #---------------------------------------------------------------------------#
+
 def RegistrarAuditoriaEmpleado(request, empleado, accion):
     
     username = request.session.get("Usuario_Username")
@@ -123,6 +127,7 @@ def RegistrarAuditoriaEmpleado(request, empleado, accion):
 
 
 #---------------------------------------------------------------------------#
+
 def RegistrarAuditoriaProducto(request, producto, accion):
     
     username = request.session.get("Usuario_Username")
@@ -142,6 +147,7 @@ def RegistrarAuditoriaProducto(request, producto, accion):
 
 
 #---------------------------------------------------------------------------#
+
 def RegistrarAuditoriaUsuario(request, usuario, accion):
 
     username = request.session.get("Usuario_Username")
@@ -158,7 +164,7 @@ def RegistrarAuditoriaUsuario(request, usuario, accion):
     )
 #---------------------------------------------------------------------------#
 
-
+@solo_admin
 def AuditoriaData(request):
     auditoriaBodega = AuditoriaBodega.objects.all()
     auditoriaCargo = AuditoriaCargo.objects.all()
