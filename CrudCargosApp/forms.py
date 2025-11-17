@@ -78,7 +78,6 @@ class CargoRegistracionForm(forms.ModelForm):
         return inputDescripcionDelCargo
     
 
-    # ⚠️ Esta validación está duplicada: sobrescribe la anterior.
     # Lo ideal sería unir ambas condiciones en una sola función.
     def clean_DescripcionDelCargo(self):
         inputDescripcionDelCargo = self.cleaned_data['DescripcionDelCargo'].strip()

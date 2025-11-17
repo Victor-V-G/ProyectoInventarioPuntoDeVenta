@@ -8,7 +8,7 @@
     <!-- Breadcrumbs: indica la ruta de navegación dentro del sistema -->
     <li>
         {% if request.session.Usuario_Username == "Admin" %}
-            <a href="{% url 'adminhome' %}">Panel Admin ></a>
+            <a href="{% url 'adminhome' %}" >Panel Admin ></a>
             <a>Crud Productos > </a>
         {% else %}
             <a href="{% url 'home' %}">Home ></a>
@@ -23,17 +23,26 @@
     <!-- Botones de navegación -->
      
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'adminhome' %}">Volver al Panel Admin</a>
+        <a href="{% url 'adminhome' %}">
+            <button class="button-header" type="button">Volver al Panel Admin</button>
+        </a>
+        
     {% else %}
-        <a href="{% url 'home' %}">Volver al Inicio</a>
+        <a href="{% url 'home' %}">
+            <button class="button-header" type="button">Volver al Inicio</button>
+        </a>
     {% endif %}
 
     <!-- Botón para registrar un nuevo producto -->
     
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'admin-registrar-producto' %}">REGISTRAR</a>
+        <a href="{% url 'admin-registrar-producto' %}">
+            <button class="button-header" type="button">REGISTRAR</button>
+        </a>
     {% else %}
-        <a href="{% url 'registrar-producto' %}">REGISTRAR</a>
+        <a href="{% url 'registrar-producto' %}">
+            <button class="button-header" type="button">REGISTRAR</button>
+        </a>
     {% endif %}
     
 {% endblock %}
@@ -86,13 +95,25 @@
                     <!-- Botones de acción: Detalle, Actualizar y Eliminar -->
                     <td>
                         {% if request.session.Usuario_Username == "Admin" %}
-                            <a href="{% url 'admin-detalle-producto' pro.IdProducto %}">DETALLE</a>
-                            <a href="{% url 'admin-actualizar-producto' pro.IdProducto %}">ACTUALIZAR</a>
-                            <a href="{% url 'admin-confirmar-eliminar-producto' pro.IdProducto %}">ELIMINAR</a>
+                            <a href="{% url 'admin-detalle-producto' pro.IdProducto %}">
+                                <button class="button-header" type="button">DETALLE</button>
+                            </a>
+                            <a href="{% url 'admin-actualizar-producto' pro.IdProducto %}">
+                                <button class="button-header" type="button">ACTUALIZAR</button>
+                            </a>
+                            <a href="{% url 'admin-confirmar-eliminar-producto' pro.IdProducto %}">
+                                <button class="button-header" type="button">ELIMINAR</button>
+                            </a>
                         {% else %}
-                            <a href="{% url 'detalle-producto' pro.IdProducto %}">DETALLE</a>
-                            <a href="{% url 'actualizar-producto' pro.IdProducto %}">ACTUALIZAR</a>
-                            <a href="{% url 'confirmar-eliminar-producto' pro.IdProducto %}">ELIMINAR</a>
+                            <a href="{% url 'detalle-producto' pro.IdProducto %}">
+                                <button class="button-header" type="button">DETALLE</button>
+                            </a>
+                            <a href="{% url 'actualizar-producto' pro.IdProducto %}">
+                                <button class="button-header" type="button">ACTUALIZAR</button>
+                            </a>
+                            <a href="{% url 'confirmar-eliminar-producto' pro.IdProducto %}">
+                                <button class="button-header" type="button">ELIMINAR</button>
+                            </a>
                         {% endif %}
                     </td>
                 </tr>

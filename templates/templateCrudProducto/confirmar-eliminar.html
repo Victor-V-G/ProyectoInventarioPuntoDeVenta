@@ -32,9 +32,13 @@
         
         <!-- Botón de volver, llama a función JS para regresar al listado -->
         {% if request.session.Usuario_Username == "Admin" %}
-            <a href="{% url 'admin-crud-producto' %}">Volver</a>
+            <a href="{% url 'admin-crud-producto' %}">
+                <button class="button-header" type="button">Volver al Panel Admin</button>
+            </a>
         {% else %}
-            <a href="{% url 'crud-producto' %}">Volver</a>
+            <a href="{% url 'crud-producto' %}" >
+                <button class="button-header" type="button">Volver al Inicio</button>
+            </a>
         {% endif %}
 
         <!-- Formulario POST para eliminar el producto -->

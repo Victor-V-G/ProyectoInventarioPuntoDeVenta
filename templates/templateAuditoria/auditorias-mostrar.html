@@ -1,46 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Auditorías</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f5f5f5;
-        }
-
-        h2 {
-            background: #333;
-            color: #fff;
-            padding: 10px;
-            margin-top: 40px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 40px;
-            background: #fff;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: left;
-            font-size: 14px;
-        }
-
-        th {
-            background: #e0e0e0;
-        }
-    </style>
-
+    <link rel="stylesheet" href="{% static 'css/auditorias-style.css' %}">
 </head>
 <body>
 
-    <h1>📋 Registro de Auditorías</h1>
+    <div class="header-auditoria">
+        <a href="{% url 'adminhome' %}">
+            <button class="button-header" type="button">VOLVER</button>
+        </a>
+
+        <h1>Registro de Auditorías</h1>
+
+        <!-- Espacio invisible para equilibrar el flex y mantener el título centrado -->
+        <div class="placeholder"></div>
+    </div>
 
     <!-- ============================== -->
     <!-- AUDITORÍA BODEGA -->
@@ -50,8 +27,8 @@
         <tr>
             <th>ID</th>
             <th>ID Bodega</th>
-            <th>Nombre Bodega (Respaldo)</th>
-            <th>Usuario</th>
+            <th>Nombre Bodega</th>
+            <th>Usuario ejecutó accion</th>
             <th>Acción</th>
             <th>Fecha</th>
         </tr>
@@ -80,7 +57,7 @@
             <th>ID</th>
             <th>ID Cargo</th>
             <th>Nombre Cargo</th>
-            <th>Usuario</th>
+            <th>Usuario ejecutó accion</th>
             <th>Acción</th>
             <th>Fecha</th>
         </tr>
@@ -109,7 +86,7 @@
             <th>ID</th>
             <th>ID Categoría</th>
             <th>Nombre Categoría</th>
-            <th>Usuario</th>
+            <th>Usuario ejecutó accion</th>
             <th>Acción</th>
             <th>Fecha</th>
         </tr>
@@ -138,7 +115,7 @@
             <th>ID</th>
             <th>ID Empleado</th>
             <th>Nombre Empleado</th>
-            <th>Usuario</th>
+            <th>Usuario ejecutó accion</th>
             <th>Acción</th>
             <th>Fecha</th>
         </tr>
@@ -167,7 +144,7 @@
             <th>ID</th>
             <th>ID Producto</th>
             <th>Nombre Producto</th>
-            <th>Usuario</th>
+            <th>Usuario ejecutó accion</th>
             <th>Acción</th>
             <th>Fecha</th>
         </tr>
@@ -195,9 +172,9 @@
     <table>
         <tr>
             <th>ID</th>
-            <th>ID Usuario Respaldo</th>
-            <th>Nombre Usuario Respaldo</th>
-            <th>Usuario ejecutó</th>
+            <th>ID Usuario</th>
+            <th>Nombre Usuario</th>
+            <th>Usuario ejecutó accion</th>
             <th>Acción</th>
             <th>Fecha</th>
         </tr>

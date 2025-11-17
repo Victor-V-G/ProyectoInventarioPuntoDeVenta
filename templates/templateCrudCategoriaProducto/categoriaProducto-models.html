@@ -22,17 +22,25 @@
     <h1 class="header-title">LISTA DE CATEGORIAS</h1>
 
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'adminhome' %}">Volver al Panel Admin</a>
+        <a href="{% url 'adminhome' %}">
+            <button class="button-header" type="button">Volver al Panel Admin</button>
+        </a>
     {% else %}
-        <a href="{% url 'home' %}">Volver al Inicio</a>
+        <a href="{% url 'home' %}">
+            <button class="button-header" type="button">Volver al Inicio</button>
+        </a>
     {% endif %}
 
     <!-- Botón para registrar una nueva categoria -->
 
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'admin-registrar-categoria' %}">REGISTRAR</a>
+        <a href="{% url 'admin-registrar-categoria' %}">
+            <button class="button-header" type="button">REGISTRAR</button>
+        </a>
     {% else %}
-        <a href="{% url 'registrar-categoria' %}">REGISTRAR</a>
+        <a href="{% url 'registrar-categoria' %}" >
+            <button class="button-header" type="button">REGISTRAR</button>
+        </a>
     {% endif %}
 
 {% endblock %}
@@ -64,13 +72,25 @@
                     <!-- Botones de acción: Detalle, Actualizar, Eliminar -->
                     <td>
                         {% if request.session.Usuario_Username == "Admin" %}
-                            <a href="{% url 'admin-detalle-categoria' bod.IdCategoriaProducto %}">DETALLE</a>
-                            <a href="{% url 'admin-actualizar-categoria' bod.IdCategoriaProducto %}">ACTUALIZAR</a>
-                            <a href="{% url 'admin-confirmar-eliminar-categoria' bod.IdCategoriaProducto %}">ELIMINAR</a>
+                            <a href="{% url 'admin-detalle-categoria' bod.IdCategoriaProducto %}">
+                                <button class="button-header" type="button">DETALLE</button>
+                            </a>
+                            <a href="{% url 'admin-actualizar-categoria' bod.IdCategoriaProducto %}" >
+                                <button class="button-header" type="button">ACTUALIZAR</button>
+                            </a>
+                            <a href="{% url 'admin-confirmar-eliminar-categoria' bod.IdCategoriaProducto %}" >
+                                <button class="button-header" type="button">ELIMINAR</button>
+                            </a>
                         {% else %}
-                            <a href="{% url 'detalle-categoria' bod.IdCategoriaProducto %}">DETALLE</a>
-                            <a href="{% url 'actualizar-categoria' bod.IdCategoriaProducto %}">ACTUALIZAR</a>
-                            <a href="{% url 'confirmar-eliminar-categoria' bod.IdCategoriaProducto %}">ELIMINAR</a>
+                            <a href="{% url 'detalle-categoria' bod.IdCategoriaProducto %}" >
+                                <button class="button-header" type="button">DETALLE</button>
+                            </a>
+                            <a href="{% url 'actualizar-categoria' bod.IdCategoriaProducto %}" >
+                                <button class="button-header" type="button">ACTUALIZAR</button>
+                            </a>
+                            <a href="{% url 'confirmar-eliminar-categoria' bod.IdCategoriaProducto %}">
+                                <button class="button-header" type="button">ELIMINAR</button>
+                            </a>
                         {% endif %}
                     </td>
                 </tr>

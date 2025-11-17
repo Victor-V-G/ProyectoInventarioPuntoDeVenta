@@ -46,8 +46,10 @@ class Cargos(models.Model):
     #   - 'Bodeguero'
     # --------------------------------------------------------------------
     TIPO_DE_CARGO = [
-        ('Gerente', 'Gerente'),
+        ('Etiquetador', 'Etiquetador'),
         ('Bodeguero', 'Bodeguero'),
+        ('Ayudante', 'Ayudante'),
+        ('Despachador', 'Despachador'),
     ]
     # --------------------------------------------------------------------
 
@@ -61,7 +63,7 @@ class Cargos(models.Model):
     # verbose_name: nombre descriptivo mostrado en la interfaz del admin.
     # --------------------------------------------------------------------
     TipoDeCargo = models.CharField(
-        max_length=10,
+        max_length=20,
         choices=TIPO_DE_CARGO,
         db_column='TipoDeCargo',
         verbose_name='Tipo de cargo'

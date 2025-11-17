@@ -22,16 +22,16 @@
     <h1 class="header-title">LISTA DE BODEGAS</h1>
 
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'adminhome' %}">Volver al Panel Admin</a>
+        <a href="{% url 'adminhome' %}" class="btn-action">Volver al Panel Admin</a>
     {% else %}
-        <a href="{% url 'home' %}">Volver al Inicio</a>
+        <a href="{% url 'home' %}" class="btn-action">Volver al Inicio</a>
     {% endif %}
 
 
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'admin-registrar-bodega' %}">REGISTRAR</a>
+        <a href="{% url 'admin-registrar-bodega' %}" class="btn-action">REGISTRAR</a>
     {% else %}
-        <a href="{% url 'registrar-bodega' %}">REGISTRAR</a>
+        <a href="{% url 'registrar-bodega' %}" class="btn-action">REGISTRAR</a>
     {% endif %}
 
 {% endblock %}
@@ -62,13 +62,13 @@
                     <!-- Botones de acción para cada bodega -->
                     <td>
                         {% if request.session.Usuario_Username == "Admin" %}
-                            <a href="{% url 'admin-detalle-bodega' bod.IdBodega %}">DETALLE</a>
-                            <a href="{% url 'admin-actualizar-bodega' bod.IdBodega %}">ACTUALIZAR</a>
-                            <a href="{% url 'admin-confirmar-eliminar-bodega' bod.IdBodega %}">ELIMINAR</a>
+                            <a href="{% url 'admin-detalle-bodega' bod.IdBodega %}" class="btn-action">DETALLE</a>
+                            <a href="{% url 'admin-actualizar-bodega' bod.IdBodega %}" class="btn-action">ACTUALIZAR</a>
+                            <a href="{% url 'admin-confirmar-eliminar-bodega' bod.IdBodega %}" class="btn-action">ELIMINAR</a>
                         {% else %}
-                            <a href="{% url 'detalle-bodega' bod.IdBodega %}">DETALLE</a>
-                            <a href="{% url 'actualizar-bodega' bod.IdBodega %}">ACTUALIZAR</a>
-                            <a href="{% url 'confirmar-eliminar-bodega' bod.IdBodega %}">ELIMINAR</a>
+                            <a href="{% url 'detalle-bodega' bod.IdBodega %}" class="btn-action">DETALLE</a>
+                            <a href="{% url 'actualizar-bodega' bod.IdBodega %}" class="btn-action">ACTUALIZAR</a>
+                            <a href="{% url 'confirmar-eliminar-bodega' bod.IdBodega %}" class="btn-action">ELIMINAR</a>
                         {% endif %}
                     </td>
                 </tr>
