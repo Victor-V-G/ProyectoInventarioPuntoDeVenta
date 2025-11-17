@@ -1,7 +1,7 @@
 from django.urls import path
 from CrudUsuariosApp import views
 
-# Lista de rutas para la aplicación CrudUsuariosApp
+# Lista de rutas para la aplicación CrudUsuariosApp solo par admin
 urlpatterns = [
 
     path('crud-usuarios/', views.usuariosData, name='admin-crud-usuario'),

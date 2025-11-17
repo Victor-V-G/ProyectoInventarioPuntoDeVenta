@@ -2,6 +2,7 @@ from django.urls import path
 from CrudCategoriaProductoApp import views
 # Lista de rutas para la aplicación CrudCategoiaApp
 
+# Lista de rutas (URL patterns) de la aplicación CRUD de categorias solo par admin.
 urlpatterns = [
 
     path('crud-categoriaProducto/', views.categoriaProductoData, name='admin-crud-categoria'),

@@ -2,7 +2,7 @@ from django.urls import path       # Función para definir rutas URL
 from CrudEmpleadosApp import views  # Importa las vistas definidas en la app CrudEmpleadosApp
 
 # ========================================================================
-# Lista de rutas URL de la aplicación CrudEmpleadosApp
+# Lista de rutas URL de la aplicación CrudEmpleadosApp para admin
 # ========================================================================
 urlpatterns = [
 

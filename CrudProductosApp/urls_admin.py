@@ -3,6 +3,7 @@
 from django.urls import path
 from CrudProductosApp import views
 
+# Lista de rutas (URL patterns) de la aplicación CRUD de producto solo para admin.
 urlpatterns = [
     # Lista de productos para Administrador
     path('crud-productos/', views.productosData, name='admin-crud-producto'),

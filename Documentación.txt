@@ -225,3 +225,23 @@ Se heizo en base a un extend con un archivo html externo
     </form>
 </section>
 {% endblock %}
+
+
+
+
+
+
+
+
+El sistema cuenta con una vista principal llamada renderTemplateHome que se encarga de obtener 
+el nombre de usuario almacenado en la sesión, buscarlo en la base de datos y enviar su información 
+al template correspondiente. Esta vista está protegida con un decorador que exige que el usuario esté 
+autenticado antes de acceder. Por otra parte, el formulario LoginForm define dos campos básicos, uno 
+para el nombre de usuario y otro para la contraseña, con etiquetas que facilitan el ingreso de datos. 
+
+En el template home.html se muestran los datos del usuario logeado y se despliega un panel administrativo 
+con accesos directos a los diferentes CRUD del sistema, además de un botón para cerrar sesión y un enlace a 
+la vista de auditorías. La URL auditorias define la ruta que permite acceder a la sección de auditorías, la 
+cual puede usar un decorador para restringir el acceso únicamente a administradores. En conjunto, todo el código 
+forma un panel de administración que muestra la información del usuario, permite gestionar los módulos del 
+sistema y protege el acceso mediante autenticación.

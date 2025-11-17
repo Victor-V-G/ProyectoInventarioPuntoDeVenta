@@ -1,5 +1,9 @@
+# IMPORTACIONES NECESARIAS
+
+# Importa las herramientas del panel de administración de Django.
 from django.contrib import admin
 
+# Importa todos los modelos de auditoría que se registrarán en el admin.
 from .models import (
     AuditoriaBodega,
     AuditoriaCargo,
@@ -9,36 +13,52 @@ from .models import (
     AuditoriaUsuario
 )
 
+
 # =============================================================================
-# BASE ADMIN SOLO LECTURA (SIN AGREGAR / EDITAR / ELIMINAR)
+# ADMIN BASE SOLO LECTURA
+# Clase genérica usada como base para todas las auditorías.
+# Esta clase deshabilita agregar, editar y eliminar registros.
+# Se utiliza para que las auditorías sean 100% históricas y no modificables.
 # =============================================================================
 class AuditoriaBaseAdmin(admin.ModelAdmin):
 
-    # Bloquear agregar
+    # ------------------------------
+    # Bloquea la opción de "Agregar"
+    # ------------------------------
     def has_add_permission(self, request):
         return False
 
-    # Bloquear editar
+    # ------------------------------
+    # Bloquea la opción de "Modificar"
+    # obj = instancia del modelo (opcional)
+    # ------------------------------
     def has_change_permission(self, request, obj=None):
         return False
 
-    # Bloquear eliminar
+    # ------------------------------
+    # Bloquea la opción de "Eliminar"
+    # ------------------------------
     def has_delete_permission(self, request, obj=None):
         return False
 
-    # Quitar acciones "Eliminar seleccionados"
+    # -------------------------------------------------
+    # Elimina las acciones masivas del admin (por ejemplo,
+    # "Eliminar seleccionados"). Esto asegura que nada pueda
+    # ser borrado aunque existan opciones en la interfaz.
+    # -------------------------------------------------
     actions = None
 
-    # Configuración común
+    # Cantidad de elementos por página en la vista de lista.
     list_per_page = 10
 
 
 # =============================================================================
 # AUDITORÍA BODEGA
+# Administrador del modelo AuditoriaBodega
 # =============================================================================
 class AuditoriaBodegaAdmin(AuditoriaBaseAdmin):
 
-    # Campos de la tabla principal
+    # Campos que se mostrarán en la tabla principal del admin
     list_display = [
         "IdAuditoriaBodega",
         "Accion",
@@ -47,10 +67,10 @@ class AuditoriaBodegaAdmin(AuditoriaBaseAdmin):
         "Fecha_hora",
     ]
 
-    # Filtros laterales
+    # Filtros en la barra lateral derecha
     list_filter = ["Accion", "Fecha_hora"]
 
-    # Campos buscables
+    # Campos que se podrán buscar desde el buscador del admin
     search_fields = [
         "IdAuditoriaBodega",
         "Accion",
@@ -58,7 +78,7 @@ class AuditoriaBodegaAdmin(AuditoriaBaseAdmin):
         "BodegaNombreRespaldo",
     ]
 
-    # Campos detalle
+    # Organización de los campos dentro del detalles de un registro
     fieldsets = (
         ('Datos importantes', {
             'fields': ('Accion', 'Fecha_hora')
@@ -71,6 +91,7 @@ class AuditoriaBodegaAdmin(AuditoriaBaseAdmin):
         }),
     )
 
+    # Campos que no se pueden modificar en el formulario del admin
     readonly_fields = [
         'IdAuditoriaBodega',
         'Bodega',
@@ -307,7 +328,8 @@ class AuditoriaUsuarioAdmin(AuditoriaBaseAdmin):
 
 
 # =============================================================================
-# REGISTROS
+# REGISTRO DE MODELOS EN EL ADMIN
+# Aquí Django conecta cada modelo con su configuración admin.
 # =============================================================================
 admin.site.register(AuditoriaBodega, AuditoriaBodegaAdmin)
 admin.site.register(AuditoriaCargo, AuditoriaCargoAdmin)

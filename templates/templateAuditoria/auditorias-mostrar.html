@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 {% load static %}
+<!-- Carga la etiqueta para acceder a archivos estáticos del proyecto -->
+
 <head>
     <meta charset="UTF-8">
     <title>Auditorías</title>
+
+    <!-- Archivo CSS del estilo de auditorías -->
     <link rel="stylesheet" href="{% static 'css/auditorias-style.css' %}">
 </head>
+
 <body>
 
+    <!-- ====================================================== -->
+    <!-- ENCABEZADO SUPERIOR: BOTÓN VOLVER + TÍTULO CENTRADO     -->
+    <!-- ====================================================== -->
     <div class="header-auditoria">
+
+        <!-- Botón para regresar al panel de administrador -->
         <a href="{% url 'adminhome' %}">
             <button class="button-header" type="button">VOLVER</button>
         </a>
 
+        <!-- Título principal de la página -->
         <h1>Registro de Auditorías</h1>
 
-        <!-- Espacio invisible para equilibrar el flex y mantener el título centrado -->
+        <!--
+            Div vacío usado como placeholder para mantener centrado el título
+            en el diseño flex del header.
+        -->
         <div class="placeholder"></div>
     </div>
 
-    <!-- ============================== -->
-    <!-- AUDITORÍA BODEGA -->
-    <!-- ============================== -->
+    <!-- ====================================================== -->
+    <!-- AUDITORÍA BODEGA                                        -->
+    <!-- ====================================================== -->
     <h2>Auditoría Bodega</h2>
+
     <table>
         <tr>
             <th>ID</th>
@@ -33,6 +48,7 @@
             <th>Fecha</th>
         </tr>
 
+        <!-- Loop que recorre todos los registros de auditoría de bodegas -->
         {% for item in AuditoriaBodega %}
         <tr>
             <td>{{ item.IdAuditoriaBodega }}</td>
@@ -42,16 +58,19 @@
             <td>{{ item.Accion }}</td>
             <td>{{ item.Fecha_hora }}</td>
         </tr>
+
+        <!-- Si no existen registros -->
         {% empty %}
         <tr><td colspan="6">Sin registros</td></tr>
         {% endfor %}
     </table>
 
 
-    <!-- ============================== -->
-    <!-- AUDITORÍA CARGO -->
-    <!-- ============================== -->
+    <!-- ====================================================== -->
+    <!-- AUDITORÍA CARGO                                         -->
+    <!-- ====================================================== -->
     <h2>Auditoría Cargo</h2>
+
     <table>
         <tr>
             <th>ID</th>
@@ -71,16 +90,18 @@
             <td>{{ item.Accion }}</td>
             <td>{{ item.Fecha_hora }}</td>
         </tr>
+
         {% empty %}
         <tr><td colspan="6">Sin registros</td></tr>
         {% endfor %}
     </table>
 
 
-    <!-- ============================== -->
-    <!-- AUDITORÍA CATEGORÍA -->
-    <!-- ============================== -->
+    <!-- ====================================================== -->
+    <!-- AUDITORÍA CATEGORÍA                                     -->
+    <!-- ====================================================== -->
     <h2>Auditoría Categoría</h2>
+
     <table>
         <tr>
             <th>ID</th>
@@ -100,16 +121,18 @@
             <td>{{ item.Accion }}</td>
             <td>{{ item.Fecha_hora }}</td>
         </tr>
+
         {% empty %}
         <tr><td colspan="6">Sin registros</td></tr>
         {% endfor %}
     </table>
 
 
-    <!-- ============================== -->
-    <!-- AUDITORÍA EMPLEADO -->
-    <!-- ============================== -->
+    <!-- ====================================================== -->
+    <!-- AUDITORÍA EMPLEADO                                      -->
+    <!-- ====================================================== -->
     <h2>Auditoría Empleado</h2>
+
     <table>
         <tr>
             <th>ID</th>
@@ -129,16 +152,18 @@
             <td>{{ item.Accion }}</td>
             <td>{{ item.Fecha_hora }}</td>
         </tr>
+
         {% empty %}
         <tr><td colspan="6">Sin registros</td></tr>
         {% endfor %}
     </table>
 
 
-    <!-- ============================== -->
-    <!-- AUDITORÍA PRODUCTO -->
-    <!-- ============================== -->
+    <!-- ====================================================== -->
+    <!-- AUDITORÍA PRODUCTO                                      -->
+    <!-- ====================================================== -->
     <h2>Auditoría Producto</h2>
+
     <table>
         <tr>
             <th>ID</th>
@@ -158,17 +183,18 @@
             <td>{{ item.Accion }}</td>
             <td>{{ item.Fecha_hora }}</td>
         </tr>
+
         {% empty %}
         <tr><td colspan="6">Sin registros</td></tr>
         {% endfor %}
     </table>
 
 
-
-    <!-- ============================== -->
-    <!-- AUDITORÍA USUARIO -->
-    <!-- ============================== -->
+    <!-- ====================================================== -->
+    <!-- AUDITORÍA USUARIO                                       -->
+    <!-- ====================================================== -->
     <h2>Auditoría Usuario</h2>
+
     <table>
         <tr>
             <th>ID</th>
@@ -188,6 +214,7 @@
             <td>{{ item.Accion }}</td>
             <td>{{ item.Fecha_hora }}</td>
         </tr>
+
         {% empty %}
         <tr><td colspan="6">Sin registros</td></tr>
         {% endfor %}

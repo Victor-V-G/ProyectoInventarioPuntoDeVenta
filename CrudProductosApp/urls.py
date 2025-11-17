@@ -5,6 +5,7 @@ from CrudProductosApp import views  # Importa las vistas de la app CrudProductos
 # ========================================================================
 # Lista de rutas URL de la aplicación CrudProductosApp
 # ========================================================================
+# Lista de rutas (URL patterns) de la aplicación CRUD de producto solo para otros usuarios.
 urlpatterns = [
     
     path('crud-productos/', views.productosData, name='crud-producto'),

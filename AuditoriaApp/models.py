@@ -1,15 +1,20 @@
-from django.db import models
+from django.db import models # Importación del módulo base de modelos de Django
+
+# Importación de los modelos que serán referenciados mediante claves foráneas
 from CrudBodegasApp.models import Bodegas
 from CrudUsuariosApp.models import Usuarios
 from CrudCargosApp.models import Cargos
 from CrudCategoriaProductoApp.models import CategoriaProducto
 from CrudEmpleadosApp.models import Empleados
 from CrudProductosApp.models import Productos
+
+# Importación para aplicar restricciones únicas en los modelos
 from django.db.models import UniqueConstraint
 
 #MANEJO DE AUDITORIAS A BODEGA
 class AuditoriaBodega(models.Model):
 
+    # Campo autoincremental que funciona como llave primaria
     IdAuditoriaBodega = models.AutoField(
         primary_key=True,
         db_column='IdAuditoriaBodega'
@@ -34,19 +39,21 @@ class AuditoriaBodega(models.Model):
         null=True,
         blank=True
     )
-
+    
+    # Campos de respaldo en caso de que la bodega sea eliminada o modificada
     BodegaIdRespaldo = models.IntegerField(
         null=True,
         blank=True
     )
 
+    # Campos de respaldo en caso de que la bodega sea eliminada o modificada
     BodegaNombreRespaldo = models.CharField(
         max_length=70,
         null=True,
         blank=True
     )
 
-    # Información de auditoría
+    # Tipo de acción registrada en la auditoría
     Accion = models.CharField(
         max_length=50,
         choices=[
@@ -57,6 +64,7 @@ class AuditoriaBodega(models.Model):
         ]
     )
 
+    # Tipo de acción registrada en la auditoría
     Fecha_hora = models.DateTimeField(auto_now_add=True)
 
 
@@ -66,7 +74,7 @@ class AuditoriaBodega(models.Model):
             UniqueConstraint(fields=['IdAuditoriaBodega'], name='unique_id_auditoria_bodega'),
         ]
 
-
+    # Nombre exacto de la tabla en la base de datos
     def __str__(self):
         return f"ID: {self.IdAuditoriaBodega}, Bodega: {self.Bodega}, Nombre Bodega: {self.BodegaNombreRespaldo}, Usuario: {self.Usuario}, Accion: {self.Accion}, Fecha: {self.Fecha_hora}"
     
@@ -99,11 +107,13 @@ class AuditoriaCargo(models.Model):
         blank=True
     )
 
+    # Datos de respaldo en caso de eliminación
     CargoIdRespaldo = models.IntegerField(
         null=True,
         blank=True
     )
-
+    
+    # Datos de respaldo en caso de eliminación
     CargoNombreRespaldo = models.CharField(
         max_length=70,
         null=True,
