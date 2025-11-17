@@ -62,8 +62,6 @@
                     <th>Fecha de registro</th>
                     <th>Marca</th>
                     <th>Fecha de vencimiento</th>
-                    <th>Categoria del Producto</th>
-                    <th>Bodega asociada</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -79,18 +77,6 @@
                     <td>{{ pro.FechaDeRegistroProducto }}</td>
                     <td>{{ pro.MarcaProducto }}</td>
                     <td>{{ pro.FechaDeVencimiento }}</td>
-    
-                    {% if pro.CategoriaProducto %}
-                        <td>{{ pro.CategoriaProducto }}</td>
-                    {% else %}
-                        <td>NO ASOCIADO</td>
-                    {% endif %}    
-                    
-                    {% if pro.Bodegas %}
-                        <td>{{ pro.Bodegas }}</td>
-                    {% else %}
-                        <td>NO ASOCIADO</td>
-                    {% endif %} 
                     
                     <!-- Botones de acción: Detalle, Actualizar y Eliminar -->
                     <td>

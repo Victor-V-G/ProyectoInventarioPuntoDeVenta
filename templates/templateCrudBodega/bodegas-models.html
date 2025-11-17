@@ -22,21 +22,27 @@
     <h1 class="header-title">LISTA DE BODEGAS</h1>
 
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'adminhome' %}" class="btn-action">Volver al Panel Admin</a>
+        <a href="{% url 'adminhome' %}">
+            <button class="button-header" type="button">Volver al Panel Admin</button>
+        </a>
     {% else %}
-        <a href="{% url 'home' %}" class="btn-action">Volver al Inicio</a>
+        <a href="{% url 'home' %}">
+            <button class="button-header" type="button">Volver al Inicio</button>
+        </a>
     {% endif %}
-
 
     {% if request.session.Usuario_Username == "Admin" %}
-        <a href="{% url 'admin-registrar-bodega' %}" class="btn-action">REGISTRAR</a>
+        <a href="{% url 'admin-registrar-bodega' %}">
+            <button class="button-header" type="button">REGISTRAR</button>
+        </a>
     {% else %}
-        <a href="{% url 'registrar-bodega' %}" class="btn-action">REGISTRAR</a>
+        <a href="{% url 'registrar-bodega' %}">
+            <button class="button-header" type="button">REGISTRAR</button>
+        </a>
     {% endif %}
-
 {% endblock %}
 
-{% block content %} 
+{% block content %}
     <!-- Verifica si hay bodegas registradas -->
     {% if Bodegas %}
         <table>
@@ -46,7 +52,6 @@
                     <th>Nombre bodega</th>
                     <th>Ubicacion bodega</th>
                     <th>Estado de la bodega</th>
-                    <th>Observaciones</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -58,19 +63,32 @@
                     <td>{{ bod.NombreBodega }}</td>
                     <td>{{ bod.UbicacionBodega }}</td>
                     <td>{{ bod.EstadoBodega }}</td>
-                    <td>{{ bod.ObservacionesBodega }}</td>
+
                     <!-- Botones de acción para cada bodega -->
                     <td>
                         {% if request.session.Usuario_Username == "Admin" %}
-                            <a href="{% url 'admin-detalle-bodega' bod.IdBodega %}" class="btn-action">DETALLE</a>
-                            <a href="{% url 'admin-actualizar-bodega' bod.IdBodega %}" class="btn-action">ACTUALIZAR</a>
-                            <a href="{% url 'admin-confirmar-eliminar-bodega' bod.IdBodega %}" class="btn-action">ELIMINAR</a>
+                            <a href="{% url 'admin-detalle-bodega' bod.IdBodega %}">
+                                <button class="button-header" type="button">DETALLE</button>
+                            </a>
+                            <a href="{% url 'admin-actualizar-bodega' bod.IdBodega %}">
+                                <button class="button-header" type="button">ACTUALIZAR</button>
+                            </a>
+                            <a href="{% url 'admin-confirmar-eliminar-bodega' bod.IdBodega %}">
+                                <button class="button-header" type="button">ELIMINAR</button>
+                            </a>
                         {% else %}
-                            <a href="{% url 'detalle-bodega' bod.IdBodega %}" class="btn-action">DETALLE</a>
-                            <a href="{% url 'actualizar-bodega' bod.IdBodega %}" class="btn-action">ACTUALIZAR</a>
-                            <a href="{% url 'confirmar-eliminar-bodega' bod.IdBodega %}" class="btn-action">ELIMINAR</a>
+                            <a href="{% url 'detalle-bodega' bod.IdBodega %}">
+                                <button class="button-header" type="button">DETALLE</button>
+                            </a>
+                            <a href="{% url 'actualizar-bodega' bod.IdBodega %}">
+                                <button class="button-header" type="button">ACTUALIZAR</button>
+                            </a>
+                            <a href="{% url 'confirmar-eliminar-bodega' bod.IdBodega %}">
+                                <button class="button-header" type="button">ELIMINAR</button>
+                            </a>
                         {% endif %}
                     </td>
+
                 </tr>
                 {% endfor %}
             </tbody>

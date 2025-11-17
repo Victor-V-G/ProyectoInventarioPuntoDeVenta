@@ -87,11 +87,15 @@
         -->
         
 
-        {{ form.Username.label_tag }}
-        {% for error in form.Username.errors %}
-            <span class="error">{{ error }}</span>
-        {% endfor %}
-        {{ form.Username }}
+        {% if UsuarioActual.Username != "Admin" %}
+    
+            {{ form.Username.label_tag }}
+            {% for error in form.Username.errors %}
+                <span class="error">{{ error }}</span>
+            {% endfor %}
+            {{ form.Username }}
+
+        {% endif %}
 
 
         <!-- CAMPO CORREO ELECTRÓNICO (manual) -->

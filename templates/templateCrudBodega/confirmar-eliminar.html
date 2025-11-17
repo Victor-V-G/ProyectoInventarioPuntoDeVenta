@@ -31,10 +31,14 @@
         
         <!-- Botón para volver al listado de bodegas -->
         {% if request.session.Usuario_Username == "Admin" %}
-            <a href="{% url 'admin-crud-bodega' %}" class="btn-action">Volver</a>
+            <a href="{% url 'admin-crud-bodega' %}">
+                <button class="button-header" type="button">Volver</button>
+            </a>
         {% else %}
-            <a href="{% url 'crud-bodega' %}" class="btn-action">Volver</a>
-        {% endif %} 
+            <a href="{% url 'crud-bodega' %}">
+                <button class="button-header" type="button">Volver</button>
+            </a>
+        {% endif %}
 
         <!-- Formulario para enviar la eliminación vía POST -->
         <form method="POST" 

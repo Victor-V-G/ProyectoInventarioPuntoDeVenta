@@ -33,8 +33,6 @@
                     <th>ID USUARIO</th>
                     <th>Username</th>
                     <th>Correo Electronico</th>
-                    <th>Empleado Asociado</th>
-                    <th>Cargo Asociado</th>
                     <th>Acciones</th> <!-- Columna para botones de acciones -->
                 </tr>
             </thead>
@@ -45,26 +43,6 @@
                         <td scope="row">{{ usu.IdUsuarios }}</td>
                         <td>{{ usu.Username }}</td>
                         <td>{{ usu.CorreoElectronico }}</td>
-
-                        {% if usu.Username == "Admin" %}
-                            <td>NO APLICA</td>
-                        {% else %}
-                            {% if usu.Empleado %}
-                                <td>{{ usu.Empleado }}</td>
-                            {% else %}
-                                <td>NO ASOCIADO</td>
-                            {% endif %}
-                        {% endif %}
-
-                        {% if usu.Username == "Admin" %}
-                            <td>NO APLICA</td>
-                        {% else %}
-                            {% if usu.Cargo %}
-                                <td>{{ usu.Cargo }}</td>
-                            {% else %}
-                                <td>NO ASOCIADO</td>
-                            {% endif %}
-                        {% endif %}
                        
                         <td>
                             <!-- Botones de acción para cada usuario -->
