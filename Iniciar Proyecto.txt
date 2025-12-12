@@ -7,7 +7,7 @@
 > python3
 > py
 
-luego en cmd poner el comando : 
+luego en cmd poner el comando :  
 
 > python --version
 
